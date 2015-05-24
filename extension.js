@@ -136,7 +136,7 @@ function init () {
   
   // K.K songs are long, so a different update timer must be used to avoid mid-song interruption from Math.random generation.
   if (day === 6 && time === 20 && options.enableKK) {
-    setInterval(updateTime, 120000);
+    setInterval(updateTime, 240000);
   }
   else {
     setInterval(updateTime, 60000);
