@@ -25,6 +25,6 @@
    "options_page": "options.html",
    "permissions": [ "notifications", "storage" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "2.7.3",
+   "version": "2.8",
    "web_accessible_resources": [ "clock.png" ]
 }
