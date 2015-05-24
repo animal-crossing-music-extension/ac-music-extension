@@ -18,7 +18,12 @@ Redo New Leaf Snow loops
 Fade-in Fade-out before switching tracks  
 Customizable Town Chime on every hour change  
   
-### Open to other suggestions
+##### Open to other suggestions
+
+## Download
+<a href="https://mega.nz/#!FVJyVToJ!WAnvws-V6Wlmf_FHKgmtGtL9pxn_8-bp5WKIIsK-QTk">Version 2.8</a>  
+Then go to your Extension page and drag and drop the .crx file  
+If that doesn't work you can unpack it and "install an unpackaged archive" by clicking the appropriate button and browsing to the archive you just extracted.
 
 
 ## Original Version
