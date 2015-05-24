@@ -18,6 +18,9 @@ function saveOptions() {
   else if (document.getElementById('new-leaf-snowing').checked) {
     music = 'new-leaf-snowing';
   }
+  else if (document.getElementById('new-leaf-raining').checked) {
+    music = 'new-leaf-raining';
+  }
   
   chrome.storage.sync.set({
     volume: volume,
