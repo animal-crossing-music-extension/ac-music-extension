@@ -7,6 +7,7 @@ Just a fun Chrome extension for playing Animal Crossing's music in the backgroun
 
 ### Achieved
 Redid all New Leaf Loops with Original files  
+(Fixed 1pm track still need to upload the edith though)  
 KK now plays at 8PM  
 Added Changelog  
 Warned about how to apply settings  
@@ -16,7 +17,7 @@ Added New Leaf Rainy day option and did all the loops
 Music on day of certain events (Halloween, Guy Fawkes, Christmas, ...)  
 Redo New Leaf Snow loops  
 Fade-in Fade-out before switching tracks  
-Customizable Town Chime on every hour change  
+Customizable Town Chime on every hour change
   
 ##### Open to other suggestions
 
