@@ -56,6 +56,10 @@ document.addEventListener('DOMContentLoaded', restoreOptions);
 document.getElementById('save').onclick = saveOptions;
 
 // About/Help
+
+document.getElementById('get-help').onclick = function() {		
+  window.open('https://github.com/JdotCarver/Animal-Crossing-Music-Extension/issues');		
+};
 document.getElementById('report-an-issue').onclick = function() {
   window.open('https://github.com/JdotCarver/Animal-Crossing-Music-Extension/issues');
 };
