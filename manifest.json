@@ -19,7 +19,6 @@
       "48": "icon_48.png",
       "64": "icon_64.png"
    },
-   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8kBbYbKTKEgR1wNw2Ox8COK7xw2jn7ce6eqS4Yv7v6eq/JA7q9SzEhm/sYdV3R+EkH2Ar7AZ2ZFy3T8Pgrok3JK5EObqVxC84o9gq8LS+7A+XvY8neRcpsA4lxPe2IGAOX8ONzGX7lYWQFYu5uvzNIamzmS3K1bihkjrlZb/biwIDAQAB",
    "manifest_version": 2,
    "name": "Animal Crossing Music",
    "options_page": "options.html",
