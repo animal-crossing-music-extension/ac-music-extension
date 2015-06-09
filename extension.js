@@ -36,7 +36,7 @@ function setAudioUrl (file, day) {
   var time = new Date().getHours();
   
   // If today is Saturday at 8pm, play songs from the kk folder (if enabled).
-  if (day === 6 && time === 20 && options.enableKK) {
+  if (day === 6 && time === 18 && options.enableKK) {
     currentMusic = 'kk';
   }
   else {
@@ -56,7 +56,7 @@ function switchMusic (time, day) {
     };
   
   if (options.enableNotifications) {
-    if (day === 6 && time === 20 && options.enableKK) {
+    if (day === 6 && time === 18 && options.enableKK) {
       notificationOptions.message = 'K.K. Slider has started to play!';
       chrome.notifications.create('animal-crossing-music-kk', notificationOptions, function(id) {
         // Creation callback.
@@ -72,7 +72,7 @@ function switchMusic (time, day) {
   updateText(time, day);
   
   // If the day is Saturday, a random K.K. Slider song is chosen to play (if enabled).
-  if (day === 6 && time === 20 && options.enableKK) {
+  if (day === 6 && time === 18 && options.enableKK) {
     setAudioUrl((Math.floor((Math.random() * 36) + 1).toString()), day);
   }
   else {
@@ -83,7 +83,7 @@ function switchMusic (time, day) {
 // Determines the overlay text on the Extension Icon.
 function formatText (time, day) {
   // If today is Saturday at 8pm, show the user they are listening to KK music (if enabled.)
-  if (day === 6 && time === 20 && options.enableKK) {
+  if (day === 6 && time === 18 && options.enableKK) {
     return 'KK time';
   }
   if (time === -1) {
@@ -135,7 +135,7 @@ function init () {
   updateTime();
   
   // K.K songs are long, so a different update timer must be used to avoid mid-song interruption from Math.random generation.
-  if (day === 6 && time === 20 && options.enableKK) {
+  if (day === 6 && time === 18 && options.enableKK) {
     setInterval(updateTime, 240000);
   }
   else {
