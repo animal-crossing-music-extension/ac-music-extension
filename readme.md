@@ -1,5 +1,5 @@
 #![alt tag](http://i.imgur.com/gluCMY7.png)  
-## About
+## Animal Crossing Music
 Just a fun Chrome extension for playing Animal Crossing's music in the background while you work or play or do whatever it is you do with your browser. Updates in real-time whenever a new hour rolls around, and informs you via an optional desktop notification.
 
 ## Progress
