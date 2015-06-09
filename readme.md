@@ -8,7 +8,7 @@ Just a fun Chrome extension for playing Animal Crossing's music in the backgroun
 ### Achieved
 Redid all New Leaf Loops with Original files  
 (Fixed 1pm track still need to upload the edith though)  
-KK now plays at 8PM  
+KK now plays at 6PM  
 Added Changelog  
 Warned about how to apply settings  
 Added New Leaf Rainy day option and did all the loops  
@@ -22,6 +22,9 @@ Customizable Town Chime on every hour change
 ##### Open to other suggestions
 
 ## Download
+Chrome Webstore
+Pusblishing Pending
+
 <a href="https://mega.nz/#!FVJyVToJ!WAnvws-V6Wlmf_FHKgmtGtL9pxn_8-bp5WKIIsK-QTk">Version 2.8</a>  
 Then go to your Extension page and drag and drop the .crx file  
 If that doesn't work you can unpack it and "install an unpackaged archive" by clicking the appropriate button and browsing to the archive you just extracted.
