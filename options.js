@@ -56,9 +56,6 @@ document.addEventListener('DOMContentLoaded', restoreOptions);
 document.getElementById('save').onclick = saveOptions;
 
 // About/Help
-document.getElementById('get-help').onclick = function() {
-  window.open('http://www.neogaf.com/forum/showthread.php?t=426040');
-};
 document.getElementById('report-an-issue').onclick = function() {
-  window.open('http://www.neogaf.com/forum/private.php?do=newpm&u=20593');
+  window.open('https://github.com/JdotCarver/Animal-Crossing-Music-Extension/issues');
 };
