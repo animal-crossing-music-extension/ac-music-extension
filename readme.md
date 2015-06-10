@@ -24,14 +24,12 @@ Customizable Town Chime on every hour change
 Chrome Webstore
 Pusblishing Pending
 
-<a href="https://mega.nz/#!FVJyVToJ!WAnvws-V6Wlmf_FHKgmtGtL9pxn_8-bp5WKIIsK-QTk">Version 2.8</a>  
-Then go to your Extension page and drag and drop the .crx file  
-If that doesn't work you can unpack it and "install an unpackaged archive" by clicking the appropriate button and browsing to the archive you just extracted.
-
-
+## Contact  
+For any specific questions or just to get organized on the project, feel free to hit me up at AnimalCrossingMusicExtension@gmail.com  
+  
 ## Original Version
 (https://chrome.google.com/webstore/detail/ldjcaihhhmemeidcfbcadilcmfdaikkg)
-The version of the original creator that has stoppped supporting the extension
+The version of the original creator that has stoppped supporting the extension, and is now no longer on the Chrome web store.
 
 ## License
 Licensed under a zlib license, see license.txt.
