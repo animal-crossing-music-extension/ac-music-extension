@@ -21,8 +21,7 @@ Customizable Town Chime on every hour change
 ##### Open to other suggestions
 
 ## Download
-Chrome Webstore
-Pusblishing Pending
+<a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop">Chrome Webstore</a>
 
 ## Contact  
 For any specific questions or just to get organized on the project, feel free to hit me up at <a href="mailto:AnimalCrossingMusicExtension@gmail.com?Subject=Hello" target="_top">AnimalCrossingMusicExtension@gmail.com</a> 
