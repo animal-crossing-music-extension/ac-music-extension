@@ -16,7 +16,7 @@ Added New Leaf Rainy day option and did all the loops
 Music on day of certain events (Halloween, Guy Fawkes, Christmas, ...)  
 Redo New Leaf Snow loops  
 Fade-in Fade-out before switching tracks  
-Customizable Town Chime on every hour change
+Customizable Town Chime on every hour change  
 A Mix All option that picks a track from all of the different games (Credit: Google user Altaria Nintendo)    
   
 ##### Open to other suggestions
