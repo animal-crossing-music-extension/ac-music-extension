@@ -28,8 +28,9 @@ A Mix All option that picks a track from all of the different games (Credit: Goo
 For any specific questions or just to get organized on the project, feel free to hit me up at <a href="mailto:AnimalCrossingMusicExtension@gmail.com?Subject=Hello" target="_top">AnimalCrossingMusicExtension@gmail.com</a> 
   
 ## Original Version
-(https://chrome.google.com/webstore/detail/ldjcaihhhmemeidcfbcadilcmfdaikkg)
-The version of the original creator that has stoppped supporting the extension, and is now no longer on the Chrome web store.
+https://chrome.google.com/webstore/detail/ldjcaihhhmemeidcfbcadilcmfdaikkg  
+The version of the original creator that has stoppped supporting the extension,  
+and is now no longer on the Chrome web store.  
 
 ## License
 Licensed under a zlib license, see license.txt.
