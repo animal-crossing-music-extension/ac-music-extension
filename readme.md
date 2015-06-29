@@ -19,7 +19,7 @@ Fade-in Fade-out before switching tracks
 Customizable Town Chime on every hour change  
 A Mix All option that picks a track from all of the different games (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
-Altaria Nintendo</a>)
+Altaria Nintendo</a>)  
 Actually adding City Folk Rainy and Snowy Tracks! (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Logan Sackchum</a>)  
