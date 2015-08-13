@@ -25,7 +25,10 @@ Actually adding City Folk Rainy and Snowy Tracks! (Credit: Google user
 Logan Sackchum</a>)  
 An option for KK to play at 8PM (Possibly 8 to 10)  
 Add loop points support in order to keep the intro of certain tracks that I cut out for the smoothest transition (Credit: Google User <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
-Nathan Morris</a>
+Nathan Morris</a>)  
+Up the max volume (Credit: Google user 
+<a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
+Maxine Manasan</a>)
   
 ##### Open to other suggestions
 
