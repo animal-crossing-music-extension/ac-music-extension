@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Animal Crossing Music</title>
+	<link rel="stylesheet" href="chrome-bootstrap.css">
+	<script src="zepto.min.js"></script>
+	<script src="navigation.js"></script>
+	<style>
+		.chrome-bootstrap .frame .view {
+			-webkit-margin-start: 180px;
+		}
+	</style>
+</head>
+<body class="chrome-bootstrap">
+	<div class="frame">
+		<div class="navigation">
+			<h1><a href="#">Animal Crossing Music</a></h1>
+			<ul class="menu" style="margin-top: 4em;">
+				<li class="selected">
+					<a href="#options">Options</a>
+				</li>
+				<li class="help-link">
+					<a href="#help">Help</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="mainview view">
+			<div id="options" class="selected">
+				<header>
+					<h1>Options</h1>
+				</header>
+			
+				<div class="content">
+				
+					<section>
+						<h3>Volume</h3>
+						<div class="checkbox">
+							<label>
+								<input id="volume" type="range" min="0" max="1" step="0.10">
+							</label>
+						</div>
+					</section>
+					
+					<section>
+						<h3>Music</h3>
+						<div class="radio">
+							<label>
+								<input id="animal-forrest" name="music-choice" type="radio">
+								<span>Animal Forrest + Animal Crossing</span>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input id="wild-world" name="music-choice" type="radio">
+								<span>Wild World + City Folk</span>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input id="new-leaf" name="music-choice" type="radio">
+								<span>New Leaf</span>
+							</label>
+						</div>
+						<!--<div class="checkbox">
+							<label>
+								<input id="new-leaf-raining" name="music-choice" type="radio">
+								<span>New Leaf (Raining)</span>
+							</label>
+						</div>-->
+						<div class="radio">
+							<label>
+								<input id="new-leaf-snowing" name="music-choice" type="radio">
+								<span>New Leaf (Snowing)</span>
+							</label>
+						</div>
+						
+					</section>
+
+					<section>
+						<h3>K.K. Slider</h3>
+						<div class="radio">
+							<label>
+								<input id="no-kk" name="enable-kk" type="radio">
+								<span>Do not play K.K. Slider songs</span>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input id="enable-kk" name="enable-kk" type="radio">
+								<span>Play K.K. Slider songs on Saturdays from 8pm&ndash;12am</span>
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input id="always-kk" name="enable-kk" type="radio">
+								<span>Play K.K. Slider songs at all times</span>
+							</label>
+						</div>
+					</section>
+
+					<section>
+						<h3>Notifications</h3>
+						<div class="checkbox">
+							<label>
+								<input id="enable-notifications" type="checkbox">
+								<span>Enable Chrome notifications on song change</span>
+							</label>
+						</div>
+					</section>
+					
+				</div>
+			</div>
+			
+			<div id="help">
+				<header>
+					<h1>About</h1>
+				</header>
+			
+				<div class="content">
+					<div class="image-container">
+						<img src="icon_32.png" width="32" height="32" alt="Add-ons for NeoGAF">
+						<div class="image-container-text">
+							<h2>Animal Crossing Music</h2>
+							<span>Play Animal Crossing's smooth background music in real-time throughout your day.</span>
+						</div>
+					</div>
+					
+					<div>
+						<button id="get-help">Get help with using this extension</button>
+						<button id="report-an-issue">Report an issue</button>
+					</div>
+					
+					<div id="version-container">Version 2.8</div>
+					
+					<div id="product-container">
+						<p>Animal Crossing Music</p>
+						<p>Extension created and maintained by Andrex from <a href="http://www.neogaf.com/forum/index.php">NeoGAF</a>.</p>
+						<p>Extension improved by <a href="http://www.neogaf.com/forum/member.php?u=142800">blazescorch2</a>.</p>
+						<p>Idea for extension taken from <a href="http://tane.us/ac/">tane.us</a>.</p>
+						<p>This option page uses <a href="https://github.com/roykolak/chrome-bootstrap">Chrome Bootstrap</a> by Roy Kolak under the MIT License.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="options.js"></script>
+</body>
+</html>
