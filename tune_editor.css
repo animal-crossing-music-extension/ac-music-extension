@@ -1,0 +1,21 @@
+.hidden {
+  display: none;
+}
+
+.pitch {
+  display: inline-block;
+  width: 25px;
+  margin:5px;
+}
+
+.pitch-name {
+}
+
+.pitch-slider {
+  -webkit-appearance: slider-vertical;
+  width: 25px;
+  height: 100px;
+}
+
+.staff {
+}

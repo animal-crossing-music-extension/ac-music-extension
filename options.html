@@ -4,8 +4,10 @@
     <meta charset="utf-8">
     <title>Animal Crossing Music</title>
     <link rel="stylesheet" href="chrome-bootstrap.css">
+    <link rel="stylesheet" href="tune_editor.css">
     <script src="zepto.min.js"></script>
     <script src="navigation.js"></script>
+    <script src="tune_editor.js"></script>
   </head>
   <body class="chrome-bootstrap">
     <div class="frame">
@@ -14,6 +16,9 @@
         <ul class="menu" style="margin-top: 4em;">
           <li class="selected">
             <a href="#options">Options</a>
+          </li>
+          <li class="town-tune-link">
+            <a href="#town-tune">Town Theme</a>
           </li>
           <li class="help-link">
             <a href="#help">Help</a>
@@ -95,10 +100,26 @@
                 <button id="save">Save</button>
               </div>
             </header>
-            
           </div>
         </div>
-        
+
+        <div id="town-tune">
+          <header>
+            <h1>Custom Town Tune</h1>
+          </header>
+
+          <div class="content">
+            <section>
+              <div class="pitch-template hidden">
+                <input class="pitch-name" type="text" maxlength="2" size="1">
+                <input class="pitch-slider" type="range" min="0" max="14" step="1" orient="vertical">
+              </div>
+              <div class="staff staff1"></div>
+              <div class="staff staff2"></div>
+            </section>
+          </div>
+        </div>
+
         <div id="help">
           <header>
             <h1>About</h1>
@@ -133,6 +154,7 @@
               <p>This option page uses <a href="https://github.com/roykolak/chrome-bootstrap">Chrome Bootstrap</a> by Roy Kolak under the MIT License.</p>
             </div>
         </div>
+
       </div>
       </div>
     </div>
