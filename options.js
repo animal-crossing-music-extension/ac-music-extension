@@ -12,6 +12,9 @@ function saveOptions() {
   else if (document.getElementById('wild-world').checked) {
     music = 'wild-world';
   }
+  else if (document.getElementById('city-folk-snowing').checked) {
+    music = 'city-folk-snowing';
+  }
   else if (document.getElementById('new-leaf').checked) {
     music = 'new-leaf';
   }
