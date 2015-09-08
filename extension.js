@@ -18,7 +18,7 @@ function getSyncedOptions (callback) {
     enableKK: true
   }, function(items) {
     options = items;
-    
+
     if (typeof callback === 'function') {
       callback();
     }
