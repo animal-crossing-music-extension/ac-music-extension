@@ -32,6 +32,9 @@ Maxine Manasan</a>)
 Add an option for only the K.K. Slider Songs to play (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Regina Herrera</a>)  
+Add the PAL equivalent of City Folk to the title (less confusion) (Credit: Google user 
+<a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
+names of the games</a>)  
   
 ##### Open to other suggestions
 
