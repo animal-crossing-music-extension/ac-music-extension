@@ -45,13 +45,18 @@ var initTune = function() {
 };
 
 var initControls = function() {
-  var index, newPitchControl, staff;
+  var index, newPitchControl, staff, playButton;
 
   for (index = 0; index < tuneLength; index++) {
     newPitchControl = createPitchControl(index);
     staff = (index < tuneLength/2) ? staff1 : staff2;
     staff.appendChild(newPitchControl);
   }
+  
+  var playButton = document.querySelector('.play');
+  playButton.onclick = function() {
+    tunePlayer.playTune(tune);
+  };
 }
 
 var setup = function() {
