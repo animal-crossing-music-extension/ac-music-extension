@@ -5,6 +5,7 @@ function saveOptions() {
   var music;
   var enableNotifications = document.getElementById('enable-notifications').checked;
   var enableKK = document.getElementById('enable-kk').checked;
+  var enableTownTune = document.getElementById('enable-town-tune').checked;
   
   if (document.getElementById('animal-forrest').checked) {
     music = 'animal-forrest';
@@ -26,7 +27,8 @@ function saveOptions() {
     volume: volume,
     music: music,
     enableNotifications: enableNotifications,
-    enableKK: enableKK
+    enableKK: enableKK,
+    enableTownTune: enableTownTune
   }, function() {
     var save = document.getElementById('save');
     save.textContent = 'Saving...';
@@ -43,12 +45,14 @@ function restoreOptions() {
     volume: 0.5,
     music: 'new-leaf',
     enableNotifications: true,
-    enableKK: true
+    enableKK: true,
+    enableTownTune: true
   }, function(items) {
     document.getElementById('volume').value = items.volume;
     document.getElementById(items.music).checked = true;
     document.getElementById('enable-notifications').checked = items.enableNotifications;
     document.getElementById('enable-kk').checked = items.enableKK;
+    document.getElementById('enable-town-tune').checked = items.enableTownTune;
   });
 }
 

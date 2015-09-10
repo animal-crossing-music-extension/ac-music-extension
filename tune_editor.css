@@ -9,12 +9,13 @@
 }
 
 .pitch-name {
+  text-align: center;
 }
 
 .pitch-slider {
   -webkit-appearance: slider-vertical;
   width: 25px;
-  height: 100px;
+  height: 75px;
 }
 
 .staff {

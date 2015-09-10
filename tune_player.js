@@ -1,84 +1,135 @@
-(function(global) {
-  var availablePitches = ['_', '-', 'G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3']
-  //values in HZ
-  //var frequencies = [null, null, 196, 220, 247, 262, 294, 330, 349, 392, 440, 494, 523, 587, 659]
-  var frequencies = [null, null, 392, 440, 494, 523, 587, 659, 698, 784, 880, 988, 1046, 1174, 1318]
-  var audioCtx = new AudioContext();
-  var noteLength = 0.25; //in seconds
-  var tempo = 150.0; // BPM
-  var stepDuration;
-  var lookahead = 25.0; //in milliseconds
-  var currentStep;
-  var attack = 0.05;
+(function() {
+var availablePitches = ['-', '=', 'G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3'];
+//values in HZ
+var frequencies = [null, null, 392, 440, 494, 523, 587, 659, 698, 784, 880, 988, 1046, 1174, 1318];
+var audioCtx = new AudioContext();
+var tempo = 240.0; // BPM
+var stepDuration;
 
-  var getStepDuration = function() {
-    if(stepDuration) return stepDuration;
-    stepDuration = 1 / (tempo / 60);
-    return stepDuration;
-  };
+var attack = 0.05; //in seconds
+var decay = 0.1; //in seconds
+var release = 0.15; //in seconds
+var gainLevel = 3;
+var sustainLevel = 2;
+var cutoffModifier = 8;
+var Q = 0;
 
-  var pitchToFreq = function(pitch) {
-    if(typeof pitch == 'number') return pitch;
+var rest = availablePitches[0];
+var sustain = availablePitches[1];
 
-    index = availablePitches.indexOf(pitch);
-    if(index == -1) return null;
+var getStepDuration = function() {
+  if(stepDuration) return stepDuration;
+  stepDuration = 1 / (tempo / 60);
+  return stepDuration;
+};
 
-    var freq = frequencies[index]
-    if(!freq) return null;
+var getSustainMultiplier = function(index, tune) {
+  var current;
+  var count = -1;
+  do {
+    count += 1;
+    index += 1;
+    current = tune[index];
+  } while(current == sustain)
+  return count;
+};
 
-    return freq;
+var pitchToFreq = function(pitch) {
+  if(typeof pitch == 'number') return pitch;
+
+  index = availablePitches.indexOf(pitch);
+  if(index == -1) return null;
+
+  var freq = frequencies[index]
+  if(!freq) return null;
+
+  return freq;
+}
+
+var playBoop = function(pitch, time, sustainDuration) {
+  if(time === undefined) time = audioCtx.currentTime;
+  if(sustainDuration === undefined) sustainDuration = 0;
+
+  var freq = pitchToFreq(pitch);
+  if(freq === null) return;
+
+  var oscillator, filter, gain;
+
+  oscillator = audioCtx.createOscillator();
+  oscillator.type = 'square';
+  oscillator.frequency.value = freq;
+
+  filter = audioCtx.createBiquadFilter();
+  filter.type = 'lowpass';
+  //filter tracks the note being played
+  filter.frequency.value = Math.sqrt(freq) * cutoffModifier;
+  filter.Q.value = Q;
+
+  gain = audioCtx.createGain();
+  gain.gain.value = 0;
+
+  oscillator.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  oscillator.start(time);
+  oscillator.stop(time + attack + decay + sustainDuration + release);
+
+  gain.gain.setValueAtTime(0, time);
+  gain.gain.linearRampToValueAtTime(gainLevel, time + attack);
+  gain.gain.linearRampToValueAtTime(sustainLevel, time + attack + decay);
+  gain.gain.setValueAtTime(sustainLevel, time + attack + decay + sustainDuration);
+  gain.gain.linearRampToValueAtTime(0, time + attack + decay + sustainDuration + release);
+};
+
+var playTune = function(tune) {
+  var callbacks, i, pitch, time, sustainDuration;
+  var stepDuration = getStepDuration();
+  var eachNote = function(index, duration) {};
+
+  for (i = 0; i < tune.length; i++) {
+    time = stepDuration * i;
+
+    //when a note is played
+    (function(index) {
+      setTimeout(function(){
+        eachNote(index, stepDuration);
+      }, time * 1000);
+    })(i);
+
+    pitch = tune[i];
+    if(pitch == rest || pitch == sustain) continue;
+
+    sustainDuration = getSustainMultiplier(i, tune) * stepDuration;
+    playBoop(pitch, audioCtx.currentTime + time, sustainDuration);
   }
 
-  var playBoop = function(pitch, time) {
-    if(time === undefined) time = audioCtx.currentTime;
-    var freq = pitchToFreq(pitch);
-    if(freq === null) return;
-
-    var oscillator = audioCtx.createOscillator();
-    var filter = audioCtx.createBiquadFilter();
-    var gain = audioCtx.createGain();
-
-    oscillator.type = 'square';
-    oscillator.frequency.value = freq;
-
-    filter.type = 'lowpass';
-    filter.frequency.value = Math.sqrt(freq) * 12;
-    filter.Q.value = 1;
-
-    gain.gain.value = 0;
-
-    oscillator.connect(filter);
-    filter.connect(gain);
-    gain.connect(audioCtx.destination);
-
-
-    oscillator.start(time);
-    oscillator.stop(time + noteLength);
-
-    gain.gain.setValueAtTime(0, time);
-    gain.gain.linearRampToValueAtTime(1, time + attack);
-    gain.gain.linearRampToValueAtTime(0, time + noteLength);
-  };
-
-  var playTune = function(tune) {
-    var i, pitch, time;
-    for(i in tune) {
-      pitch = tune[i];
-      time = audioCtx.currentTime + (getStepDuration() * i);
-      playBoop(pitch, time);
+  //jQuery stlye chain callbacks
+  callbacks = {
+    eachNote: function(callback) {
+      eachNote = callback;
+      return callbacks;
+    },
+    done: function(callback) {
+      //when the tune over
+      setTimeout(callback, stepDuration * tune.length * 1000);
+      return callbacks;
     }
   };
+  return callbacks;
+};
 
-  //export
-  var tunePlayer = {
-    availablePitches: availablePitches,
-    playBoop: playBoop,
-    playTune: playTune
-  };
-  global.tunePlayer = tunePlayer;
-})(window);
+//export
+var tunePlayer = {
+  availablePitches: availablePitches,
+  playBoop: playBoop,
+  playTune: playTune
+};
+window.tunePlayer = tunePlayer;
+})();
 
 /*
+This stuff will be useful for the bells;
 var loadBoops = function() {
   var reqListener = function() {
     audioCtx.decodeAudioData(req.response, function(buffer) {
