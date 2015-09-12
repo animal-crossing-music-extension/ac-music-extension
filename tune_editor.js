@@ -1,12 +1,16 @@
 (function(){
 var pitchTemplate, playButton, saveButton, tune;
-var availablePitches = tunePlayer.availablePitches;
 var defaultTune = ["G2", "E3", "=", "G2", "F2", "D3", "=", "B2", "C3", "-", "C2", "-", "C2", "=", "=", "-"];
-var rest = availablePitches[0];
 var tuneLength = 16;
 var editorControls = [];
 var pitchNames = [];
-var flashColor = '#76FF76';
+var flashColor = '#FFBC70';
+var audioContext = new AudioContext;
+var booper = createBooper(audioContext);
+var sampler = createSampler(audioContext);
+var tunePlayer = createTunePlayer(audioContext);
+var availablePitches = tunePlayer.availablePitches;
+var rest = availablePitches[0];
 
 var createPitchControl = function(index) {
   var pitch = pitchTemplate.cloneNode(true);
@@ -94,7 +98,7 @@ var flashName = function(index, duration) {
 
 var playTune = function() {
   disableEditor();
-  tunePlayer.playTune(tune).eachNote(flashName).done(enableEditor);
+  tunePlayer.playTune(tune, sampler, 100).eachNote(flashName).done(enableEditor);
 };
 
 var retrieveTune = function(done) {
@@ -121,7 +125,7 @@ var setup = function() {
 
 var updateTune = function(index, pitch) {
   tune[index] = pitch;
-  tunePlayer.playBoop(pitch);
+  booper.playNote(pitch);
 };
 
 window.addEventListener('load', setup);

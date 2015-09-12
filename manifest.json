@@ -25,5 +25,5 @@
    "permissions": [ "notifications", "storage" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "2.9",
-   "web_accessible_resources": [ "clock.png" ]
+   "web_accessible_resources": [ "clock.png", "bells.ogg" ]
 }
