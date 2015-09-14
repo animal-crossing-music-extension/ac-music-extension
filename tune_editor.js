@@ -98,7 +98,7 @@ var flashName = function(index, duration) {
 
 var playTune = function() {
   disableEditor();
-  tunePlayer.playTune(tune, sampler, 100).eachNote(flashName).done(enableEditor);
+  tunePlayer.playTune(tune, booper, 240).eachNote(flashName).done(enableEditor);
 };
 
 var retrieveTune = function(done) {

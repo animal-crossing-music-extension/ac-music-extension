@@ -1,6 +1,6 @@
 {
    "background": {
-      "scripts": [ "extension.js" ]
+      "scripts": ["tune_player.js", "extension.js"]
    },
    "browser_action": {
       "default_icon": {

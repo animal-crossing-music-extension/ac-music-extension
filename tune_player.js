@@ -72,6 +72,7 @@ var createSampler = function(audioContext) {
   var bellBuffer;
   var startPoints = [null, null];
   var chimeLength = 3.8;
+  var volume = 0.2;
 
   var pitchToStartPoint = function(pitch) {
     index = availablePitches.indexOf(pitch);
@@ -107,7 +108,12 @@ var createSampler = function(audioContext) {
     if (!bellBuffer) return;
     var source = audioContext.createBufferSource();
     source.buffer = bellBuffer;
-    source.connect(audioContext.destination);
+
+    gain = audioContext.createGain();
+    gain.gain.value = volume;
+
+    source.connect(gain);
+    gain.connect(audioContext.destination);
     source.start(time, pitchToStartPoint(pitch), chimeLength);
   };
 
