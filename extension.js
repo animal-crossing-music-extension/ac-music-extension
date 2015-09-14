@@ -128,8 +128,8 @@ function updateTime () {
     // New hour! New music and new text.
     if (time != currentTime) {
       currentMusic = options.music;
-      if(options.enableTownTune) {
-        //play the town tune before starting the new song
+      //time to play the town tune before starting the new song
+      if(options.enableTownTune && new Date().getMinutes() < 3) {
         getTownTune(function(tune) {
           audio.pause();
           tunePlayer.playTune(tune, sampler, 100).done(function() {
