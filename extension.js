@@ -1,10 +1,15 @@
 'use strict';
 
-var options, audio, currentTime, currentMusic, badgeText, day, time,
-  checkVolume, setAudioUrl, switchMusic, formatText, updateText, updateTime, init;;
+var options, audio, audioContext, defaultTune, currentTime, currentMusic, badgeText, day, time,
+  checkVolume, sampler, setAudioUrl, switchMusic, tunePlayer, formatText, updateText, updateTime, init;
 
 audio = document.createElement('audio');
 audio.loop = true;
+
+defaultTune = ["G2", "E3", "=", "G2", "F2", "D3", "=", "B2", "C3", "-", "C2", "-", "C2", "=", "=", "-"];
+audioContext = new AudioContext();
+sampler = createSampler(audioContext);
+tunePlayer = createTunePlayer(audioContext);
 
 day = new Date().getDay();
 time = new Date().getHours();
@@ -15,16 +20,23 @@ function getSyncedOptions (callback) {
     volume: 0.5,
     music: 'new-leaf',
     enableNotifications: true,
-    enableKK: true
+    enableKK: true,
+    enableTownTune: true
   }, function(items) {
     options = items;
-    
+
     if (typeof callback === 'function') {
       callback();
     }
     else {
       init();
     }
+  });
+}
+
+function getTownTune(done) {
+  chrome.storage.sync.get({ townTune: defaultTune }, function(items){
+    if (typeof done == 'function') done(items.townTune);
   });
 }
 
@@ -112,13 +124,29 @@ function updateText (time, day, show) {
 function updateTime () {
   var time = new Date().getHours();
 
-  // New hour! New music and new text.
-  if ((time !== currentTime || currentMusic !== options.music) && !audio.paused) {
-    currentMusic = options.music;
-    switchMusic(time,day);
-    audio.play();
-    updateText(time,day);
-    currentTime = time;
+  if(!audio.paused) {
+    // New hour! New music and new text.
+    if (time != currentTime) {
+      currentMusic = options.music;
+      //time to play the town tune before starting the new song
+      if(options.enableTownTune && new Date().getMinutes() < 3) {
+        getTownTune(function(tune) {
+          audio.pause();
+          tunePlayer.playTune(tune, sampler, 100).done(function() {
+            switchMusic(time, day);
+            audio.play();
+          });
+        });
+      } else {
+        switchMusic(time, day);
+        audio.play();
+      }
+      updateText(time,day);
+      currentTime = time;
+    } else if (currentMusic !== options.music) {
+      switchMusic(time, day);
+      audio.play();
+    }
   }
 }
 

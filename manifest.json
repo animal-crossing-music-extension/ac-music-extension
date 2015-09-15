@@ -1,6 +1,6 @@
 {
    "background": {
-      "scripts": [ "extension.js" ]
+      "scripts": ["tune_player.js", "extension.js"]
    },
    "browser_action": {
       "default_icon": {
@@ -24,6 +24,6 @@
    "options_page": "options.html",
    "permissions": [ "notifications", "storage" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "2.8",
-   "web_accessible_resources": [ "clock.png" ]
+   "version": "2.9",
+   "web_accessible_resources": [ "clock.png", "bells.ogg" ]
 }
