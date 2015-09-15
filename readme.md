@@ -11,12 +11,16 @@ KK now plays at 6PM
 Added Changelog  
 Warned about how to apply settings  
 Added New Leaf Rainy day option and did all the loops  
+Customizable Town Chime on every hour change  
+Added the PAL equivalent of City Folk to the title (less confusion) (Credit: Google user 
+<a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
+names of the games</a>)  
+
 
 ### Sought improvements
 Music on day of certain events (Halloween, Guy Fawkes, Christmas, ...)  
 Redo New Leaf Snow loops  
 Fade-in Fade-out before switching tracks  (Done in new version, awaiting merge)  
-Customizable Town Chime on every hour change  
 A Mix All option that picks a track from all of the different games (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Altaria Nintendo</a>)  
@@ -32,9 +36,6 @@ Maxine Manasan</a>)
 Add an option for only the K.K. Slider Songs to play (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Regina Herrera</a>)  
-Add the PAL equivalent of City Folk to the title (less confusion) (Credit: Google user 
-<a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
-names of the games</a>)  
   
 ##### Open to other suggestions
 
