@@ -1,10 +1,15 @@
 'use strict';
 
 // initialize
-var options, audio, playingHour, currentMusic, inKK, notifiedKK, exitingKK, badgeText, day, hour;
+var options, audio, sampler, tunePlayer, audioContext, defaultTune, playingHour, currentMusic, inKK, notifiedKK, exitingKK, badgeText, day, hour;
 
 audio = document.createElement('audio');
 audio.loop = true;
+
+defaultTune = ["G2", "E3", "=", "G2", "F2", "D3", "=", "B2", "C3", "-", "C2", "-", "C2", "=", "=", "-"];
+audioContext = new AudioContext();
+sampler = createSampler(audioContext);
+tunePlayer = createTunePlayer(audioContext);
 
 day = function() { return new Date().getDay(); }
 hour = function() { return new Date().getHours(); }
@@ -20,10 +25,10 @@ function getSyncedOptions(callback) {
 		enableNotifications: true,
 		enableKK: true,
 		alwaysKK: false,
-		paused: false
+		paused: false,
+		enableTownTune: true
 	}, function(items) {
 		options = items;
-		
 		if (typeof callback === 'function') {
 			callback();
 		}
@@ -38,6 +43,12 @@ function checkKK() {
 // set volume back to the user-selected value
 function resetVolume() {
 	audio.volume = options.volume;
+}
+
+function getTownTune(done) {
+	chrome.storage.sync.get({ townTune: defaultTune }, function(items){
+		if (typeof done == 'function') done(items.townTune);
+	});
 }
 
 // get path of a song file
@@ -120,7 +131,7 @@ function updateMusic() {
 		exitKK = true;
 		exitingKK = true;
 	}
-	
+
 	if (enterKK) {
 		audio.loop = false;
 		playNewMusic();
@@ -134,17 +145,29 @@ function updateMusic() {
 	}
 	// normal music every hour
 	else if (!inKK && !exitingKK && (hour() !== playingHour || currentMusic !== options.music)) {
-		// we are changing songs - do a 3 second fadeout, step every 100 ms
-		var step = options.volume / 30.0;
-		var fade = setInterval(function () {
-			if (audio.volume > step)
-				audio.volume -= step;
-			else {
-				clearInterval(fade);
+		changeSong();
+	}
+}
+
+function changeSong() {
+	//do a 3 second fadeout, step every 100 ms
+	var step = options.volume / 30.0;
+	var fade = setInterval(function () {
+		if (audio.volume > step)
+			audio.volume -= step;
+		else {
+			clearInterval(fade);
+
+			//Maybe play the town tune
+			if(hour() !== playingHour && options.enableTownTune && new Date().getMinutes() < 3) {
+				getTownTune(function(tune) {
+					tunePlayer.playTune(tune, sampler, 100).done(playNewMusic)
+				});
+			} else {
 				playNewMusic();
 			}
-		}, 100);
-	}
+		}
+	}, 100);
 }
 
 // start playing a new song

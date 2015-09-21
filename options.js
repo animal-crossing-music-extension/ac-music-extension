@@ -6,6 +6,8 @@ function saveOptions() {
 	// 2 separate KK variables to preserve compatibility with old versions
 	var alwaysKK = document.getElementById('always-kk').checked;
 	var enableKK = alwaysKK || document.getElementById('enable-kk').checked;
+  var enableTownTune = document.getElementById('enable-town-tune').checked;
+
 
 	var music;	
 	if (document.getElementById('animal-forrest').checked) {
@@ -29,7 +31,8 @@ function saveOptions() {
 		music: music,
 		enableNotifications: enableNotifications,
 		enableKK: enableKK,
-		alwaysKK: alwaysKK
+		alwaysKK: alwaysKK,
+		enableTownTune: enableTownTune
 	}, function() { });
 }
 
@@ -39,7 +42,8 @@ function restoreOptions() {
 		music: 'new-leaf',
 		enableNotifications: true,
 		enableKK: true,
-		alwaysKK: false
+		alwaysKK: false,
+		enableTownTune: true
 	}, function(items) {
 		document.getElementById('volume').value = items.volume;
 		document.getElementById(items.music).checked = true;
@@ -47,6 +51,7 @@ function restoreOptions() {
 		document.getElementById('no-kk').checked = true;
 		document.getElementById('enable-kk').checked = items.enableKK;
 		document.getElementById('always-kk').checked = items.alwaysKK;
+		document.getElementById('enable-town-tune').checked = items.enableTownTune;
 	});
 }
 
