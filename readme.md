@@ -7,7 +7,7 @@ Just a fun Chrome extension for playing Animal Crossing's music in the backgroun
 ### Achieved
 Redid all New Leaf Loops with Original files  
 (Fixed 1pm track still need to upload the edith though)  
-KK now plays at 6PM  
+K.K. Slider now plays : from 8pm to 12am / all the time / never  
 Added Changelog  
 Warned about how to apply settings  
 Added New Leaf Rainy day option and did all the loops  
@@ -15,27 +15,22 @@ Customizable Town Chime on every hour change
 Added the PAL equivalent of City Folk to the title (less confusion) (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 names of the games</a>)  
-
+Fade-in Fade-out before switching tracks  
 
 ### Sought improvements
 Music on day of certain events (Halloween, Guy Fawkes, Christmas, ...)  
 Redo New Leaf Snow loops  
-Fade-in Fade-out before switching tracks  (Done in new version, awaiting merge)  
 A Mix All option that picks a track from all of the different games (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Altaria Nintendo</a>)  
 Actually adding City Folk Rainy and Snowy Tracks! (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Logan Sackchum</a>)  
-An option for KK to play at 8PM (Possibly 8 to 10)  (Done in new version, awaiting merge)  
 Add loop points support in order to keep the intro of certain tracks that I cut out for the smoothest transition (Credit: Google User <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Nathan Morris</a>)  
 Up the max volume (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Maxine Manasan</a>)  
-Add an option for only the K.K. Slider Songs to play (Credit: Google user 
-<a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
-Regina Herrera</a>)  
   
 ##### Open to other suggestions
 
