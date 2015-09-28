@@ -1,7 +1,7 @@
 'use strict';
 
-var options, audio, audioContext, defaultTune, currentTime, currentMusic, badgeText, day, time,
-  checkVolume, sampler, setAudioUrl, switchMusic, tunePlayer, formatText, updateText, updateTime, init;
+// initialize
+var options, audio, sampler, tunePlayer, audioContext, defaultTune, playingHour, currentMusic, inKK, notifiedKK, exitingKK, badgeText, day, hour;
 
 audio = document.createElement('audio');
 audio.loop = true;
@@ -11,183 +11,244 @@ audioContext = new AudioContext();
 sampler = createSampler(audioContext);
 tunePlayer = createTunePlayer(audioContext);
 
-day = new Date().getDay();
-time = new Date().getHours();
-currentTime = new Date().getHours();
+day = function() { return new Date().getDay(); }
+hour = function() { return new Date().getHours(); }
+playingHour = new Date().getHours();
+inKK = false;
+notifiedKK = false;
 
-function getSyncedOptions (callback) {
-  chrome.storage.sync.get({
-    volume: 0.5,
-    music: 'new-leaf',
-    enableNotifications: true,
-    enableKK: true,
-    enableTownTune: true
-  }, function(items) {
-    options = items;
+// retrieve saved options
+function getSyncedOptions(callback) {
+	chrome.storage.sync.get({
+		volume: 0.5,
+		music: 'new-leaf',
+		enableNotifications: true,
+		enableKK: true,
+		alwaysKK: false,
+		paused: false,
+		enableTownTune: true
+	}, function(items) {
+		options = items;
+		if (typeof callback === 'function') {
+			callback();
+		}
+	});
+}
 
-    if (typeof callback === 'function') {
-      callback();
-    }
-    else {
-      init();
-    }
-  });
+// returns if K.K. should be playing right now
+function checkKK() {
+	return options.alwaysKK || (options.enableKK && day() === 6 && hour() >= 20 && hour() <= 23);
+}
+
+// set volume back to the user-selected value
+function resetVolume() {
+	audio.volume = options.volume;
 }
 
 function getTownTune(done) {
-  chrome.storage.sync.get({ townTune: defaultTune }, function(items){
-    if (typeof done == 'function') done(items.townTune);
-  });
+	chrome.storage.sync.get({ townTune: defaultTune }, function(items){
+		if (typeof done == 'function') done(items.townTune);
+	});
 }
 
-function checkVolume () {
-  audio.volume = options.volume;
+// get path of a song file
+function setAudioUrl(file) {
+	if (checkKK()) {
+		currentMusic = 'kk';
+	}
+	else {
+		currentMusic = options.music;
+		file += 'm';
+	}
+	audio.src = '../' + currentMusic + '/' + file + '.ogg';
 }
 
-function setAudioUrl (file, day) {
-  var time = new Date().getHours();
-  
-  // If today is Saturday at 8pm, play songs from the kk folder (if enabled).
-  if (day === 6 && time === 18 && options.enableKK) {
-    currentMusic = 'kk';
-  }
-  else {
-    currentMusic = options.music;
-  }
-  audio.src = '../' + currentMusic + '/' + file + '.ogg';
+// format text for the badge and for the song URL
+function formatHour(time) {
+	if (time === -1) {
+		return '';
+	}
+	if (checkKK()) {
+		return 'KK';
+	}
+	if (time === 0) {
+		return '12a';
+	}
+	if (time === 12) {
+		return '12p';
+	}
+	if (time < 13) {
+		return time + 'a';
+	}
+	return (time - 12) + 'p';
 }
 
-function switchMusic (time, day) {
-  var day = new Date().getDay(),
-    time = new Date().getHours(),
-    notificationOptions = {
-      type: 'basic',
-      title: 'Animal Crossing Music',
-      message: 'It is now ' + formatText(time,day) + '!',
-      iconUrl: 'clock.png'
-    };
-  
-  if (options.enableNotifications) {
-    if (day === 6 && time === 18 && options.enableKK) {
-      notificationOptions.message = 'K.K. Slider has started to play!';
-      chrome.notifications.create('animal-crossing-music-kk', notificationOptions, function(id) {
-        // Creation callback.
-      });
-    }
-    else {
-      chrome.notifications.create('animal-crossing-music', notificationOptions, function(id) {
-        // Creation callback.
-      });
-    }
-  }
-  
-  updateText(time, day);
-  
-  // If the day is Saturday, a random K.K. Slider song is chosen to play (if enabled).
-  if (day === 6 && time === 18 && options.enableKK) {
-    setAudioUrl((Math.floor((Math.random() * 36) + 1).toString()), day);
-  }
-  else {
-    setAudioUrl(formatText(time, day));
-  }
+// show notification, swap to a new song
+function switchMusic() {
+	if (options.enableNotifications) {
+		var notificationOptions = {
+				type: 'basic',
+				title: 'Animal Crossing Music',
+				message: 'It is now ' + formatHour(hour()) + 'm!',
+				iconUrl: 'clock.png'
+			};
+		if (checkKK() && !notifiedKK) {
+			notificationOptions.message = 'K.K. Slider has started to play!';
+			chrome.notifications.create('animal-crossing-music', notificationOptions, function(id) {
+				notifiedKK = true;
+			});
+		}
+		else if (!checkKK()) {
+			chrome.notifications.create('animal-crossing-music', notificationOptions, function(id) { });
+		}
+	}
+	
+	updateBadge();
+	
+	if (checkKK()) {
+		setAudioUrl((Math.floor((Math.random() * 36) + 1).toString()));
+	}
+	else {
+		setAudioUrl(formatHour(hour()));
+	}
 }
 
-// Determines the overlay text on the Extension Icon.
-function formatText (time, day) {
-  // If today is Saturday at 8pm, show the user they are listening to KK music (if enabled.)
-  if (day === 6 && time === 18 && options.enableKK) {
-    return 'KK time';
-  }
-  if (time === -1) {
-    return '';
-  }
-  else if (time === 0) {
-    return '12am';
-  }
-  else if (time === 12) {
-    return '12pm';
-  }
-  else if (time < 13) {
-    return time + 'am';
-  }
-  else {
-    return time - 12 + 'pm';
-  }
+// figure out what song should be playing vs. what is playing, change if necessary
+function updateMusic() {
+	if (audio.paused)
+		return;
+	
+	// K.K. check
+	var enterKK = false, exitKK = false;
+	if (checkKK() && !inKK) {
+		// need to start playing K.K.
+		inKK = true;
+		enterKK = true;
+	}
+	else if (!checkKK() && inKK) {
+		// we are playing KK but we need to stop
+		inKK = false;
+		exitKK = true;
+		exitingKK = true;
+	}
+
+	if (enterKK) {
+		audio.loop = false;
+		playNewMusic();
+		// at the end of every K.K. song, swap to a new one
+		audio.addEventListener("ended", playNewMusic);
+	}
+	else if (exitKK) {
+		audio.removeEventListener("ended", playNewMusic);
+		// at the end of the current K.K. song, swap back to normal music
+		audio.addEventListener("ended", endKK);
+	}
+	// normal music every hour
+	else if (!inKK && !exitingKK && (hour() !== playingHour || currentMusic !== options.music)) {
+		changeSong();
+	}
 }
 
-// Updates the Extension Icon's overlay text.
-function updateText (time, day, show) {
-  badgeText = formatText(time,day);
-  chrome.browserAction.setBadgeText({ text: badgeText.replace('m', '') });
+function changeSong() {
+	//do a 3 second fadeout, step every 100 ms
+	var step = options.volume / 30.0;
+	var fade = setInterval(function () {
+		if (audio.volume > step)
+			audio.volume -= step;
+		else {
+			clearInterval(fade);
+
+			//Maybe play the town tune
+			if(hour() !== playingHour && options.enableTownTune && new Date().getMinutes() < 3) {
+				getTownTune(function(tune) {
+					tunePlayer.playTune(tune, sampler, 100).done(playNewMusic)
+				});
+			} else {
+				playNewMusic();
+			}
+		}
+	}, 100);
 }
 
-function updateTime () {
-  var time = new Date().getHours();
+// start playing a new song
+function playNewMusic() {
+	// pause for 2 seconds before the next song
+	setTimeout(function () {
+		playPause(true);
+		playingHour = hour();
+	}, 2000);
+}
 
-  if(!audio.paused) {
-    // New hour! New music and new text.
-    if (time != currentTime) {
-      currentMusic = options.music;
-      //time to play the town tune before starting the new song
-      if(options.enableTownTune && new Date().getMinutes() < 3) {
-        getTownTune(function(tune) {
-          audio.pause();
-          tunePlayer.playTune(tune, sampler, 100).done(function() {
-            switchMusic(time, day);
-            audio.play();
-          });
-        });
-      } else {
-        switchMusic(time, day);
-        audio.play();
-      }
-      updateText(time,day);
-      currentTime = time;
-    } else if (currentMusic !== options.music) {
-      switchMusic(time, day);
-      audio.play();
-    }
-  }
+// start/stop the audio control, setting the correct song first
+function playPause(play) {
+	if (play) {
+		resetVolume();
+		switchMusic();
+		updateMusic();
+		updateBadge();
+		audio.play();
+	}
+	else {
+		audio.pause();
+		updateBadge(-1);
+	}
+}
+
+// callback for when we are exiting K.K. time
+function endKK() {
+	audio.removeEventListener("ended", endKK);
+	notifiedKK = false;
+	exitingKK = false;
+	audio.loop = true;
+	playNewMusic();
+}
+
+// updates the badge text
+function updateBadge(overrideTime) {
+	badgeText = formatHour(overrideTime || hour());
+	chrome.browserAction.setBadgeText({ text: badgeText });
 }
 
 // Set the globe spinning.
-function init () {
-  if (typeof options === 'undefined') {
-    getSyncedOptions();
-  }
-  
-  var day = new Date().getDay();
-  checkVolume();
-  switchMusic(currentTime);
-  updateText(currentTime, day, false);
-  updateTime();
-  
-  // K.K songs are long, so a different update timer must be used to avoid mid-song interruption from Math.random generation.
-  if (day === 6 && time === 18 && options.enableKK) {
-    setInterval(updateTime, 240000);
-  }
-  else {
-    setInterval(updateTime, 60000);
-  }
-  
-  chrome.browserAction.setBadgeBackgroundColor({ color: [57, 230, 0, 255] });
+function init() {
+	if (typeof options === 'undefined') {
+		getSyncedOptions();
+	}
+	
+	playPause(!options.paused);
+	
+	// check every 15 seconds for a time/song change
+	setInterval(updateMusic, 15000);
+	
+	chrome.browserAction.setBadgeBackgroundColor({ color: [57, 230, 0, 255] });
 }
 
+// play/pause when user clicks the extension icon
 chrome.browserAction.onClicked.addListener(function() {
-  var callback = function() {
-    checkVolume();
-    if (audio.paused) {
-      audio.play();
-      updateTime();
-      updateText(currentTime, day);
-    }
-    else {
-      audio.pause();
-      updateText(-1, day);
-    }
-  };
-  
-  getSyncedOptions(callback);
+	playPause(audio.paused);
+	chrome.storage.sync.set({
+		paused: audio.paused
+	}, function() {});
 });
 
-getSyncedOptions();
+// listen for option changes and reflect them immediately
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+	var musicCB = function() {
+		playPause(!options.paused);
+	};
+	var volumeCB = function() {
+		resetVolume();
+	};
+	
+	// if user has no synced settings yet, a volume change ends up restarting playback
+	// but it only happens the first time the user saves any setting, so oh well.
+	if (typeof changes.volume !== 'undefined')
+		getSyncedOptions(volumeCB);
+	if (typeof changes.music !== 'undefined'
+		|| typeof changes.enableKK !== 'undefined'
+		|| typeof changes.alwaysKK !== 'undefined')
+		getSyncedOptions(musicCB);
+});
+
+// run this when the extension is first loaded.
+getSyncedOptions(init);
