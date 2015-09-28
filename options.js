@@ -22,9 +22,9 @@ function saveOptions() {
 	else if (document.getElementById('new-leaf-snowing').checked) {
 		music = 'new-leaf-snowing';
 	}
-	/*else if (document.getElementById('new-leaf-raining').checked) {
+	else if (document.getElementById('new-leaf-raining').checked) {
 		music = 'new-leaf-raining';
-	}*/
+	}
 	
 	chrome.storage.sync.set({
 		volume: volume,
@@ -62,6 +62,7 @@ document.getElementById('animal-forrest').onclick = saveOptions;
 document.getElementById('wild-world').onclick = saveOptions;
 document.getElementById('new-leaf').onclick = saveOptions;
 document.getElementById('new-leaf-snowing').onclick = saveOptions;
+document.getElementById('new-leaf-raining').onclick = saveOptions;
 document.getElementById('no-kk').onclick = saveOptions;
 document.getElementById('enable-kk').onclick = saveOptions;
 document.getElementById('always-kk').onclick = saveOptions;
@@ -69,8 +70,11 @@ document.getElementById('enable-notifications').onclick = saveOptions;
 
 // About/Help
 document.getElementById('get-help').onclick = function() {
-	window.open('http://www.neogaf.com/forum/showthread.php?t=426040');
+	window.open('https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/support');
 };
 document.getElementById('report-an-issue').onclick = function() {
-	window.open('http://www.neogaf.com/forum/private.php?do=newpm&u=20593');
+	window.open('https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/support');
+};
+document.getElementById('help-us-out').onclick = function() {
+	window.open('https://github.com/JdotCarver/Animal-Crossing-Music-Extension/');
 };
