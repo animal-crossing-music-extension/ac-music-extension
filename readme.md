@@ -14,7 +14,7 @@ Added New Leaf Rainy day option and did all the loops
 Customizable Town Chime on every hour change  
 Added the PAL equivalent of City Folk to the title (less confusion) (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
-names of the games</a>)  
+e4iojk</a>)  
 Fade-in Fade-out before switching tracks  
 
 ### Sought improvements
