@@ -20,6 +20,7 @@ Fade-in Fade-out before switching tracks
 ### Sought improvements
 Music on day of certain events (Halloween, Guy Fawkes, Christmas, ...)  
 Redo New Leaf Snow loops  
+Add sound tones similar to previsualizing the Town chime in the original game  
 A Mix All option that picks a track from all of the different games (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Altaria Nintendo</a>)  
