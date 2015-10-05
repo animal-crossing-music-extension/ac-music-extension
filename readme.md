@@ -21,7 +21,7 @@ Fade-in Fade-out before switching tracks
 1.  **Music on day of certain events (Halloween, Guy Fawkes, Christmas, ...)**  
 
 2. **Enable the user to either choose Live K.K. songs or Aircheck songs**  
-[Check issue](https://github.com/JdotCarver/Animal-Crossing-Music-Extension/issues/4)
+[Check Issue](https://github.com/JdotCarver/Animal-Crossing-Music-Extension/issues/4)
 
 3. **Fix the Download size**  
 _This extension is already big and isn't going to get smaller. (We need a solution of some sort to bypass Chrome's questionnable download manager and make the user's experience better)_   
@@ -31,29 +31,40 @@ _This extension is already big and isn't going to get smaller. (We need a soluti
 
 5. **Add sound tones to the town tune previsualizer to more closely ressemble the one in the original game**  
 
-6. **(Redo New Leaf Snow loops)**  
+6. **Dynamic Music according to local weather**  
+[Check Issue](https://github.com/JdotCarver/Animal-Crossing-Music-Extension/issues/5)
+
+7. **Add an option for ambient sounds while the music is playing**  
+_20% to 30% of the current volume would be pretty sweet, a separate volume slider would be even better. Contact me if you want me to get the sound files prepped._
+
+8. **Alternate icon(s) in browser**  
+_Contact me if you want the icon files prepped_
+ 
+9. **(Redo New Leaf Snow loops)**  
 *That will be in suspense until loop points are organized*
 
-7.  **(Actually adding City Folk Rainy and Snowy Tracks!)**  
+10.  **(Actually adding City Folk Rainy and Snowy Tracks!)**  
+_This too_  
 (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Logan Sackchum</a>)
 
-8. **A Mix All option that picks a track from all of the different games**  
+
+11. **A Mix All option that picks a track from all of the different games**  
 (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Altaria Nintendo</a>)  
 
-9. **Up the max volume**  
+12. **Up the max volume**  
 (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Maxine Manasan</a>)  
 
-10. **Hire an artist for UI design?**  
+13. **Hire an artist for UI design?**  
 *Just thinking about it, would be a nice addition to colorize the interface a bit.*  
 
-11. **Firefox and Opera Compatibility**  
-*(preferably when the extension is close to finalized)*  
+14. **Firefox and Opera Compatibility**  
+*Preferably when the extension is close to finalized*  
 (Credit: Google users <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">Yugo Selatrop</a> and <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">Comand Reu</a>)  
   
 ##### Open to other suggestions
