@@ -9,7 +9,7 @@ Redid all New Leaf Loops with Original files
 (Fixed 1pm track still need to upload the edith though)  
 K.K. Slider now plays : from 8pm to 12am / all the time / never  
 Added Changelog  
-Warned about how to apply settings  
+Settings now auto-save  
 Added New Leaf Rainy day option and did all the loops  
 Customizable Town Chime on every hour change  
 Added the PAL equivalent of City Folk to the title (less confusion) (Credit: Google user 
@@ -18,22 +18,23 @@ e4iojk</a>)
 Fade-in Fade-out before switching tracks  
 
 ### Sought improvements
+Fix the Download size. This extension is already big and isn't going to get smaller. We need a solution of some sort to bypass Chrome's questionnable download manager and make the user's experience better   
 Music on day of certain events (Halloween, Guy Fawkes, Christmas, ...)  
+Add loop points support in order to keep the intro of certain tracks that I cut out for the smoothest transition (Credit: Google User <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">Nathan Morris</a>)  
+Add sound tones to the town tune previsualizer to more closely ressemble the one in the original game  
 Redo New Leaf Snow loops  
-Add sound tones similar to previsualizing the Town chime in the original game  
 A Mix All option that picks a track from all of the different games (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Altaria Nintendo</a>)  
 Actually adding City Folk Rainy and Snowy Tracks! (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Logan Sackchum</a>)  
-Add loop points support in order to keep the intro of certain tracks that I cut out for the smoothest transition (Credit: Google User <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
-Nathan Morris</a>)  
 Up the max volume (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Maxine Manasan</a>)  
+Hire an artist for UI design? Just thinking about it, would be a nice addition to colorize the interface a bit.  
 Firefox and Opera Compatibility (preferably when the extension is close to finalized) (Credit: Google users 
-<a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">Yugo Selatrop and Comand Reu</a>)  
+<a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">Yugo Selatrop</a> and <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">Comand Reu</a>)  
   
 ##### Open to other suggestions
 
