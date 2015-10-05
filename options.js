@@ -16,6 +16,9 @@ function saveOptions() {
 	else if (document.getElementById('wild-world').checked) {
 		music = 'wild-world';
 	}
+	else if (document.getElementById('wild-world-snowing').checked) {
+		music = 'wild-world-snowing';
+	}
 	else if (document.getElementById('new-leaf').checked) {
 		music = 'new-leaf';
 	}
@@ -60,6 +63,7 @@ document.addEventListener('DOMContentLoaded', restoreOptions);
 document.getElementById('volume').onchange = saveOptions;
 document.getElementById('animal-forrest').onclick = saveOptions;
 document.getElementById('wild-world').onclick = saveOptions;
+document.getElementById('wild-world-snowing').onclick = saveOptions;
 document.getElementById('new-leaf').onclick = saveOptions;
 document.getElementById('new-leaf-snowing').onclick = saveOptions;
 document.getElementById('new-leaf-raining').onclick = saveOptions;
