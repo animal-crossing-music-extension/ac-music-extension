@@ -18,7 +18,8 @@ e4iojk</a>)
 Fade-in Fade-out before switching tracks  
 
 ### Sought improvements
-Fix the Download size. This extension is already big and isn't going to get smaller. We need a solution of some sort to bypass Chrome's questionnable download manager and make the user's experience better   
+Fix the Download size. This extension is already big and isn't going to get smaller. (We need a solution of some sort to bypass Chrome's questionnable download manager and make the user's experience better)   
+Enable the user to either choose Live K.K. songs or Aircheck songs  
 Music on day of certain events (Halloween, Guy Fawkes, Christmas, ...)  
 Add loop points support in order to keep the intro of certain tracks that I cut out for the smoothest transition (Credit: Google User <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">Nathan Morris</a>)  
 Add sound tones to the town tune previsualizer to more closely ressemble the one in the original game  
@@ -37,6 +38,9 @@ Firefox and Opera Compatibility (preferably when the extension is close to final
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">Yugo Selatrop</a> and <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">Comand Reu</a>)  
   
 ##### Open to other suggestions
+
+## Resources
+<a href="https://drive.google.com/open?id=0B79uF1ZqAHtbN0l4eFR1NU9CMGc">Google Drive Music folder</a>
 
 ## Download
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop">Chrome Webstore</a>
