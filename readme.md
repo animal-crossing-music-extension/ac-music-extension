@@ -32,6 +32,8 @@ Nathan Morris</a>)
 Up the max volume (Credit: Google user 
 <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">
 Maxine Manasan</a>)  
+Firefox and Opera Compatibility (preferably when the extension is close to finalized) (Credit: Google users 
+<a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">Yugo Selatrop and Comand Reu</a>)  
   
 ##### Open to other suggestions
 
