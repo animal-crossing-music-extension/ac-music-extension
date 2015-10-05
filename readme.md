@@ -23,7 +23,7 @@ Fade-in Fade-out before switching tracks
 2. **Enable the user to either choose Live K.K. songs or Aircheck songs**  
 [Check issue](https://github.com/JdotCarver/Animal-Crossing-Music-Extension/issues/4)
 
-3. **Fix the Download size.**  
+3. **Fix the Download size**  
 _This extension is already big and isn't going to get smaller. (We need a solution of some sort to bypass Chrome's questionnable download manager and make the user's experience better)_   
 
 4. **Add loop points support in order to keep the intro of certain tracks that I cut out for the smoothest transition**  
@@ -31,7 +31,8 @@ _This extension is already big and isn't going to get smaller. (We need a soluti
 
 5. **Add sound tones to the town tune previsualizer to more closely ressemble the one in the original game**  
 
-6. **(Redo New Leaf Snow loops)** *that will be in suspense until loop points are organized*
+6. **(Redo New Leaf Snow loops)**  
+*That will be in suspense until loop points are organized*
 
 7.  **(Actually adding City Folk Rainy and Snowy Tracks!)**  
 (Credit: Google user 
