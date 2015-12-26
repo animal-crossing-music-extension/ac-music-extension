@@ -1,6 +1,8 @@
 // Manages the current state of the extension, views can register to it
 // and it will notify certain events.
 
+'use strict';
+
 function StateManager() {
 
 	var self = this;

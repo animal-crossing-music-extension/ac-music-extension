@@ -1,3 +1,5 @@
+'use strict';
+
 var stateManager = new StateManager();
 var audioManager = new AudioManager(stateManager.registerCallback, function() {
 	return stateManager.getOption("enableTownTune");

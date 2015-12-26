@@ -1,6 +1,8 @@
 // Handles Chrome notifications and the badge on the icon
 // This could potentially be split into two objects.
 
+'use strict';
+
 function NotificationManager(addEventListener, isEnabled) {
 
 	function popMusicNotification(hour) {

@@ -1,5 +1,7 @@
 // Keeps time and notifies passed in callback on each hour
 
+'use strict';
+
 function TimeKeeper() {
 
 	var hourlyCallback;

@@ -1,5 +1,7 @@
 // Handles playing hourly music, KK, and the town tune.
 
+'use strict';
+
 function AudioManager(addEventListener, isTownTune) {
 
 	var audio = document.createElement('audio');

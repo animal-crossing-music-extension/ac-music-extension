@@ -2,6 +2,8 @@
 // into AudioManager, or tune_player instead of making createSampler
 // and createTunePlayer globally accessable.
 
+'use strict';
+
 function TownTuneManager() {
 
 	var defaultTune = ["G2", "E3", "=", "G2", "F2", "D3", "=", "B2", "C3", "-", "C2", "-", "C2", "=", "=", "-"];
