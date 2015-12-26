@@ -14,11 +14,11 @@ function AudioManager(addEventListener, isTownTune) {
 		fadeOutAudio(fadeOutLength, function() {
 			if(isHourChange && isTownTune()) {
 				townTuneManager.playTune(function() {
-					audio.src = './' + game + '/' + formatHour(hour) + 'm.ogg';
+					audio.src = '../music/' + game + '/' + formatHour(hour) + 'm.ogg';
 					audio.play();
 				});
 			} else {
-				audio.src = './' + game + '/' + formatHour(hour) + 'm.ogg';
+				audio.src = '../music/' + game + '/' + formatHour(hour) + 'm.ogg';
 				audio.play();
 			}
 		});
@@ -32,7 +32,7 @@ function AudioManager(addEventListener, isTownTune) {
 
 	function playKKSong() {
 		var randomSong = Math.floor((Math.random() * 36) + 1).toString();
-		audio.src = './kk/' + randomSong + '.ogg';
+		audio.src = '../music/kk/' + randomSong + '.ogg';
 		audio.play();
 	}
 

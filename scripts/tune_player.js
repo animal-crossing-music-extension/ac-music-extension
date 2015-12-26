@@ -94,7 +94,7 @@ var createSampler = function(audioContext) {
     var req = new XMLHttpRequest();
     req.responseType = 'arraybuffer';
     req.onload = reqListener;
-    req.open("get", chrome.extension.getURL('bells.ogg'), true);
+    req.open("get", chrome.extension.getURL('../bells.ogg'), true);
     req.send();
   };
 

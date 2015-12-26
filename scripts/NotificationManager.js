@@ -10,7 +10,7 @@ function NotificationManager(addEventListener, isEnabled) {
 			type: 'basic',
 			title: 'Animal Crossing Music',
 			message: 'It is now ' + formatHour(hour) + 'm!',
-			iconUrl: 'clock.png'
+			iconUrl: '../img/clock.png'
 		});
 	}
 
@@ -19,7 +19,7 @@ function NotificationManager(addEventListener, isEnabled) {
 			type: 'basic',
 			title: 'Animal Crossing Music',
 			message: 'K.K. Slider has started to play!',
-			iconUrl: 'clock.png'
+			iconUrl: '../img/clock.png'
 		});
 
 	}
