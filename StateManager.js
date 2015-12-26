@@ -5,7 +5,7 @@ function StateManager() {
 	var options = {};
 	var callbacks = {};
 
-	window.timeKeeper = new TimeKeeper();
+	var timeKeeper = new TimeKeeper();
 	var isKKTime = timeKeeper.getDay() == 6 && timeKeeper.getHours() >= 20;
 
 	this.registerCallback = function(event, callback) {
@@ -34,8 +34,6 @@ function StateManager() {
 			for(var i = 0; i < callbackArr.length; i++) {
 				callbackArr[i].apply(window, args);
 			}
-		} else {
-			console.log("BLARG");
 		}
 	}
 
