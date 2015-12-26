@@ -27,9 +27,9 @@ function TimeKeeper() {
 		setTimeout(timeCheckLoop, timeToNext);
 		currDay = newDate.getDay();
 		// if we're in a new hour
-		if(newDate.getHours() != currHour) {
+		if (newDate.getHours() != currHour) {
 			currHour = newDate.getHours();
-			if(hourlyCallback) {
+			if (hourlyCallback) {
 				hourlyCallback(currDay, currHour);
 			}
 		}
@@ -40,9 +40,9 @@ function TimeKeeper() {
 	// window.timeCheckDebug = function(day, hour) {
 	// 	currDay = day;
 	// 	// if we're in a new hour
-	// 	if(hour != currHour) {
+	// 	if (hour != currHour) {
 	// 		currHour = hour;
-	// 		if(hourlyCallback) {
+	// 		if (hourlyCallback) {
 	// 			hourlyCallback(currDay, currHour);
 	// 		}
 	// 	}

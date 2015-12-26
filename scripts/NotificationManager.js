@@ -1,5 +1,4 @@
-// Handles Chrome notifications and the badge on the icon
-// This could potentially be split into two objects.
+// Handles Chrome notifications
 
 'use strict';
 
@@ -25,23 +24,15 @@ function NotificationManager(addEventListener, isEnabled) {
 	}
 
 	addEventListener("hourMusic", function(hour) {
-		chrome.browserAction.setBadgeText({ text: formatHour(hour) });
-		if(isEnabled()) {
+		if (isEnabled()) {
 			popMusicNotification(hour);
 		}
 	});
 
 	addEventListener("kkStart", function() {
-		chrome.browserAction.setBadgeText({ text: "KK" });
-		if(isEnabled()) {
+		if (isEnabled()) {
 			popKKNotification();
 		}
 	});
-
-	addEventListener("pause", function() {
-		chrome.browserAction.setBadgeText({ text: "" });
-	});
-
-	chrome.browserAction.setBadgeBackgroundColor({ color: [57, 230, 0, 255] });
 
 }

@@ -26,7 +26,7 @@ function StateManager() {
 		isKKTime = timeKeeper.getDay() == 6 && timeKeeper.getHour() >= 20;
 		getSyncedOptions(function() {
 			notifyListeners("volume", [options.volume]);
-			if(isKK()) {
+			if (isKK()) {
 				notifyListeners("kkStart");
 			} else {
 				notifyListeners("hourMusic", [timeKeeper.getHour(), options.music, false]);
@@ -37,7 +37,7 @@ function StateManager() {
 	// Possible events include:
 	// volume, kkStart, hourMusic, gameChange, pause
 	function notifyListeners(event, args) {
-		if(!options.paused) {
+		if (!options.paused) {
 			var callbackArr = callbacks[event] || [];
 			for(var i = 0; i < callbackArr.length; i++) {
 				callbackArr[i].apply(window, args);
@@ -72,9 +72,9 @@ function StateManager() {
 	timeKeeper.registerHourlyCallback(function(day, hour) {
 		var wasKK = isKK();
 		isKKTime = day == 6 && hour >= 20;
-		if(isKK() && !wasKK) {
+		if (isKK() && !wasKK) {
 			notifyListeners("kkStart");
-		} else if(!isKK()) {
+		} else if (!isKK()) {
 			notifyListeners("hourMusic", [hour, options.music, true]);
 		}
 	});
@@ -84,16 +84,16 @@ function StateManager() {
 	chrome.storage.onChanged.addListener(function(changes, namespace) {
 		var wasKK = isKK();
 		getSyncedOptions(function() {
-			if(typeof changes.volume !== 'undefined') {
+			if (typeof changes.volume !== 'undefined') {
 				notifyListeners("volume", [options.volume]);
 			}
-			if(typeof changes.music !== 'undefined' && !isKK()) {
+			if (typeof changes.music !== 'undefined' && !isKK()) {
 				notifyListeners("gameChange", [timeKeeper.getHour(), options.music]);
 			}
-			if(isKK() && !wasKK) {
+			if (isKK() && !wasKK) {
 				notifyListeners("kkStart");
 			}
-			if(!isKK() && wasKK) {
+			if (!isKK() && wasKK) {
 				notifyListeners("hourMusic", [timeKeeper.getHour(), options.music]);
 			}
 		});
@@ -102,7 +102,7 @@ function StateManager() {
 	// play/pause when user clicks the extension icon
 	chrome.browserAction.onClicked.addListener(function() {
 		chrome.storage.sync.set({ paused: !options.paused }, function() {
-			if(options.paused) {
+			if (options.paused) {
 				self.activate();
 			} else {
 				notifyListeners("pause");

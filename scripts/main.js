@@ -7,5 +7,6 @@ var audioManager = new AudioManager(stateManager.registerCallback, function() {
 var notificationManager = new NotificationManager(stateManager.registerCallback, function() {
 	return stateManager.getOption("enableNotifications");
 });
+var badgeManager = new BadgeManager(stateManager.registerCallback);
 
 stateManager.activate();

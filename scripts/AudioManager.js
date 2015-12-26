@@ -12,7 +12,7 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.removeEventListener("ended", playKKSong);
 		var fadeOutLength = isHourChange ? 3000 : 1000;
 		fadeOutAudio(fadeOutLength, function() {
-			if(isHourChange && isTownTune()) {
+			if (isHourChange && isTownTune()) {
 				townTuneManager.playTune(function() {
 					audio.src = '../music/' + game + '/' + formatHour(hour) + 'm.ogg';
 					audio.play();
@@ -38,19 +38,19 @@ function AudioManager(addEventListener, isTownTune) {
 
 	// Fade out audio and call callback when finished.
 	function fadeOutAudio(time, callback) {
-		if(audio.paused) {
-			if(callback) callback();
+		if (audio.paused) {
+			if (callback) callback();
 		} else {
 			var oldVolume = audio.volume;
 			var step = audio.volume / (time / 100.0);
 			var fade = setInterval(function() {
-				if(audio.volume > step) {
+				if (audio.volume > step) {
 					audio.volume -= step;
 				} else {
 					clearInterval(fade);
 					audio.pause();
 					audio.volume = oldVolume;
-					if(callback) callback();
+					if (callback) callback();
 				}
 			}, 100);
 		}
