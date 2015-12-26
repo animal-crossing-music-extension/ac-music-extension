@@ -37,15 +37,4 @@ function TimeKeeper() {
 
 	timeCheckLoop();
 
-	// window.timeCheckDebug = function(day, hour) {
-	// 	currDay = day;
-	// 	// if we're in a new hour
-	// 	if (hour != currHour) {
-	// 		currHour = hour;
-	// 		if (hourlyCallback) {
-	// 			hourlyCallback(currDay, currHour);
-	// 		}
-	// 	}
-	// }
-
 }
