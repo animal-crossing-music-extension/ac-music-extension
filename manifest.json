@@ -1,6 +1,6 @@
 {
    "background": {
-      "scripts": ["tune_player.js", "extension.js"]
+      "scripts": [ "Utility.js", "tune_player.js", "TownTuneManager.js", "TimeKeeper.js", "AudioManager.js", "NotificationManager.js", "StateManager.js", "main.js" ]
    },
    "browser_action": {
       "default_icon": {
@@ -19,6 +19,7 @@
       "48": "icon_48.png",
       "64": "icon_64.png"
    },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl2ESTURbPEGcWeMTfbQ8tFDZl6d/NFJEUtU9J3IXxHDsFGgInU5bPh+Bsv9p+0LNTGbdDfjC3TKHIjI6tLAgWY7FCEqOguZArLasftfy4D+qDHTNF9xDktza4sbbiatAOyDEV5v5rapi5pwfYTCPrr2guo3zGHeDqgk8tSvf1KVwVqcixO8i3JmWvd8Cw9mr8MTVRp8zWGhNisqfcMqctk1W0XvdhVkMKYZnp/JO0hpk8lzOhLuuQgu4HLQ83unzoTcgA3xNJMnKQgOxC89cFA9FkAQ5Az2MjVIH2h4Y859rvXVqFIx4hq9RoY7uoCSdE0KljmqWwKL5ufB4MhctFQIDAQAB",
    "manifest_version": 2,
    "name": "Animal Crossing Music",
    "options_page": "options.html",
