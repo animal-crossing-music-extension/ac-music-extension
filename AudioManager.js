@@ -7,13 +7,14 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.loop = true;
 		audio.removeEventListener("ended", playKKSong);
 		console.log("Play hourly music for " + formatHour(hour));
-		audio.src = './' + game + '/' + formatHour(hour) + 'm.ogg';
 		fadeOutAudio(function() {
 			if(isHourChange && isTownTune()) {
 				townTuneManager.playTune(function() {
+					audio.src = './' + game + '/' + formatHour(hour) + 'm.ogg';
 					audio.play();
 				});
 			} else {
+				audio.src = './' + game + '/' + formatHour(hour) + 'm.ogg';
 				audio.play();
 			}
 		});
@@ -30,6 +31,7 @@ function AudioManager(addEventListener, isTownTune) {
 					audio.volume -= step;
 				} else {
 					clearInterval(fade);
+					audio.pause();
 					audio.volume = oldVolume;
 					if(callback) callback();
 				}
