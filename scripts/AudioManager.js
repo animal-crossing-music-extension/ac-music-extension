@@ -7,6 +7,8 @@ function AudioManager(addEventListener, isTownTune) {
 	var audio = document.createElement('audio');
 	var townTuneManager = new TownTuneManager();
 
+	// isHourChange is true if it's an actual hour change,
+	// false if we're activating music in the middle of an hour
 	function playHourlyMusic(hour, game, isHourChange) {
 		audio.loop = true;
 		audio.removeEventListener("ended", playKKSong);
