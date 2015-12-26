@@ -8,7 +8,6 @@ function AudioManager(addEventListener, isTownTune) {
 	function playHourlyMusic(hour, game, isHourChange) {
 		audio.loop = true;
 		audio.removeEventListener("ended", playKKSong);
-		console.log("Play hourly music for " + formatHour(hour));
 		var fadeOutLength = isHourChange ? 3000 : 1000;
 		fadeOutAudio(fadeOutLength, function() {
 			if(isHourChange && isTownTune()) {
@@ -25,7 +24,6 @@ function AudioManager(addEventListener, isTownTune) {
 
 	function playKKMusic() {
 		audio.loop = false;
-		console.log("Play KK Music");
 		audio.addEventListener("ended", playKKSong);
 		fadeOutAudio(1000, playKKSong);
 	}

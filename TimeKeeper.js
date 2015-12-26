@@ -13,15 +13,15 @@ function TimeKeeper() {
 
 	this.getHour = function() {
 		return currHour;
-	}
+	};
 
 	this.getDay = function() {
 		return currDay;
-	}
+	};
 
 	var timeCheckLoop = function() {
 		var newDate = new Date();
-		var timeToNext = Math.max(5000, 60000 * (59 - newDate.getMinutes()));
+		var timeToNext = 3600000 - (newDate.getTime() % 3600000);
 		setTimeout(timeCheckLoop, timeToNext);
 		currDay = newDate.getDay();
 		// if we're in a new hour
