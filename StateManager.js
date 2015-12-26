@@ -1,3 +1,6 @@
+// Manages the current state of the extension, views can register to it
+// and it will notify certain events.
+
 function StateManager() {
 
 	var self = this;
@@ -6,7 +9,7 @@ function StateManager() {
 	var callbacks = {};
 
 	var timeKeeper = new TimeKeeper();
-	var isKKTime = timeKeeper.getDay() == 6 && timeKeeper.getHours() >= 20;
+	var isKKTime;
 
 	this.registerCallback = function(event, callback) {
 		callbacks[event] = callbacks[event] || [];
@@ -18,16 +21,19 @@ function StateManager() {
 	};
 
 	this.activate = function() {
+		isKKTime = timeKeeper.getDay() == 6 && timeKeeper.getHour() >= 20;
 		getSyncedOptions(function() {
 			notifyListeners("volume", [options.volume]);
 			if(isKK()) {
-				notifyListeners("KKStart");
+				notifyListeners("kkStart");
 			} else {
 				notifyListeners("hourMusic", [timeKeeper.getHour(), options.music, false]);
 			}
 		});
 	};
 
+	// Possible events include:
+	// volume, kkStart, hourMusic, gameChange, pause
 	function notifyListeners(event, args) {
 		if(!options.paused) {
 			var callbackArr = callbacks[event] || [];
@@ -59,28 +65,20 @@ function StateManager() {
 		});
 	}
 
+	// If we're not playing KK, let listeners know the hour has changed
+	// If we enter KK time, let listeners know
 	timeKeeper.registerHourlyCallback(function(day, hour) {
-		if(!isKK()) {
+		var wasKK = isKK();
+		isKKTime = day == 6 && hour >= 20;
+		if(isKK() && !wasKK) {
+			notifyListeners("kkStart");
+		} else if(!isKK()) {
 			notifyListeners("hourMusic", [hour, options.music, true]);
 		}
 	});
 
-	timeKeeper.registerSpecificTimeCallback(function(day, hour) {
-		var wasKK = isKK();
-		isKKTime = true;
-		if(isKK() && !wasKK) {
-			notifyListeners("KKStart");
-		}
-	}, 6, 20);
-
-	timeKeeper.registerSpecificTimeCallback(function(day, hour) {
-		var wasKK = isKK();
-		isKKTime = false;
-		if(!isKK() && wasKK) {
-			notifyListeners("hourMusic", [hour, options.music]);
-		}
-	}, 0, 0);
-
+	// Update our options object if stored options changes, and notify listeners
+	// of any pertinent changes.
 	chrome.storage.onChanged.addListener(function(changes, namespace) {
 		var wasKK = isKK();
 		getSyncedOptions(function() {
@@ -88,10 +86,10 @@ function StateManager() {
 				notifyListeners("volume", [options.volume]);
 			}
 			if(typeof changes.music !== 'undefined' && !isKK()) {
-				notifyListeners("game", [timeKeeper.getHour(), options.music]);
+				notifyListeners("gameChange", [timeKeeper.getHour(), options.music]);
 			}
 			if(isKK() && !wasKK) {
-				notifyListeners("KKStart");
+				notifyListeners("kkStart");
 			}
 			if(!isKK() && wasKK) {
 				notifyListeners("hourMusic", [timeKeeper.getHour(), options.music]);
@@ -101,10 +99,7 @@ function StateManager() {
 
 	// play/pause when user clicks the extension icon
 	chrome.browserAction.onClicked.addListener(function() {
-		
-		chrome.storage.sync.set({
-			paused: !options.paused
-		}, function() {
+		chrome.storage.sync.set({ paused: !options.paused }, function() {
 			if(options.paused) {
 				self.activate();
 			} else {

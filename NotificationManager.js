@@ -1,3 +1,6 @@
+// Handles Chrome notifications and the badge on the icon
+// This could potentially be split into two objects.
+
 function NotificationManager(addEventListener, isEnabled) {
 
 	function popMusicNotification(hour) {
@@ -26,7 +29,7 @@ function NotificationManager(addEventListener, isEnabled) {
 		}
 	});
 
-	addEventListener("KKStart", function() {
+	addEventListener("kkStart", function() {
 		chrome.browserAction.setBadgeText({ text: "KK" });
 		if(isEnabled()) {
 			popKKNotification();

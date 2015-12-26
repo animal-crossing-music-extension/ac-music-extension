@@ -5,6 +5,4 @@ var audioManager = new AudioManager(stateManager.registerCallback, function() {
 var notificationManager = new NotificationManager(stateManager.registerCallback, function() {
 	return stateManager.getOption("enableNotifications");
 });
-setTimeout(function() {
-	stateManager.activate();
-}, 10);
+stateManager.activate();

@@ -1,3 +1,5 @@
+// Handles playing hourly music, KK, and the town tune.
+
 function AudioManager(addEventListener, isTownTune) {
 
 	var audio = document.createElement('audio');
@@ -7,7 +9,8 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.loop = true;
 		audio.removeEventListener("ended", playKKSong);
 		console.log("Play hourly music for " + formatHour(hour));
-		fadeOutAudio(function() {
+		var fadeOutLength = isHourChange ? 3000 : 1000;
+		fadeOutAudio(fadeOutLength, function() {
 			if(isHourChange && isTownTune()) {
 				townTuneManager.playTune(function() {
 					audio.src = './' + game + '/' + formatHour(hour) + 'm.ogg';
@@ -20,12 +23,26 @@ function AudioManager(addEventListener, isTownTune) {
 		});
 	}
 
-	function fadeOutAudio(callback) {
+	function playKKMusic() {
+		audio.loop = false;
+		console.log("Play KK Music");
+		audio.addEventListener("ended", playKKSong);
+		fadeOutAudio(1000, playKKSong);
+	}
+
+	function playKKSong() {
+		var randomSong = Math.floor((Math.random() * 36) + 1).toString();
+		audio.src = './kk/' + randomSong + '.ogg';
+		audio.play();
+	}
+
+	// Fade out audio and call callback when finished.
+	function fadeOutAudio(time, callback) {
 		if(audio.paused) {
 			if(callback) callback();
 		} else {
 			var oldVolume = audio.volume;
-			var step = audio.volume / 30.0;
+			var step = audio.volume / (time / 100.0);
 			var fade = setInterval(function() {
 				if(audio.volume > step) {
 					audio.volume -= step;
@@ -39,31 +56,18 @@ function AudioManager(addEventListener, isTownTune) {
 		}
 	}
 
-	function playKKMusic() {
-		audio.loop = false;
-		console.log("Play KK Music");
-		audio.addEventListener("ended", playKKSong);
-		playKKSong();
-	}
-
-	function playKKSong() {
-		var randomSong = Math.floor((Math.random() * 36) + 1).toString();
-		audio.src = './kk/' + randomSong + '.ogg';
-		audio.play();
-	}
-
 	addEventListener("hourMusic", playHourlyMusic);
 
-	addEventListener("KKStart", playKKMusic);
+	addEventListener("kkStart", playKKMusic);
 
-	addEventListener("game", playHourlyMusic);
-
-	addEventListener("volume", function(newVol) {
-		audio.volume = newVol;
-	});
+	addEventListener("gameChange", playHourlyMusic);
 
 	addEventListener("pause", function() {
 		audio.pause();
+	});
+
+	addEventListener("volume", function(newVol) {
+		audio.volume = newVol;
 	});
 
 }

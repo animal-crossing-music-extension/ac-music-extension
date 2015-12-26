@@ -1,3 +1,5 @@
+// Globally accessable helper functions
+
 // format text for the badge and for the song URL
 function formatHour(time) {
 	if (time === -1) {
