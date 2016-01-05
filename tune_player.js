@@ -1,6 +1,5 @@
 (function() {
-  var availablePitches = ['-', '=', 'G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3'];
-
+  var availablePitches = ['zZz', '-', 'G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3'];
 
 var createBooper = function(audioContext) {
   //values in HZ
@@ -178,7 +177,7 @@ var createTunePlayer = function(audioContext, bpm) {
       instrument.playNote(pitch, audioContext.currentTime + time, sustainDuration);
     }
 
-    //jQuery stlye chain callbacks
+    //jQuery style chain callbacks
     callbacks = {
       eachNote: function(callback) {
         eachNote = callback;

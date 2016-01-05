@@ -10,12 +10,32 @@
 
 .pitch-name {
   text-align: center;
+  width: 40px;
 }
 
 .pitch-slider {
   -webkit-appearance: slider-vertical;
   width: 25px;
   height: 75px;
+}
+
+input[type="range"].pitch-slider{
+    -webkit-appearance: none;
+    transform:rotate(-90deg);
+	margin: 40px -20px;
+	width: 75px;
+	height: 3px;
+    background-color: #e3ddd8; 
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	background-color: #F0F0E1;
+	border: 1px solid #BFBFBF;
+	width: 10px;
+	height: 20px;
+	border-radius: 2px;
+	cursor: pointer;
 }
 
 .staff {
