@@ -28,7 +28,7 @@ section {
   height: 75px;
 }
 
-button, input[type='text'] {
+button, input[type='text']:not(.pitch-name) {
 	background: #FFFFF2 !important; 
 	border: 1px solid #BFBFBF !important; 
 	padding: 10px auto !important; 
