@@ -1,12 +1,12 @@
 'use strict';
 
 // initialize
-var options, audio, sampler, tunePlayer, audioContext, defaultTune, playingHour, currentMusic, inKK, notifiedKK, exitingKK, badgeText, day, hour;
+var options, audio, sampler, tunePlayer, audioContext, defaultTune, playingHour, currentMusic, inKK, notifiedKK, exitingKK, badgeText, day, hour, weatherRain, weatherSnow;
 
 audio = document.createElement('audio');
 audio.loop = true;
 
-defaultTune = ["G2", "E3", "=", "G2", "F2", "D3", "=", "B2", "C3", "-", "C2", "-", "C2", "=", "=", "-"];
+defaultTune = ["G2", "E3", "-", "G2", "F2", "D3", "-", "B2", "C3", "zZz", "C2", "zZz", "C2", "-", "-", "zZz"];
 audioContext = new AudioContext();
 sampler = createSampler(audioContext);
 tunePlayer = createTunePlayer(audioContext);
@@ -17,16 +17,23 @@ playingHour = new Date().getHours();
 inKK = false;
 notifiedKK = false;
 
+weatherRain = ['Thunderstorm', 'Drizzle', 'Rain'];
+weatherSnow = ['Snow'];
+
 // retrieve saved options
 function getSyncedOptions(callback) {
 	chrome.storage.sync.get({
 		volume: 0.5,
 		music: 'new-leaf',
-		enableNotifications: true,
+		enableNotifications: false,
 		enableKK: true,
 		alwaysKK: false,
 		paused: false,
-		enableTownTune: true
+		enableTownTune: true,
+		enableAutoPause: false,
+		zipCode: "73301",
+		countryCode: "us",
+		weather: "Clear"
 	}, function(items) {
 		options = items;
 		if (typeof callback === 'function') {
@@ -40,9 +47,25 @@ function checkKK() {
 	return options.alwaysKK || (options.enableKK && day() === 6 && hour() >= 20 && hour() <= 23);
 }
 
+// returns if the weather conditions should be checked
+function checkLive() {
+	return options.music === 'new-leaf-live';
+}
+
 // set volume back to the user-selected value
 function resetVolume() {
 	audio.volume = options.volume;
+	chrome.browserAction.setIcon({
+		path : "/icon_38_leaf-02.png"
+	});
+}
+
+// mute volume
+function muteVolume() {
+	audio.volume = 0;
+	chrome.browserAction.setIcon({
+		path : "/icon_38_leaf-01.png"
+	});
 }
 
 function getTownTune(done) {
@@ -55,6 +78,18 @@ function getTownTune(done) {
 function setAudioUrl(file) {
 	if (checkKK()) {
 		currentMusic = 'kk';
+	}
+	else if(checkLive()) {
+		if(options.music == 'new-leaf-live')
+		{
+			if(options.weather == "Rain")
+				currentMusic = 'new-leaf-raining';
+			else if(options.weather == "Snow")
+				currentMusic = 'new-leaf-snowing';
+			else
+				currentMusic =  'new-leaf';
+		}
+		file += 'm';
 	}
 	else {
 		currentMusic = options.music;
@@ -103,12 +138,17 @@ function switchMusic() {
 		}
 	}
 	
-	updateBadge();
+	//updateBadge();
 	
 	if (checkKK()) {
 		setAudioUrl((Math.floor((Math.random() * 36) + 1).toString()));
 	}
 	else {
+		if(checkLive()) {
+			var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + options.zipCode + "," + 
+								options.countryCode + "&appid=e7f97bd1900b94491d3263f89cbe28d6";
+			updateWeatherCond(url);
+		}
 		setAudioUrl(formatHour(hour()));
 	}
 }
@@ -144,7 +184,7 @@ function updateMusic() {
 		audio.addEventListener("ended", endKK);
 	}
 	// normal music every hour
-	else if (!inKK && !exitingKK && (hour() !== playingHour || currentMusic !== options.music)) {
+	else if (!inKK && !exitingKK && (hour() !== playingHour || (currentMusic !== options.music && !checkLive()))) {
 		changeSong();
 	}
 }
@@ -153,6 +193,7 @@ function changeSong() {
 	//do a 3 second fadeout, step every 100 ms
 	var step = options.volume / 30.0;
 	var fade = setInterval(function () {
+		
 		if (audio.volume > step)
 			audio.volume -= step;
 		else {
@@ -185,12 +226,18 @@ function playPause(play) {
 		resetVolume();
 		switchMusic();
 		updateMusic();
-		updateBadge();
+		//updateBadge();
 		audio.play();
+		chrome.browserAction.setIcon({
+			path : "/icon_38_leaf-02.png"
+		});
 	}
 	else {
 		audio.pause();
-		updateBadge(-1);
+		//updateBadge(-1);
+		chrome.browserAction.setIcon({
+			path : "/icon_38_leaf-01.png"
+		});
 	}
 }
 
@@ -204,9 +251,8 @@ function endKK() {
 }
 
 // updates the badge text
-function updateBadge(overrideTime) {
-	badgeText = formatHour(overrideTime || hour());
-	chrome.browserAction.setBadgeText({ text: badgeText });
+function updateBadge() {
+	chrome.browserAction.setBadgeText({ text: options.weather });
 }
 
 // Set the globe spinning.
@@ -218,9 +264,84 @@ function init() {
 	playPause(!options.paused);
 	
 	// check every 15 seconds for a time/song change
-	setInterval(updateMusic, 15000);
+	setInterval(updateMusic, 15000);	
 	
+	// check ever second if a tab has audio playing
+	// still buggy and doesn't work like I'd like
+	// only checks at start, must restart extension/browser to disable/enable after settings change
+	if(options.enableAutoPause)
+		setInterval(tabAudio, 1000);
+		
 	chrome.browserAction.setBadgeBackgroundColor({ color: [57, 230, 0, 255] });
+}
+
+// check all tabs for playing audio, process tabs in callback
+function tabAudio() {
+	if (audio.paused)
+		return;
+		
+	return chrome.tabs.query({audible: true}, function(tabs){
+		processAudio(tabs.length);
+	});
+}
+
+// process tabs, mute volume if 
+function processAudio(length) {		
+	if(length)
+		muteVolume();
+	else
+		fadeIn();
+}
+
+// fade in from silence
+function fadeIn() {
+	chrome.browserAction.setIcon({
+		path : "/icon_38_leaf-02.png"
+	});
+		
+	var step = options.volume / 30.0;
+	var fade = setInterval(function () {
+		if (audio.volume < options.volume)
+			audio.volume += step;
+		else
+			clearInterval(fade);
+	}, 100);
+	
+}
+
+//get current weather conditions using openweathermap: http://openweathermap.org/current
+function updateWeatherCond(url) {
+	var request = new XMLHttpRequest();
+
+	request.onreadystatechange = function()
+		{
+			if(request.readyState == 4 && request.status == 200)
+			{
+				LDResponse(JSON.parse(request.responseText));
+			}
+		}
+
+	request.open("GET", url, true);
+	request.send();
+	
+	function LDResponse(response)
+	{
+		if(response.cod == "200")
+		{
+			var weather = response.weather[0].main;
+			
+			if(weatherRain.indexOf(weather) > -1)
+				options.weather = "Rain";
+			else if(weatherSnow.indexOf(weather) > -1)
+				options.weather = "Snow";
+			else
+				options.weather = "Clear";
+		}
+		else
+		{
+			alert("invalid zip/country code");
+		}
+	}
 }
 
 // play/pause when user clicks the extension icon
@@ -246,7 +367,9 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 		getSyncedOptions(volumeCB);
 	if (typeof changes.music !== 'undefined'
 		|| typeof changes.enableKK !== 'undefined'
-		|| typeof changes.alwaysKK !== 'undefined')
+		|| typeof changes.alwaysKK !== 'undefined'
+		|| typeof changes.zipCode !== 'undefined'
+		|| typeof changes.countryCode !== 'undefined')
 		getSyncedOptions(musicCB);
 });
 

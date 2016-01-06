@@ -52,40 +52,26 @@
 					<section>
 						<h3>Music</h3>
 						<div class="radio">
-							<label>
-								<input id="animal-forrest" name="music-choice" type="radio">
-								<span>Animal Forest/Animal Crossing</span>
-							</label>
+							<input id="animal-forrest" name="music-choice" type="radio"><label for="animal-forrest"><span><span></span></span>Animal Forest/Animal Crossing</label>
 						</div>
 						<div class="radio">
-							<label>
-								<input id="wild-world" name="music-choice" type="radio">
-								<span>Wild World + City Folk/Let's Go to the City</span>
-							</label>
+							<input id="wild-world" name="music-choice" type="radio"><label for="wild-world"><span><span></span></span>Wild World + City Folk/Let's Go to the City</label>
 						</div>
 						<div class="radio">
-							<label>
-								<input id="wild-world-snowing" name="music-choice" type="radio">
-								<span>Wild World + City Folk/Let's Go to the City (Snowing)</span>
-							</label>
+							<input id="wild-world-snowing" name="music-choice" type="radio"><label for="wild-world-snowing"><span><span></span></span>Wild World + City Folk/Let's Go to the City (Snowing)</label>
 						</div>
 						<div class="radio">
-							<label>
-								<input id="new-leaf" name="music-choice" type="radio">
-								<span>New Leaf</span>
-							</label>
+							<input id="new-leaf" name="music-choice" type="radio"><label for="new-leaf"><span><span></span></span>New Leaf</label>
 						</div>
 						<div class="radio">
-							<label>
-								<input id="new-leaf-raining" name="music-choice" type="radio">
-								<span>New Leaf (Raining)</span>
-							</label>
+							<input id="new-leaf-raining" name="music-choice" type="radio"><label for="new-leaf-raining"><span><span></span></span>New Leaf (Raining)</label>
 						</div>
 						<div class="radio">
-							<label>
-								<input id="new-leaf-snowing" name="music-choice" type="radio">
-								<span>New Leaf (Snowing)</span>
-							</label>
+							<input id="new-leaf-snowing" name="music-choice" type="radio"><label for="new-leaf-snowing"><span><span></span></span>New Leaf (Snowing)</label>
+						</div>
+						<div class="radio">
+							<input id="new-leaf-live" name="music-choice" type="radio"><label for="new-leaf-live"><span><span></span></span>[BETA] New Leaf (<a href="http://openweathermap.org/current">Live Weather</a>)</label>
+								<input type="text" id="weather" disabled>
 						</div>
 						
 					</section>
@@ -93,42 +79,44 @@
 					<section>
 						<h3>K.K. Slider</h3>
 						<div class="radio">
-							<label>
-								<input id="no-kk" name="enable-kk" type="radio">
-								<span>Do not play K.K. Slider songs</span>
-							</label>
+							<input id="no-kk" name="enable-kk" type="radio"><label for="no-kk"><span><span></span></span>Do not play K.K. Slider songs</label>
 						</div>
 						<div class="radio">
-							<label>
-								<input id="enable-kk" name="enable-kk" type="radio">
-								<span>Play K.K. Slider songs on Saturdays from 8pm&ndash;12am</span>
-							</label>
+							<input id="enable-kk" name="enable-kk" type="radio"><label for="enable-kk"><span><span></span></span>Play K.K. Slider songs on Saturdays from 8pm&ndash;12am</label>
 						</div>
 						<div class="radio">
-							<label>
-								<input id="always-kk" name="enable-kk" type="radio">
-								<span>Play K.K. Slider songs at all times</span>
-							</label>
+							<input id="always-kk" name="enable-kk" type="radio"><label for="always-kk"><span><span></span></span>Play K.K. Slider songs at all times</label>
 						</div>
 					</section>
 
 					<section>
 						<h3>Town Tune</h3>
 						<div class="checkbox">
-							<label>
-								<input id="enable-town-tune" type="checkbox">
-								<span>Play your custom town tune on the hour</span>
-							</label>
+							<input id="enable-town-tune" type="checkbox"><label for="enable-town-tune"><span></span>Play your custom town tune on the hour</label>
 						</div>
 					</section>
 
 					<section>
 						<h3>Notifications</h3>
 						<div class="checkbox">
-							<label>
-								<input id="enable-notifications" type="checkbox">
-								<span>Enable Chrome notifications on song change</span>
-							</label>
+							<input id="enable-notifications" type="checkbox"><label for="enable-notifications"><span></span>Enable Chrome notifications on song change</label>
+						</div>
+					</section>
+					
+					<section class="beta">
+						<h3>Beta Features</h3>
+						<h3>Auto Pause</h3>
+						<div class="checkbox">
+							<input id="enable-audio-pause" type="checkbox"><label for="enable-audio-pause"><span></span>Automatically pause music if a tab starts playing sound 
+																																													(requires browser restart after change)</label>
+						</div>
+						
+						<h3>Location</h3>
+						<div class="text">
+								<input type="text" id="zip-code" value="618708">
+								<input type="text" id="country-code" value="ru">
+								<button type="button" id="update-location">Update Location</button>
+								<label>(First box is <a href="http://www.geonames.org/postal-codes/">zip code</a>, second is <a href = "https://countrycode.org/">country</a>)</label>
 						</div>
 					</section>
 					
@@ -182,7 +170,7 @@
 						<button id="help-us-out">Help us make the best AC extension ever!</button>
 					</div>
 					
-					<div id="version-container">Version 3.0</div>
+					<div id="version-container">Version 3.1</div>
 					
 					<div id="product-container">
 						<p>Animal Crossing Music</p>
