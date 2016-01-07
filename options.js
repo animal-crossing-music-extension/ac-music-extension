@@ -10,6 +10,7 @@ function saveOptions() {
 	var enableAutoPause = document.getElementById('enable-audio-pause').checked;	
 	var zipCode = document.getElementById('zip-code').value;
 	var countryCode = document.getElementById('country-code').value;
+	var badgeWeather = document.getElementById('enable-badge-weather').checked;
 
 	var music;	
 	if (document.getElementById('animal-forrest').checked) {
@@ -43,7 +44,8 @@ function saveOptions() {
 		enableTownTune: enableTownTune,
 		enableAutoPause: enableAutoPause,
 		zipCode: zipCode,
-		countryCode: countryCode
+		countryCode: countryCode,
+		badgeWeather: badgeWeather
 	}, function() { });
 }
 
@@ -57,7 +59,8 @@ function restoreOptions() {
 		enableTownTune: true,
 		enableAutoPause: false,
 		zipCode: "73301",
-		countryCode: "us"
+		countryCode: "us",
+		badgeWeather: false
 	}, function(items) {
 		document.getElementById('volume').value = items.volume;
 		document.getElementById(items.music).checked = true;
@@ -69,6 +72,7 @@ function restoreOptions() {
 		document.getElementById('enable-audio-pause').checked = items.enableAutoPause;
 		document.getElementById('zip-code').value = items.zipCode;
 		document.getElementById('country-code').value = items.countryCode;
+		document.getElementById('enable-badge-weather').checked = items.badgeWeather;
 	});
 }
 
@@ -88,6 +92,7 @@ document.getElementById('always-kk').onclick = saveOptions;
 document.getElementById('enable-notifications').onclick = saveOptions;
 document.getElementById('enable-audio-pause').onclick = saveOptions;
 document.getElementById('update-location').onclick = saveOptions;
+document.getElementById('enable-badge-weather').onclick = saveOptions;
 
 // About/Help
 document.getElementById('get-help').onclick = function() {

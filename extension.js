@@ -33,7 +33,8 @@ function getSyncedOptions(callback) {
 		enableTownTune: false,
 		enableAutoPause: false,
 		zipCode: "73301",
-		countryCode: "us"
+		countryCode: "us",
+		badgeWeather: false
 	}, function(items) {
 		options = items;
 		if (typeof callback === 'function') {
@@ -253,7 +254,13 @@ function endKK() {
 
 // updates the badge text
 function updateBadge() {
-	chrome.browserAction.setBadgeText({ text: weather });
+	if(checkLive() && options.badgeWeather)
+	{
+		chrome.browserAction.setBadgeBackgroundColor({ color: [57, 230, 0, 255] });
+		chrome.browserAction.setBadgeText({ text: weather });
+	}
+	else
+		chrome.browserAction.setBadgeText({ text: '' });
 }
 
 // check all tabs for playing audio, process tabs in callback
@@ -314,7 +321,7 @@ function updateWeatherCond() {
 		{
 			if(weather === false)
 			{
-				setTimeout(function() { playPause(true) }, 100);
+				setTimeout(function() { playPause(true); }, 50);
 			}
 			
 			weather = response.weather[0].main;
@@ -378,7 +385,8 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 		|| typeof changes.enableKK !== 'undefined'
 		|| typeof changes.alwaysKK !== 'undefined'
 		|| typeof changes.zipCode !== 'undefined'
-		|| typeof changes.countryCode !== 'undefined')
+		|| typeof changes.countryCode !== 'undefined'
+		|| typeof changes.badgeWeather !== 'undefined')
 		getSyncedOptions(musicCB);
 });
 
