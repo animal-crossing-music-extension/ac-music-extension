@@ -10,7 +10,6 @@ function saveOptions() {
 	var enableAutoPause = document.getElementById('enable-audio-pause').checked;	
 	var zipCode = document.getElementById('zip-code').value;
 	var countryCode = document.getElementById('country-code').value;
-	var weather = "Clear";
 
 	var music;	
 	if (document.getElementById('animal-forrest').checked) {
@@ -44,8 +43,7 @@ function saveOptions() {
 		enableTownTune: enableTownTune,
 		enableAutoPause: enableAutoPause,
 		zipCode: zipCode,
-		countryCode: countryCode,
-		weather: weather
+		countryCode: countryCode
 	}, function() { });
 }
 
@@ -59,8 +57,7 @@ function restoreOptions() {
 		enableTownTune: true,
 		enableAutoPause: false,
 		zipCode: "73301",
-		countryCode: "us",
-		weather: "Clear"
+		countryCode: "us"
 	}, function(items) {
 		document.getElementById('volume').value = items.volume;
 		document.getElementById(items.music).checked = true;
@@ -71,8 +68,7 @@ function restoreOptions() {
 		document.getElementById('enable-town-tune').checked = items.enableTownTune;
 		document.getElementById('enable-audio-pause').checked = items.enableAutoPause;
 		document.getElementById('zip-code').value = items.zipCode;
-		document.getElementById('country-code').value = items.countryCode;	
-		document.getElementById('weather').value = items.weather;	
+		document.getElementById('country-code').value = items.countryCode;
 	});
 }
 

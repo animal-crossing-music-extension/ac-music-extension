@@ -22,7 +22,7 @@ var createPitchControl = function(index) {
   pitch.className = 'pitch';
   pitch.id = 'pitch' + index;
 
-  name.value = tune[index];  
+  name.value = tune[index];
 
   name.onchange = function() {
     var val = name.value.toUpperCase();

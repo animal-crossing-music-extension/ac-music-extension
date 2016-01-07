@@ -1,7 +1,7 @@
 'use strict';
 
 // initialize
-var options, audio, sampler, tunePlayer, audioContext, defaultTune, playingHour, currentMusic, inKK, notifiedKK, exitingKK, badgeText, day, hour, weatherRain, weatherSnow;
+var options, audio, sampler, tunePlayer, audioContext, defaultTune, playingHour, currentMusic, inKK, notifiedKK, exitingKK, badgeText, day, hour, weather, weatherRain, weatherSnow;
 
 audio = document.createElement('audio');
 audio.loop = true;
@@ -17,8 +17,9 @@ playingHour = new Date().getHours();
 inKK = false;
 notifiedKK = false;
 
-weatherRain = ['Thunderstorm', 'Drizzle', 'Rain'];
-weatherSnow = ['Snow'];
+weather = false;
+weatherRain = ['Thunderstorm', 'Drizzle', 'Rain', 'Mist'];
+weatherSnow = ['Snow', 'Fog'];
 
 // retrieve saved options
 function getSyncedOptions(callback) {
@@ -29,16 +30,16 @@ function getSyncedOptions(callback) {
 		enableKK: true,
 		alwaysKK: false,
 		paused: false,
-		enableTownTune: true,
+		enableTownTune: false,
 		enableAutoPause: false,
 		zipCode: "73301",
-		countryCode: "us",
-		weather: "Clear"
+		countryCode: "us"
 	}, function(items) {
 		options = items;
 		if (typeof callback === 'function') {
 			callback();
 		}
+		weather = false;
 	});
 }
 
@@ -82,9 +83,9 @@ function setAudioUrl(file) {
 	else if(checkLive()) {
 		if(options.music == 'new-leaf-live')
 		{
-			if(options.weather == "Rain")
+			if(weather == "Rain")
 				currentMusic = 'new-leaf-raining';
-			else if(options.weather == "Snow")
+			else if(weather == "Snow")
 				currentMusic = 'new-leaf-snowing';
 			else
 				currentMusic =  'new-leaf';
@@ -120,6 +121,7 @@ function formatHour(time) {
 
 // show notification, swap to a new song
 function switchMusic() {
+	
 	if (options.enableNotifications) {
 		var notificationOptions = {
 				type: 'basic',
@@ -138,19 +140,18 @@ function switchMusic() {
 		}
 	}
 	
-	//updateBadge();
-	
 	if (checkKK()) {
 		setAudioUrl((Math.floor((Math.random() * 36) + 1).toString()));
 	}
 	else {
-		if(checkLive()) {
-			var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + options.zipCode + "," + 
-								options.countryCode + "&appid=e7f97bd1900b94491d3263f89cbe28d6";
-			updateWeatherCond(url);
+		if(checkLive())
+		{
+			updateWeatherCond();
 		}
 		setAudioUrl(formatHour(hour()));
 	}
+	
+	updateBadge();
 }
 
 // figure out what song should be playing vs. what is playing, change if necessary
@@ -252,7 +253,84 @@ function endKK() {
 
 // updates the badge text
 function updateBadge() {
-	chrome.browserAction.setBadgeText({ text: options.weather });
+	chrome.browserAction.setBadgeText({ text: weather });
+}
+
+// check all tabs for playing audio, process tabs in callback
+function tabAudio() {
+	if (audio.paused)
+		return;
+		
+	return chrome.tabs.query({audible: true}, function(tabs){
+		processTabs(tabs.length);
+	});
+	
+	// process tabs, mute volume if 
+	function processTabs(length) {		
+		if(length)
+			muteVolume();
+		else
+			fadeIn();
+	}
+}
+
+// fade in from silence
+function fadeIn() {
+	chrome.browserAction.setIcon({
+		path : "/icon_38_leaf-02.png"
+	});
+		
+	var step = options.volume / 30.0;
+	var fade = setInterval(function () {
+		if (audio.volume < options.volume)
+			audio.volume += step;
+		else
+			clearInterval(fade);
+	}, 100);
+	
+}
+
+//get current weather conditions using openweathermap: http://openweathermap.org/current
+function updateWeatherCond() {
+	var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + options.zipCode + "," + 
+						options.countryCode + "&appid=e7f97bd1900b94491d3263f89cbe28d6";
+						
+	var request = new XMLHttpRequest();
+
+	request.onreadystatechange = function()
+		{
+			if(request.readyState == 4 && request.status == 200)
+			{
+				LDResponse(JSON.parse(request.responseText));
+			}
+		}
+
+	request.open("GET", url, true);
+	request.send();
+	
+	function LDResponse(response)
+	{
+		if(response.cod == "200")
+		{
+			if(weather === false)
+			{
+				setTimeout(function() { playPause(true) }, 100);
+			}
+			
+			weather = response.weather[0].main;
+			
+			if(weatherRain.indexOf(weather) > -1)
+				weather = "Rain";
+			else if(weatherSnow.indexOf(weather) > -1)
+				weather = "Snow";
+			else
+				weather = "Clear";
+		}
+		else
+		{
+			alert("invalid zip/country code");
+		}
+	}
 }
 
 // Set the globe spinning.
@@ -273,75 +351,6 @@ function init() {
 		setInterval(tabAudio, 1000);
 		
 	chrome.browserAction.setBadgeBackgroundColor({ color: [57, 230, 0, 255] });
-}
-
-// check all tabs for playing audio, process tabs in callback
-function tabAudio() {
-	if (audio.paused)
-		return;
-		
-	return chrome.tabs.query({audible: true}, function(tabs){
-		processAudio(tabs.length);
-	});
-}
-
-// process tabs, mute volume if 
-function processAudio(length) {		
-	if(length)
-		muteVolume();
-	else
-		fadeIn();
-}
-
-// fade in from silence
-function fadeIn() {
-	chrome.browserAction.setIcon({
-		path : "/icon_38_leaf-02.png"
-	});
-		
-	var step = options.volume / 30.0;
-	var fade = setInterval(function () {
-		if (audio.volume < options.volume)
-			audio.volume += step;
-		else
-			clearInterval(fade);
-	}, 100);
-	
-}
-
-//get current weather conditions using openweathermap: http://openweathermap.org/current
-function updateWeatherCond(url) {
-	var request = new XMLHttpRequest();
-
-	request.onreadystatechange = function()
-		{
-			if(request.readyState == 4 && request.status == 200)
-			{
-				LDResponse(JSON.parse(request.responseText));
-			}
-		}
-
-	request.open("GET", url, true);
-	request.send();
-	
-	function LDResponse(response)
-	{
-		if(response.cod == "200")
-		{
-			var weather = response.weather[0].main;
-			
-			if(weatherRain.indexOf(weather) > -1)
-				options.weather = "Rain";
-			else if(weatherSnow.indexOf(weather) > -1)
-				options.weather = "Snow";
-			else
-				options.weather = "Clear";
-		}
-		else
-		{
-			alert("invalid zip/country code");
-		}
-	}
 }
 
 // play/pause when user clicks the extension icon
