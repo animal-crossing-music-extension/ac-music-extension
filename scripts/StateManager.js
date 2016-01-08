@@ -103,10 +103,10 @@ function StateManager() {
 	chrome.browserAction.onClicked.addListener(function() {
 		chrome.storage.sync.set({ paused: !options.paused }, function() {
 			if (options.paused) {
-				self.activate();
-			} else {
 				notifyListeners("pause");
 				options.paused = true;
+			} else {
+				self.activate();
 			}
 		});
 	});
