@@ -85,8 +85,8 @@ function StateManager() {
 			enableKK: true,
 			alwaysKK: false,
 			paused: false,
-			//enableTownTune: true,
-			enableAutoPause: false,
+			enableTownTune: true,
+			//enableAutoPause: false,
 			zipCode: "98052",
 			countryCode: "us",
 			enableBadgeText: true
@@ -109,8 +109,14 @@ function StateManager() {
 		else if(isLive()) {
 			if(options.music == 'new-leaf-live') {
 				updateWeatherCond(options.zipCode, options.countryCode, function(response) {
-				if(response.cod == "200") {
+				if(response.cod == 200) {
 					weather = response.weather[0].main;
+					if(weatherRain.indexOf(weather) > -1)
+						weather = "Rain";
+					else if(weatherSnow.indexOf(weather) > -1)
+						weather = "Snow";
+					else
+						weather = "Clear";
 					notifyListeners("weatherMusic", [timeKeeper.getHour(), options.music, weather, true]);
 				}
 				else
