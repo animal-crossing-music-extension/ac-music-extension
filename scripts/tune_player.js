@@ -1,6 +1,7 @@
 (function() {
   var availablePitches = ['zZz', '-', 'G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3'];
 
+
 var createBooper = function(audioContext) {
   //values in HZ
   var frequencies = [null, null, 392, 440, 494, 523, 587, 659, 698, 784, 880, 988, 1046, 1174, 1318];
@@ -93,7 +94,7 @@ var createSampler = function(audioContext) {
     var req = new XMLHttpRequest();
     req.responseType = 'arraybuffer';
     req.onload = reqListener;
-    req.open("get", chrome.extension.getURL('bells.ogg'), true);
+    req.open("get", chrome.extension.getURL('../bells.ogg'), true);
     req.send();
   };
 
@@ -177,7 +178,7 @@ var createTunePlayer = function(audioContext, bpm) {
       instrument.playNote(pitch, audioContext.currentTime + time, sustainDuration);
     }
 
-    //jQuery style chain callbacks
+    //jQuery stlye chain callbacks
     callbacks = {
       eachNote: function(callback) {
         eachNote = callback;

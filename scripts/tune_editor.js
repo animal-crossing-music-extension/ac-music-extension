@@ -1,6 +1,6 @@
 (function(){
 var pitchTemplate, playButton, saveButton, tune;
-var defaultTune = ["G2", "E3", "-", "G2", "F2", "D3", "zZz", "B2", "C3", "zZz", "C2", "zZz", "C2", "-", "zZz", "zZz"];
+var defaultTune = ["G2", "E3", "-", "G2", "F2", "D3", "-", "B2", "C3", "zZz", "C2", "zZz", "C2", "-", "-", "zZz"];
 var tuneLength = 16;
 var availableColors = ["#a4a2d0", "#e4b3d3", "#5eccf5", "#12fee0", "#53fd8a", "#79fc4e", "#a8fd35", "#d0fe47", 
 									"#e4fd39", "#f9fe2e", "#fefa43", "#fef03f", "#fcd03a", "#fcb141", "#fe912e"];
@@ -67,7 +67,6 @@ var initControls = function() {
     newPitchControl = createPitchControl(index);
     staff = (index < tuneLength/2) ? staff1 : staff2;
     staff.appendChild(newPitchControl);
-	
 	updateColor(index, tune[index]);
   }
 
@@ -135,7 +134,6 @@ var updateColor = function(index, pitch){
 var updateTune = function(index, pitch) {
   tune[index] = pitch;
   booper.playNote(pitch);
-  updateColor(index, pitch);
 };
 
 window.addEventListener('load', setup);

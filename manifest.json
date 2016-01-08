@@ -1,18 +1,18 @@
 {
    "background": {
-      "scripts": ["tune_player.js", "extension.js"]
+      "scripts": [ "scripts/Utility.js", "scripts/tune_player.js", "scripts/TownTuneManager.js", "scripts/TimeKeeper.js", "scripts/AudioManager.js", "scripts/BadgeManager.js", "scripts/NotificationManager.js", "scripts/StateManager.js", "scripts/main.js" ]
    },
    "browser_action": {
       "default_icon": {
-      "38": "icon_38_leaf-01.png",
-      "19": "icon_19_leaf-01.png"
+		  "19": "img/icon_19_leaf-01.png",
+		  "38": "img/icon_38_leaf-01.png"
       },
       "default_title": "Animal Crossing Music"
    },
    "description": "Play Animal Crossing's smooth background music in real-time throughout your day.",
    "icons": {
-      "128": "icon_128.png",
-      "38": "icon_32.png"
+      "128": "img/icon_128.png",
+      "38": "img/icon_32.png"
    },
    "manifest_version": 3,
    "name": "Animal Crossing Music",
@@ -20,8 +20,8 @@
    "permissions": [ 
 		"notifications", 
 		"storage", 
-		"http://api.openweathermap.org/*" ],
+		"http://api.openweathermap.org/" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "3.1",
-   "web_accessible_resources": [ "clock.png", "bells.ogg" ]
+   "version": "3.0",
+   "web_accessible_resources": [ "img/clock.png", "bells.ogg" ]
 }

@@ -3,12 +3,12 @@
 <head>
 	<meta charset="utf-8">
 	<title>Animal Crossing Music</title>
-	<link rel="stylesheet" href="chrome-bootstrap.css">
-	<link rel="stylesheet" href="tune_editor.css">
-	<script src="zepto.min.js"></script>
-	<script src="navigation.js"></script>
-	<script src="tune_player.js"></script>
-	<script src="tune_editor.js"></script>
+	<link rel="stylesheet" href="css/chrome-bootstrap.css">
+	<link rel="stylesheet" href="css/input.css">
+	<script src="scripts/zepto.min.js"></script>
+	<script src="scripts/navigation.js"></script>
+	<script src="scripts/tune_player.js"></script>
+	<script src="scripts/tune_editor.js"></script>
 	<style>
 		.chrome-bootstrap .frame .view {
 			-webkit-margin-start: 180px;
@@ -101,26 +101,25 @@
 						<div class="checkbox">
 							<input id="enable-notifications" type="checkbox"><label for="enable-notifications"><span></span>Enable Chrome notifications on song change</label>
 						</div>
+						
+						<div class="checkbox">
+							<input id="enable-badge" type="checkbox"><label for="enable-badge"><span></span>Display text on badge</label>
+						</div>
 					</section>
 					
 					<section class="beta">
-						<h3>Beta Features</h3>
-						<h3>Auto Pause</h3>
-						<div class="checkbox">
+						<h3 hidden>Beta Feature - Auto Pause</h3>
+						<div class="checkbox" hidden>
 							<input id="enable-audio-pause" type="checkbox"><label for="enable-audio-pause"><span></span>Automatically pause music if a tab starts playing sound 
 																																													(requires browser restart after change)</label>
 						</div>
 						
-						<h3>Live Weather</h3>
+						<h3>Live Weather Location</h3>
 						<div class="text">
 								<input type="text" id="zip-code" value="618708">
 								<input type="text" id="country-code" value="ru">
 								<button type="button" id="update-location">Update Location</button>
-								<label>(First box is <a href="http://www.geonames.org/postal-codes/">zip code</a>, second is <a href = "https://countrycode.org/">country</a>)</label>
-						</div>
-						
-						<div class="checkbox">
-							<input id="enable-badge-weather" type="checkbox"><label for="enable-badge-weather"><span></span>Show live weather on badge</label>
+								<label>(First box is <a href="http://www.geonames.org/postal-codes/">zip code</a>, second is <a href = "https://countrycode.org/">country code</a>)</label>
 						</div>
 					</section>
 					
@@ -161,7 +160,7 @@
 
 				<div class="content">
 					<div class="image-container">
-						<img src="icon_32.png" width="32" height="32" alt="Add-ons for NeoGAF">
+						<img src="img/icon_32.png" width="32" height="32" alt="Add-ons for NeoGAF">
 						<div class="image-container-text">
 							<h2>Animal Crossing Music</h2>
 							<span>Play Animal Crossing's smooth background music in real-time throughout your day.</span>
@@ -174,7 +173,7 @@
 						<button id="help-us-out">Help us make the best AC extension ever!</button>
 					</div>
 					
-					<div id="version-container">Version 3.1</div>
+					<div id="version-container">Version 3.0</div>
 					
 					<div id="product-container">
 						<p>Animal Crossing Music</p>
@@ -192,6 +191,6 @@
 		</div>
 	</div>
 	
-	<script src="options.js"></script>
+	<script src="scripts/options.js"></script>
 </body>
 </html>
