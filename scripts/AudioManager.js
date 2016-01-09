@@ -16,12 +16,12 @@ function AudioManager(addEventListener, isTownTune) {
 		fadeOutAudio(fadeOutLength, function() {
 			if (isHourChange && isTownTune()) {
 				townTuneManager.playTune(function() {
-					audio.src = '../' + game + '/' + formatHour(hour) + 'm.ogg';
+					audio.src = getSrc(game, hour);
 					playPause(true);
 				});
-			} 
+			}
 			else {
-					audio.src = '../' + game + '/' + formatHour(hour) + 'm.ogg';
+					audio.src = getSrc(game, hour);
 					playPause(true);
 			}
 		});
@@ -36,21 +36,12 @@ function AudioManager(addEventListener, isTownTune) {
 		fadeOutAudio(fadeOutLength, function() {
 			if (isHourChange && isTownTune()) {
 				townTuneManager.playTune(function() {
-					audio.src = '../' + game + '/' + formatHour(hour) + 'm.ogg';
+					audio.src = getSrc(game, hour, weather);
+					playPause(true);
 				});
 			}
-			else if(game == 'new-leaf-live') {				
-				if(weather == "Rain")
-					audio.src = '../new-leaf-raining/' + formatHour(hour) + 'm.ogg';
-				else if(weather == "Snow")
-					audio.src = '../new-leaf-snowing/' + formatHour(hour) + 'm.ogg';
-				else
-					audio.src = '../new-leaf/' + formatHour(hour) + 'm.ogg';
-					
-				playPause(true);
-			}
 			else {
-					audio.src = '../' + game + '/' + formatHour(hour) + 'm.ogg';
+					audio.src = getSrc(game, hour, weather);
 					playPause(true);
 			}
 		});

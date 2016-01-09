@@ -159,7 +159,6 @@ function StateManager() {
 				self.activate();
 			} else {
 				notifyListeners("pause");
-				options.paused = true;
 			}
 		});
 	});

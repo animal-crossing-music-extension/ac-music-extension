@@ -29,7 +29,7 @@ section {
 }
 
 button, input[type='text']:not(.pitch-name) {
-	background: #FFFFF2 !important; 
+	background: #f9f9f8 !important; 
 	border: 1px solid #BFBFBF !important; 
 	padding: 10px auto !important; 
 	height: 25px; 
@@ -76,7 +76,7 @@ input[type="range"].pitch-slider{
 
 input[type="range"]::-webkit-slider-thumb {
 	-webkit-appearance: none;
-	background-color: #F0F0E1;
+	background-color: #f3f3f3;
 	border: 1px solid #BFBFBF;
 	width: 10px;
 	height: 20px;
@@ -115,13 +115,13 @@ input[type=radio   ]:not(old) + label > span{
   height: 10px;
   margin: 0 5px 0 0;
   border: 1px solid #BFBFBF;
-  background: #F0F0E1;
+  background: #f3f3f3;
   vertical-align: bottom;
 }
 
 input[type=checkbox]:not(old):checked + label > span,
 input[type=radio   ]:not(old):checked + label > span{
-  background:         #F0F0E1;
+  background:         #f3f3f3;
 }
 
 input[type=checkbox]:not(old):checked + label > span:before{
