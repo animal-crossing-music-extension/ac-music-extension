@@ -37,7 +37,7 @@ function StateManager() {
 	// Possible events include:
 	// volume, kkStart, hourMusic, gameChange, pause
 	function notifyListeners(event, args) {
-		if (!options.paused) {
+		if (!options.paused || event === "pause") {
 			var callbackArr = callbacks[event] || [];
 			for(var i = 0; i < callbackArr.length; i++) {
 				callbackArr[i].apply(window, args);
@@ -102,12 +102,13 @@ function StateManager() {
 	// play/pause when user clicks the extension icon
 	chrome.browserAction.onClicked.addListener(function() {
 		chrome.storage.sync.set({ paused: !options.paused }, function() {
-			if (options.paused) {
-				notifyListeners("pause");
-				options.paused = true;
-			} else {
-				self.activate();
-			}
+			getSyncedOptions(function() {
+				if (options.paused) {
+					notifyListeners("pause");
+				} else {
+					self.activate();
+				}
+			});
 		});
 	});
 
