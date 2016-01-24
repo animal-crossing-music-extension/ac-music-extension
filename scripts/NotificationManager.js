@@ -12,7 +12,6 @@ function NotificationManager(addEventListener, isEnabled) {
 			iconUrl: '../img/clock.png'
 		});
 	}
-<<<<<<< HEAD
 	
 	function popWeatherNotification(weather) {
 		var msg;
@@ -30,8 +29,6 @@ function NotificationManager(addEventListener, isEnabled) {
 			iconUrl: '../img/clock.png'
 		});
 	}
-=======
->>>>>>> refs/remotes/JdotCarver/master
 
 	function popKKNotification() {
 		chrome.notifications.create('animal-crossing-music', {
@@ -48,15 +45,12 @@ function NotificationManager(addEventListener, isEnabled) {
 			popMusicNotification(hour);
 		}
 	});
-<<<<<<< HEAD
 	
 	addEventListener("weatherMusic", function(hour, music, weather) {
 		if (isEnabled()) {
 			popWeatherNotification(weather);
 		}
 	});
-=======
->>>>>>> refs/remotes/JdotCarver/master
 
 	addEventListener("kkStart", function() {
 		if (isEnabled()) {
