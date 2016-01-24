@@ -60,10 +60,10 @@ var loopTimes = {
 		// 	start : ,
 		// 	end : 
 		// },
-		// 15 : {
-		// 	start : ,
-		// 	end : 
-		// },
+		15 : {
+			start : 19.831,
+			end : 56.449
+		},
 		16 : {
 			start : 9.838,
 			end : 101.774

@@ -46,8 +46,6 @@ function StateManager() {
 		}
 	}
 
-	window.kyle = notifyListeners;
-
 	function isKK() {
 		return options.alwaysKK || (options.enableKK && isKKTime);
 	}
@@ -114,5 +112,11 @@ function StateManager() {
 			});
 		});
 	});
+
+	// Gives easy access to the notifyListeners function if
+	// we're debugging.
+	if(DEBUG_FLAG) {
+		window.notify = notifyListeners;
+	}
 
 }
