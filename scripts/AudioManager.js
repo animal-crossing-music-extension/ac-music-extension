@@ -5,28 +5,49 @@
 function AudioManager(addEventListener, isTownTune) {
 
 	var audio = document.createElement('audio');
+	var loopTimeout;
 	var townTuneManager = new TownTuneManager();
 
 	// isHourChange is true if it's an actual hour change,
 	// false if we're activating music in the middle of an hour
 	function playHourlyMusic(hour, game, isHourChange) {
+		clearLoop();
 		audio.loop = true;
 		audio.removeEventListener("ended", playKKSong);
 		var fadeOutLength = isHourChange ? 3000 : 500;
 		fadeOutAudio(fadeOutLength, function() {
 			if (isHourChange && isTownTune()) {
 				townTuneManager.playTune(function() {
-					audio.src = '../' + game + '/' + formatHour(hour) + 'm.ogg';
-					audio.play();
+					playHourSong(game, hour, false);
 				});
 			} else {
-				audio.src = '../' + game + '/' + formatHour(hour) + 'm.ogg';
-				audio.play();
+				playHourSong(game, hour, false);
 			}
 		});
 	}
 
+	function playHourSong(game, hour, skipIntro) {
+		audio.loop = true;
+		audio.src = '../' + game + '/' + formatHour(hour) + 'm.ogg';
+		var loopTime = (loopTimes[game] || {})[hour];
+		if(loopTime) {
+			var delayToLoop = loopTime.end;
+			if(skipIntro) {
+				audio.currentTime = loopTime.start;
+				delayToLoop -= loopTime.start;
+			}
+			audio.onplay = function() {
+				loopTimeout = setTimeout(function() {
+					printDebug("looping");
+					playHourSong(game, hour, true);
+				}, delayToLoop * 1000);
+			}
+		}
+		audio.play();
+	}
+
 	function playKKMusic() {
+		clearLoop();
 		audio.loop = false;
 		audio.addEventListener("ended", playKKSong);
 		fadeOutAudio(500, playKKSong);
@@ -36,6 +57,13 @@ function AudioManager(addEventListener, isTownTune) {
 		var randomSong = Math.floor((Math.random() * 36) + 1).toString();
 		audio.src = '../kk/' + randomSong + '.ogg';
 		audio.play();
+	}
+
+	function clearLoop() {
+		if(loopTimeout) {
+			audio.onplay = function() {};
+			clearTimeout(loopTimeout);
+		}
 	}
 
 	// Fade out audio and call callback when finished.
@@ -65,7 +93,8 @@ function AudioManager(addEventListener, isTownTune) {
 	addEventListener("gameChange", playHourlyMusic);
 
 	addEventListener("pause", function() {
-		audio.pause();
+		clearLoop();
+		fadeOutAudio(300);
 	});
 
 	addEventListener("volume", function(newVol) {

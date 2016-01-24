@@ -2,6 +2,8 @@
 
 'use strict';
 
+var DEBUG_FLAG = true;
+
 // format text for the badge and for the song URL
 function formatHour(time) {
 	if (time === -1) {
@@ -17,4 +19,8 @@ function formatHour(time) {
 		return time + 'a';
 	}
 	return (time - 12) + 'p';
+}
+
+function printDebug(message) {
+	if (DEBUG_FLAG) console.log(message);
 }

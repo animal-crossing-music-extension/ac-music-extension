@@ -42,8 +42,11 @@ function StateManager() {
 			for(var i = 0; i < callbackArr.length; i++) {
 				callbackArr[i].apply(window, args);
 			}
+			printDebug("Notified listeners of " + event + " with args: " + args);
 		}
 	}
+
+	window.kyle = notifyListeners;
 
 	function isKK() {
 		return options.alwaysKK || (options.enableKK && isKKTime);
@@ -94,7 +97,7 @@ function StateManager() {
 				notifyListeners("kkStart");
 			}
 			if (!isKK() && wasKK) {
-				notifyListeners("hourMusic", [timeKeeper.getHour(), options.music]);
+				notifyListeners("hourMusic", [timeKeeper.getHour(), options.music, false]);
 			}
 		});
 	});
