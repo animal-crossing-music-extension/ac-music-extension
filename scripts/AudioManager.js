@@ -16,6 +16,7 @@ function AudioManager(addEventListener, isTownTune) {
 		fadeOutAudio(fadeOutLength, function() {
 			if (isHourChange && isTownTune()) {
 				townTuneManager.playTune(function() {
+<<<<<<< HEAD
 					audio.src = getSrc(game, hour);
 					playPause(true);
 				});
@@ -23,10 +24,19 @@ function AudioManager(addEventListener, isTownTune) {
 			else {
 					audio.src = getSrc(game, hour);
 					playPause(true);
+=======
+					audio.src = '../' + game + '/' + formatHour(hour) + 'm.ogg';
+					audio.play();
+				});
+			} else {
+				audio.src = '../' + game + '/' + formatHour(hour) + 'm.ogg';
+				audio.play();
+>>>>>>> refs/remotes/JdotCarver/master
 			}
 		});
 	}
 
+<<<<<<< HEAD
 	// isWeatherChange is true if it's an actual hour change,
 	// false if we're activating music in the middle of an hour
 	function playWeatherMusic(hour, game, weather, isHourChange) {
@@ -47,6 +57,8 @@ function AudioManager(addEventListener, isTownTune) {
 		});
 	}
 	
+=======
+>>>>>>> refs/remotes/JdotCarver/master
 	function playKKMusic() {
 		audio.loop = false;
 		audio.addEventListener("ended", playKKSong);
@@ -56,7 +68,11 @@ function AudioManager(addEventListener, isTownTune) {
 	function playKKSong() {
 		var randomSong = Math.floor((Math.random() * 36) + 1).toString();
 		audio.src = '../kk/' + randomSong + '.ogg';
+<<<<<<< HEAD
 		playPause(true);
+=======
+		audio.play();
+>>>>>>> refs/remotes/JdotCarver/master
 	}
 
 	// Fade out audio and call callback when finished.
@@ -71,13 +87,18 @@ function AudioManager(addEventListener, isTownTune) {
 					audio.volume -= step;
 				} else {
 					clearInterval(fade);
+<<<<<<< HEAD
 					playPause(false);
+=======
+					audio.pause();
+>>>>>>> refs/remotes/JdotCarver/master
 					audio.volume = oldVolume;
 					if (callback) callback();
 				}
 			}, 100);
 		}
 	}
+<<<<<<< HEAD
 	
 	function getSrc(game, hour, weather) {
 		var src;
@@ -117,6 +138,17 @@ function AudioManager(addEventListener, isTownTune) {
 
 	addEventListener("pause", function() {
 		playPause(false);
+=======
+
+	addEventListener("hourMusic", playHourlyMusic);
+
+	addEventListener("kkStart", playKKMusic);
+
+	addEventListener("gameChange", playHourlyMusic);
+
+	addEventListener("pause", function() {
+		audio.pause();
+>>>>>>> refs/remotes/JdotCarver/master
 	});
 
 	addEventListener("volume", function(newVol) {

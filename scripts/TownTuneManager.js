@@ -6,7 +6,11 @@
 
 function TownTuneManager() {
 
+<<<<<<< HEAD
 	var defaultTune = ["G2", "E3", "-", "G2", "F2", "D3", "-", "B2", "C3", "zZz", "C2", "-", "C2", "-", "-", "zZz"];
+=======
+	var defaultTune = ["G2", "E3", "=", "G2", "F2", "D3", "=", "B2", "C3", "-", "C2", "-", "C2", "=", "=", "-"];
+>>>>>>> refs/remotes/JdotCarver/master
 	var audioContext = new AudioContext();
 	var sampler = createSampler(audioContext);
 	var tunePlayer = createTunePlayer(audioContext);

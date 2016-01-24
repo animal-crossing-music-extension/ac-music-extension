@@ -87,8 +87,11 @@ document.getElementById('enable-kk').onclick = saveOptions;
 document.getElementById('always-kk').onclick = saveOptions;
 document.getElementById('enable-notifications').onclick = saveOptions;
 document.getElementById('enable-town-tune').onclick = saveOptions;
+<<<<<<< HEAD:scripts/options.js
 document.getElementById('enable-badge').onclick = saveOptions;
 document.getElementById('update-location').onclick = saveOptions;
+=======
+>>>>>>> refs/remotes/JdotCarver/master:scripts/options.js
 
 // About/Help
 document.getElementById('get-help').onclick = function() {

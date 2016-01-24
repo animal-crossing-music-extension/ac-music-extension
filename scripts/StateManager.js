@@ -12,10 +12,13 @@ function StateManager() {
 
 	var timeKeeper = new TimeKeeper();
 	var isKKTime;
+<<<<<<< HEAD
 	
 	var weatherRain = ['Thunderstorm', 'Drizzle', 'Rain', 'Mist'];
 	var weatherSnow = ['Snow', 'Fog'];
 	var weather = "Clear";
+=======
+>>>>>>> refs/remotes/JdotCarver/master
 
 	this.registerCallback = function(event, callback) {
 		callbacks[event] = callbacks[event] || [];
@@ -32,6 +35,7 @@ function StateManager() {
 			notifyListeners("volume", [options.volume]);
 			if (isKK()) {
 				notifyListeners("kkStart");
+<<<<<<< HEAD
 			}
 			else if(isLive()) {
 				if(options.music == 'new-leaf-live') {
@@ -52,13 +56,20 @@ function StateManager() {
 				}
 			}
 			else {
+=======
+			} else {
+>>>>>>> refs/remotes/JdotCarver/master
 				notifyListeners("hourMusic", [timeKeeper.getHour(), options.music, false]);
 			}
 		});
 	};
 
 	// Possible events include:
+<<<<<<< HEAD
 	// volume, kkStart, hourMusic, weatherMusic, gameChange, weatherChange, pause
+=======
+	// volume, kkStart, hourMusic, gameChange, pause
+>>>>>>> refs/remotes/JdotCarver/master
 	function notifyListeners(event, args) {
 		if (!options.paused || event === "pause") {
 			var callbackArr = callbacks[event] || [];
@@ -71,10 +82,13 @@ function StateManager() {
 	function isKK() {
 		return options.alwaysKK || (options.enableKK && isKKTime);
 	}
+<<<<<<< HEAD
 	
 	function isLive() {
 		return options.music == 'new-leaf-live';
 	}
+=======
+>>>>>>> refs/remotes/JdotCarver/master
 
 	// retrieve saved options
 	function getSyncedOptions(callback) {
@@ -85,11 +99,15 @@ function StateManager() {
 			enableKK: true,
 			alwaysKK: false,
 			paused: false,
+<<<<<<< HEAD
 			enableTownTune: true,
 			//enableAutoPause: false,
 			zipCode: "98052",
 			countryCode: "us",
 			enableBadgeText: true
+=======
+			enableTownTune: true
+>>>>>>> refs/remotes/JdotCarver/master
 		}, function(items) {
 			options = items;
 			if (typeof callback === 'function') {
@@ -105,6 +123,7 @@ function StateManager() {
 		isKKTime = day == 6 && hour >= 20;
 		if (isKK() && !wasKK) {
 			notifyListeners("kkStart");
+<<<<<<< HEAD
 		}
 		else if(isLive()) {
 			if(options.music == 'new-leaf-live') {
@@ -125,6 +144,9 @@ function StateManager() {
 			}
 		}
 		else if (!isKK()) {
+=======
+		} else if (!isKK()) {
+>>>>>>> refs/remotes/JdotCarver/master
 			notifyListeners("hourMusic", [hour, options.music, true]);
 		}
 	});
@@ -137,12 +159,18 @@ function StateManager() {
 			if (typeof changes.volume !== 'undefined') {
 				notifyListeners("volume", [options.volume]);
 			}
+<<<<<<< HEAD
 			if (typeof changes.music !== 'undefined' && !isLive() && !isKK()) {
 				notifyListeners("gameChange", [timeKeeper.getHour(), options.music]);
 			}
 			if (!isKK() && isLive() && (typeof changes.music !== 'undefined' || typeof changes.zipCode !== 'undefined' || typeof changes.countryCode !== 'undefined')) {
 				notifyListeners("weatherChange", [timeKeeper.getHour(), options.music, weather]);
 			}
+=======
+			if (typeof changes.music !== 'undefined' && !isKK()) {
+				notifyListeners("gameChange", [timeKeeper.getHour(), options.music]);
+			}
+>>>>>>> refs/remotes/JdotCarver/master
 			if (isKK() && !wasKK) {
 				notifyListeners("kkStart");
 			}
@@ -165,6 +193,7 @@ function StateManager() {
 		});
 	});
 
+<<<<<<< HEAD
 	// get current weather conditions using openweathermap: http://openweathermap.org/current
 	function updateWeatherCond(zip, country, cb) {
 		//if appid is not valid nothing will be returned
@@ -183,4 +212,6 @@ function StateManager() {
 		request.open("GET", url, true);
 		request.send();
 	}
+=======
+>>>>>>> refs/remotes/JdotCarver/master
 }

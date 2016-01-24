@@ -2,6 +2,7 @@
 
 'use strict';
 
+<<<<<<< HEAD
 function BadgeManager(addEventListener, isEnabled) {
 
 	addEventListener("hourMusic", function(hour) {
@@ -51,4 +52,22 @@ function BadgeManager(addEventListener, isEnabled) {
 	}
 	
 	chrome.browserAction.setBadgeBackgroundColor({ color: [57, 230, 0, 255] });
+=======
+function BadgeManager(addEventListener) {
+
+	addEventListener("hourMusic", function(hour) {
+		chrome.browserAction.setBadgeText({ text: formatHour(hour) });
+	});
+
+	addEventListener("kkStart", function() {
+		chrome.browserAction.setBadgeText({ text: "KK" });
+	});
+
+	addEventListener("pause", function() {
+		chrome.browserAction.setBadgeText({ text: "" });
+	});
+
+	chrome.browserAction.setBadgeBackgroundColor({ color: [57, 230, 0, 255] });
+
+>>>>>>> refs/remotes/JdotCarver/master
 }
