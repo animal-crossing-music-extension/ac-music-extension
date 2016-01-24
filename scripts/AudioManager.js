@@ -79,15 +79,29 @@ function AudioManager(addEventListener, isTownTune) {
 		}
 	}
 	
+	function getSrc(game, hour, weather) {
+		var src;
+		if(game == 'new-leaf-live') {		
+			if(weather == "Rain")
+				src = '../new-leaf-raining';
+			else if(weather == "Snow")
+				src =  '../new-leaf-snowing';
+			else
+				src =  '../new-leaf';
+		}
+		else
+			src = '../' + game;
+			
+		src += '/' + formatHour(hour) + 'm.ogg';
+		return src;
+	}
+	
 	function playPause(play) {
 		if(play) {
 			audio.play();
-			setIcon(!audio.paused);
 		}
 		else {
 			audio.pause();
-			clearBadge();
-			setIcon(!audio.paused);
 		}
 	}
 

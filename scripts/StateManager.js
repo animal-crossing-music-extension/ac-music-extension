@@ -165,4 +165,22 @@ function StateManager() {
 		});
 	});
 
+	// get current weather conditions using openweathermap: http://openweathermap.org/current
+	function updateWeatherCond(zip, country, cb) {
+		//if appid is not valid nothing will be returned
+		var appid = "e7f97bd1900b94491d3263f89cbe28d6";
+		var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zip + "," + country + "&appid=" + appid;
+
+		var request = new XMLHttpRequest();
+
+		request.onreadystatechange = function() {
+				if(request.readyState == 4 && request.status == 200) {
+					if( typeof cb === 'function' )
+						cb(JSON.parse(request.responseText));
+				}
+			}
+
+		request.open("GET", url, true);
+		request.send();
+	}
 }

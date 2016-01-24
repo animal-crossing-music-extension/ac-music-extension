@@ -8,47 +8,47 @@ function BadgeManager(addEventListener, isEnabled) {
 		if(isEnabled()) {
 			chrome.browserAction.setBadgeText({ text: formatHour(hour) });
 		}
+		chrome.browserAction.setIcon({
+			path : "img/icon_38_leaf-02.png"
+		});
+		playIcon();
 	});
 	
 	addEventListener("weatherMusic", function(hour, music, weather) {
 		if(isEnabled()) {
 			chrome.browserAction.setBadgeText({ text: weather });
 		}
+		chrome.browserAction.setIcon({
+			path : "img/icon_38_leaf-02.png"
+		});
+		playIcon();
 	});
 
 	addEventListener("kkStart", function() {
 		if(isEnabled()) {
 			chrome.browserAction.setBadgeText({ text: "KK" });
 		}
+		playIcon();
 	});
 
 	addEventListener("pause", function() {
 		if(isEnabled()) {
 			chrome.browserAction.setBadgeText({ text: "" });
 		}
+		pauseIcon();
 	});
 	
-
-	chrome.browserAction.setBadgeBackgroundColor({ color: [57, 230, 0, 255] });
-}
-
-function clearBadge() {
-	chrome.browserAction.setBadgeText({ text: '' });
-}
-
-function updateWeather(weather) {
-		chrome.browserAction.setBadgeText({ text: weather });
-}
-
-function setIcon(play) {
-	if(play) {
-		chrome.browserAction.setIcon({
-			path : "img/icon_38_leaf-02.png"
-		});
-	}
-	else {
+	function pauseIcon() {
 		chrome.browserAction.setIcon({
 			path : "img/icon_38_leaf-01.png"
 		});
 	}
+	
+	function playIcon() {
+		chrome.browserAction.setIcon({
+			path : "img/icon_38_leaf-02.png"
+		});
+	}
+	
+	chrome.browserAction.setBadgeBackgroundColor({ color: [57, 230, 0, 255] });
 }
