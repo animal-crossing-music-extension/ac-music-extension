@@ -71,6 +71,7 @@ document.getElementById('no-kk').onclick = saveOptions;
 document.getElementById('enable-kk').onclick = saveOptions;
 document.getElementById('always-kk').onclick = saveOptions;
 document.getElementById('enable-notifications').onclick = saveOptions;
+document.getElementById('enable-town-tune').onclick = saveOptions;
 
 // About/Help
 document.getElementById('get-help').onclick = function() {
