@@ -7,7 +7,6 @@ function saveOptions() {
 	var alwaysKK = document.getElementById('always-kk').checked;
 	var enableKK = alwaysKK || document.getElementById('enable-kk').checked;
 	var enableTownTune = document.getElementById('enable-town-tune').checked;
-	//var enableAutoPause = document.getElementById('enable-audio-pause').checked;	
 	var zipCode = document.getElementById('zip-code').value;
 	var countryCode = document.getElementById('country-code').value;
 	var enableBadgeText = document.getElementById('enable-badge').checked;
@@ -42,7 +41,6 @@ function saveOptions() {
 		enableKK: enableKK,
 		alwaysKK: alwaysKK,
 		enableTownTune: enableTownTune,
-		//enableAutoPause: enableAutoPause,
 		zipCode: zipCode,
 		countryCode: countryCode,
 		enableBadgeText: enableBadgeText
@@ -57,7 +55,6 @@ function restoreOptions() {
 		enableKK: true,
 		alwaysKK: false,
 		enableTownTune: true,
-		//enableAutoPause: false,
 		zipCode: "98052",
 		countryCode: "us",
 		enableBadgeText: true
@@ -69,7 +66,6 @@ function restoreOptions() {
 		document.getElementById('enable-kk').checked = items.enableKK;
 		document.getElementById('always-kk').checked = items.alwaysKK;
 		document.getElementById('enable-town-tune').checked = items.enableTownTune;
-		//document.getElementById('enable-audio-pause').checked = items.enableAutoPause;
 		document.getElementById('zip-code').value = items.zipCode;
 		document.getElementById('country-code').value = items.countryCode;
 		document.getElementById('enable-badge').checked = items.enableBadgeText;
@@ -91,7 +87,6 @@ document.getElementById('enable-kk').onclick = saveOptions;
 document.getElementById('always-kk').onclick = saveOptions;
 document.getElementById('enable-notifications').onclick = saveOptions;
 document.getElementById('enable-town-tune').onclick = saveOptions;
-//document.getElementById('enable-audio-pause').onclick = saveOptions;
 document.getElementById('enable-badge').onclick = saveOptions;
 document.getElementById('update-location').onclick = saveOptions;
 
