@@ -117,6 +117,9 @@ function StateManager() {
 	// we're debugging.
 	if(DEBUG_FLAG) {
 		window.notify = notifyListeners;
+		window.setTime = function(hour, playTownTune) {
+			notifyListeners("hourMusic", [hour, options.music, playTownTune]);
+		};
 	}
 
 }

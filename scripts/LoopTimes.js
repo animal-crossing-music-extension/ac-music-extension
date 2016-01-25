@@ -8,6 +8,12 @@
 // it won't introduce any bugs with the other hour tracks.
 
 var loopTimes = {
+	"animal-forrest" : {
+		17 : {
+			start : 54.934,
+			end : 114.943
+		}
+	},
 	"wild-world" : {
 		0 : {
 			start : 12.290,
