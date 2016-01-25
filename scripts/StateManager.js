@@ -42,6 +42,7 @@ function StateManager() {
 			for(var i = 0; i < callbackArr.length; i++) {
 				callbackArr[i].apply(window, args);
 			}
+			printDebug("Notified listeners of " + event + " with args: " + args);
 		}
 	}
 
@@ -94,7 +95,7 @@ function StateManager() {
 				notifyListeners("kkStart");
 			}
 			if (!isKK() && wasKK) {
-				notifyListeners("hourMusic", [timeKeeper.getHour(), options.music]);
+				notifyListeners("hourMusic", [timeKeeper.getHour(), options.music, false]);
 			}
 		});
 	});
@@ -111,5 +112,14 @@ function StateManager() {
 			});
 		});
 	});
+
+	// Gives easy access to the notifyListeners function if
+	// we're debugging.
+	if(DEBUG_FLAG) {
+		window.notify = notifyListeners;
+		window.setTime = function(hour, playTownTune) {
+			notifyListeners("hourMusic", [hour, options.music, playTownTune]);
+		};
+	}
 
 }
