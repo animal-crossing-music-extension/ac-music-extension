@@ -2,7 +2,7 @@
 
 'use strict';
 
-var DEBUG_FLAG = true;
+var DEBUG_FLAG = false;
 
 // format text for the badge and for the song URL
 function formatHour(time) {
