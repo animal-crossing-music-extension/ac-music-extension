@@ -10,13 +10,6 @@ function BadgeManager(addEventListener, isEnabled) {
 		}
 		playIcon();
 	});
-	
-	addEventListener("weatherMusic", function(hour, music, weather) {
-		if(isEnabled()) {
-			chrome.browserAction.setBadgeText({ text: weather });
-		}
-		playIcon();
-	});
 
 	addEventListener("kkStart", function() {
 		if(isEnabled()) {
@@ -26,9 +19,7 @@ function BadgeManager(addEventListener, isEnabled) {
 	});
 
 	addEventListener("pause", function() {
-		if(isEnabled()) {
-			chrome.browserAction.setBadgeText({ text: "" });
-		}
+		chrome.browserAction.setBadgeText({ text: "" });
 		pauseIcon();
 	});
 	

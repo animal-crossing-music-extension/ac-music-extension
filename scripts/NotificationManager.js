@@ -14,18 +14,22 @@ function NotificationManager(addEventListener, isEnabled) {
 	}
 	
 	function popWeatherNotification(weather) {
-		var msg;
-		if(weather == "Rain")
-			msg = "It's rainy outside!"
-		else if(weather == "Snow")
-			msg = "It's snowing outiside!"
-		else
-			msg = "The weather is clear!"
+		var weatherString;
+		switch(weather) {
+			case "Rain":
+				weatherString = "raining";
+				break;
+			case "Snow":
+				weatherString = "snowing";
+				break;
+			default:
+				weatherString = "clear";
+		}
 		
 		chrome.notifications.create('animal-crossing-music', {
 			type: 'basic',
 			title: 'Animal Crossing Music',
-			message: msg,
+			message: 'It is now ' + weatherString + '!',
 			iconUrl: '../img/clock.png'
 		});
 	}
@@ -46,7 +50,7 @@ function NotificationManager(addEventListener, isEnabled) {
 		}
 	});
 	
-	addEventListener("weatherMusic", function(hour, music, weather) {
+	addEventListener("weatherChange", function(weather) {
 		if (isEnabled()) {
 			popWeatherNotification(weather);
 		}

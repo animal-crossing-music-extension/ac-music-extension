@@ -1,6 +1,6 @@
 {
    "background": {
-      "scripts": [ "scripts/Utility.js", "scripts/tune_player.js", "scripts/TownTuneManager.js", "scripts/TimeKeeper.js", "scripts/AudioManager.js", "scripts/BadgeManager.js", "scripts/NotificationManager.js", "scripts/StateManager.js", "scripts/main.js" ]
+      "scripts": [ "scripts/Utility.js", "scripts/tune_player.js", "scripts/TownTuneManager.js", "scripts/TimeKeeper.js", "scripts/WeatherManager.js", "scripts/AudioManager.js", "scripts/BadgeManager.js", "scripts/NotificationManager.js", "scripts/StateManager.js", "scripts/main.js" ]
    },
    "browser_action": {
       "default_icon": {
