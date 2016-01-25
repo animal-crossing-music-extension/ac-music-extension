@@ -26,10 +26,14 @@ function AudioManager(addEventListener, isTownTune) {
 		});
 	}
 
+	// Plays a song for an hour, setting up loop times if
+	// any exist
 	function playHourSong(game, hour, skipIntro) {
 		audio.loop = true;
 		audio.src = '../' + game + '/' + formatHour(hour) + 'm.ogg';
 		var loopTime = (loopTimes[game] || {})[hour];
+		// set up loop points if loopTime is set up for this
+		// game and hour
 		if(loopTime) {
 			var delayToLoop = loopTime.end;
 			if(skipIntro) {
@@ -59,6 +63,7 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.play();
 	}
 
+	// clears the loop point timeout if one exists
 	function clearLoop() {
 		if(loopTimeout) {
 			audio.onplay = function() {};
