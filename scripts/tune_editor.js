@@ -45,6 +45,7 @@ var createPitchControl = function(index) {
     var val = slider.value;
     name.value = availablePitches[val];
     updateTune(index, availablePitches[val]);
+	updateColor(index, tune[index]);
     saveButton.textContent = 'Save';
   };
 
