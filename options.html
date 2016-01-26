@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>Animal Crossing Music</title>
 	<link rel="stylesheet" href="css/chrome-bootstrap.css">
-	<link rel="stylesheet" href="css/tune_editor.css">
+	<link rel="stylesheet" href="css/input.css">
 	<script src="scripts/zepto.min.js"></script>
 	<script src="scripts/navigation.js"></script>
 	<script src="scripts/tune_player.js"></script>
@@ -18,7 +18,8 @@
 <body class="chrome-bootstrap">
 	<div class="frame">
 		<div class="navigation">
-			<h1><a href="#">Animal Crossing Music</a></h1>
+			<!-- <h1><a href="#">Animal Crossing Music</a></h1> -->
+			<img src="img/sign.png" width="150">
 			<ul class="menu" style="margin-top: 4em;">
 				<li class="selected">
 					<a href="#options">Options</a>
@@ -44,7 +45,7 @@
 						<h3>Volume</h3>
 						<div class="checkbox">
 							<label>
-								<input id="volume" type="range" min="0" max="1" step="0.10">
+								<input id="volume" type="range" min="0" max="1" step="0.05">
 							</label>
 						</div>
 					</section>
@@ -52,83 +53,82 @@
 					<section>
 						<h3>Music</h3>
 						<div class="radio">
-							<label>
-								<input id="animal-forrest" name="music-choice" type="radio">
-								<span>Animal Forest/Animal Crossing</span>
-							</label>
+							<input id="animal-forrest" name="music-choice" type="radio"><label for="animal-forrest"><span><span></span></span>Animal Forest/Animal Crossing</label>
 						</div>
 						<div class="radio">
-							<label>
-								<input id="wild-world" name="music-choice" type="radio">
-								<span>Wild World + City Folk/Let's Go to the City</span>
-							</label>
+							<input id="wild-world" name="music-choice" type="radio"><label for="wild-world"><span><span></span></span>Wild World + City Folk/Let's Go to the City</label>
 						</div>
 						<div class="radio">
-							<label>
-								<input id="wild-world-snowing" name="music-choice" type="radio">
-								<span>Wild World + City Folk/Let's Go to the City (Snowing)</span>
-							</label>
+							<input id="wild-world-snowing" name="music-choice" type="radio"><label for="wild-world-snowing"><span><span></span></span>Wild World + City Folk/Let's Go to the City (Snowing)</label>
 						</div>
 						<div class="radio">
-							<label>
-								<input id="new-leaf" name="music-choice" type="radio">
-								<span>New Leaf</span>
-							</label>
+							<input id="new-leaf" name="music-choice" type="radio"><label for="new-leaf"><span><span></span></span>New Leaf</label>
 						</div>
 						<div class="radio">
-							<label>
-								<input id="new-leaf-raining" name="music-choice" type="radio">
-								<span>New Leaf (Raining)</span>
-							</label>
+							<input id="new-leaf-raining" name="music-choice" type="radio"><label for="new-leaf-raining"><span><span></span></span>New Leaf (Raining)</label>
 						</div>
 						<div class="radio">
-							<label>
-								<input id="new-leaf-snowing" name="music-choice" type="radio">
-								<span>New Leaf (Snowing)</span>
-							</label>
+							<input id="new-leaf-snowing" name="music-choice" type="radio"><label for="new-leaf-snowing"><span><span></span></span>New Leaf (Snowing)</label>
 						</div>
-						
+						<div class="radio">
+							<input id="new-leaf-live" name="music-choice" type="radio"><label for="new-leaf-live"><span><span></span></span>New Leaf (<a href="http://openweathermap.org/current">Live Weather</a>)</label>
+						</div>
+
 					</section>
 
 					<section>
 						<h3>K.K. Slider</h3>
 						<div class="radio">
-							<label>
-								<input id="no-kk" name="enable-kk" type="radio">
-								<span>Do not play K.K. Slider songs</span>
-							</label>
+							<input id="no-kk" name="enable-kk" type="radio"><label for="no-kk"><span><span></span></span>Do not play K.K. Slider songs</label>
 						</div>
 						<div class="radio">
-							<label>
-								<input id="enable-kk" name="enable-kk" type="radio">
-								<span>Play K.K. Slider songs on Saturdays from 8pm&ndash;12am</span>
-							</label>
+							<input id="enable-kk" name="enable-kk" type="radio"><label for="enable-kk"><span><span></span></span>Play K.K. Slider songs on Saturdays from 8pm&ndash;12am</label>
 						</div>
 						<div class="radio">
-							<label>
-								<input id="always-kk" name="enable-kk" type="radio">
-								<span>Play K.K. Slider songs at all times</span>
-							</label>
+							<input id="always-kk" name="enable-kk" type="radio"><label for="always-kk"><span><span></span></span>Play K.K. Slider songs at all times</label>
 						</div>
 					</section>
 
 					<section>
 						<h3>Town Tune</h3>
 						<div class="checkbox">
-							<label>
-								<input id="enable-town-tune" type="checkbox">
-								<span>Play your custom town tune on the hour</span>
-							</label>
+							<input id="enable-town-tune" type="checkbox"><label for="enable-town-tune"><span></span>Play your custom town tune on the hour</label>
 						</div>
 					</section>
 
 					<section>
 						<h3>Notifications</h3>
 						<div class="checkbox">
-							<label>
-								<input id="enable-notifications" type="checkbox">
-								<span>Enable Chrome notifications on song change</span>
-							</label>
+							<input id="enable-notifications" type="checkbox"><label for="enable-notifications"><span></span>Enable Chrome notifications on song change</label>
+						</div>
+						
+						<div class="checkbox">
+							<input id="enable-badge" type="checkbox"><label for="enable-badge"><span></span>Display text on badge</label>
+						</div>
+					</section>
+					
+					<section>
+						<h3>Icon</h3>
+						<div class="radio">
+							<input id="kk-icon" name="icon" type="radio">
+							<label for="kk-icon"><span><span></span></span>K.K. Slider Icon</label>
+							<img src='img/icon_19_kk.png'/>
+						</div>
+						<div class="radio">
+							<input id="leaf-icon" name="icon" type="radio">
+							<label for="leaf-icon"><span><span></span></span>Leaf Icon</label>
+							<img src='img/icon_19_leaf.png'/>
+						</div>
+					</section>
+
+
+					<section>						
+						<h3>Live Weather Location</h3>
+						<div class="text">
+								<input type="text" id="zip-code" value="618708">
+								<input type="text" id="country-code" value="ru">
+								<button type="button" id="update-location">Update Location</button>
+								<label>(First box is <a href="http://www.geonames.org/postal-codes/" target="_blank">zip code</a>, second is <a href = "https://countrycode.org/" target="_blank">country code</a>)</label>
 						</div>
 					</section>
 					
@@ -186,7 +186,7 @@
 					
 					<div id="product-container">
 						<p>Animal Crossing Music</p>
-						<p>Actual developpers:</p>
+						<p>Actual developers:</p>
 						<p>Jack Carver</p>
 						<p>Brandon Anderson</p>
 						<p>Matt Jardine</p>
@@ -198,6 +198,9 @@
 				</div>
 			</div>
 		</div>
+
+		<img id='house' src='img/house.png' width='150'/>
+
 	</div>
 	
 	<script src="scripts/options.js"></script>

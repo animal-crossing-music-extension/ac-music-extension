@@ -1,10 +1,12 @@
 (function(){
 var pitchTemplate, playButton, saveButton, tune;
-var defaultTune = ["G2", "E3", "=", "G2", "F2", "D3", "=", "B2", "C3", "-", "C2", "-", "C2", "=", "=", "-"];
+var defaultTune = ["G2", "E3", "-", "G2", "F2", "D3", "-", "B2", "C3", "zZz", "C2", "zZz", "C2", "-", "-", "zZz"];
 var tuneLength = 16;
+var availableColors = ["#a4a2d0", "#e4b3d3", "#5eccf5", "#12fee0", "#53fd8a", "#79fc4e", "#a8fd35", "#d0fe47", 
+									"#e4fd39", "#f9fe2e", "#fefa43", "#fef03f", "#fcd03a", "#fcb141", "#fe912e"];
 var editorControls = [];
 var pitchNames = [];
-var flashColor = '#FFBC70';
+var flashColor = '#FFFFFF';
 var audioContext = new AudioContext;
 var booper = createBooper(audioContext);
 var sampler = createSampler(audioContext);
@@ -43,6 +45,7 @@ var createPitchControl = function(index) {
     var val = slider.value;
     name.value = availablePitches[val];
     updateTune(index, availablePitches[val]);
+	updateColor(index, tune[index]);
     saveButton.textContent = 'Save';
   };
 
@@ -65,6 +68,7 @@ var initControls = function() {
     newPitchControl = createPitchControl(index);
     staff = (index < tuneLength/2) ? staff1 : staff2;
     staff.appendChild(newPitchControl);
+	updateColor(index, tune[index]);
   }
 
   playButton.onclick = playTune;
@@ -92,7 +96,7 @@ var flashName = function(index, duration) {
   pitchName.style.background = flashColor;
 
   setTimeout(function() {
-    pitchName.style.background = '#fff';
+	updateColor(index, tune[index]);
   }, duration * 1000);
 };
 
@@ -122,6 +126,11 @@ var saveTune = function() {
 var setup = function() {
   retrieveTune(initControls);
 };
+
+var updateColor = function(index, pitch){
+  var pitchName = pitchNames[index];
+  pitchName.style.background = availableColors[availablePitches.indexOf(pitch)];
+}
 
 var updateTune = function(index, pitch) {
   tune[index] = pitch;
