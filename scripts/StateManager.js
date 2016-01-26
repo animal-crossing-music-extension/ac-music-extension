@@ -157,11 +157,7 @@ function StateManager() {
 				notifyListeners("kkStart");
 			}
 			if (!isKK() && wasKK) {
-<<<<<<< HEAD
-				notifyListeners("hourMusic", [timeKeeper.getHour(), getMusic()]);
-=======
-				notifyListeners("hourMusic", [timeKeeper.getHour(), options.music, false]);
->>>>>>> refs/remotes/JdotCarver/master
+				notifyListeners("hourMusic", [timeKeeper.getHour(), getMusic(), false]);
 			}
 		});
 	});
@@ -178,8 +174,6 @@ function StateManager() {
 			});
 		});
 	});
-<<<<<<< HEAD
-=======
 
 	// Gives easy access to the notifyListeners function if
 	// we're debugging.
@@ -190,5 +184,4 @@ function StateManager() {
 		};
 	}
 
->>>>>>> refs/remotes/JdotCarver/master
 }

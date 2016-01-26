@@ -1,12 +1,8 @@
-// Globally accessable helper functions
+// Globally accessible helper functions
 
 'use strict';
 
-<<<<<<< HEAD
 var DEBUG_FLAG = false;
-=======
-var DEBUG_FLAG = true;
->>>>>>> refs/remotes/JdotCarver/master
 
 // format text for the badge and for the song URL
 function formatHour(time) {

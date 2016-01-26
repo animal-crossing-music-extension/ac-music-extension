@@ -18,46 +18,14 @@ function AudioManager(addEventListener, isTownTune) {
 		fadeOutAudio(fadeOutLength, function() {
 			if (isHourChange && isTownTune()) {
 				townTuneManager.playTune(function() {
-<<<<<<< HEAD
-					audio.src = getSrc(game, hour);
-					playPause(true);
-				});
-			}
-			else {
-					audio.src = getSrc(game, hour);
-					playPause(true);
-=======
 					playHourSong(game, hour, false);
 				});
 			} else {
 				playHourSong(game, hour, false);
->>>>>>> refs/remotes/JdotCarver/master
 			}
 		});
 	}
 
-<<<<<<< HEAD
-	// isWeatherChange is true if it's an actual hour change,
-	// false if we're activating music in the middle of an hour
-	function playWeatherMusic(hour, game, weather, isHourChange) {
-		audio.loop = true;
-		audio.removeEventListener("ended", playKKSong);
-		var fadeOutLength = isHourChange ? 3000 : 500;
-		fadeOutAudio(fadeOutLength, function() {
-			if (isHourChange && isTownTune()) {
-				townTuneManager.playTune(function() {
-					audio.src = getSrc(game, hour, weather);
-					playPause(true);
-				});
-			}
-			else {
-					audio.src = getSrc(game, hour, weather);
-					playPause(true);
-			}
-		});
-	}
-	
-=======
 	// Plays a song for an hour, setting up loop times if
 	// any exist
 	function playHourSong(game, hour, skipIntro) {
@@ -82,7 +50,6 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.play();
 	}
 
->>>>>>> refs/remotes/JdotCarver/master
 	function playKKMusic() {
 		clearLoop();
 		audio.loop = false;
@@ -154,16 +121,10 @@ function AudioManager(addEventListener, isTownTune) {
 	addEventListener("kkStart", playKKMusic);
 
 	addEventListener("gameChange", playHourlyMusic);
-	
-	addEventListener("weatherChange", playWeatherMusic);
 
 	addEventListener("pause", function() {
-<<<<<<< HEAD
-		playPause(false);
-=======
 		clearLoop();
 		fadeOutAudio(300);
->>>>>>> refs/remotes/JdotCarver/master
 	});
 
 	addEventListener("volume", function(newVol) {
