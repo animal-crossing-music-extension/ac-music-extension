@@ -60,7 +60,7 @@ function AudioManager(addEventListener, isTownTune) {
 	function playKKSong() {
 		var randomSong = Math.floor((Math.random() * 36) + 1).toString();
 		audio.src = '../kk/' + randomSong + '.ogg';
-		playPause(true);
+		audio.play();
 	}
 
 	// clears the loop point timeout if one exists
@@ -83,37 +83,12 @@ function AudioManager(addEventListener, isTownTune) {
 					audio.volume -= step;
 				} else {
 					clearInterval(fade);
-					playPause(false);
+					audio.pause();
 					audio.volume = oldVolume;
 					if (callback) callback();
 				}
 			}, 100);
 		}
-	}
-	
-	function playPause(play) {
-		if(play) {
-			audio.play();
-		}
-		else {
-			audio.pause();
-		}
-	}
-	function getSrc(game, hour, weather) {
-		var src;
-		if(game == 'new-leaf-live') {		
-			if(weather == "Rain")
-				src = '../new-leaf-raining';
-			else if(weather == "Snow")
-				src =  '../new-leaf-snowing';
-			else
-				src =  '../new-leaf';
-		}
-		else
-			src = '../' + game;
-			
-		src += '/' + formatHour(hour) + 'm.ogg';
-		return src;
 	}
 
 	addEventListener("hourMusic", playHourlyMusic);

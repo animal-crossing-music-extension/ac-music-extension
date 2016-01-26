@@ -3,6 +3,7 @@
 'use strict';
 
 function WeatherManager(zip, country) {
+	var self = this;
 
 	var timeout;
 	var callback;
@@ -55,8 +56,9 @@ function WeatherManager(zip, country) {
  			if(request.readyState == 4 && request.status == 200) {
  				var response = JSON.parse(request.responseText);
  				if( response.cod == "200" && response.weather[0].main !== weather) {
+					var oldWeather = self.getWeather();
  					weather = response.weather[0].main;
- 					if( typeof callback === 'function' ) {
+ 					if(self.getWeather() !== oldWeather && typeof callback === 'function' ) {
  						callback();
  					}
  				}
@@ -69,4 +71,11 @@ function WeatherManager(zip, country) {
 	};
 
 	weatherCheckLoop();
+	
+	if(DEBUG_FLAG) {
+		window.changeWeather = function(newWeather) {
+			weather = newWeather;
+			callback();
+		}
+	}
 }

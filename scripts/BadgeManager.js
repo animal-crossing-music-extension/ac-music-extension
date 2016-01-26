@@ -8,28 +8,34 @@ function BadgeManager(addEventListener, isEnabled) {
 		if(isEnabled()) {
 			chrome.browserAction.setBadgeText({ text: formatHour(hour) });
 		}
-		playIcon();
+		play(false);
 	});
 
 	addEventListener("kkStart", function() {
 		if(isEnabled()) {
 			chrome.browserAction.setBadgeText({ text: "KK" });
 		}
-		playIcon();
+		play(true);
 	});
 
 	addEventListener("pause", function() {
 		chrome.browserAction.setBadgeText({ text: "" });
-		pauseIcon();
+		pause();
 	});
 	
-	function playIcon() {
-		chrome.browserAction.setIcon({
-			path : "img/icon_38_leaf-02.png"
-		});
+	function play(kk) {
+		if(kk) {
+			chrome.browserAction.setIcon({
+				path : "img/icon_38_kk.png"
+			});
+		} else {
+			chrome.browserAction.setIcon({
+				path : "img/icon_38_leaf-02.png"
+			});
+		}
 	}
 	
-	function pauseIcon() {
+	function pause() {
 		chrome.browserAction.setIcon({
 			path : "img/icon_38_leaf-01.png"
 		});
