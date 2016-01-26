@@ -8,37 +8,38 @@ function BadgeManager(addEventListener, isEnabled) {
 		if(isEnabled()) {
 			chrome.browserAction.setBadgeText({ text: formatHour(hour) });
 		}
-		play(false);
+		changeIcon(true, false);
 	});
 
 	addEventListener("kkStart", function() {
 		if(isEnabled()) {
 			chrome.browserAction.setBadgeText({ text: "KK" });
 		}
-		play(true);
+		changeIcon(true, true);
 	});
 
 	addEventListener("pause", function() {
 		chrome.browserAction.setBadgeText({ text: "" });
-		pause();
+		changeIcon(false, false);
 	});
 	
-	function play(kk) {
-		if(kk) {
-			chrome.browserAction.setIcon({
-				path : "img/icon_38_kk.png"
-			});
-		} else {
-			chrome.browserAction.setIcon({
-				path : "img/icon_38_leaf-02.png"
-			});
+	function changeIcon(isPlaying, isKK) {
+		if(isPlaying) {
+			if(isKK) {
+				chrome.browserAction.setIcon({
+					path : "img/icon_38_kk.png"
+				});
+			} else {
+				chrome.browserAction.setIcon({
+					path : "img/icon_38_leaf-02.png"
+				});
+			}		
 		}
-	}
-	
-	function pause() {
+		else {
 		chrome.browserAction.setIcon({
 			path : "img/icon_38_leaf-01.png"
 		});
+		}
 	}
 
 	chrome.browserAction.setBadgeBackgroundColor({ color: [57, 230, 0, 255] });
