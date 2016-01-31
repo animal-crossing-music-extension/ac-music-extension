@@ -11,6 +11,7 @@ function StateManager() {
 	var callbacks = {};
 
 	var timeKeeper = new TimeKeeper();
+	var weatherManager;
 	var isKKTime;
 
 	this.registerCallback = function(event, callback) {
@@ -25,17 +26,28 @@ function StateManager() {
 	this.activate = function() {
 		isKKTime = timeKeeper.getDay() == 6 && timeKeeper.getHour() >= 20;
 		getSyncedOptions(function() {
+		if(!weatherManager) {
+			weatherManager = new WeatherManager(options.zipCode, options.countryCode);
+			weatherManager.registerChangeCallback(function() {
+				if(!isKK() && isLive()) {
+					notifyListeners("gameChange", [timeKeeper.getHour(), getMusic()]);
+					notifyListeners("weatherChange", [weatherManager.getWeather()]);
+				}
+			});
+		}
+
 			notifyListeners("volume", [options.volume]);
 			if (isKK()) {
 				notifyListeners("kkStart");
-			} else {
-				notifyListeners("hourMusic", [timeKeeper.getHour(), options.music, false]);
+			}
+			else {
+				notifyListeners("hourMusic", [timeKeeper.getHour(), getMusic(), false]);
 			}
 		});
 	};
 
 	// Possible events include:
-	// volume, kkStart, hourMusic, gameChange, pause
+	// volume, kkStart, hourMusic, gameChange, weatherChange, pause
 	function notifyListeners(event, args) {
 		if (!options.paused || event === "pause") {
 			var callbackArr = callbacks[event] || [];
@@ -49,6 +61,10 @@ function StateManager() {
 	function isKK() {
 		return options.alwaysKK || (options.enableKK && isKKTime);
 	}
+	
+	function isLive() {
+		return options.music == 'new-leaf-live';
+	}
 
 	// retrieve saved options
 	function getSyncedOptions(callback) {
@@ -59,13 +75,32 @@ function StateManager() {
 			enableKK: true,
 			alwaysKK: false,
 			paused: false,
-			enableTownTune: true
+			enableTownTune: true,
+			//enableAutoPause: false,
+			zipCode: "98052",
+			countryCode: "us",
+			enableBadgeText: true
 		}, function(items) {
 			options = items;
 			if (typeof callback === 'function') {
 				callback();
 			}
 		});
+	}
+	
+	// Gets the current game based on the option, and weather if
+	// we're using a live weather option.
+	function getMusic() {
+		if(isLive()) {
+			if(weatherManager.getWeather() == "Rain")
+				return "new-leaf-raining";
+			else if(weatherManager.getWeather() == "Snow")
+				return "new-leaf-snowing";
+			else
+				return "new-leaf";			
+		}
+		else
+			return options.music;
 	}
 
 	// If we're not playing KK, let listeners know the hour has changed
@@ -75,8 +110,9 @@ function StateManager() {
 		isKKTime = day == 6 && hour >= 20;
 		if (isKK() && !wasKK) {
 			notifyListeners("kkStart");
-		} else if (!isKK()) {
-			notifyListeners("hourMusic", [hour, options.music, true]);
+		}
+		else if (!isKK()) {
+			notifyListeners("hourMusic", [hour, getMusic(), true]);
 		}
 	});
 
@@ -84,18 +120,25 @@ function StateManager() {
 	// of any pertinent changes.
 	chrome.storage.onChanged.addListener(function(changes, namespace) {
 		var wasKK = isKK();
+		var oldMusic = getMusic();
 		getSyncedOptions(function() {
+			if(typeof changes.zipCode !== 'undefined') {
+				weatherManager.setZip(options.zipCode);
+			}
+			if(typeof changes.countryCode !== 'undefined') {
+				weatherManager.setCountry(options.countryCode);
+			}
 			if (typeof changes.volume !== 'undefined') {
 				notifyListeners("volume", [options.volume]);
 			}
-			if (typeof changes.music !== 'undefined' && !isKK()) {
-				notifyListeners("gameChange", [timeKeeper.getHour(), options.music]);
+			if (typeof changes.music !== 'undefined' && !isKK() && getMusic() != oldMusic) {
+				notifyListeners("gameChange", [timeKeeper.getHour(), getMusic()]);
 			}
 			if (isKK() && !wasKK) {
 				notifyListeners("kkStart");
 			}
 			if (!isKK() && wasKK) {
-				notifyListeners("hourMusic", [timeKeeper.getHour(), options.music, false]);
+				notifyListeners("hourMusic", [timeKeeper.getHour(), getMusic(), false]);
 			}
 		});
 	});

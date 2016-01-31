@@ -1,29 +1,25 @@
 {
    "background": {
-      "scripts": [ "scripts/Utility.js", "scripts/tune_player.js", "scripts/TownTuneManager.js", "scripts/TimeKeeper.js", "scripts/LoopTimes.js", "scripts/AudioManager.js", "scripts/BadgeManager.js", "scripts/NotificationManager.js", "scripts/StateManager.js", "scripts/main.js" ]
+      "scripts": [ "scripts/Utility.js", "scripts/tune_player.js", "scripts/TownTuneManager.js", "scripts/TimeKeeper.js", "scripts/LoopTimes.js", "scripts/WeatherManager.js", "scripts/AudioManager.js", "scripts/BadgeManager.js", "scripts/NotificationManager.js", "scripts/StateManager.js", "scripts/main.js" ]
    },
    "browser_action": {
       "default_icon": {
-         "19": "img/icon_19.png",
-         "38": "img/icon_38.png"
+		  "38": "img/icon_38_kk_playing.png"
       },
       "default_title": "Animal Crossing Music"
    },
    "description": "Play Animal Crossing's smooth background music in real-time throughout your day.",
    "icons": {
-      "128": "img/icon_128.png",
-      "16": "img/icon_16.png",
-      "19": "img/icon_19.png",
-      "32": "img/icon_32.png",
-      "38": "img/icon_38.png",
-      "48": "img/icon_48.png",
-      "64": "img/icon_64.png"
+      "128": "img/icon_128_kk.png",
+      "38": "img/icon_32_kk.png"
    },
-   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl2ESTURbPEGcWeMTfbQ8tFDZl6d/NFJEUtU9J3IXxHDsFGgInU5bPh+Bsv9p+0LNTGbdDfjC3TKHIjI6tLAgWY7FCEqOguZArLasftfy4D+qDHTNF9xDktza4sbbiatAOyDEV5v5rapi5pwfYTCPrr2guo3zGHeDqgk8tSvf1KVwVqcixO8i3JmWvd8Cw9mr8MTVRp8zWGhNisqfcMqctk1W0XvdhVkMKYZnp/JO0hpk8lzOhLuuQgu4HLQ83unzoTcgA3xNJMnKQgOxC89cFA9FkAQ5Az2MjVIH2h4Y859rvXVqFIx4hq9RoY7uoCSdE0KljmqWwKL5ufB4MhctFQIDAQAB",
-   "manifest_version": 2,
+   "manifest_version": 3,
    "name": "Animal Crossing Music",
    "options_page": "options.html",
-   "permissions": [ "notifications", "storage" ],
+   "permissions": [ 
+		"notifications", 
+		"storage", 
+		"http://api.openweathermap.org/" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "3.0",
    "web_accessible_resources": [ "img/clock.png", "bells.ogg" ]

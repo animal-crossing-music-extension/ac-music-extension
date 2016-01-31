@@ -6,8 +6,10 @@ function saveOptions() {
 	// 2 separate KK variables to preserve compatibility with old versions
 	var alwaysKK = document.getElementById('always-kk').checked;
 	var enableKK = alwaysKK || document.getElementById('enable-kk').checked;
-  var enableTownTune = document.getElementById('enable-town-tune').checked;
-
+	var enableTownTune = document.getElementById('enable-town-tune').checked;
+	var zipCode = document.getElementById('zip-code').value;
+	var countryCode = document.getElementById('country-code').value;
+	var enableBadgeText = document.getElementById('enable-badge').checked;
 
 	var music;	
 	if (document.getElementById('animal-forrest').checked) {
@@ -22,11 +24,14 @@ function saveOptions() {
 	else if (document.getElementById('new-leaf').checked) {
 		music = 'new-leaf';
 	}
+	else if (document.getElementById('new-leaf-raining').checked) {
+		music = 'new-leaf-raining';
+	}
 	else if (document.getElementById('new-leaf-snowing').checked) {
 		music = 'new-leaf-snowing';
 	}
-	else if (document.getElementById('new-leaf-raining').checked) {
-		music = 'new-leaf-raining';
+	else if (document.getElementById('new-leaf-live').checked) {
+		music = 'new-leaf-live';
 	}
 	
 	chrome.storage.sync.set({
@@ -35,7 +40,10 @@ function saveOptions() {
 		enableNotifications: enableNotifications,
 		enableKK: enableKK,
 		alwaysKK: alwaysKK,
-		enableTownTune: enableTownTune
+		enableTownTune: enableTownTune,
+		zipCode: zipCode,
+		countryCode: countryCode,
+		enableBadgeText: enableBadgeText
 	}, function() { });
 }
 
@@ -46,7 +54,10 @@ function restoreOptions() {
 		enableNotifications: true,
 		enableKK: true,
 		alwaysKK: false,
-		enableTownTune: true
+		enableTownTune: true,
+		zipCode: "98052",
+		countryCode: "us",
+		enableBadgeText: true
 	}, function(items) {
 		document.getElementById('volume').value = items.volume;
 		document.getElementById(items.music).checked = true;
@@ -55,6 +66,9 @@ function restoreOptions() {
 		document.getElementById('enable-kk').checked = items.enableKK;
 		document.getElementById('always-kk').checked = items.alwaysKK;
 		document.getElementById('enable-town-tune').checked = items.enableTownTune;
+		document.getElementById('zip-code').value = items.zipCode;
+		document.getElementById('country-code').value = items.countryCode;
+		document.getElementById('enable-badge').checked = items.enableBadgeText;
 	});
 }
 
@@ -67,11 +81,14 @@ document.getElementById('wild-world-snowing').onclick = saveOptions;
 document.getElementById('new-leaf').onclick = saveOptions;
 document.getElementById('new-leaf-snowing').onclick = saveOptions;
 document.getElementById('new-leaf-raining').onclick = saveOptions;
+document.getElementById('new-leaf-live').onclick = saveOptions;
 document.getElementById('no-kk').onclick = saveOptions;
 document.getElementById('enable-kk').onclick = saveOptions;
 document.getElementById('always-kk').onclick = saveOptions;
 document.getElementById('enable-notifications').onclick = saveOptions;
 document.getElementById('enable-town-tune').onclick = saveOptions;
+document.getElementById('enable-badge').onclick = saveOptions;
+document.getElementById('update-location').onclick = saveOptions;
 
 // About/Help
 document.getElementById('get-help').onclick = function() {
