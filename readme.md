@@ -26,12 +26,12 @@ Fade-in Fade-out before switching tracks
 3. **Fix the Download size**  
 _This extension is already big and isn't going to get smaller. (We need a solution of some sort to bypass Chrome's questionnable download manager and make the user's experience better)_   
 
-4. **Add loop points support in order to keep the intro of certain tracks that I cut out for the smoothest transition**  
+4. **<s>Add loop points support in order to keep the intro of certain tracks that I cut out for the smoothest transition</s>**  
 (Credit: Google User <a href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews">Nathan Morris</a>)  
 
 5. **Add sound tones to the town tune previsualizer to more closely ressemble the one in the original game**  
 
-6. **Dynamic Music according to local weather**  
+6. **<s>Dynamic Music according to local weather</s>**  
 [Check Issue](https://github.com/JdotCarver/Animal-Crossing-Music-Extension/issues/5)
 
 7. **Add an option for ambient sounds while the music is playing**  
