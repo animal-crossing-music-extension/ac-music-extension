@@ -61,7 +61,7 @@ function StateManager() {
 	function isKK() {
 		return options.alwaysKK || (options.enableKK && isKKTime);
 	}
-	
+
 	function isLive() {
 		return options.music == 'new-leaf-live';
 	}
@@ -87,7 +87,7 @@ function StateManager() {
 			}
 		});
 	}
-	
+
 	// Gets the current game based on the option, and weather if
 	// we're using a live weather option.
 	function getMusic() {
@@ -97,10 +97,22 @@ function StateManager() {
 			else if(weatherManager.getWeather() == "Snow")
 				return "new-leaf-snowing";
 			else
-				return "new-leaf";			
+				return "new-leaf";
 		}
-		else
-			return options.music;
+		else {
+			if (options.music === "random"){
+				let games = ['animal-forrest',
+										'wild-world',
+										'wild-world-snowing',
+										'new-leaf',
+										'new-leaf-raining',
+										'new-leaf-snowing',
+										'new-leaf-live'];
+				return games[Math.floor(Math.random() * games.length)];
+			} else
+				return options.music;
+
+		}
 	}
 
 	// If we're not playing KK, let listeners know the hour has changed
