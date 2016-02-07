@@ -38,21 +38,9 @@ function saveOptions() {
 		music = 'random';
 	}
 
-	if (music === "random"){
-		let games = ['animal-forrest',
-								'wild-world',
-								'wild-world-snowing',
-								'new-leaf',
-								'new-leaf-raining',
-								'new-leaf-snowing',
-								'new-leaf-live'];
-		currentSong = games[Math.floor(Math.random() * games.length)];
-	} else
-		currentSong = music;
-
 	chrome.storage.sync.set({
 		volume             : volume,
-		music              : currentSong,
+		music              : music,
 		enableNotifications: enableNotifications,
 		enableKK           : enableKK,
 		alwaysKK           : alwaysKK,
