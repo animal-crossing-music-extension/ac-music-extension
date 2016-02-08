@@ -106,8 +106,7 @@ function StateManager() {
 										'wild-world-snowing',
 										'new-leaf',
 										'new-leaf-raining',
-										'new-leaf-snowing',
-										'new-leaf-live'];
+										'new-leaf-snowing',];
 				return games[Math.floor(Math.random() * games.length)];
 			} else
 				return options.music;
