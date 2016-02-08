@@ -5,8 +5,8 @@
 function AudioManager(addEventListener, isTownTune) {
 
 	var audio = document.createElement('audio');
-	var loopTimeout;
-	var fadeInterval;
+	var killLoopTimeout;
+	var killFadeInterval;
 	var townTuneManager = new TownTuneManager();
 
 	// isHourChange is true if it's an actual hour change,
@@ -42,10 +42,15 @@ function AudioManager(addEventListener, isTownTune) {
 				delayToLoop -= loopTime.start;
 			}
 			audio.onplay = function() {
-				loopTimeout = setTimeout(function() {
+				var loopTimeout = setTimeout(function() {
 					printDebug("looping");
 					playHourSong(game, hour, true);
 				}, delayToLoop * 1000);
+				killLoopTimeout = function() {
+					clearTimeout(loopTimeout);
+					audio.onplay = function() {};
+					loopTimeout = null;
+				};
 			}
 		}
 		audio.play();
@@ -64,16 +69,14 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.play();
 	}
 
-	// clears the loop point timeout if one exists
+	// clears the loop point timeout and the fadeout
+	// interval if one exists
 	function clearLoop() {
-		if(loopTimeout) {
-			audio.onplay = function() {};
-			clearTimeout(loopTimeout);
-			loopTimeout = null;
+		if(typeof(killLoopTimeout) === 'function') {
+			killLoopTimeout();
 		}
-		if(fadeInterval) {
-			clearInterval(fadeInterval);
-			fadeInterval = null;
+		if(typeof(killFadeInterval) === 'function') {
+			killFadeInterval();
 		}
 	}
 
@@ -84,7 +87,7 @@ function AudioManager(addEventListener, isTownTune) {
 		} else {
 			var oldVolume = audio.volume;
 			var step = audio.volume / (time / 100.0);
-			fadeInterval = setInterval(function() {
+			var fadeInterval = setInterval(function() {
 				if (audio.volume > step) {
 					audio.volume -= step;
 				} else {
@@ -94,6 +97,11 @@ function AudioManager(addEventListener, isTownTune) {
 					if (callback) callback();
 				}
 			}, 100);
+			killFadeInterval = function() {
+				clearInterval(fadeInterval);
+				audio.volume = oldVolume;
+				killFadeInterval = null;
+			}
 		}
 	}
 
