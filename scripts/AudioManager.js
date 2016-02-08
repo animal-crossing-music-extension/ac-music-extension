@@ -6,6 +6,7 @@ function AudioManager(addEventListener, isTownTune) {
 
 	var audio = document.createElement('audio');
 	var loopTimeout;
+	var fadeInterval;
 	var townTuneManager = new TownTuneManager();
 
 	// isHourChange is true if it's an actual hour change,
@@ -68,6 +69,11 @@ function AudioManager(addEventListener, isTownTune) {
 		if(loopTimeout) {
 			audio.onplay = function() {};
 			clearTimeout(loopTimeout);
+			loopTimeout = null;
+		}
+		if(fadeInterval) {
+			clearInterval(fadeInterval);
+			fadeInterval = null;
 		}
 	}
 
@@ -78,11 +84,11 @@ function AudioManager(addEventListener, isTownTune) {
 		} else {
 			var oldVolume = audio.volume;
 			var step = audio.volume / (time / 100.0);
-			var fade = setInterval(function() {
+			fadeInterval = setInterval(function() {
 				if (audio.volume > step) {
 					audio.volume -= step;
 				} else {
-					clearInterval(fade);
+					clearInterval(fadeInterval);
 					audio.pause();
 					audio.volume = oldVolume;
 					if (callback) callback();
