@@ -27,12 +27,12 @@ var loopTimes = {
 			start : 7.144,
 			end : 47.134
 		},
-		/*14 : {
-			start : 00.090,
+		14 : {
+			start : 0.090,
 			end : 37.746
 		},
 		16 : {
-			start : 04.246,
+			start : 4.246,
 			end : 49.249
 		},
 		17 : {
@@ -41,16 +41,16 @@ var loopTimes = {
 		},
 		19 : {
 			start : 47.165,
-			end : 1.29.519
+			end : 89.519
 		},
 		20 : {
 			start : 14.344,
 			end : 56.090
 		},
 		24 : {
-			start : 00.000,
+			start : 0.000,
 			end : 42.867
-		},*/
+		},
 	},
 	"wild-world" : {
 		0 : {
