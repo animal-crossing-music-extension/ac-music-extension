@@ -6,6 +6,7 @@ function saveOptions() {
 	// 2 separate KK variables to preserve compatibility with old versions
 	var alwaysKK            = document.getElementById('always-kk').checked;
 	var enableKK            = alwaysKK || document.getElementById('enable-kk').checked;
+	var kkAirChecks 		    = document.getElementById('kk-airchecks').checked;
 	var enableTownTune      = document.getElementById('enable-town-tune').checked;
 	var zipCode             = document.getElementById('zip-code').value;
 	var countryCode         = document.getElementById('country-code').value;
@@ -44,6 +45,7 @@ function saveOptions() {
 		enableNotifications: enableNotifications,
 		enableKK           : enableKK,
 		alwaysKK           : alwaysKK,
+		kkAirChecks        : kkAirChecks,
 		enableTownTune     : enableTownTune,
 		zipCode            : zipCode,
 		countryCode        : countryCode,
@@ -58,6 +60,7 @@ function restoreOptions() {
 		enableNotifications: true,
 		enableKK           : true,
 		alwaysKK           : false,
+		kkAirChecks        : false,
 		enableTownTune     : true,
 		zipCode            : "98052",
 		countryCode        : "us",
@@ -69,6 +72,7 @@ function restoreOptions() {
 		document.getElementById('no-kk').checked                = true;
 		document.getElementById('enable-kk').checked            = items.enableKK;
 		document.getElementById('always-kk').checked            = items.alwaysKK;
+		document.getElementById('kk-airchecks').checked         = items.kkAirChecks;
 		document.getElementById('enable-town-tune').checked     = items.enableTownTune;
 		document.getElementById('zip-code').value               = items.zipCode;
 		document.getElementById('country-code').value           = items.countryCode;
@@ -91,6 +95,7 @@ document.getElementById('random').onclick               = saveOptions;
 document.getElementById('no-kk').onclick                = saveOptions;
 document.getElementById('enable-kk').onclick            = saveOptions;
 document.getElementById('always-kk').onclick            = saveOptions;
+document.getElementById('kk-airchecks').onclick         = saveOptions;
 document.getElementById('enable-notifications').onclick = saveOptions;
 document.getElementById('enable-town-tune').onclick     = saveOptions;
 document.getElementById('enable-badge').onclick         = saveOptions;

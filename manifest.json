@@ -11,14 +11,14 @@
    "description": "Play Animal Crossing's smooth background music in real-time throughout your day.",
    "icons": {
       "128": "img/icon_128_kk.png",
-      "38": "img/icon_32_kk.png"
+      "38": "img/icon_32.png"
    },
    "manifest_version": 3,
    "name": "Animal Crossing Music",
    "options_page": "options.html",
-   "permissions": [ 
-		"notifications", 
-		"storage", 
+   "permissions": [
+		"notifications",
+		"storage",
 		"http://api.openweathermap.org/" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "3.4",

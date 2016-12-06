@@ -38,7 +38,7 @@ function StateManager() {
 
 			notifyListeners("volume", [options.volume]);
 			if (isKK()) {
-				notifyListeners("kkStart");
+				notifyListeners("kkStart", [isAirChecks()]);
 			}
 			else {
 				notifyListeners("hourMusic", [timeKeeper.getHour(), getMusic(), false]);
@@ -65,6 +65,9 @@ function StateManager() {
 	function isLive() {
 		return options.music == 'new-leaf-live';
 	}
+	function isAirChecks() {
+		return options.kkAirChecks;
+	}
 
 	// retrieve saved options
 	function getSyncedOptions(callback) {
@@ -74,6 +77,7 @@ function StateManager() {
 			enableNotifications: true,
 			enableKK: true,
 			alwaysKK: false,
+			kkAirChecks: false,
 			paused: false,
 			enableTownTune: true,
 			//enableAutoPause: false,
@@ -120,7 +124,7 @@ function StateManager() {
 		var wasKK = isKK();
 		isKKTime = day == 6 && hour >= 20;
 		if (isKK() && !wasKK) {
-			notifyListeners("kkStart");
+			notifyListeners("kkStart", [isAirChecks()]);
 		}
 		else if (!isKK()) {
 			notifyListeners("hourMusic", [hour, getMusic(), true]);
@@ -146,7 +150,7 @@ function StateManager() {
 				notifyListeners("gameChange", [timeKeeper.getHour(), getMusic()]);
 			}
 			if (isKK() && !wasKK) {
-				notifyListeners("kkStart");
+				notifyListeners("kkStart", [isAirChecks()]);
 			}
 			if (!isKK() && wasKK) {
 				notifyListeners("hourMusic", [timeKeeper.getHour(), getMusic(), false]);

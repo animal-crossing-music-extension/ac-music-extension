@@ -8,6 +8,7 @@ function AudioManager(addEventListener, isTownTune) {
 	var killLoopTimeout;
 	var killFadeInterval;
 	var townTuneManager = new TownTuneManager();
+	var isAirChecks;
 
 	// isHourChange is true if it's an actual hour change,
 	// false if we're activating music in the middle of an hour
@@ -56,7 +57,8 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.play();
 	}
 
-	function playKKMusic() {
+	function playKKMusic(airchecks) {
+		isAirChecks = airchecks;
 		clearLoop();
 		audio.loop = false;
 		audio.addEventListener("ended", playKKSong);
@@ -64,8 +66,15 @@ function AudioManager(addEventListener, isTownTune) {
 	}
 
 	function playKKSong() {
-		var randomSong = Math.floor((Math.random() * 36) + 1).toString();
-		audio.src = '../kk/' + randomSong + '.ogg';
+		//change random number generator to match the actual range of songs in the KK and KKAC folders
+		//The kk folder that I downloaded from google drive only has tracks 1,2, and 10-19, which is why this is set to generate a number from 10-19
+		var randomSong = Math.floor((Math.random() * 9) + 10).toString();
+		if(isAirChecks){
+			audio.src = '../kkac/' + randomSong + '.ogg';
+		}else{
+			audio.src = '../kk/' + randomSong + '.ogg';
+		}
+
 		audio.play();
 	}
 
