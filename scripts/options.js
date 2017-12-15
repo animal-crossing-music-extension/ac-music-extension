@@ -38,9 +38,18 @@ function saveOptions() {
 		music = 'random';
 	}
 
+	var icon;
+	if(document.getElementById('isabelle').checked;){
+		icon = 'isabelle'
+	 }
+	 else if(document.getElementById('leaf').checked;){
+		 icon = 'leaf'
+	 }
+
 	chrome.storage.sync.set({
 		volume             : volume,
 		music              : music,
+	  icon               : icon,
 		enableNotifications: enableNotifications,
 		enableKK           : enableKK,
 		alwaysKK           : alwaysKK,
@@ -55,6 +64,7 @@ function restoreOptions() {
 	chrome.storage.sync.get({
 		volume             : 0.5,
 		music              : 'new-leaf',
+		icon               : 'leaf'
 		enableNotifications: true,
 		enableKK           : true,
 		alwaysKK           : false,
@@ -65,6 +75,7 @@ function restoreOptions() {
 	}, function(items) {
 		document.getElementById('volume').value                 = items.volume;
 		document.getElementById(items.music).checked            = true;
+		document.getElementById(items.icon).checked             = true;
 		document.getElementById('enable-notifications').checked = items.enableNotifications;
 		document.getElementById('no-kk').checked                = true;
 		document.getElementById('enable-kk').checked            = items.enableKK;
@@ -88,6 +99,8 @@ document.getElementById('new-leaf-raining').onclick     = saveOptions;
 document.getElementById('new-leaf-live').onclick        = saveOptions;
 document.getElementById('new-leaf-live').onclick        = saveOptions;
 document.getElementById('random').onclick               = saveOptions;
+document.getElementById('leaf').onclick                 = saveOptions;
+document.getElementById('isabelle').onclick             = saveOptions;
 document.getElementById('no-kk').onclick                = saveOptions;
 document.getElementById('enable-kk').onclick            = saveOptions;
 document.getElementById('always-kk').onclick            = saveOptions;
