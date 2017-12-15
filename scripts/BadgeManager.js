@@ -29,21 +29,26 @@ function BadgeManager(addEventListener, isEnabled) {
 				chrome.browserAction.setIcon({
 					path : "img/icon_38_kk_playing.png"
 				});
-				if(options.icon == 'isabelle') {
-				chrome.browserAction.setIcon({
-					path : "img/Isabelle_playing.png"
-				});
-			} else {
-				chrome.browserAction.setIcon({
-					path : "img/icon_38_leaf_playing.png"
-				});
 			}
-		}
+				if(options.icon == 'isabelle') {
+					chrome.browserAction.setIcon({
+						path : "img/Isabelle_playing.png"
+					});
+				}
+				else {
+					chrome.browserAction.setIcon({
+						path : "img/icon_38_leaf_playing.png"
+					});
+				}
+			}
+
+
 		else {
 		chrome.browserAction.setIcon({
 			path : "img/icon_38_leaf_paused.png"
 		});
 		}
+
 	}
 
 	chrome.browserAction.setBadgeBackgroundColor({ color: [57, 230, 0, 255] });
