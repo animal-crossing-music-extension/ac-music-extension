@@ -103,6 +103,7 @@ function StateManager() {
 			if (options.music === "random"){
 				let games = ['animal-forrest',
 										'wild-world',
+										'wild-world-raining',
 										'wild-world-snowing',
 										'new-leaf',
 										'new-leaf-raining',
