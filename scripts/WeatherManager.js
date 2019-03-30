@@ -28,9 +28,9 @@ function WeatherManager(zip, country) {
 	};
 
 	this.getWeather = function() {
-		if(weatherRain.indexOf(weather) > -1) {
+		if(~weatherRain.indexOf(weather)) {
 			return "Rain";
-		} else if(weatherSnow.indexOf(weather) > -1) {
+		} else if(~weatherSnow.indexOf(weather)) {
 			return "Snow";
 		} else {
 			return "Clear";
@@ -48,7 +48,7 @@ function WeatherManager(zip, country) {
 	var weatherCheckLoop = function() {
 		//if appid is not valid nothing will be returned
 	 	var appid = "e7f97bd1900b94491d3263f89cbe28d6";
-	 	var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + zip + "," + country + "&appid=" + appid;
+	 	var url = `http://api.openweathermap.org/data/2.5/weather?zip=${zip},${country}&appid=${appid}`
 	 
 	 	var request = new XMLHttpRequest();
 	 
