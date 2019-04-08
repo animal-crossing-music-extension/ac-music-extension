@@ -81,7 +81,7 @@ function restoreOptions() {
 
 document.addEventListener('DOMContentLoaded', restoreOptions);
 
-document.getElementById('volume').onchange              = saveOptions;
+document.getElementById('volume').oninput              = saveOptions;
 document.getElementById('animal-forrest').onclick       = saveOptions;
 document.getElementById('wild-world').onclick           = saveOptions;
 document.getElementById('wild-world-raining').onclick	= saveOptions;

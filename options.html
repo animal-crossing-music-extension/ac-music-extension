@@ -18,7 +18,7 @@
 <body class="chrome-bootstrap">
 	<div class="frame">
 		<div class="navigation">
-			<h1><a href="#">Animal Crossing Music</a></h1>
+			<h1 style="color: #5C6166;">Animal Crossing Music</h1>
 			<ul class="menu" style="margin-top: 4em;">
 				<li class="selected">
 					<a href="#options">Options</a>
@@ -44,7 +44,7 @@
 						<h3>Volume</h3>
 						<div class="checkbox">
 							<label>
-								<input id="volume" type="range" min="0" max="1" step="0.05">
+								<input aria-label="Volume" id="volume" type="range" min="0" max="1" step="0.05">
 							</label>
 						</div>
 					</section>
@@ -115,8 +115,8 @@
 					<section>
 						<h3>Live Weather Location</h3>
 						<div class="text">
-								<input type="text" id="zip-code" value="618708">
-								<input type="text" id="country-code" value="ru">
+								<input type="text" id="zip-code" aria-label="Zip Code" value="618708">
+								<input type="text" id="country-code" aria-label="Country Code" value="ru">
 								<button type="button" id="update-location">Update Location</button>
 								<label>(First box is <a href="http://www.geonames.org/postal-codes/" target="_blank">zip code</a>, second is <a href = "https://countrycode.org/" target="_blank">country code</a>)</label>
 						</div>
@@ -142,7 +142,7 @@
 					</section>
 
 					<header>
-						<h1 style="padding: 0; margin: 0;"></h1>
+						<div style="padding: 0; margin: 0; height:18px;"></div>
 						<div class="controls">
 							<button class="play-tune">Play!</button>
 							<div class="spacer"></div>
@@ -167,9 +167,9 @@
 					</div>
 
 					<div>
-						<button id="get-help">Get help with using this extension</button>
-						<button id="report-an-issue">Report an issue</button>
-						<button id="help-us-out">Help us make the best AC extension ever!</button>
+						<button id="get-help" role="link" href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/support">Get help with using this extension</button>
+						<button id="report-an-issue" role="link" href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/support">Report an issue</button>
+						<button id="help-us-out" role="link" href="https://github.com/JdotCarver/Animal-Crossing-Music-Extension/">Help us make the best AC extension ever!</button>
 					</div>
 
 					<div id="version-container">Version 3.0</div>
