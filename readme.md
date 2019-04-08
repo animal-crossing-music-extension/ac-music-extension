@@ -3,6 +3,9 @@
 Just a fun Chrome extension for playing Animal Crossing's music in the background while you work or play or do whatever it is you do with your browser. Updates in real-time whenever a new hour rolls around, and informs you via an optional desktop notification and customizable town tune.
 
 ## Progress
+Hey there, Its Jack.  
+I've loved this project from the very start, but I feel I've been holding onto it for too long. I have pure intentions and have always been a fan. And I never want this project to turn bad. However I just started my streaming career and unfortunately with all the content ceration and community management it takes I have totally wiped my brain of how to manage this whole thing. With Animal Crossing coming out on Switch and people gaining interest I feel that way more good things could come out of this. If you are a true fan and want to share your passion for Animal Crossing with our fellow villagers. Please contact me.  
+Here's hoping we find the new mayor that'll give this town the bright future it deserves. ♥  
 
 ### Achieved
 Redid all New Leaf Loops with Original files  
