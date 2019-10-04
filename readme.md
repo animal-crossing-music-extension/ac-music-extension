@@ -29,21 +29,21 @@ deserves. 🌸
 
 ### Achieved
 
-[X] Updated all New Leaf loops with original files, (1PM is still unfinished),
+- [X] Updated all New Leaf loops with original files, (1PM is still unfinished),
 
-[X] K.K. Slider now plays either from 8pm to 12am, all the time or never,
+- [X] K.K. Slider now plays either from 8pm to 12am, all the time or never,
 
-[X] Added Changelog,
+- [X] Added Changelog,
 
-[X] Settings now auto-save,
+- [X] Settings now auto-save,
 
-[X] Added New Leaf Rainy-Day option and created all the loops,
+- [X] Added New Leaf Rainy-Day option and created all the loops,
 
-[X] Created a customizable Town chime on each hour,
+- [X] Created a customizable Town chime on each hour,
 
-[X] Added the PAL equivalent of City Folk to the title for less confusion, (Credit: Google user [e4iojk](https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews))
+- [X] Added the PAL equivalent of City Folk to the title for less confusion, (Credit: Google user [e4iojk](https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/reviews))
 
-[X] Fade-in and fade-out audio before switching tracks, (Credit: Google User [Nathan Moris](https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/) )
+- [X] Fade-in and fade-out audio before switching tracks, (Credit: Google User [Nathan Moris](https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/) )
 
 ### Improvements
 
