@@ -4,6 +4,12 @@
 
 function AudioManager(addEventListener, isTownTune) {
 
+	// if eventsEnabled is true, plays event music when appliccable. 
+	// Only enable after all game's music-folders contain one .ogg sound file for each event 
+	// (i.e. "halloween.ogg" in newLeaf, AC,) 
+	// Should also be used for disabling event music for those who have turned them off in the settings, then this  should be false.
+	var eventsEnabled = false;
+	
 	var audio = document.createElement('audio');
 	var killLoopTimeout;
 	var killFadeInterval;
@@ -31,7 +37,19 @@ function AudioManager(addEventListener, isTownTune) {
 	// any exist
 	function playHourSong(game, hour, skipIntro) {
 		audio.loop = true;
-		audio.src = '../' + game + '/' + formatHour(hour) + 'm.ogg';
+		
+		// STANDARD SONG NAME FORMATTING
+		let songName = formatHour(hour) + 'm'; // 'm' cut from 'm.ogg' and put here.
+		
+		// EVENT SONG NAME FORMATTING
+		if(timeKeeper.getEvent() !== "none"){ //getEvent() returns eventname, or "none".
+			// Changing the song name to the name of the event, if an event is ongoing.
+			songName = timeKeeper.getEvent();
+		}
+		
+		// SETTING AUDIO SOURCE
+		audio.src = '../' + game + '/' + songName + '.ogg';
+		
 		var loopTime = (loopTimes[game] || {})[hour];
 		// set up loop points if loopTime is set up for this
 		// game and hour
