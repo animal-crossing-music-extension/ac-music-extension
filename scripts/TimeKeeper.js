@@ -4,11 +4,22 @@
 
 function TimeKeeper() {
 
+	var self = this;
+	
 	var hourlyCallback;
-
-	var currHour = (new Date()).getHours();
-	var currDay = (new Date()).getDay();
-
+	
+	// DECLARING TIME VARIABLES
+	var date, currHour, currDay, currMonth, currDate;
+	
+	// INITIALIZING VARIABLES
+	this.updateTimeVariables = function(){
+		date = new Date();
+		currHour = date.getHours();
+		currDay = date.getDay();
+		currMonth = date.getMonth();
+		currDate = date.getDate();
+	} 
+	
 	this.registerHourlyCallback = function(callback) {
 		hourlyCallback = callback;
 	};
@@ -20,7 +31,24 @@ function TimeKeeper() {
 	this.getDay = function() {
 		return currDay;
 	};
-
+	
+	this.getMonth = function() {
+		return currMonth;
+	}
+	
+	this.getDate = function() {
+		return currDate;
+	}
+	
+	// Updating these variables manually because running this.updateTimeVariables(); doesn't work, reference error or something, because JavaScript.
+	date = new Date();
+	currHour = date.getHours();
+	currDay = date.getDay();
+	currMonth = date.getMonth();
+	currDate = date.getDate();
+	
+	
+	
 	/**
 	 * @function getEvent
 	 * @desc Returns the name of the current event, or "none" if no event is ongoing.
@@ -48,19 +76,28 @@ function TimeKeeper() {
 	}
 	
 	
-	
+
+	/**
+	 * @method timeCheckLoop 
+	 * @desc Updates time variables every hour
+	 */
 	var timeCheckLoop = function() {
-		var newDate = new Date();
-		var timeToNext = 3600000 - (newDate.getTime() % 3600000);
+		
+		// CREATING NEW DATE OBJECT
+		let newDate = new Date();
+		
+		// QUEUING NEXT RECURSION
+		let timeToNext = 3600000 - (newDate.getTime() % 3600000);
 		setTimeout(timeCheckLoop, timeToNext);
-		currDay = newDate.getDay();
-		// if we're in a new hour
-		if (newDate.getHours() != currHour) {
-			currHour = newDate.getHours();
-			if (hourlyCallback) {
-				hourlyCallback(currDay, currHour);
-			}
+		
+		// CALLS hourlyCallback() IF THE HOUR HAS CHANGED 
+		if (newDate.getHours() !== currHour) {
+			if (hourlyCallback) hourlyCallback(currDay, currHour);
 		}
+		
+		// UPDATING TIME VARIABLES
+		self.updateTimeVariables();
+		
 	}
 
 	timeCheckLoop();
