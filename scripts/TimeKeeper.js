@@ -4,10 +4,22 @@
 
 function TimeKeeper() {
 
+	var self = this;
+	
 	var hourlyCallback;
-
-	var currHour = (new Date()).getHours();
-	var currDay = (new Date()).getDay();
+	
+	// DECLARING TIME VARIABLES
+	var date, currHour, currDay, currMonth, currDate;
+	
+	// INITIALIZING VARIABLES
+	this.updateTimeVariables = function(){
+		date = new Date();
+		currHour = date.getHours();
+		currDay = date.getDay();
+		currMonth = date.getMonth();
+		currDate = date.getDate();
+	} //();
+	
 
 	this.registerHourlyCallback = function(callback) {
 		hourlyCallback = callback;
@@ -20,7 +32,24 @@ function TimeKeeper() {
 	this.getDay = function() {
 		return currDay;
 	};
+	
+	this.getMonth = function() {
+		return currMonth;	
+	};
+	
+	this.getDate = function() {
+		return currMonth;
+	};
 
+	
+	// running updateTimeVariables created issues, because JavaScript, so initially updating these manually.
+	date = new Date();
+	currHour = date.getHours();
+	currDay = date.getDay();
+	currMonth = date.getMonth();
+	currDate = date.getDate();
+	
+	
 	/**
 	 * @function getEvent
 	 * @desc Returns the name of the current event, or "none" if no event is ongoing.
