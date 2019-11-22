@@ -14,6 +14,7 @@ function AudioManager(addEventListener, isTownTune) {
 	var killLoopTimeout;
 	var killFadeInterval;
 	var townTuneManager = new TownTuneManager();
+	var timeKeeper = new TimeKeeper();
 
 	// isHourChange is true if it's an actual hour change,
 	// false if we're activating music in the middle of an hour

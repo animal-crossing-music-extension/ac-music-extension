@@ -10,7 +10,12 @@ function TimeKeeper() {
 	
 	// DECLARING TIME VARIABLES
 	var date, currHour, currDay, currMonth, currDate;
-	
+	// running updateTimeVariables created issues, because JavaScript, so initially updating these manually.
+	date = new Date();
+	currHour = date.getHours();
+	currDay = date.getDay();
+	currMonth = date.getMonth();
+	currDate = date.getDate();
 	// INITIALIZING VARIABLES
 	this.updateTimeVariables = function(){
 		date = new Date();
@@ -42,12 +47,7 @@ function TimeKeeper() {
 	};
 
 	
-	// running updateTimeVariables created issues, because JavaScript, so initially updating these manually.
-	date = new Date();
-	currHour = date.getHours();
-	currDay = date.getDay();
-	currMonth = date.getMonth();
-	currDate = date.getDate();
+	
 	
 	
 	/**
@@ -59,11 +59,11 @@ function TimeKeeper() {
 		// DECLARE EVENT NAMES AND PARAMETERS
 		let events = [
 			//["<Event Name>", (<event parameters>)]
-			["Halloween", 	(timeKeeper.currMonth() === 10 	&& timeKeeper.currDate() === 31)],
-			["Christmas", 	(timeKeeper.currMonth() === 12 	&& timeKeeper.currDate() >= 24 && timeKeeper.currDate() <= 25)], 
+			["Halloween", 	(this.getMonth() === 10 	&& this.getDate() === 31)],
+			["Christmas", 	(this.getMonth() === 12 	&& this.getDate() >= 24 && cthis.getDate() <= 25)], 
 			// christmas comes before winter, to prioritize it over winter, as getEvent() returns the first event it finds.
-			["Winter", 		(timeKeeper.getMonth() >= 12 	|| timeKeeper.getMonth() <= 2)],
-			["NewYearsEve",	(timeKeeper.getMonth() === 12 	&& timeKeeper.currDate() === 31)]
+			["Winter", 		(this.getMonth() >= 12 	|| this.getMonth() <= 2)],
+			["NewYearsEve",	(this.getMonth() === 12 	&& this.getDate() === 31)]
 			//["Easter", (timeKeeper.getMonth() === && )]
 		];
 		
