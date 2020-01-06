@@ -43,10 +43,11 @@ function AudioManager(addEventListener, isTownTune) {
 		let songName = formatHour(hour) + 'm'; // 'm' cut from 'm.ogg' and put here.
 		
 		// EVENT SONG NAME FORMATTING
-		if(timeKeeper.getEvent() !== "none"){ //getEvent() returns eventname, or "none".
+		// TODO: Re-enable events.
+		/*if(timeKeeper.getEvent() !== "none"){ //getEvent() returns eventname, or "none".
 			// Changing the song name to the name of the event, if an event is ongoing.
 			songName = timeKeeper.getEvent();
-		}
+		}*/
 		
 		// SETTING AUDIO SOURCE
 		audio.src = '../sound/' + game + '/' + songName + '.ogg';
