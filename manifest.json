@@ -22,5 +22,5 @@
 		"http://api.openweathermap.org/" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "3.4",
-   "web_accessible_resources": [ "img/clock.png", "bells.ogg" ]
+   "web_accessible_resources": [ "img/clock.png", "sound/bells.ogg" ]
 }

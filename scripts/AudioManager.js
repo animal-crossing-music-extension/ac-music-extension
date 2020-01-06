@@ -49,7 +49,7 @@ function AudioManager(addEventListener, isTownTune) {
 		}
 		
 		// SETTING AUDIO SOURCE
-		audio.src = '../' + game + '/' + songName + '.ogg';
+		audio.src = '../sound/' + game + '/' + songName + '.ogg';
 		
 		var loopTime = (loopTimes[game] || {})[hour];
 		// set up loop points if loopTime is set up for this
@@ -84,7 +84,7 @@ function AudioManager(addEventListener, isTownTune) {
 
 	function playKKSong() {
 		var randomSong = Math.floor((Math.random() * 36) + 1).toString();
-		audio.src = '../kk/' + randomSong + '.ogg';
+		audio.src = '../sound/kk/' + randomSong + '.ogg';
 		audio.play();
 	}
 
