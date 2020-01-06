@@ -1,10 +1,10 @@
 ![Project Banner](https://github.com/PikaDude/Animal-Crossing-Music-Extension/blob/master/docs/banner.png)
 
-# Animal Crossing Music (Revamp) 🍀
+# Animal Crossing Music (Revived) 🍀
 
 ##### This is a fork of the original [Animal Crossing Music Extension](https://github.com/animal-crossing-music-extension/Animal-Crossing-Music-Extension).
 
-**Animal Crossing Music** is a a fun Chrome extension for playing Animal Crossing's
+**Animal Crossing Music (Revived)** is a a fun Chrome extension for playing Animal Crossing's
 music in the browser, while you work, play or browse the web! ✨
 
 The music updates in real-time on the hour, and informs you via an optional desktop notification and customizable town tune! 🌱
@@ -62,7 +62,7 @@ If you have a feature request, a proposal for improvement, want to report a bug 
 
 
 ## Original Project
-Animal Crossing Music (Revamped) is a continuation of the [Animal Crossing Music](https://github.com/animal-crossing-music-extension/Animal-Crossing-Music-Extension) project. 
+Animal Crossing Music (Revived) is a continuation of the [Animal Crossing Music](https://github.com/animal-crossing-music-extension/Animal-Crossing-Music-Extension) project. 
 
 - Github: [project repository](https://github.com/animal-crossing-music-extension/Animal-Crossing-Music-Extension)
 - Chrome Web Store: [extension page](https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop)
@@ -73,4 +73,4 @@ Credit is due to all the [contributors](https://github.com/animal-crossing-music
 
 ## Licensing
 
-Animal Crossing Music (Revamped) is licensed under the zlib license. See [LICENSE.md](./LICENSE.md) for reference.
+Animal Crossing Music (Revived) is licensed under the zlib license. See [LICENSE.md](./LICENSE.md) for reference.
