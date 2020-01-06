@@ -13,7 +13,7 @@
       "128": "img/icon_128_kk.png",
       "38": "img/icon_32_kk.png"
    },
-   "manifest_version": 3,
+   "manifest_version": 2,
    "name": "Animal Crossing Music",
    "options_page": "options.html",
    "permissions": [ 
