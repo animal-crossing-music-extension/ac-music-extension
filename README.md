@@ -18,7 +18,7 @@ Listen to the corresponding hourly music from the main Animal Crossing titles:
 
 Rain and snow variants are also included!
 
-#### Live Weather 🌧
+### Live Weather 🌧
 You can enable Weather Detection so weather variants of the hourly music can be automatically picked according to the weather in your location!
 
 ### K.K. Slider 🎙
