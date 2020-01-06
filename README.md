@@ -58,6 +58,9 @@ Contributions to the project are greatly appreciated!
 
 If you have a feature request, a proposal for improvement, want to report a bug or just to ask a question, feel free to open a public [issue](https://github.com/PikaDude/Animal-Crossing-Music-Extension/issues) on the project repository.
 
+[PRs](https://github.com/PikaDude/Animal-Crossing-Music-Extension/pulls) are equally welcomed. Just make sure to mention a relevant issue in its description!
+
+
 ## Original Project
 Animal Crossing Music (Revamped) is a continuation of the [Animal Crossing Music](https://github.com/animal-crossing-music-extension/Animal-Crossing-Music-Extension) project. 
 
