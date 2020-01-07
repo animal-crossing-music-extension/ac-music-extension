@@ -8,67 +8,64 @@ function AudioManager(addEventListener, isTownTune) {
 	// Only enable after all game's music-folders contain one .ogg sound file for each event 
 	// (i.e. "halloween.ogg" in newLeaf, AC,) 
 	// Should also be used for disabling event music for those who have turned them off in the settings, then this  should be false.
-	var eventsEnabled = false;
-	
-	var audio = document.createElement('audio');
-	var killLoopTimeout;
-	var killFadeInterval;
-	var townTuneManager = new TownTuneManager();
-	var timeKeeper = new TimeKeeper();
+	let eventsEnabled = false;
+
+	let audio = document.createElement('audio');
+	let killLoopTimeout;
+	let killFadeInterval;
+	let townTuneManager = new TownTuneManager();
+	let timeKeeper = new TimeKeeper();
 
 	// isHourChange is true if it's an actual hour change,
 	// false if we're activating music in the middle of an hour
-	function playHourlyMusic(hour, game, isHourChange) {
+	function playHourlyMusic(hour, weather, game, isHourChange) {
 		clearLoop();
 		audio.loop = true;
 		audio.removeEventListener("ended", playKKSong);
-		var fadeOutLength = isHourChange ? 3000 : 500;
-		fadeOutAudio(fadeOutLength, function() {
-			if (isHourChange && isTownTune()) {
-				townTuneManager.playTune(function() {
-					playHourSong(game, hour, false);
+		let fadeOutLength = isHourChange ? 3000 : 500;
+		fadeOutAudio(fadeOutLength, () => {
+			if (true && isTownTune()) {
+				townTuneManager.playTune(() => {
+					playHourSong(game, weather, hour, false);
 				});
-			} else {
-				playHourSong(game, hour, false);
-			}
+			} else playHourSong(game, weather, hour, false);
 		});
 	}
 
 	// Plays a song for an hour, setting up loop times if
 	// any exist
-	function playHourSong(game, hour, skipIntro) {
+	function playHourSong(game, weather, hour, skipIntro) {
 		audio.loop = true;
-		
+
 		// STANDARD SONG NAME FORMATTING
 		let songName = formatHour(hour) + 'm'; // 'm' cut from 'm.ogg' and put here.
-		
+
 		// EVENT SONG NAME FORMATTING
 		// TODO: Re-enable events.
 		/*if(timeKeeper.getEvent() !== "none"){ //getEvent() returns eventname, or "none".
 			// Changing the song name to the name of the event, if an event is ongoing.
 			songName = timeKeeper.getEvent();
 		}*/
-		
-		// SETTING AUDIO SOURCE
-		audio.src = '../sound/' + game + '/' + songName + '.ogg';
-		
-		var loopTime = (loopTimes[game] || {})[hour];
+
+		// SETTING AUDIO SOURCE		
+		audio.src = `../sound/${game}/${weather}/${songName}.ogg`;
+
+		let loopTime = (loopTimes[game] || {})[hour];
 		// set up loop points if loopTime is set up for this
 		// game and hour
-		if(loopTime) {
-			var delayToLoop = loopTime.end;
-			if(skipIntro) {
+		if (loopTime) {
+			let delayToLoop = loopTime.end;
+			if (skipIntro) {
 				audio.currentTime = loopTime.start;
 				delayToLoop -= loopTime.start;
 			}
-			audio.onplay = function() {
-				var loopTimeout = setTimeout(function() {
+			audio.onplay = function () {
+				let loopTimeout = setTimeout(() => {
 					printDebug("looping");
-					playHourSong(game, hour, true);
+					playHourSong(game, weather, hour, true);
 				}, delayToLoop * 1000);
-				killLoopTimeout = function() {
+				killLoopTimeout = function () {
 					clearTimeout(loopTimeout);
-					audio.onplay = function() {};
 					loopTimeout = null;
 				};
 			}
@@ -84,7 +81,7 @@ function AudioManager(addEventListener, isTownTune) {
 	}
 
 	function playKKSong() {
-		var randomSong = Math.floor((Math.random() * 36) + 1).toString();
+		let randomSong = Math.floor((Math.random() * 36) + 1).toString();
 		audio.src = '../sound/kk/' + randomSong + '.ogg';
 		audio.play();
 	}
@@ -92,12 +89,8 @@ function AudioManager(addEventListener, isTownTune) {
 	// clears the loop point timeout and the fadeout
 	// interval if one exists
 	function clearLoop() {
-		if(typeof(killLoopTimeout) === 'function') {
-			killLoopTimeout();
-		}
-		if(typeof(killFadeInterval) === 'function') {
-			killFadeInterval();
-		}
+		if (typeof (killLoopTimeout) === 'function') killLoopTimeout();
+		if (typeof (killFadeInterval) === 'function') killFadeInterval();
 	}
 
 	// Fade out audio and call callback when finished.
@@ -105,9 +98,9 @@ function AudioManager(addEventListener, isTownTune) {
 		if (audio.paused) {
 			if (callback) callback();
 		} else {
-			var oldVolume = audio.volume;
-			var step = audio.volume / (time / 100.0);
-			var fadeInterval = setInterval(function() {
+			let oldVolume = audio.volume;
+			let step = audio.volume / (time / 100.0);
+			let fadeInterval = setInterval(() => {
 				if (audio.volume > step) {
 					audio.volume -= step;
 				} else {
@@ -117,7 +110,7 @@ function AudioManager(addEventListener, isTownTune) {
 					if (callback) callback();
 				}
 			}, 100);
-			killFadeInterval = function() {
+			killFadeInterval = function () {
 				clearInterval(fadeInterval);
 				audio.volume = oldVolume;
 				killFadeInterval = null;
@@ -131,12 +124,12 @@ function AudioManager(addEventListener, isTownTune) {
 
 	addEventListener("gameChange", playHourlyMusic);
 
-	addEventListener("pause", function() {
+	addEventListener("pause", () => {
 		clearLoop();
 		fadeOutAudio(300);
 	});
 
-	addEventListener("volume", function(newVol) {
+	addEventListener("volume", newVol => {
 		audio.volume = newVol;
 	});
 

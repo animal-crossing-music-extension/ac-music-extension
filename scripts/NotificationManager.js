@@ -3,8 +3,6 @@
 'use strict';
 
 function NotificationManager(addEventListener, isEnabled) {
-	let weather;
-
 	function doNotification (message) {
 		chrome.notifications.create('animal-crossing-music', {
 			type: 'basic',
@@ -15,19 +13,18 @@ function NotificationManager(addEventListener, isEnabled) {
 		});
 	}
 
-	addEventListener("weatherChange", function(weather) {
-
+	addEventListener("weatherChange", weather => {
 		if (isEnabled()) {
 			let lowerWeather = weather.toLowerCase();
 			doNotification(lowerWeather + (lowerWeather !== 'clear' ? 'ing' : ''));
 		}
 	});
 	
-	addEventListener("hourMusic", function(hour) {
+	addEventListener("hourMusic", hour => {
 		isEnabled() && doNotification(`It is now ${formatHour(hour)}m`);
 	});
 
-	addEventListener("kkStart", function() {
+	addEventListener("kkStart", () => {
 		isEnabled() && doNotification('K.K. Slider has started to play!');
 	});
 
