@@ -49,9 +49,12 @@ To install the downloaded project, do the following:
 Currently, music resources are packed within the extension. As they take up a lot of space, they have been purposedly left out of the repository.
 
 You can find the music resources in the following link:
-- Google Drive: [Animal Crossing Music Extension](https://drive.google.com/drive/folders/0B79uF1ZqAHtbN0l4eFR1NU9CMGc)
+- Google Drive: [Animal Crossing Music Extension Revived](https://drive.google.com/open?id=1QjG8QjPt_IKgzZRzmnoH8KTGwTsWSLsR)
 
 In order to run this project locally, you will need to download the above directory and extract it under `./sounds`.
+
+If, for some reason, you need access to the legacy music and structure, you can find them in the following link:
+- Google Drive: [Animal Crossing Music Extension](https://drive.google.com/drive/folders/0B79uF1ZqAHtbN0l4eFR1NU9CMGc)
 
 ## Contribute
 Contributions to the project are greatly appreciated!
