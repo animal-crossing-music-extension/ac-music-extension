@@ -120,13 +120,8 @@ var createSampler = function(audioContext) {
   initStartPoints();
   loadBells();
 
-  var poop = Math.sqrt(6);
-  var butt = poop;
-  console.log(butt);
-
   return {
-    playNote: playNote,
-    butt: butt
+    playNote: playNote
   }
 };
 
