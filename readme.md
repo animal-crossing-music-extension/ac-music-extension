@@ -10,7 +10,7 @@ desktop notification and customizable town tune! 🌱
 
 ## Development
 
-An update and revamp of this extension is currently underway (https://github.com/PikaDude/Animal-Crossing-Music-Extension)[on this repo]!
+An update and revamp of this extension is currently underway [on this repo](https://github.com/PikaDude/Animal-Crossing-Music-Extension)!
 
 Achievements and Planned improvements have been moved to [here](milestones.md).
 
