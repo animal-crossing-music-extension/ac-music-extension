@@ -4,7 +4,7 @@
    },
    "browser_action": {
       "default_icon": {
-		  "38": "img/icon_38_leaf_playing.png"
+		  "38": "img/icon_38_leaf_paused.png"
       },
       "default_title": "Animal Crossing Music"
    },
