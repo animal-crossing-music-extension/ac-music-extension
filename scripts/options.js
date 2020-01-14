@@ -106,7 +106,6 @@ const onClickElements = [
 	'enable-town-tune',
 	'enable-notifications',
 	'enable-badge',
-	'update-location',
 	'kk-version-live',
 	'kk-version-aircheck',
 	'kk-version-both'
@@ -117,6 +116,58 @@ document.getElementById('volume').oninput = saveOptions;
 onClickElements.forEach(el => {
 	document.getElementById(el).onclick = saveOptions;
 });
+
+let updateLocationEl = document.getElementById('update-location');
+updateLocationEl.onclick = function () {
+	updateLocationEl.textContent = "Validating...";
+	updateLocationEl.disabled = true;
+
+	let zip = document.getElementById('zip-code').value;
+	let country = document.getElementById('country-code').value;
+	if (zip == '') {
+		responseMessage('You must specify a zip code.');
+		return;
+	}
+	if (country == '') {
+		responseMessage('You must specify a country code.');
+		return;
+	}
+
+	let appid = "e7f97bd1900b94491d3263f89cbe28d6";
+	let url = `http://api.openweathermap.org/data/2.5/weather?zip=${zip},${country}&appid=${appid}`;
+	let request = new XMLHttpRequest();
+
+	request.onload = function () {
+		let response;
+		try {
+			response = JSON.parse(request.responseText);
+		} catch (Exception) {
+			responseMessage();
+			return;
+		}
+
+		if (response.cod == "200") responseMessage(`Success! The current weather status in ${response.name}, ${response.sys.country} is "${response.weather[0].main}"`, true);
+		else {
+			if (response.message) responseMessage(response.message.charAt(0).toUpperCase() + response.message.slice(1));
+			else responseMessage();
+		}
+	}
+
+	request.onerror = responseMessage;
+
+	request.open("GET", url, true);
+	request.send();
+
+	function responseMessage(message = 'An unknown error occurred', success = false) {
+		let weatherResponseEl = document.getElementById('weather-response');
+		if (success == true) weatherResponseEl.style.color = "#39d462";
+		else weatherResponseEl.style.color = "#d43939";
+		weatherResponseEl.textContent = message;
+
+		updateLocationEl.textContent = "Update Location";
+		updateLocationEl.disabled = false;	
+	}
+}
 
 // About/Help
 document.getElementById('get-help').onclick = function () {
