@@ -155,7 +155,7 @@ function StateManager() {
 					notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
 			}
 
-			if ((isKK() && !wasKK) || kkVersion != options.kkVersion) notifyListeners("kkStart", [options.kkVersion]);
+			if ((isKK() && !wasKK) || (kkVersion != options.kkVersion && isKK())) notifyListeners("kkStart", [options.kkVersion]);
 			if (!isKK() && wasKK) {
 				let musicAndWeather = getMusicAndWeather();
 				notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
