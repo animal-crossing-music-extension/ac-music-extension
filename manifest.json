@@ -1,6 +1,20 @@
 {
    "background": {
-      "scripts": [ "scripts/Utility.js", "scripts/tune_player.js", "scripts/TownTuneManager.js", "scripts/TimeKeeper.js", "scripts/LoopTimes.js", "scripts/WeatherManager.js", "scripts/KKSongs.js", "scripts/AudioManager.js", "scripts/BadgeManager.js", "scripts/NotificationManager.js", "scripts/StateManager.js", "scripts/main.js" ]
+      "scripts": [ 
+         "scripts/Utility.js", 
+         "scripts/tune_player.js", 
+         "scripts/TownTuneManager.js", 
+         "scripts/TimeKeeper.js", 
+         "scripts/LoopTimes.js", 
+         "scripts/WeatherManager.js", 
+         "scripts/KKSongs.js",
+         "scripts/AudioManager.js", 
+         "scripts/BadgeManager.js", 
+         "scripts/NotificationManager.js", 
+         "scripts/StateManager.js", 
+         "scripts/MediaSessionManager.js", 
+         "scripts/main.js" 
+      ]
    },
    "browser_action": {
       "default_icon": {

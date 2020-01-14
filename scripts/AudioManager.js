@@ -15,7 +15,9 @@ function AudioManager(addEventListener, isTownTune) {
 	let killFadeInterval;
 	let townTuneManager = new TownTuneManager();
 	let timeKeeper = new TimeKeeper();
+	let mediaSessionManager = new MediaSessionManager();
 	let kkVersion;
+
 
 	// isHourChange is true if it's an actual hour change,
 	// false if we're activating music in the middle of an hour
@@ -72,6 +74,7 @@ function AudioManager(addEventListener, isTownTune) {
 			}
 		}
 		audio.play();
+		mediaSessionManager.updateMetadata(game, hour, weather);
 	}
 
 	function playKKMusic(_kkVersion) {
