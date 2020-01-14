@@ -24,6 +24,11 @@ function saveOptions() {
 	else if (document.getElementById('live').checked) weather = 'live';
 	else if (document.getElementById('weather-random').checked) weather = 'weather-random';
 
+	let kkVersion;
+	if (document.getElementById('kk-version-live').checked) kkVersion = 'live';
+	else if (document.getElementById('kk-version-aircheck').checked) kkVersion = 'aircheck';
+	else if (document.getElementById('kk-version-both').checked) kkVersion = 'both';
+
 	document.getElementById('raining').disabled = music == 'animal-crossing';
 
 	chrome.storage.sync.set({
@@ -33,6 +38,7 @@ function saveOptions() {
 		enableNotifications,
 		enableKK,
 		alwaysKK,
+		kkVersion,
 		enableTownTune,
 		zipCode,
 		countryCode,
@@ -48,6 +54,7 @@ function restoreOptions() {
 		enableNotifications: true,
 		enableKK: true,
 		alwaysKK: false,
+		kkVersion: 'live',
 		enableTownTune: true,
 		zipCode: "98052",
 		countryCode: "us",
@@ -60,6 +67,7 @@ function restoreOptions() {
 		document.getElementById('no-kk').checked = true;
 		document.getElementById('enable-kk').checked = items.enableKK;
 		document.getElementById('always-kk').checked = items.alwaysKK;
+		document.getElementById('kk-version-' + items.kkVersion).checked = true;
 		document.getElementById('enable-town-tune').checked = items.enableTownTune;
 		document.getElementById('zip-code').value = items.zipCode;
 		document.getElementById('country-code').value = items.countryCode;
@@ -88,7 +96,10 @@ const onClickElements = [
 	'enable-town-tune',
 	'enable-notifications',
 	'enable-badge',
-	'update-location'
+	'update-location',
+	'kk-version-live',
+	'kk-version-aircheck',
+	'kk-version-both'
 ];
 
 document.getElementById('volume').oninput = saveOptions;

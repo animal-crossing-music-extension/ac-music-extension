@@ -15,6 +15,7 @@ function AudioManager(addEventListener, isTownTune) {
 	let killFadeInterval;
 	let townTuneManager = new TownTuneManager();
 	let timeKeeper = new TimeKeeper();
+	let kkVersion;
 
 	// isHourChange is true if it's an actual hour change,
 	// false if we're activating music in the middle of an hour
@@ -73,7 +74,8 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.play();
 	}
 
-	function playKKMusic() {
+	function playKKMusic(_kkVersion) {
+		kkVersion = _kkVersion;
 		clearLoop();
 		audio.loop = false;
 		audio.addEventListener("ended", playKKSong);
@@ -81,9 +83,19 @@ function AudioManager(addEventListener, isTownTune) {
 	}
 
 	function playKKSong() {
-		let randomSong = Math.floor((Math.random() * 36) + 1).toString();
-		audio.src = '../sound/kk/' + randomSong + '.ogg';
+		let version;
+		if (kkVersion == 'both') {
+			if (Math.floor(Math.random() * 2) == 0) version = 'live';
+			else version = 'aircheck';
+		} else version = kkVersion;
+
+		let randomSong;
+		if (version == 'live') randomSong = liveKKSongList[Math.floor(Math.random() * liveKKSongList.length)];
+		else if (version == 'aircheck') randomSong = aircheckKKSongList[Math.floor(Math.random() * aircheckKKSongList.length)];
+		audio.src = `../sound/kk/${version}/${randomSong}.ogg`;
 		audio.play();
+
+		window.notify("kkMusic", [randomSong.split(' - ')[1]]);
 	}
 
 	// clears the loop point timeout and the fadeout

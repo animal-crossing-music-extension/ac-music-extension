@@ -38,7 +38,7 @@ function StateManager() {
 			}
 
 			notifyListeners("volume", [options.volume]);
-			if (isKK()) notifyListeners("kkStart");
+			if (isKK()) notifyListeners("kkStart", [options.kkVersion]);
 			else {
 				let musicAndWeather = getMusicAndWeather();
 				notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
@@ -75,6 +75,7 @@ function StateManager() {
 			enableNotifications: true,
 			enableKK: true,
 			alwaysKK: false,
+			kkVersion: 'live',
 			paused: false,
 			enableTownTune: true,
 			//enableAutoPause: false,
@@ -95,7 +96,6 @@ function StateManager() {
 			weather: options.weather
 		};
 
-		console.log(options.music)
 		if (options.music === "random") {
 			let games = [
 				'animal-crossing',
@@ -132,7 +132,7 @@ function StateManager() {
 	timeKeeper.registerHourlyCallback((day, hour) => {
 		let wasKK = isKK();
 		isKKTime = day == 6 && hour >= 20;
-		if (isKK() && !wasKK) notifyListeners("kkStart");
+		if (isKK() && !wasKK) notifyListeners("kkStart", [options.kkVersion]);
 		else if (!isKK()) {
 			let musicAndWeather = getMusicAndWeather();
 			notifyListeners("hourMusic", [hour, musicAndWeather.weather, musicAndWeather.music, true]);
@@ -143,6 +143,7 @@ function StateManager() {
 	// of any pertinent changes.
 	chrome.storage.onChanged.addListener(changes => {
 		let wasKK = isKK();
+		let kkVersion = options.kkVersion;
 		let oldMusicAndWeather = getMusicAndWeather();
 		getSyncedOptions(() => {
 			if (typeof changes.zipCode !== 'undefined') weatherManager.setZip(options.zipCode);
@@ -154,7 +155,7 @@ function StateManager() {
 					notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
 			}
 
-			if (isKK() && !wasKK) notifyListeners("kkStart");
+			if ((isKK() && !wasKK) || kkVersion != options.kkVersion) notifyListeners("kkStart", [options.kkVersion]);
 			if (!isKK() && wasKK) {
 				let musicAndWeather = getMusicAndWeather();
 				notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
@@ -171,11 +172,11 @@ function StateManager() {
 			});
 		});
 	});
+	
+	// Make notifyListeners public to allow for easier notification sending.
+	window.notify = notifyListeners;
 
-	// Gives easy access to the notifyListeners function if
-	// we're debugging.
 	if (DEBUG_FLAG) {
-		window.notify = notifyListeners;
 		window.setTime = function (hour, playTownTune) {
 			notifyListeners("hourMusic", [hour, options.weather, options.music, playTownTune]);
 		};

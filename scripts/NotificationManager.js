@@ -24,8 +24,7 @@ function NotificationManager(addEventListener, isEnabled) {
 		isEnabled() && doNotification(`It is now ${formatHour(hour)}m`);
 	});
 
-	addEventListener("kkStart", () => {
-		isEnabled() && doNotification('K.K. Slider has started to play!');
+	addEventListener("kkMusic", title => {
+		isEnabled() && doNotification('K.K. Slider is now playing ' + title);
 	});
-
 }
