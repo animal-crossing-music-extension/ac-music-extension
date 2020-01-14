@@ -3,11 +3,11 @@
 'use strict';
 
 function NotificationManager(addEventListener, isEnabled) {
-	function doNotification (message) {
+	function doNotification(message, icon = 'clock') {
 		chrome.notifications.create('animal-crossing-music', {
 			type: 'basic',
 			title: 'Animal Crossing Music',
-			iconUrl: '../img/clock.png',
+			iconUrl: `../img/${icon}.png`,
 			silent: true,
 			message
 		});
@@ -19,12 +19,12 @@ function NotificationManager(addEventListener, isEnabled) {
 			doNotification(lowerWeather + (lowerWeather !== 'clear' ? 'ing' : ''));
 		}
 	});
-	
+
 	addEventListener("hourMusic", hour => {
 		isEnabled() && doNotification(`It is now ${formatHour(hour)}m`);
 	});
 
 	addEventListener("kkMusic", title => {
-		isEnabled() && doNotification('K.K. Slider is now playing ' + title);
+		isEnabled() && doNotification('K.K. Slider is now playing ' + title, 'icon_128_kk');
 	});
 }
