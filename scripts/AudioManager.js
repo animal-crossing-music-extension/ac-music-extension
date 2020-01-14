@@ -39,7 +39,7 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.loop = true;
 
 		// STANDARD SONG NAME FORMATTING
-		let songName = formatHour(hour) + 'm'; // 'm' cut from 'm.ogg' and put here.
+		let songName = formatHour(hour);
 
 		// EVENT SONG NAME FORMATTING
 		// TODO: Re-enable events.
