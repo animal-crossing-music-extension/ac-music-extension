@@ -21,7 +21,7 @@ function NotificationManager(addEventListener, isEnabled) {
 	});
 
 	addEventListener("hourMusic", hour => {
-		isEnabled() && doNotification(`It is now ${formatHour(hour)}m`);
+		isEnabled() && doNotification(`It is now ${formatHour(hour)}`);
 	});
 
 	addEventListener("kkMusic", title => {
