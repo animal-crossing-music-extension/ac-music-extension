@@ -110,7 +110,9 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.src = `../sound/kk/${version}/${randomSong}.ogg`;
 		audio.play();
 
-		window.notify("kkMusic", [randomSong.split(' - ')[1]]);
+		let formattedTitle = `${randomSong.split(' - ')[1]} (${version.charAt(0).toUpperCase() + version.slice(1)} Version)`;
+		window.notify("kkMusic", [formattedTitle]);
+		mediaSessionManager.updateMetadataKK(formattedTitle, randomSong);
 	}
 
 	// clears the loop point timeout and the fadeout
