@@ -33,6 +33,8 @@ function AudioManager(addEventListener, isTownTune) {
 				});
 			} else playHourSong(game, weather, hour, false);
 		});
+
+		navigator.mediaSession.setActionHandler('nexttrack', null);
 	}
 
 	// Plays a song for an hour, setting up loop times if
@@ -73,6 +75,14 @@ function AudioManager(addEventListener, isTownTune) {
 				};
 			}
 		}
+
+		// If the music is paused via pressing the "close" button in the media session dialogue,
+		// then we gracefully handle it rather than going into an invalid state.
+		audio.onpause = function () {
+			window.notify("pause");
+			chrome.storage.sync.set({ paused: true });
+		}
+
 		audio.play();
 		mediaSessionManager.updateMetadata(game, hour, weather);
 	}
@@ -83,6 +93,8 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.loop = false;
 		audio.addEventListener("ended", playKKSong);
 		fadeOutAudio(500, playKKSong);
+
+		navigator.mediaSession.setActionHandler('nexttrack', playKKSong);
 	}
 
 	function playKKSong() {

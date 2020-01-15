@@ -164,15 +164,21 @@ function StateManager() {
 	});
 
 	// play/pause when user clicks the extension icon
-	chrome.browserAction.onClicked.addListener(function () {
+	chrome.browserAction.onClicked.addListener(toggleMusic);
+
+	// Handle the user interactions in the media session dialogue.
+	navigator.mediaSession.setActionHandler('play', toggleMusic);
+	navigator.mediaSession.setActionHandler('pause', toggleMusic);
+
+	function toggleMusic() {
 		chrome.storage.sync.set({ paused: !options.paused }, function () {
 			getSyncedOptions(() => {
 				if (options.paused) notifyListeners("pause");
 				else self.activate();
 			});
 		});
-	});
-	
+	}
+
 	// Make notifyListeners public to allow for easier notification sending.
 	window.notify = notifyListeners;
 
