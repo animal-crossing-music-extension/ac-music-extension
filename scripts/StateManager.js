@@ -96,7 +96,7 @@ function StateManager() {
 			weather: options.weather
 		};
 
-		if (options.music === "random") {
+		if (options.music === "game-random") {
 			let games = [
 				'animal-crossing',
 				'wild-world',
