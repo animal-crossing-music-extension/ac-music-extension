@@ -15,7 +15,9 @@ function AudioManager(addEventListener, isTownTune) {
 	let killFadeInterval;
 	let townTuneManager = new TownTuneManager();
 	let timeKeeper = new TimeKeeper();
+	let mediaSessionManager = new MediaSessionManager();
 	let kkVersion;
+
 
 	// isHourChange is true if it's an actual hour change,
 	// false if we're activating music in the middle of an hour
@@ -31,6 +33,8 @@ function AudioManager(addEventListener, isTownTune) {
 				});
 			} else playHourSong(game, weather, hour, false);
 		});
+
+		navigator.mediaSession.setActionHandler('nexttrack', null);
 	}
 
 	// Plays a song for an hour, setting up loop times if
@@ -39,7 +43,7 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.loop = true;
 
 		// STANDARD SONG NAME FORMATTING
-		let songName = formatHour(hour) + 'm'; // 'm' cut from 'm.ogg' and put here.
+		let songName = formatHour(hour);
 
 		// EVENT SONG NAME FORMATTING
 		// TODO: Re-enable events.
@@ -71,7 +75,16 @@ function AudioManager(addEventListener, isTownTune) {
 				};
 			}
 		}
+
+		// If the music is paused via pressing the "close" button in the media session dialogue,
+		// then we gracefully handle it rather than going into an invalid state.
+		audio.onpause = function () {
+			window.notify("pause");
+			chrome.storage.sync.set({ paused: true });
+		}
+
 		audio.play();
+		mediaSessionManager.updateMetadata(game, hour, weather);
 	}
 
 	function playKKMusic(_kkVersion) {
@@ -80,6 +93,8 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.loop = false;
 		audio.addEventListener("ended", playKKSong);
 		fadeOutAudio(500, playKKSong);
+
+		navigator.mediaSession.setActionHandler('nexttrack', playKKSong);
 	}
 
 	function playKKSong() {
@@ -95,7 +110,9 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.src = `../sound/kk/${version}/${randomSong}.ogg`;
 		audio.play();
 
-		window.notify("kkMusic", [randomSong.split(' - ')[1]]);
+		let formattedTitle = `${randomSong.split(' - ')[1]} (${version.charAt(0).toUpperCase() + version.slice(1)} Version)`;
+		window.notify("kkMusic", [formattedTitle]);
+		mediaSessionManager.updateMetadataKK(formattedTitle, randomSong);
 	}
 
 	// clears the loop point timeout and the fadeout

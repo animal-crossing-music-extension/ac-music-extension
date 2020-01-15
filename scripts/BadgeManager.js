@@ -5,7 +5,7 @@
 function BadgeManager(addEventListener, isEnabled) {
 	
 	addEventListener("hourMusic", function(hour) {
-		isEnabled() && chrome.browserAction.setBadgeText({ text: `${formatHour(hour)}m` });
+		isEnabled() && chrome.browserAction.setBadgeText({ text: `${formatHour(hour)}` });
 		chrome.browserAction.setIcon({ path: 'img/icon_38_leaf_playing.png' });
 	});
 
