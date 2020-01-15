@@ -91,6 +91,7 @@ function AudioManager(addEventListener, isTownTune) {
 		kkVersion = _kkVersion;
 		clearLoop();
 		audio.loop = false;
+		audio.onplay = null
 		audio.addEventListener("ended", playKKSong);
 		fadeOutAudio(500, playKKSong);
 
@@ -112,6 +113,7 @@ function AudioManager(addEventListener, isTownTune) {
 
 		let formattedTitle = `${randomSong.split(' - ')[1]} (${version.charAt(0).toUpperCase() + version.slice(1)} Version)`;
 		window.notify("kkMusic", [formattedTitle]);
+
 		mediaSessionManager.updateMetadataKK(formattedTitle, randomSong);
 	}
 
