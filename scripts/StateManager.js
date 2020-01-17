@@ -149,7 +149,7 @@ function StateManager() {
 			if (typeof changes.zipCode !== 'undefined') weatherManager.setZip(options.zipCode);
 			if (typeof changes.countryCode !== 'undefined') weatherManager.setCountry(options.countryCode);
 			if (typeof changes.volume !== 'undefined') notifyListeners("volume", [options.volume]);
-			if (typeof changes.music !== 'undefined' || typeof changes.weather && !isKK()) {
+			if ((typeof changes.music !== 'undefined' || typeof changes.weather) && !isKK()) {
 				let musicAndWeather = getMusicAndWeather();
 				if (musicAndWeather.music != oldMusicAndWeather.music || musicAndWeather.weather != oldMusicAndWeather.weather)
 					notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
