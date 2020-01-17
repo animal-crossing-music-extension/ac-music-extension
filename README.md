@@ -35,7 +35,7 @@ With it you can compone your custom Town Tune, which will be played every time a
 Notice that this project remains unpublished right now. You'll soon be able to install it through the Chrome Web Store!
 
 ### Source Code
-You can [download](https://github.com/PikaDude/Animal-Crossing-Music-Extension/archive/develop.zip) the source code of the project and install the unpacked extension yourself.
+You can download the source code of the project and install the unpacked extension yourself. Just click on the `Clone or download` button at the top-right of the page and then on `Download Zip`.
 
 To install the downloaded project, do the following:
 1. Unzip the downloaded file
