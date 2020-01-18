@@ -1,0 +1,55 @@
+.chrome-bootstrap button+button {
+    margin-left: 5px;
+}
+
+.chrome-bootstrap .help-link {
+    margin-top: 27px;
+}
+
+.chrome-bootstrap .image-container {
+    margin-top: 10px;
+    margin-bottom: 16px;
+}
+
+.chrome-bootstrap .image-container>img {
+    float: left;
+}
+
+.chrome-bootstrap .image-container-text {
+    margin-left: 64px;
+}
+
+.chrome-bootstrap .image-container-text h2 {
+    margin-bottom: 5px;
+    font-size: 1.3em;
+}
+
+#contributors-failed {
+    display: none;
+    color: red;
+}
+
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+.contributor {
+    text-decoration: none !important;
+}
+
+.contributor>p {
+    text-align: center !important;
+    margin: 6px 0 0 0;
+}
+
+.contributor>img {
+    width: 100%;
+}
