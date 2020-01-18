@@ -1,24 +1,24 @@
 {
    "background": {
-      "scripts": [ 
-         "scripts/Utility.js", 
-         "scripts/tune_player.js", 
-         "scripts/TownTuneManager.js", 
-         "scripts/TimeKeeper.js", 
-         "scripts/LoopTimes.js", 
-         "scripts/WeatherManager.js", 
-         "scripts/KKSongs.js",
-         "scripts/AudioManager.js", 
-         "scripts/BadgeManager.js", 
-         "scripts/NotificationManager.js", 
-         "scripts/StateManager.js", 
-         "scripts/MediaSessionManager.js", 
-         "scripts/main.js" 
+      "scripts": [
+         "scripts/background/Utility.js",
+         "scripts/global/tune_player.js",
+         "scripts/background/TownTuneManager.js",
+         "scripts/background/TimeKeeper.js",
+         "scripts/background/LoopTimes.js",
+         "scripts/background/WeatherManager.js",
+         "scripts/background/KKSongs.js",
+         "scripts/background/AudioManager.js",
+         "scripts/background/BadgeManager.js",
+         "scripts/background/NotificationManager.js",
+         "scripts/background/StateManager.js",
+         "scripts/background/MediaSessionManager.js",
+         "scripts/background/main.js"
       ]
    },
    "browser_action": {
       "default_icon": {
-		  "38": "img/icon_38_leaf_paused.png"
+         "38": "img/icon_38_leaf_paused.png"
       },
       "default_title": "Animal Crossing Music"
    },
@@ -30,11 +30,15 @@
    "manifest_version": 2,
    "name": "Animal Crossing Music",
    "options_page": "options.html",
-   "permissions": [ 
-		"notifications", 
-		"storage", 
-		"http://api.openweathermap.org/" ],
+   "permissions": [
+      "notifications",
+      "storage",
+      "http://api.openweathermap.org/"
+   ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "3.4",
-   "web_accessible_resources": [ "img/clock.png", "sound/bells.ogg" ]
+   "web_accessible_resources": [
+      "img/clock.png",
+      "sound/bells.ogg"
+   ]
 }
