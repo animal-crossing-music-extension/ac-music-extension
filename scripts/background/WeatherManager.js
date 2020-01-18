@@ -9,6 +9,7 @@ function WeatherManager(zip, country) {
 	var callback;
 
 	var weather;
+	var checked = false;
 
 	var weatherRain = ['Thunderstorm', 'Drizzle', 'Rain', 'Mist'];
  	var weatherSnow = ['Snow', 'Fog'];
@@ -28,6 +29,8 @@ function WeatherManager(zip, country) {
 	};
 
 	this.getWeather = function() {
+		if (!checked) return "Unknown";
+
 		if(~weatherRain.indexOf(weather)) {
 			return "Rain";
 		} else if(~weatherSnow.indexOf(weather)) {
@@ -54,6 +57,7 @@ function WeatherManager(zip, country) {
 	 
 	 	request.onreadystatechange = function() {
  			if(request.readyState == 4 && request.status == 200) {
+				checked = true;
  				var response = JSON.parse(request.responseText);
  				if( response.cod == "200" && response.weather[0].main !== weather) {
 					var oldWeather = self.getWeather();
