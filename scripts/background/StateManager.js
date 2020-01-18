@@ -151,8 +151,13 @@ function StateManager() {
 			if (typeof changes.volume !== 'undefined') notifyListeners("volume", [options.volume]);
 			if ((typeof changes.music !== 'undefined' || typeof changes.weather) && !isKK()) {
 				let musicAndWeather = getMusicAndWeather();
-				if (musicAndWeather.music != oldMusicAndWeather.music || musicAndWeather.weather != oldMusicAndWeather.weather)
+				if (musicAndWeather.music != oldMusicAndWeather.music) notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
+				else if (musicAndWeather.weather != oldMusicAndWeather.weather) {
+					// Sends a weatherChange event first to allow for the weather notification change.
+					// Follows up with a gameChange event to update the music playing.
+					notifyListeners("weatherChange", [musicAndWeather.weather]);
 					notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
+				}
 			}
 
 			if ((isKK() && !wasKK) || (kkVersion != options.kkVersion && isKK())) notifyListeners("kkStart", [options.kkVersion]);
