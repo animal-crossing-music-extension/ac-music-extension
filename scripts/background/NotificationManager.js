@@ -21,6 +21,10 @@ function NotificationManager(addEventListener, isEnabled) {
 		isEnabled() && doNotification(`It is now ${formatHour(hour)} and ${weather}`);
 	});
 
+	addEventListener("gameChange", (hour, weather) => {
+		isEnabled() && doNotification(`It is now ${formatHour(hour)} and ${weather}`);
+	});
+
 	addEventListener("kkMusic", title => {
 		isEnabled() && doNotification('K.K. Slider is now playing ' + title, 'icon_128_kk');
 	});

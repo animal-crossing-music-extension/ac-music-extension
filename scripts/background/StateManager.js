@@ -31,7 +31,7 @@ function StateManager() {
 				weatherManager.registerChangeCallback(function () {
 					if (!isKK() && isLive()) {
 						let musicAndWeather = getMusicAndWeather();
-						notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
+						notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
 					}
 				});
 			}
@@ -41,7 +41,7 @@ function StateManager() {
 			else {
 				let musicAndWeather = getMusicAndWeather();
 				if (musicAndWeather.weather == "unknown") return;
-				notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
+				notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
 			}
 		});
 	};
