@@ -31,6 +31,7 @@ function MediaSessionManager() {
 
 		// We try getting our artwork. If we succeed, then we add it to the metadata.
 		// If we try to pass a null or blank artwork src, then it throws an error.
+		// Also, K.K. albumn art is only available in 128x128px
 		let artworkSrc = await toDataURL(fileName, true);
 		if (artworkSrc) {
 			metadata.artwork = [
