@@ -31,7 +31,7 @@ function StateManager() {
 				weatherManager.registerChangeCallback(function () {
 					if (!isKK() && isLive()) {
 						let musicAndWeather = getMusicAndWeather();
-						notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
+						notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
 					}
 				});
 			}
