@@ -70,11 +70,7 @@ Contributions to the project are **greatly** appreciated! Here is how you can he
 If you want to report a bug, or have a feature request/proposal for improvement, feel free to open a public [issue](https://github.com/PikaDude/Animal-Crossing-Music-Extension/issues) on the project repository.
 
 ### PR Submission
-[PRs](https://github.com/PikaDude/Animal-Crossing-Music-Extension/pulls) are equally welcomed. Just make sure to:
-
-* Any changes you introduce **do not** break the project in any way
-* You have mentioned any relevant issue in its description
-* You choose `develop` as base branch
+[Pull Requests](https://github.com/PikaDude/Animal-Crossing-Music-Extension/pulls) are equally welcomed. Just make sure to submit them to `develop` and give some love to the PR description!
 
 
 ## Credit
