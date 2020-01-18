@@ -25,6 +25,6 @@ function NotificationManager(addEventListener, isEnabled) {
 	});
 
 	addEventListener("kkMusic", title => {
-		isEnabled() && doNotification('K.K. Slider is now playing ' + title, 'icon_128_kk');
+		isEnabled() && doNotification('K.K. Slider is now playing ' + title, 'kk');
 	});
 }
