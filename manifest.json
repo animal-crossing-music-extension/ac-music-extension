@@ -19,22 +19,16 @@
    "browser_action": {
       "default_icon": {
          "128": "img/icons/status/paused/128.png",
-         "96": "img/icons/status/paused/96.png",
          "64": "img/icons/status/paused/64.png",
-         "48": "img/icons/status/paused/48.png",
-         "32": "img/icons/status/paused/32.png",
-         "16": "img/icons/status/paused/16.png"
+         "32": "img/icons/status/paused/32.png"
       },
       "default_title": "Animal Crossing Music"
    },
    "description": "Play Animal Crossing's smooth background music in real-time throughout your day.",
    "icons": {
       "128": "img/icons/icon/128.png",
-      "96": "img/icons/icon/96.png",
       "64": "img/icons/icon/64.png",
-      "48": "img/icons/icon/48.png",
-      "32": "img/icons/icon/32.png",
-      "16": "img/icons/icon/16.png"
+      "32": "img/icons/icon/32.png"
    },
    "manifest_version": 2,
    "name": "Animal Crossing Music",

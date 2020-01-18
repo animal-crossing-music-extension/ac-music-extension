@@ -13,11 +13,8 @@ function BadgeManager(addEventListener, isEnabled) {
 		chrome.browserAction.setIcon({
 			path: {
 				128: `img/icons/kk/128.png`,
-				96: `img/icons/kk/96.png`,
 				64: `img/icons/kk/64.png`,
-				48: `img/icons/kk/48.png`,
 				32: `img/icons/kk/32.png`,
-				16: `img/icons/kk/16.png`
 			}
 		});
 	});
@@ -39,11 +36,8 @@ function BadgeManager(addEventListener, isEnabled) {
 		chrome.browserAction.setIcon({
 			path: {
 				128: `img/icons/status/${weather}/128.png`,
-				96: `img/icons/status/${weather}/96.png`,
 				64: `img/icons/status/${weather}/64.png`,
-				48: `img/icons/status/${weather}/48.png`,
 				32: `img/icons/status/${weather}/32.png`,
-				16: `img/icons/status/${weather}/16.png`
 			}
 		});
 	}
