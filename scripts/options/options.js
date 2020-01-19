@@ -124,6 +124,7 @@ function restoreOptions() {
 }
 
 function validateWeather() {
+	let updateLocationEl = document.getElementById('update-location');
 	updateLocationEl.textContent = "Validating...";
 	updateLocationEl.disabled = true;
 
