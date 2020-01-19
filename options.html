@@ -1,20 +1,25 @@
 <!doctype html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<title>AC Music Revived - Options</title>
 	<link rel="stylesheet" href="css/chrome-bootstrap.css">
 	<link rel="stylesheet" href="css/input.css">
+	<link rel="stylesheet" href="css/options.css">
 	<script src="scripts/options/zepto.min.js"></script>
 	<script src="scripts/options/navigation.js"></script>
 	<script src="scripts/global/tune_player.js"></script>
 	<script src="scripts/options/tune_editor.js"></script>
+	<script src="scripts/options/options.js"></script>
+	<script src="scripts/options/contributors.js"></script>
 	<style>
 		.chrome-bootstrap .frame .view {
 			-webkit-margin-start: 180px;
 		}
 	</style>
 </head>
+
 <body class="chrome-bootstrap">
 	<div class="frame">
 		<div class="navigation">
@@ -90,7 +95,8 @@
 							<input id="no-kk" name="enable-kk" type="radio"><label for="no-kk"><span><span></span></span>Do not play K.K. Slider songs</label>
 						</div>
 						<div class="radio">
-							<input id="enable-kk" name="enable-kk" type="radio"><label for="enable-kk"><span><span></span></span>Play K.K. Slider songs on Saturdays from 8pm&ndash;12am</label>
+							<input id="enable-kk" name="enable-kk" type="radio"><label for="enable-kk"><span><span></span></span>Play K.K. Slider songs on Saturdays from
+								8pm&ndash;12am</label>
 						</div>
 						<div class="radio">
 							<input id="always-kk" name="enable-kk" type="radio"><label for="always-kk"><span><span></span></span>Play K.K. Slider songs at all times</label>
@@ -128,11 +134,12 @@
 					<section>
 						<h3>Live Weather Location</h3>
 						<div class="text">
-								<input type="text" id="zip-code" aria-label="Zip Code" value="98052" placeholder="Zip Code">
-								<input type="text" id="country-code" aria-label="Country Code" value="US" placeholder="Country Code">
-								<button type="button" id="update-location">Update Location</button>
-								<label>(First box is <a href="http://www.geonames.org/postal-codes/" target="_blank">zip code</a>, second is <a href = "https://countrycode.org/" target="_blank">country code</a>)</label>
-								<p id="weather-response"></p>
+							<input type="text" id="zip-code" aria-label="Zip Code" value="98052" placeholder="Zip Code">
+							<input type="text" id="country-code" aria-label="Country Code" value="US" placeholder="Country Code">
+							<button type="button" id="update-location">Update Location</button>
+							<label>(First box is <a href="http://www.geonames.org/postal-codes/" target="_blank">zip code</a>, second is <a href="https://countrycode.org/"
+									target="_blank">country code</a>)</label>
+							<p id="weather-response"></p>
 						</div>
 					</section>
 
@@ -173,43 +180,36 @@
 
 				<div class="content">
 					<div class="image-container">
-						<img src="img/icons/icon/128.png" width="32" height="32">
+						<img src="img/icons/icon/128.png" width="48" height="48">
 						<div class="image-container-text">
 							<h2>Animal Crossing Music</h2>
 							<span>Play Animal Crossing's smooth background music in real-time throughout your day.</span>
+							<br />
+							<span id="version-number"></span>
 						</div>
 					</div>
 
 					<div>
-						<button id="get-help" role="link" href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/support">Get help with using this extension</button>
-						<button id="report-an-issue" role="link" href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop/support">Report an issue</button>
-						<button id="help-us-out" role="link" href="https://github.com/JdotCarver/Animal-Crossing-Music-Extension/">Help us make the best AC extension ever!</button>
+						<a target="_blank" href="https://discord.gg/4FMrEF8"><button role="link">Join our Discord Server to get help using this extension</button></a>
+						<a target="_blank" href="https://github.com/PikaDude/ac-music-extension-revived/issues"><button role="link">Report an issue</button></a>
+						<a target="_blank" href="https://github.com/PikaDude/ac-music-extension-revived"><button role="link">GitHub Repository</button></a>
 					</div>
 
-					<div id="version-container">Version 3.0</div>
-
-					<div id="product-container">
-						<p>Animal Crossing Music</p>
-						<p>Actual developers:</p>
-						<p>Jack Carver</p>
-						<p>Brandon Anderson</p>
-						<p>Matt Jardine</p>
-						<p>Hyarwen</p>
-						<p>Kyle Owsen</p>
-						<p>Jesse Lieberg</p>
-						<p>Harold Houchin</p>
-						<p>Mherndon6</p>
-						<p>Antonio Luis Roman-Naranjo Varela</p>
-						<p>Extension originally created and maintained by Andrex from NeoGAF</p>
-						<p>Extension improved by blazescorch2</p>
-						<p>Idea for extension taken from <a href="http://tane.us/ac/">tane.us</a>.</p>
-						<p>This option page uses <a href="https://github.com/roykolak/chrome-bootstrap">Chrome Bootstrap</a> by Roy Kolak under the MIT License.</p>
-					</div>
+					<br />
+					<h3>Contributors</h3>
+					<p id="contributors-failed">Failed to load contributors :(</p>
+					<table>
+						<tbody id="contributors-table"></tbody>
+					</table>
+					<br />
+					<p>Extension originally created and maintained by Andrex from NeoGAF.</p>
+					<p>Extension improved by blazescorch2.</p>
+					<p>Idea for extension taken from <a href="http://tane.us/ac/">tane.us</a>.</p>
+					<p>This options page uses <a href="https://github.com/roykolak/chrome-bootstrap">Chrome Bootstrap</a> by Roy Kolak under the MIT License.</p>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<script src="scripts/options/options.js"></script>
 </body>
+
 </html>

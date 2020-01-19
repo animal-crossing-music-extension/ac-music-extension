@@ -1,5 +1,40 @@
 'use strict';
 
+const onClickElements = [
+	'animal-crossing',
+	'wild-world',
+	'new-leaf',
+	'game-random',
+	'sunny',
+	'snowing',
+	'raining',
+	'live',
+	'weather-random',
+	'no-kk',
+	'enable-kk',
+	'always-kk',
+	'enable-town-tune',
+	'enable-notifications',
+	'enable-badge',
+	'kk-version-live',
+	'kk-version-aircheck',
+	'kk-version-both'
+];
+
+window.onload = function () {
+	restoreOptions();
+
+	document.getElementById('version-number').textContent = 'Version ' + chrome.runtime.getManifest().version;
+
+	document.getElementById('volume').oninput = saveOptions;
+	onClickElements.forEach(el => {
+		document.getElementById(el).onclick = saveOptions;
+	});
+	document.getElementById('update-location').onclick = validateWeather;
+
+	updateContributors();
+}
+
 function saveOptions() {
 	let volume = document.getElementById('volume').value;
 	let enableNotifications = document.getElementById('enable-notifications').checked;
@@ -88,37 +123,8 @@ function restoreOptions() {
 	});
 }
 
-document.addEventListener('DOMContentLoaded', restoreOptions);
-
-const onClickElements = [
-	'animal-crossing',
-	'wild-world',
-	'new-leaf',
-	'game-random',
-	'sunny',
-	'snowing',
-	'raining',
-	'live',
-	'weather-random',
-	'no-kk',
-	'enable-kk',
-	'always-kk',
-	'enable-town-tune',
-	'enable-notifications',
-	'enable-badge',
-	'kk-version-live',
-	'kk-version-aircheck',
-	'kk-version-both'
-];
-
-document.getElementById('volume').oninput = saveOptions;
-
-onClickElements.forEach(el => {
-	document.getElementById(el).onclick = saveOptions;
-});
-
-let updateLocationEl = document.getElementById('update-location');
-updateLocationEl.onclick = function () {
+function validateWeather() {
+	let updateLocationEl = document.getElementById('update-location');
 	updateLocationEl.textContent = "Validating...";
 	updateLocationEl.disabled = true;
 
@@ -165,17 +171,6 @@ updateLocationEl.onclick = function () {
 		weatherResponseEl.textContent = message;
 
 		updateLocationEl.textContent = "Update Location";
-		updateLocationEl.disabled = false;	
+		updateLocationEl.disabled = false;
 	}
 }
-
-// About/Help
-document.getElementById('get-help').onclick = function () {
-	window.open('https://github.com/PikaDude/ac-music-extension-revived/issues');
-};
-document.getElementById('report-an-issue').onclick = function () {
-	window.open('https://github.com/PikaDude/ac-music-extension-revived/issues');
-};
-document.getElementById('help-us-out').onclick = function () {
-	window.open('https://github.com/PikaDude/ac-music-extension-revived');
-};
