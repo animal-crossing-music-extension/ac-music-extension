@@ -60,7 +60,7 @@ function MediaSessionManager() {
 				// Prevent potential infinite loops.
 				if (name == 'kk') resolve('');
 
-				if (kk) resolve(`https://ac.pikadude.me/kk/art/${name}.png`);
+				if (kk) resolve(`https://ac.pikadude.me/static/kk/art/${name}.png`);
 				else resolve(await toDataURL('kk'));
 			}
 		});
