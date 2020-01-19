@@ -13,7 +13,7 @@ function NotificationManager(addEventListener, isEnabled) {
 		});
 	}
 
-	addEventListener("weatherChange", weather => {
+	addEventListener("weatherChange", (hour, weather) => {
 		isEnabled() && doNotification("It is now " + weather.toLowerCase());
 	});
 

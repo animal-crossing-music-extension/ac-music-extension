@@ -24,11 +24,9 @@ function BadgeManager(addEventListener, isEnabled) {
 		setIcon('paused');
 	});
 
-	addEventListener("gameChange", (hour, weather) => {
-		setIcon(weather);
-	});
+	addEventListener("gameChange", (hour, weather) => setIcon(weather));
 
-	addEventListener("weatherChange", setIcon);
+	addEventListener("weatherChange", (hour, weather) => setIcon(weather));
 
 	chrome.browserAction.setBadgeBackgroundColor({ color: [57, 230, 0, 255] });
 
