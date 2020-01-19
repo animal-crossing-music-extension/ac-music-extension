@@ -31,8 +31,7 @@ function StateManager() {
 				weatherManager.registerChangeCallback(function () {
 					if (!isKK() && isLive()) {
 						let musicAndWeather = getMusicAndWeather();
-						notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
-						notifyListeners("weatherChange", [musicAndWeather.weather]);
+						notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
 					}
 				});
 			}
@@ -41,6 +40,7 @@ function StateManager() {
 			if (isKK()) notifyListeners("kkStart", [options.kkVersion]);
 			else {
 				let musicAndWeather = getMusicAndWeather();
+				if (musicAndWeather.weather == "unknown") return;
 				notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
 			}
 		});
@@ -107,7 +107,8 @@ function StateManager() {
 		}
 
 		if (isLive()) {
-			if (weatherManager.getWeather() == "Rain") data.weather = 'raining';
+			if (weatherManager.getWeather() == "Unknown") data.weather = 'unknown';
+			else if (weatherManager.getWeather() == "Rain") data.weather = 'raining';
 			else if (weatherManager.getWeather() == "Snow") data.weather = 'snowing';
 			else data.weather = "sunny";
 		} else if (options.weather == 'weather-random') {

@@ -14,14 +14,11 @@ function NotificationManager(addEventListener, isEnabled) {
 	}
 
 	addEventListener("weatherChange", weather => {
-		if (isEnabled()) {
-			let lowerWeather = weather.toLowerCase();
-			doNotification(lowerWeather + (lowerWeather !== 'clear' ? 'ing' : ''));
-		}
+		isEnabled() && doNotification("It is now " + weather.toLowerCase());
 	});
 
-	addEventListener("hourMusic", hour => {
-		isEnabled() && doNotification(`It is now ${formatHour(hour)}`);
+	addEventListener("hourMusic", (hour, weather) => {
+		isEnabled() && doNotification(`It is now ${formatHour(hour)} and ${weather}`);
 	});
 
 	addEventListener("kkMusic", title => {
