@@ -21,7 +21,7 @@ Listen to the corresponding hourly music from the main Animal Crossing titles:
 You can enable Weather Detection so weather variants of the hourly music can be automatically picked according to the weather in your location!
 
 ### K.K. Slider 🎙
-Listen to the mitic K.K. Slider songs! The extension features both 'live' and 'aircheck' version of his tunes.
+Listen to K.K. Slider's songs! The extension features both 'live' and 'aircheck' version of his tunes.
 
 You can choose whether to keep his appearances to the usual Saturday nights, or to play his songs 24/7.
 
