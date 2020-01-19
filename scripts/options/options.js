@@ -151,10 +151,8 @@ function validateWeather() {
 			return;
 		}
 
-		if (request.status == 200) {
-			responseMessage(`Success! The current weather status in ${response.city}, ${response.country} is "${response.weather}"`, true);
-			saveOptions();
-		} else {
+		if (request.status == 200) responseMessage(`Success! The current weather status in ${response.city}, ${response.country} is "${response.weather}"`, true);
+		else {
 			if (response.error) responseMessage(response.error);
 			else responseMessage();
 		}
