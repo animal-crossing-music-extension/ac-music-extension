@@ -166,8 +166,10 @@ function validateWeather() {
 
 	function responseMessage(message = 'An unknown error occurred', success = false) {
 		let weatherResponseEl = document.getElementById('weather-response');
-		if (success == true) weatherResponseEl.style.color = "#39d462";
-		else weatherResponseEl.style.color = "#d43939";
+		if (success == true) {
+			weatherResponseEl.style.color = "#39d462";
+			saveOptions();
+		} else weatherResponseEl.style.color = "#d43939";
 		weatherResponseEl.textContent = message;
 
 		updateLocationEl.textContent = "Update Location";
