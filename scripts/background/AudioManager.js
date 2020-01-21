@@ -26,7 +26,6 @@ function AudioManager(addEventListener, isTownTune) {
 	// isHourChange is true if it's an actual hour change,
 	// false if we're activating music in the middle of an hour
 	function playHourlyMusic(hour, weather, game, isHourChange) {
-		hour = 9;
 		clearLoop();
 		audio.loop = true;
 		audio.removeEventListener("ended", playKKSong);
