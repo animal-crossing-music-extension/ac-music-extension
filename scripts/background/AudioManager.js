@@ -10,6 +10,10 @@ function AudioManager(addEventListener, isTownTune) {
 	// Should also be used for disabling event music for those who have turned them off in the settings, then this  should be false.
 	let eventsEnabled = false;
 
+	// If enabled, after 3 seconds, the song will skim to three seconds before
+	// the end of the loop time, to easily and quickly test loops.
+	let debugLoopTimes = false;
+
 	let audio = document.createElement('audio');
 	let killLoopTimeout;
 	let killFadeInterval;
@@ -22,6 +26,7 @@ function AudioManager(addEventListener, isTownTune) {
 	// isHourChange is true if it's an actual hour change,
 	// false if we're activating music in the middle of an hour
 	function playHourlyMusic(hour, weather, game, isHourChange) {
+		hour = 9;
 		clearLoop();
 		audio.loop = true;
 		audio.removeEventListener("ended", playKKSong);
@@ -55,35 +60,54 @@ function AudioManager(addEventListener, isTownTune) {
 		// SETTING AUDIO SOURCE		
 		audio.src = `https://ac.pikadude.me/static/${game}/${weather}/${songName}.ogg`;
 
-		let loopTime = (loopTimes[game] || {})[hour];
-		// set up loop points if loopTime is set up for this
-		// game and hour
-		if (loopTime) {
-			let delayToLoop = loopTime.end;
-			if (skipIntro) {
-				audio.currentTime = loopTime.start;
-				delayToLoop -= loopTime.start;
-			}
-			audio.onplay = function () {
-				let loopTimeout = setTimeout(() => {
-					printDebug("looping");
-					playHourSong(game, weather, hour, true);
-				}, delayToLoop * 1000);
-				killLoopTimeout = function () {
-					clearTimeout(loopTimeout);
-					loopTimeout = null;
-				};
-			}
+		let loopTime = ((loopTimes[game] || {})[weather] || {})[hour];
+		let delayToLoop = loopTime.end;
+
+		if (loopTime && skipIntro) {
+			audio.currentTime = loopTime.start;
+			delayToLoop -= loopTime.start;
 		}
 
 		// If the music is paused via pressing the "close" button in the media session dialogue,
 		// then we gracefully handle it rather than going into an invalid state.
 		audio.onpause = function () {
 			window.notify("pause");
+
+			if (killLoopTimeout) killLoopTimeout();
+
 			chrome.storage.sync.set({ paused: true });
 		}
 
-		audio.play();
+		audio.play().then(setLoopTimes);
+
+		function setLoopTimes() {
+			printDebug("setting loop times");
+			// set up loop points if loopTime is set up for this
+			// game, hour and weather.
+			if (loopTime) {
+				if (debugLoopTimes) {
+					delayToLoop = 8;
+					setTimeout(() => {
+						printDebug("skimming");
+						audio.currentTime = loopTime.end - 5;
+					}, 3000);
+				}
+
+				let loopTimeout = setTimeout(() => {
+					printDebug("looping");
+					audio.currentTime = loopTime.start;
+
+					delayToLoop = loopTime.end - loopTime.start;
+					setLoopTimes();
+				}, delayToLoop * 1000);
+				killLoopTimeout = () => {
+					printDebug("killing loop timeout");
+					clearTimeout(loopTimeout);
+					loopTimeout = null;
+				};
+			}
+		}
+
 		mediaSessionManager.updateMetadata(game, hour, weather);
 	}
 
