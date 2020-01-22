@@ -36,7 +36,7 @@
    "permissions": [
       "notifications",
       "storage",
-      "http://api.openweathermap.org/"
+      "https://ac.pikadude.me/"
    ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "4.0.0"

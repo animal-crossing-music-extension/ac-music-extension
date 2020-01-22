@@ -13,6 +13,7 @@ function StateManager() {
 	let timeKeeper = new TimeKeeper();
 	let weatherManager;
 	let isKKTime;
+	let startup = true;
 
 	this.registerCallback = function (event, callback) {
 		callbacks[event] = callbacks[event] || [];
@@ -28,10 +29,15 @@ function StateManager() {
 		getSyncedOptions(() => {
 			if (!weatherManager) {
 				weatherManager = new WeatherManager(options.zipCode, options.countryCode);
-				weatherManager.registerChangeCallback(function () {
+				weatherManager.registerChangeCallback(() => {
 					if (!isKK() && isLive()) {
 						let musicAndWeather = getMusicAndWeather();
-						notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
+
+						// Sends a different event on startup to get the "hourMusic" desktop notification.
+						if (startup) {
+							notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
+							startup = false;
+						} else notifyListeners("weatherChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
 					}
 				});
 			}
@@ -40,7 +46,7 @@ function StateManager() {
 			if (isKK()) notifyListeners("kkStart", [options.kkVersion]);
 			else {
 				let musicAndWeather = getMusicAndWeather();
-				if (musicAndWeather.weather == "unknown") return;
+				if (!musicAndWeather.weather) return;
 				notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
 			}
 		});
@@ -107,7 +113,7 @@ function StateManager() {
 		}
 
 		if (isLive()) {
-			if (weatherManager.getWeather() == "Unknown") data.weather = 'unknown';
+			if (!weatherManager.getWeather()) data.weather = null;
 			else if (weatherManager.getWeather() == "Rain") data.weather = 'raining';
 			else if (weatherManager.getWeather() == "Snow") data.weather = 'snowing';
 			else data.weather = "sunny";

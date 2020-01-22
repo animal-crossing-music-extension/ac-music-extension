@@ -139,8 +139,7 @@ function validateWeather() {
 		return;
 	}
 
-	let appid = "e7f97bd1900b94491d3263f89cbe28d6";
-	let url = `http://api.openweathermap.org/data/2.5/weather?zip=${zip},${country}&appid=${appid}`;
+	let url = `https://ac.pikadude.me/weather/${country}/${zip}`;
 	let request = new XMLHttpRequest();
 
 	request.onload = function () {
@@ -152,14 +151,14 @@ function validateWeather() {
 			return;
 		}
 
-		if (response.cod == "200") responseMessage(`Success! The current weather status in ${response.name}, ${response.sys.country} is "${response.weather[0].main}"`, true);
+		if (request.status == 200) responseMessage(`Success! The current weather status in ${response.city}, ${response.country} is "${response.weather}"`, true);
 		else {
-			if (response.message) responseMessage(response.message.charAt(0).toUpperCase() + response.message.slice(1));
+			if (response.error) responseMessage(response.error);
 			else responseMessage();
 		}
 	}
 
-	request.onerror = responseMessage;
+	request.onerror = () => responseMessage();
 
 	request.open("GET", url, true);
 	request.send();
