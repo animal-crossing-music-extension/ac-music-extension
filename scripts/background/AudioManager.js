@@ -12,7 +12,7 @@ function AudioManager(addEventListener, isTownTune) {
 
 	// If enabled, after 3 seconds, the song will skim to three seconds before
 	// the end of the loop time, to easily and quickly test loops.
-	let debugLoopTimes = false;
+	let debugLoopTimes = true;
 
 	let audio = document.createElement('audio');
 	let killLoopTimeout;
@@ -26,6 +26,8 @@ function AudioManager(addEventListener, isTownTune) {
 	// isHourChange is true if it's an actual hour change,
 	// false if we're activating music in the middle of an hour
 	function playHourlyMusic(hour, weather, game, isHourChange) {
+		//hour = Object.keys(Object.values(Object.values(loopTimes).pop()).pop()).pop();
+		hour = 23;
 		clearLoop();
 		audio.loop = true;
 		audio.removeEventListener("ended", playKKSong);
