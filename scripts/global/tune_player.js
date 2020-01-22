@@ -181,7 +181,7 @@ var createTunePlayer = function(audioContext, bpm) {
       },
       done: function(callback) {
         //when the tune over
-        setTimeout(callback, stepDuration * tune.length * 1000);
+        if (callback) setTimeout(callback, stepDuration * tune.length * 1000);
         return callbacks;
       }
     };
