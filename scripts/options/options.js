@@ -21,6 +21,11 @@ const onClickElements = [
 	'kk-version-both'
 ];
 
+const exclamationElements = [
+	'live-weather-location-link',
+	'town-tune-button-link'
+]
+
 window.onload = function () {
 	restoreOptions();
 
@@ -31,6 +36,14 @@ window.onload = function () {
 		document.getElementById(el).onclick = saveOptions;
 	});
 	document.getElementById('update-location').onclick = validateWeather;
+
+	exclamationElements.forEach(el => {
+		document.getElementById(el).onclick = () => {
+			let element = document.getElementById(el.split('-link')[0]);
+			element.style.animation = 'scrolled 1s';
+			element.onanimationend = () => element.style.animation = null;
+		}
+	});
 
 	updateContributors();
 }
