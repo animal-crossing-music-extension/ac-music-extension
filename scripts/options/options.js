@@ -67,6 +67,7 @@ function saveOptions() {
 	else if (document.getElementById('kk-version-both').checked) kkVersion = 'both';
 
 	document.getElementById('raining').disabled = music == 'animal-crossing';
+	document.getElementById('absolute-town-tune').disabled = !enableTownTune;
 
 	let enabledKKVersion = !(document.getElementById('always-kk').checked || document.getElementById('enable-kk').checked);
 	document.getElementById('kk-version-live').disabled = enabledKKVersion;
@@ -120,6 +121,7 @@ function restoreOptions() {
 
 		// Disable raining if the game is animal crossing, since there is no raining music for animal crossing.
 		document.getElementById('raining').disabled = items.music == 'animal-crossing';
+		document.getElementById('absolute-town-tune').disabled = !items.enableTownTune;
 
 		let enabledKKVersion = !(document.getElementById('always-kk').checked || document.getElementById('enable-kk').checked);
 		document.getElementById('kk-version-live').disabled = enabledKKVersion;
