@@ -548,7 +548,7 @@
 
   background-image: -webkit-image-set(url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAICAYAAAAbQcSUAAAAAXNSR0IArs4c6QAAAAd0SU1FB9sLAxYEBKriBmwAAAAGYktHRAD/AP8A/6C9p5MAAAAJcEhZcwAACxMAAAsTAQCanBgAAABLSURBVCiRY2CgA4gC4jQ8OIpokxKBoKGh4T8uDJIn2rD///8rLFiwYCE2g0DiIHkSfIndQLIMwmYgRQYhG/j27dsmig1CMpCVGHUAo8FcsHfxfXQAAAAASUVORK5CYII=") 1 x), -webkit-linear-gradient(#f1f1f1, #f1f1f1 38%, #e6e6e6);
 }
-.chrome-bootstrap input[type='checkbox']:disabled,
+.chrome-bootstrap input[type='checkbox']:disabled + label,
 .chrome-bootstrap input[type='radio']:disabled + label {
   opacity: .5;
 }

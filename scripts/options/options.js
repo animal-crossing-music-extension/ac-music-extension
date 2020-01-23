@@ -14,6 +14,7 @@ const onClickElements = [
 	'enable-kk',
 	'always-kk',
 	'enable-town-tune',
+	'absolute-town-tune',
 	'enable-notifications',
 	'enable-badge',
 	'kk-version-live',
@@ -55,6 +56,7 @@ function saveOptions() {
 	let alwaysKK = document.getElementById('always-kk').checked;
 	let enableKK = alwaysKK || document.getElementById('enable-kk').checked;
 	let enableTownTune = document.getElementById('enable-town-tune').checked;
+	let absoluteTownTune = document.getElementById('absolute-town-tune').checked;
 	let zipCode = document.getElementById('zip-code').value;
 	let countryCode = document.getElementById('country-code').value;
 	let enableBadgeText = document.getElementById('enable-badge').checked;
@@ -78,6 +80,7 @@ function saveOptions() {
 	else if (document.getElementById('kk-version-both').checked) kkVersion = 'both';
 
 	document.getElementById('raining').disabled = music == 'animal-crossing';
+	document.getElementById('absolute-town-tune').disabled = !enableTownTune;
 
 	let enabledKKVersion = !(document.getElementById('always-kk').checked || document.getElementById('enable-kk').checked);
 	document.getElementById('kk-version-live').disabled = enabledKKVersion;
@@ -93,6 +96,7 @@ function saveOptions() {
 		alwaysKK,
 		kkVersion,
 		enableTownTune,
+		absoluteTownTune,
 		zipCode,
 		countryCode,
 		enableBadgeText
@@ -109,6 +113,7 @@ function restoreOptions() {
 		alwaysKK: false,
 		kkVersion: 'live',
 		enableTownTune: true,
+		absoluteTownTune: false,
 		zipCode: "98052",
 		countryCode: "us",
 		enableBadgeText: true
@@ -122,12 +127,14 @@ function restoreOptions() {
 		document.getElementById('always-kk').checked = items.alwaysKK;
 		document.getElementById('kk-version-' + items.kkVersion).checked = true;
 		document.getElementById('enable-town-tune').checked = items.enableTownTune;
+		document.getElementById('absolute-town-tune').checked = items.absoluteTownTune;
 		document.getElementById('zip-code').value = items.zipCode;
 		document.getElementById('country-code').value = items.countryCode;
 		document.getElementById('enable-badge').checked = items.enableBadgeText;
 
 		// Disable raining if the game is animal crossing, since there is no raining music for animal crossing.
 		document.getElementById('raining').disabled = items.music == 'animal-crossing';
+		document.getElementById('absolute-town-tune').disabled = !items.enableTownTune;
 
 		let enabledKKVersion = !(document.getElementById('always-kk').checked || document.getElementById('enable-kk').checked);
 		document.getElementById('kk-version-live').disabled = enabledKKVersion;
