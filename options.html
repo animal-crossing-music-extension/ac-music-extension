@@ -146,6 +146,22 @@
 						</div>
 					</section>
 
+					<section>
+						<h3>Tab Audio Behaviour</h3>
+						<p>Control what the extension does while a tab is playing audio</p>
+						<div class="radio" style="height: 21px">
+							<input id="tab-audio-reduce" name="tab-audio" type="radio"><label for="tab-audio-reduce" style="line-height: unset"><span
+									style="vertical-align: middle;"><span></span></span>Reduce the extension's music by <input id="tab-audio-reduce-value" name="tab-audio" type="number"
+									max="100" min="0">%</label>
+						</div>
+						<div class="radio">
+							<input id="tab-audio-pause" name="tab-audio" type="radio"><label for="tab-audio-pause"><span><span></span></span>Pause the extension's music</label>
+						</div>
+						<div class="radio">
+							<input id="tab-audio-nothing" name="tab-audio" type="radio"><label for="tab-audio-nothing"><span><span></span></span>Do nothing</label>
+						</div>
+					</section>
+
 					<section id="live-weather-location">
 						<h3>Live Weather Location</h3>
 						<p>Select the location to fetch the live weather information from. The live weather synchronizes with the extension's music</p>
@@ -225,6 +241,19 @@
 					<p>This options page uses <a href="https://github.com/roykolak/chrome-bootstrap">Chrome Bootstrap</a> by Roy Kolak under the MIT License.</p>
 				</div>
 			</div>
+		</div>
+	</div>
+
+	<div id="tabAudioModal" class="modal">
+		<div class="modal-content">
+			<p class="modal-title">Note!</p>
+			<p>The "Tab Audio Behaviour" option requires additional permissions to function, specifically the "Tabs" permission. Due to a quirk in Chromium, this permission is defined
+				as "Read your browsing history". This permission does NOT give the extension permission to view your actual browsing history, but allows it to see what tabs you currently
+				have open, which we use ONLY to check to see if any tabs are playing audio. If you are okay with that, press "Allow" on the next dialogue.</p>
+			<a target="_blank" href="https://developer.chrome.com/extensions/permission_warnings#view_warnings">For more info, refer to the Chrome Developer Docs.</a>
+			<br />
+			<br />
+			<button id="tabAudioModalDismiss">Understood!</button>
 		</div>
 	</div>
 </body>
