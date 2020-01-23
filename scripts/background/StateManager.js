@@ -11,6 +11,8 @@ function StateManager() {
 	let callbacks = {};
 
 	let timeKeeper = new TimeKeeper();
+	let tabAudio = new TabAudioHandler();
+	let townTuneManager = new TownTuneManager();
 	let weatherManager;
 	let isKKTime;
 	let startup = true;
@@ -46,16 +48,17 @@ function StateManager() {
 			if (isKK()) notifyListeners("kkStart", [options.kkVersion]);
 			else {
 				let musicAndWeather = getMusicAndWeather();
-				if (!musicAndWeather.weather) return;
-				notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
+				if (musicAndWeather.weather) notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
 			}
+
+			tabAudio.activate();
 		});
 	};
 
 	// Possible events include:
-	// volume, kkStart, hourMusic, gameChange, weatherChange, pause
+	// volume, kkStart, hourMusic, gameChange, weatherChange, pause, tabAudio
 	function notifyListeners(event, args) {
-		if (!options.paused || event === "pause") {
+		if (!options.paused || event === "pause" || event === "tabAudio") {
 			var callbackArr = callbacks[event] || [];
 			for (var i = 0; i < callbackArr.length; i++) {
 				callbackArr[i].apply(window, args);
@@ -84,10 +87,13 @@ function StateManager() {
 			kkVersion: 'live',
 			paused: false,
 			enableTownTune: true,
+			absoluteTownTune: false,
 			//enableAutoPause: false,
 			zipCode: "98052",
 			countryCode: "us",
-			enableBadgeText: true
+			enableBadgeText: true,
+			tabAudio: 'nothing',
+			tabAudioReduceValue: 80
 		}, items => {
 			options = items;
 			if (typeof callback === 'function') callback();
@@ -143,6 +149,8 @@ function StateManager() {
 		else if (!isKK()) {
 			let musicAndWeather = getMusicAndWeather();
 			notifyListeners("hourMusic", [hour, musicAndWeather.weather, musicAndWeather.music, true]);
+
+			if (options.paused && options.absoluteTownTune) townTuneManager.playTune();
 		}
 	});
 
@@ -152,6 +160,8 @@ function StateManager() {
 		let wasKK = isKK();
 		let kkVersion = options.kkVersion;
 		let oldMusicAndWeather = getMusicAndWeather();
+		let oldTabAudio = this.getOption("tabAudio");
+		let oldTabAudioReduce = this.getOption("tabAudioReduceValue");
 		getSyncedOptions(() => {
 			if (typeof changes.zipCode !== 'undefined') weatherManager.setZip(options.zipCode);
 			if (typeof changes.countryCode !== 'undefined') weatherManager.setCountry(options.countryCode);
@@ -167,11 +177,20 @@ function StateManager() {
 				let musicAndWeather = getMusicAndWeather();
 				notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
 			}
+			if (oldTabAudio != options.tabAudio || oldTabAudioReduce != options.tabAudioReduceValue) notifyListeners("tabAudio", [null, options.tabAudio, options.tabAudioReduceValue])
 		});
 	});
 
 	// play/pause when user clicks the extension icon
 	chrome.browserAction.onClicked.addListener(toggleMusic);
+
+	// update tab audio handler when the user changes the extension's permissions
+	chrome.permissions.onAdded.addListener(tabAudio.activate);
+	chrome.permissions.onRemoved.addListener(tabAudio.activate);
+
+	tabAudio.registerCallback(audible => {
+		notifyListeners("tabAudio", [audible, options.tabAudio, options.tabAudioReduceValue]);
+	});
 
 	// Handle the user interactions in the media session dialogue.
 	navigator.mediaSession.setActionHandler('play', toggleMusic);

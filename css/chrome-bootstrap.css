@@ -124,7 +124,8 @@
 }
 .chrome-bootstrap .frame .view,
 .chrome-bootstrap .frame .content {
-  width: 738px;
+  max-width: 60%;
+  min-width: 600px;
   overflow-x: hidden;
 }
 .chrome-bootstrap .frame .content {
@@ -145,6 +146,7 @@
 .chrome-bootstrap .frame .mainview > * {
   -webkit-margin-start: -20px;
   -webkit-transition: margin 100ms, opacity 100ms;
+  width: 80%;
   opacity: 0;
   z-index: 0;
   position: absolute;
@@ -161,7 +163,8 @@
 .chrome-bootstrap header {
   position: fixed;
   background-image: -webkit-linear-gradient(#ffffff, #ffffff 40%, rgba(255, 255, 255, 0.92));
-  width: 738px;
+  width: 50%;
+  min-width: 600px;
   z-index: 2;
 }
 .chrome-bootstrap header h1 {
@@ -186,7 +189,6 @@
   -webkit-padding-start: 18px;
   margin-bottom: 24px;
   margin-top: 8px;
-  max-width: 600px;
 }
 .chrome-bootstrap section h3 {
   -webkit-margin-start: -18px;
@@ -502,6 +504,7 @@
   min-width: 4em;
 }
 .chrome-bootstrap input[type='text'],
+.chrome-bootstrap input[type='number'],
 .chrome-bootstrap input[type='search'] {
   border: 1px solid #BFBFBF;
   border-radius: 2px;
@@ -523,6 +526,7 @@
 .chrome-bootstrap input[type='radio']:focus,
 .chrome-bootstrap input[type='search']:focus,
 .chrome-bootstrap input[type='text']:focus,
+.chrome-bootstrap input[type='number']:focus,
 .chrome-bootstrap button:focus {
   /* OVERRIDE */
 
@@ -546,12 +550,13 @@
 
   background-image: -webkit-image-set(url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAICAYAAAAbQcSUAAAAAXNSR0IArs4c6QAAAAd0SU1FB9sLAxYEBKriBmwAAAAGYktHRAD/AP8A/6C9p5MAAAAJcEhZcwAACxMAAAsTAQCanBgAAABLSURBVCiRY2CgA4gC4jQ8OIpokxKBoKGh4T8uDJIn2rD///8rLFiwYCE2g0DiIHkSfIndQLIMwmYgRQYhG/j27dsmig1CMpCVGHUAo8FcsHfxfXQAAAAASUVORK5CYII=") 1 x), -webkit-linear-gradient(#f1f1f1, #f1f1f1 38%, #e6e6e6);
 }
-.chrome-bootstrap input[type='checkbox']:disabled,
+.chrome-bootstrap input[type='checkbox']:disabled + label,
 .chrome-bootstrap input[type='radio']:disabled + label {
   opacity: .5;
 }
 .chrome-bootstrap input[type='search']:disabled,
-.chrome-bootstrap input[type='text']:disabled {
+.chrome-bootstrap input[type='text']:disabled,
+.chrome-bootstrap input[type='number']:disabled {
   color: #999;
 }
 .chrome-bootstrap select:hover:enabled,

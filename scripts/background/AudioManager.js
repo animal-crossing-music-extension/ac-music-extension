@@ -18,6 +18,9 @@ function AudioManager(addEventListener, isTownTune) {
 	let mediaSessionManager = new MediaSessionManager();
 	let kkVersion;
 	let hourlyChange = false;
+	let setVolume;
+	let reducedVolume = false;
+	let tabAudioPaused = false;
 
 	// isHourChange is true if it's an actual hour change,
 	// false if we're activating music in the middle of an hour
@@ -76,15 +79,7 @@ function AudioManager(addEventListener, isTownTune) {
 			}
 		}
 
-		// If the music is paused via pressing the "close" button in the media session dialogue,
-		// then we gracefully handle it rather than going into an invalid state.
-		audio.onpause = function () {
-			if (hourlyChange) hourlyChange = false;
-			else {
-				window.notify("pause");
-				chrome.storage.sync.set({ paused: true });
-			}
-		}
+		audio.onpause = onPause;
 
 		audio.play();
 		mediaSessionManager.updateMetadata(game, hour, weather);
@@ -94,7 +89,8 @@ function AudioManager(addEventListener, isTownTune) {
 		kkVersion = _kkVersion;
 		clearLoop();
 		audio.loop = false;
-		audio.onplay = null
+		audio.onplay = null;
+		audio.onpause = onPause;
 		audio.addEventListener("ended", playKKSong);
 		fadeOutAudio(500, playKKSong);
 
@@ -153,6 +149,16 @@ function AudioManager(addEventListener, isTownTune) {
 		}
 	}
 
+	// If the music is paused via pressing the "close" button in the media session dialogue,
+	// then we gracefully handle it rather than going into an invalid state.
+	function onPause() {
+    if (hourlyChange) hourlyChange = false;
+		else {
+		  window.notify("pause", [tabAudioPaused]);
+		  if (!tabAudioPaused) chrome.storage.sync.set({ paused: true });
+    }
+	}
+
 	addEventListener("hourMusic", playHourlyMusic);
 
 	addEventListener("kkStart", playKKMusic);
@@ -168,6 +174,55 @@ function AudioManager(addEventListener, isTownTune) {
 
 	addEventListener("volume", newVol => {
 		audio.volume = newVol;
+		setVolume = newVol;
+	});
+
+	// If a tab starts or stops playing audio
+	addEventListener("tabAudio", (audible, tabAudio, reduceValue) => {
+		if (audible != null) {
+			// Handles all cases except for an options switch.
+			if (tabAudio == 'pause') {
+				if (audible) {
+					if (!audio.paused) {
+						audio.pause();
+						tabAudioPaused = true;
+					}
+				} else {
+					if (audio.paused && audio.readyState >= 3) {
+						audio.play();
+						tabAudioPaused = false;
+						// Get the badge icon updated.
+						window.notify("unpause");
+					}
+				}
+			}
+
+			if (tabAudio == 'reduce') {
+				if (audible) {
+					let newVolume = setVolume * (1 - reduceValue / 100);
+					if (newVolume < 0) newVolume = 0;
+					audio.volume = newVolume;
+					reducedVolume = true;
+				} else {
+					audio.volume = setVolume;
+					reducedVolume = false;
+				}
+			}
+		} else {
+			// Handles when the options are switched. Disables the previous option and enables the new one.
+
+			if (audio.paused && tabAudio != 'pause') {
+				audio.play();
+				tabAudioPaused = false;
+				window.notify("unpause");
+				window.notify("tabAudio", [true, tabAudio, reduceValue]);
+			}
+			if (reducedVolume && tabAudio != 'reduce') {
+				reducedVolume = false;
+				audio.volume = setVolume;
+				window.notify("tabAudio", [true, tabAudio, reduceValue]);
+			}
+		}
 	});
 
 }
