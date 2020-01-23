@@ -18,8 +18,14 @@ const onClickElements = [
 	'enable-badge',
 	'kk-version-live',
 	'kk-version-aircheck',
-	'kk-version-both'
+	'kk-version-both',
+	'tab-audio-nothing'
 ];
+
+const tabAudioElements = [
+	'tab-audio-reduce',
+	'tab-audio-pause'
+]
 
 window.onload = function () {
 	restoreOptions();
@@ -30,7 +36,30 @@ window.onload = function () {
 	onClickElements.forEach(el => {
 		document.getElementById(el).onclick = saveOptions;
 	});
+	tabAudioElements.forEach(el => {
+		document.getElementById(el).onclick = () => {
+			chrome.permissions.contains({ permissions: ['tabs'] }, hasTabs => {
+				if (hasTabs) saveOptions();
+				else {
+					let modal = document.getElementById('tabAudioModal');
+					modal.style.display = 'block';
+
+					document.getElementById('tabAudioModalDismiss').onclick = () => {
+						modal.style.display = "none";
+						chrome.permissions.request({ permissions: ['tabs'] }, hasTabs => {
+							if (hasTabs) saveOptions();
+							else {
+								tabAudioElements.forEach(el => document.getElementById(el).checked = false);
+								document.getElementById('tab-audio-nothing').checked = true;
+							}
+						});
+					};
+				}
+			});
+		}
+	});
 	document.getElementById('update-location').onclick = validateWeather;
+	document.getElementById('tab-audio-reduce-value').onchange = saveOptions;
 
 	updateContributors();
 }
@@ -45,6 +74,16 @@ function saveOptions() {
 	let zipCode = document.getElementById('zip-code').value;
 	let countryCode = document.getElementById('country-code').value;
 	let enableBadgeText = document.getElementById('enable-badge').checked;
+	let tabAudioReduceValue = document.getElementById('tab-audio-reduce-value').value;
+
+	if (tabAudioReduceValue > 100) {
+		document.getElementById('tab-audio-reduce-value').value = 100;
+		tabAudioReduceValue = 100;
+	}
+	if (tabAudioReduceValue < 0) {
+		document.getElementById('tab-audio-reduce-value').value = 0;
+		tabAudioReduceValue = 0;
+	}
 
 	let music;
 	let weather;
@@ -64,6 +103,11 @@ function saveOptions() {
 	else if (document.getElementById('kk-version-aircheck').checked) kkVersion = 'aircheck';
 	else if (document.getElementById('kk-version-both').checked) kkVersion = 'both';
 
+	let tabAudio;
+	if (document.getElementById('tab-audio-reduce').checked) tabAudio = 'reduce';
+	else if (document.getElementById('tab-audio-pause').checked) tabAudio = 'pause';
+	else if (document.getElementById('tab-audio-nothing').checked) tabAudio = 'nothing';
+
 	document.getElementById('raining').disabled = music == 'animal-crossing';
 
 	let enabledKKVersion = !(document.getElementById('always-kk').checked || document.getElementById('enable-kk').checked);
@@ -82,7 +126,9 @@ function saveOptions() {
 		enableTownTune,
 		zipCode,
 		countryCode,
-		enableBadgeText
+		enableBadgeText,
+		tabAudio,
+		tabAudioReduceValue
 	});
 }
 
@@ -98,7 +144,9 @@ function restoreOptions() {
 		enableTownTune: true,
 		zipCode: "98052",
 		countryCode: "us",
-		enableBadgeText: true
+		enableBadgeText: true,
+		tabAudio: 'nothing',
+		tabAudioReduceValue: 80
 	}, items => {
 		document.getElementById('volume').value = items.volume;
 		document.getElementById(items.music).checked = true;
@@ -112,6 +160,8 @@ function restoreOptions() {
 		document.getElementById('zip-code').value = items.zipCode;
 		document.getElementById('country-code').value = items.countryCode;
 		document.getElementById('enable-badge').checked = items.enableBadgeText;
+		document.getElementById('tab-audio-' + items.tabAudio).checked = true;
+		document.getElementById('tab-audio-reduce-value').value = items.tabAudioReduceValue;
 
 		// Disable raining if the game is animal crossing, since there is no raining music for animal crossing.
 		document.getElementById('raining').disabled = items.music == 'animal-crossing';

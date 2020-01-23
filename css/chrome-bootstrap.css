@@ -502,6 +502,7 @@
   min-width: 4em;
 }
 .chrome-bootstrap input[type='text'],
+.chrome-bootstrap input[type='number'],
 .chrome-bootstrap input[type='search'] {
   border: 1px solid #BFBFBF;
   border-radius: 2px;
@@ -523,6 +524,7 @@
 .chrome-bootstrap input[type='radio']:focus,
 .chrome-bootstrap input[type='search']:focus,
 .chrome-bootstrap input[type='text']:focus,
+.chrome-bootstrap input[type='number']:focus,
 .chrome-bootstrap button:focus {
   /* OVERRIDE */
 
@@ -551,7 +553,8 @@
   opacity: .5;
 }
 .chrome-bootstrap input[type='search']:disabled,
-.chrome-bootstrap input[type='text']:disabled {
+.chrome-bootstrap input[type='text']:disabled,
+.chrome-bootstrap input[type='number']:disabled {
   color: #999;
 }
 .chrome-bootstrap select:hover:enabled,
