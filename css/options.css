@@ -92,3 +92,15 @@ h3, h4 {
         background-color: inherit;
     }
 }
+
+.nav-buttons>tbody>tr>td {
+    border: none;
+}
+
+.nav-button {
+    padding: 7px 0 35px 0;
+}
+
+.nav-button>img {
+    width: 100%;
+}
