@@ -124,7 +124,8 @@
 }
 .chrome-bootstrap .frame .view,
 .chrome-bootstrap .frame .content {
-  width: 738px;
+  max-width: 60%;
+  min-width: 600px;
   overflow-x: hidden;
 }
 .chrome-bootstrap .frame .content {
@@ -145,6 +146,7 @@
 .chrome-bootstrap .frame .mainview > * {
   -webkit-margin-start: -20px;
   -webkit-transition: margin 100ms, opacity 100ms;
+  width: 80%;
   opacity: 0;
   z-index: 0;
   position: absolute;
@@ -161,7 +163,8 @@
 .chrome-bootstrap header {
   position: fixed;
   background-image: -webkit-linear-gradient(#ffffff, #ffffff 40%, rgba(255, 255, 255, 0.92));
-  width: 738px;
+  width: 50%;
+  min-width: 600px;
   z-index: 2;
 }
 .chrome-bootstrap header h1 {
@@ -186,7 +189,6 @@
   -webkit-padding-start: 18px;
   margin-bottom: 24px;
   margin-top: 8px;
-  max-width: 600px;
 }
 .chrome-bootstrap section h3 {
   -webkit-margin-start: -18px;
