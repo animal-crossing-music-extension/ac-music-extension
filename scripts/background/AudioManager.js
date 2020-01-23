@@ -183,7 +183,7 @@ function AudioManager(addEventListener, isTownTune) {
 						tabAudioPaused = true;
 					}
 				} else {
-					if (audio.paused) {
+					if (audio.paused && audio.readyState >= 3) {
 						audio.play();
 						tabAudioPaused = false;
 						// Get the badge icon updated.
@@ -210,12 +210,13 @@ function AudioManager(addEventListener, isTownTune) {
 				audio.play();
 				tabAudioPaused = false;
 				window.notify("unpause");
+				window.notify("tabAudio", [true, tabAudio, reduceValue]);
 			}
 			if (reducedVolume && tabAudio != 'reduce') {
 				reducedVolume = false;
 				audio.volume = setVolume;
+				window.notify("tabAudio", [true, tabAudio, reduceValue]);
 			}
-			window.notify("tabAudio", [true, tabAudio, reduceValue]);
 		}
 	});
 
