@@ -17,6 +17,7 @@ function AudioManager(addEventListener, isTownTune) {
 	let timeKeeper = new TimeKeeper();
 	let mediaSessionManager = new MediaSessionManager();
 	let kkVersion;
+	let hourlyChange = false;
 	let setVolume;
 	let reducedVolume = false;
 	let tabAudioPaused = false;
@@ -134,6 +135,7 @@ function AudioManager(addEventListener, isTownTune) {
 					audio.volume -= step;
 				} else {
 					clearInterval(fadeInterval);
+					hourlyChange = true;
 					audio.pause();
 					audio.volume = oldVolume;
 					if (callback) callback();
@@ -150,8 +152,11 @@ function AudioManager(addEventListener, isTownTune) {
 	// If the music is paused via pressing the "close" button in the media session dialogue,
 	// then we gracefully handle it rather than going into an invalid state.
 	function onPause() {
-		window.notify("pause", [tabAudioPaused]);
-		if (!tabAudioPaused) chrome.storage.sync.set({ paused: true });
+    if (hourlyChange) hourlyChange = false;
+		else {
+		  window.notify("pause", [tabAudioPaused]);
+		  if (!tabAudioPaused) chrome.storage.sync.set({ paused: true });
+    }
 	}
 
 	addEventListener("hourMusic", playHourlyMusic);
