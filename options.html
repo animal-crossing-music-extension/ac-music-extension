@@ -28,13 +28,19 @@
 				<li class="selected">
 					<a href="#options">Options</a>
 				</li>
-				<li class="town-tune-link">
-					<a href="#town-tune">Town Tune</a>
+				<li class="town-tune-link" id ="town-tune-button">
+					<a href="#town-tune">Town Tune Editor</a>
 				</li>
 				<li class="help-link">
-					<a href="#help">Help</a>
+					<a href="#about">About</a>
 				</li>
 			</ul>
+
+			<table class="nav-buttons">
+				<td><a target="_blank" href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop"><button type="button" class="nav-button" title="Chrome Webstore"><img src="img/webstore.png" /></button></a></td>
+				<td><a target="_blank" href="https://discord.gg/4FMrEF8"><button type="button" class="nav-button" title="Discord Server"><img src="img/discord.png" /></button></a></td>
+				<td><a target="_blank" href="https://github.com/PikaDude/ac-music-extension-revived"><button type="button" class="nav-button" title="GitHub"><img src="img/github.png" /></button></a></td>
+			</table>
 		</div>
 
 		<div class="mainview view">
@@ -46,6 +52,7 @@
 				<div class="content">
 					<section>
 						<h3>Volume</h3>
+						<p>Adjust the volume that the extension's music plays at</p>
 						<div class="checkbox">
 							<label>
 								<input aria-label="Volume" id="volume" type="range" min="0" max="1" step="0.01">
@@ -55,6 +62,7 @@
 
 					<section>
 						<h3>Music</h3>
+						<p>Select which game's music you wish to listen to</p>
 						<div class="radio">
 							<input id="animal-crossing" name="music-choice" type="radio"><label for="animal-crossing"><span><span></span></span>Animal Forest/Animal Crossing</label>
 						</div>
@@ -71,6 +79,7 @@
 
 					<section>
 						<h3>Weather</h3>
+						<p>Select the weather variation you wish to listen to</p>
 						<div class="radio">
 							<input id="sunny" name="weather-choice" type="radio"><label for="sunny"><span><span></span></span>Sunny/Normal</label>
 						</div>
@@ -81,7 +90,7 @@
 							<input id="raining" name="weather-choice" type="radio"><label for="raining"><span><span></span></span>Raining</label>
 						</div>
 						<div class="radio">
-							<input id="live" name="weather-choice" type="radio"><label for="live"><span><span></span></span>Live Weather</label>
+							<input id="live" name="weather-choice" type="radio"><label for="live"><span><span></span></span>Live Weather <a href="#live-weather-location" id="live-weather-location-link" class="exclamation">!</a></label>
 						</div>
 						<div class="radio">
 							<input id="weather-random" name="weather-choice" type="radio"><label for="weather-random"><span><span></span></span>Random!</label>
@@ -90,7 +99,8 @@
 
 					<section>
 						<h3>K.K. Slider</h3>
-						<h4>K.K. Slider - Play Times</h4>
+						<p>Customize K.K. Slider's behaviour</p>
+						<h4>Play Times</h4>
 						<div class="radio">
 							<input id="no-kk" name="enable-kk" type="radio"><label for="no-kk"><span><span></span></span>Do not play K.K. Slider songs</label>
 						</div>
@@ -101,7 +111,7 @@
 						<div class="radio">
 							<input id="always-kk" name="enable-kk" type="radio"><label for="always-kk"><span><span></span></span>Play K.K. Slider songs at all times</label>
 						</div>
-						<h4>K.K. Slider - Version Choice</h4>
+						<h4>Version Choice</h4>
 						<div class="radio">
 							<input id="kk-version-live" name="kk-version" type="radio"><label for="kk-version-live"><span><span></span></span>Live</label>
 						</div>
@@ -114,14 +124,19 @@
 					</section>
 
 					<section>
-						<h3>Town Tune</h3>
+						<h3>Town Tune <a id="town-tune-button-link" class="exclamation">!</a></h3>
+						<p>Customize your custom town tune's behaviour</p>
 						<div class="checkbox">
 							<input id="enable-town-tune" type="checkbox"><label for="enable-town-tune"><span></span>Play your custom town tune on the hour</label>
+						</div>
+						<div class="checkbox">
+							<input id="absolute-town-tune" type="checkbox"><label for="absolute-town-tune"><span></span>Play your custom town tune regardless if the music is paused</label>
 						</div>
 					</section>
 
 					<section>
 						<h3>Notifications</h3>
+						<p>Customize desktop notification behaviour</p>
 						<div class="checkbox">
 							<input id="enable-notifications" type="checkbox"><label for="enable-notifications"><span></span>Enable Chrome notifications on song change</label>
 						</div>
@@ -147,8 +162,9 @@
 						</div>
 					</section>
 
-					<section>
+					<section id="live-weather-location">
 						<h3>Live Weather Location</h3>
+						<p>Select the location to fetch the live weather information from. The live weather synchronizes with the extension's music</p>
 						<div class="text">
 							<input type="text" id="zip-code" aria-label="Zip Code" value="98052" placeholder="Zip Code">
 							<input type="text" id="country-code" aria-label="Country Code" value="US" placeholder="Country Code">
@@ -164,7 +180,7 @@
 
 			<div id="town-tune">
 				<header>
-					<h1>Custom Town Tune</h1>
+					<h1>Town Tune Editor</h1>
 				</header>
 
 				<div class="content">
@@ -189,7 +205,7 @@
 				</div>
 			</div>
 
-			<div id="help">
+			<div id="about">
 				<header>
 					<h1>About</h1>
 				</header>
@@ -213,13 +229,14 @@
 
 					<br />
 					<h3>Contributors</h3>
+					<p>These people have helped make the extension possible!</p>
 					<p id="contributors-failed">Failed to load contributors :(</p>
 					<table>
 						<tbody id="contributors-table"></tbody>
 					</table>
 					<br />
-					<p>Extension originally created and maintained by Andrex from NeoGAF.</p>
-					<p>Extension improved by blazescorch2.</p>
+					<p>Extension originally created by <a href="https://www.neogaf.com/members/andrex.20593/">Andrex</a> from <a href="https://www.neogaf.com/threads/real-time-animal-crossing-music.473164/post-37661922">NeoGAF</a>.</p>
+					<p>Extension improved by <a href="https://www.neogaf.com/members/blazescorch2.142800/">blazescorch2</a>.</p>
 					<p>Idea for extension taken from <a href="http://tane.us/ac/">tane.us</a>.</p>
 					<p>This options page uses <a href="https://github.com/roykolak/chrome-bootstrap">Chrome Bootstrap</a> by Roy Kolak under the MIT License.</p>
 				</div>

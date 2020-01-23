@@ -12,6 +12,7 @@ function StateManager() {
 
 	let timeKeeper = new TimeKeeper();
 	let tabAudio = new TabAudioHandler();
+	let townTuneManager = new TownTuneManager();
 	let weatherManager;
 	let isKKTime;
 	let startup = true;
@@ -86,6 +87,7 @@ function StateManager() {
 			kkVersion: 'live',
 			paused: false,
 			enableTownTune: true,
+			absoluteTownTune: false,
 			//enableAutoPause: false,
 			zipCode: "98052",
 			countryCode: "us",
@@ -147,6 +149,8 @@ function StateManager() {
 		else if (!isKK()) {
 			let musicAndWeather = getMusicAndWeather();
 			notifyListeners("hourMusic", [hour, musicAndWeather.weather, musicAndWeather.music, true]);
+
+			if (options.paused && options.absoluteTownTune) townTuneManager.playTune();
 		}
 	});
 

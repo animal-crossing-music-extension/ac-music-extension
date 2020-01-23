@@ -24,6 +24,15 @@
     font-size: 1.3em;
 }
 
+.exclamation {
+    background-color: #595959;
+    color: white !important;
+    font-size: 11px !important;
+    text-decoration: none !important;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
 #contributors-failed {
     display: none;
     color: red;
@@ -83,4 +92,46 @@ td {
 .modal-title {
     font-weight: bold;
     font-size: 18px;
+}
+
+.chrome-bootstrap section {
+    border-radius: 2px;
+}
+
+section > p:first-of-type {
+    margin: 6px 0;
+}
+
+section > h4 {
+    margin-top: 10px;
+}
+
+h3, h4 {
+    font-weight: bold !important;
+}
+
+@keyframes scrolled {
+    0% {
+        background-color: inherit;
+    }
+
+    50% {
+        background-color: rgb(102, 255, 156);
+    }
+
+    100% {
+        background-color: inherit;
+    }
+}
+
+.nav-buttons>tbody>tr>td {
+    border: none;
+}
+
+.nav-button {
+    padding: 7px 0 35px 0;
+}
+
+.nav-button>img {
+    width: 100%;
 }
