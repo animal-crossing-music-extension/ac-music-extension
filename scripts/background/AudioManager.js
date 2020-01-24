@@ -64,6 +64,7 @@ function AudioManager(addEventListener, isTownTune) {
 
 		let loopTime = ((loopTimes[game] || {})[weather] || {})[hour];
 		let delayToLoop;
+		let started = false;
 
 		if (loopTime) {
 			delayToLoop = loopTime.end;
@@ -76,9 +77,26 @@ function AudioManager(addEventListener, isTownTune) {
 
 		audio.onpause = onPause;
 
+		audio.onplay = () => {
+			// If we resume mid-song, then we recalculate the delayToLoop
+			if (started && loopTime) {
+				delayToLoop = loopTime.end;
+				delayToLoop -= audio.currentTime;
+
+				if (skipIntro) {
+					audio.currentTime = loopTime.start;
+					delayToLoop -= loopTime.start;
+				}
+				setLoopTimes();
+			}
+		};
+
 		audio.play().then(setLoopTimes);
 
 		function setLoopTimes() {
+			// song has started
+			started = true;
+
 			// set up loop points if loopTime is set up for this
 			// game, hour and weather.
 			if (loopTime) {
@@ -91,6 +109,8 @@ function AudioManager(addEventListener, isTownTune) {
 						audio.currentTime = loopTime.end - 5;
 					}, 3000);
 				}
+
+				printDebug("delayToLoop: " + delayToLoop);
 
 				let loopTimeout = setTimeout(() => {
 					printDebug("looping");
@@ -177,12 +197,12 @@ function AudioManager(addEventListener, isTownTune) {
 	// If the music is paused via pressing the "close" button in the media session dialogue,
 	// then we gracefully handle it rather than going into an invalid state.
 	function onPause() {
-    if (hourlyChange) hourlyChange = false;
+		if (hourlyChange) hourlyChange = false;
 		else {
-		  window.notify("pause", [tabAudioPaused]);
-      if (killLoopTimeout) killLoopTimeout();
-		  if (!tabAudioPaused) chrome.storage.sync.set({ paused: true });
-    }
+			window.notify("pause", [tabAudioPaused]);
+			if (killLoopTimeout) killLoopTimeout();
+			if (!tabAudioPaused) chrome.storage.sync.set({ paused: true });
+		}
 	}
 
 	addEventListener("hourMusic", playHourlyMusic);
