@@ -216,12 +216,12 @@ function AudioManager(addEventListener, isTownTune) {
 				tabAudioPaused = false;
 				window.notify("unpause");
 				window.notify("tabAudio", [true, tabAudio, reduceValue]);
-			}
-			if (reducedVolume && tabAudio != 'reduce') {
+			} else if (reducedVolume && tabAudio != 'reduce') {
 				reducedVolume = false;
 				audio.volume = setVolume;
 				window.notify("tabAudio", [true, tabAudio, reduceValue]);
-			}
+			} else if (tabAudio == 'pause' && audio.pause && !tabAudioPaused) window.notify("tabAudio", [true, tabAudio, reduceValue]);
+			else if (!reducedVolume && tabAudio == 'reduce') window.notify("tabAudio", [true, tabAudio, reduceValue]);
 		}
 	});
 
