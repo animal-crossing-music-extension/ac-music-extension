@@ -13,6 +13,7 @@
          "scripts/background/NotificationManager.js",
          "scripts/background/StateManager.js",
          "scripts/background/MediaSessionManager.js",
+         "scripts/background/TabAudioHandler.js",
          "scripts/background/main.js"
       ]
    },
@@ -36,7 +37,10 @@
    "permissions": [
       "notifications",
       "storage",
-      "http://api.openweathermap.org/"
+      "https://ac.pikadude.me/"
+   ],
+   "optional_permissions": [
+      "tabs"
    ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "4.0.0"

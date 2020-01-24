@@ -15,7 +15,7 @@ function MediaSessionManager() {
 		navigator.mediaSession.metadata = new MediaMetadata({
 			title: `${formatHour(hour)} (${weather.charAt(0).toUpperCase() + weather.slice(1)})`,
 			artist: gameNames[game],
-			album: 'Animal Crossing Music (Revived)',
+			album: 'Animal Crossing Music',
 			artwork: [
 				{ src: artwork, sizes: '512x512', type: 'image/png' }
 			]
@@ -26,7 +26,7 @@ function MediaSessionManager() {
 		let metadata = new MediaMetadata({
 			title,
 			artist: 'K.K. Slider',
-			album: 'Animal Crossing Music (Revived)'
+			album: 'Animal Crossing Music'
 		});
 
 		// We try getting our artwork. If we succeed, then we add it to the metadata.
