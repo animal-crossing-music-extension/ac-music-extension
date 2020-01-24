@@ -83,10 +83,6 @@ function AudioManager(addEventListener, isTownTune) {
 				delayToLoop = loopTime.end;
 				delayToLoop -= audio.currentTime;
 
-				if (skipIntro) {
-					audio.currentTime = loopTime.start;
-					delayToLoop -= loopTime.start;
-				}
 				setLoopTimes();
 			}
 		};
