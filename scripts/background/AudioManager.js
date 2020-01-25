@@ -20,6 +20,7 @@ function AudioManager(addEventListener, isTownTune) {
 	let hourlyChange = false;
 
 	let setVolumeValue;
+	let tabAudible = false;
 	let reduceVolumeValue = 0;
 	let reducedVolume = false;
 	let tabAudioPaused = false;
@@ -221,8 +222,9 @@ function AudioManager(addEventListener, isTownTune) {
 					setVolume();
 				}
 			}
-		} else {
+		} else if (tabAudible) {
 			// Handles when the options are switched. Disables the previous option and enables the new one.
+			// Only runs when tab is audible.
 
 			if (audio.paused && tabAudio != 'pause') {
 				audio.play();
