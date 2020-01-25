@@ -168,10 +168,10 @@ function StateManager() {
 		// Trigger 'options' variable update
 		getSyncedOptions(() => {
 			// Detect changes and notify corresponding listeners
-			if (typeof changes.zipCode !== 'undefined') weatherManager.setZip(options.zipCode);
-			if (typeof changes.countryCode !== 'undefined') weatherManager.setCountry(options.countryCode);
-			if (typeof changes.volume !== 'undefined') notifyListeners("volume", [options.volume]);
-			if ((typeof changes.music !== 'undefined' || typeof changes.weather) && !isKK()) {
+			if ('zipCode' in changes) weatherManager.setZip(changes.zipCode.newValue);
+			if ('countryCode' in changes) weatherManager.setCountry(changes.countryCode.newValue);
+			if ('volume' in changes) notifyListeners("volume", [changes.volume.newValue]);
+			if (('music' in changes || 'weather' in changes) && !isKK()) {
 				let musicAndWeather = getMusicAndWeather();
 				if (musicAndWeather.music != oldMusicAndWeather.music || musicAndWeather.weather != oldMusicAndWeather.weather)
 					notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
