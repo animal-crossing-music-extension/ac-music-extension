@@ -162,7 +162,6 @@ function StateManager() {
 		printDebug('A data object has been updated: ', changes)
 		let wasKK = isKK();
 		let kkVersion = options.kkVersion;
-		let oldMusicAndWeather = getMusicAndWeather();
 		let oldTabAudio = this.getOption("tabAudio");
 		let oldTabAudioReduce = this.getOption("tabAudioReduceValue");
 		// Trigger 'options' variable update
@@ -173,8 +172,7 @@ function StateManager() {
 			if ('volume' in changes) notifyListeners("volume", [changes.volume.newValue]);
 			if (('music' in changes || 'weather' in changes) && !isKK()) {
 				let musicAndWeather = getMusicAndWeather();
-				if (musicAndWeather.music != oldMusicAndWeather.music || musicAndWeather.weather != oldMusicAndWeather.weather)
-					notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
+				notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
 			}
 			if ((isKK() && !wasKK) || (kkVersion != options.kkVersion && isKK())) notifyListeners("kkStart", [options.kkVersion]);
 			if (!isKK() && wasKK) {
