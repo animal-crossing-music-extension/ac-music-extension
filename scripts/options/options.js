@@ -33,6 +33,15 @@ const exclamationElements = [
 	'town-tune-button-link'
 ]
 
+// Formats an integer to percentage
+function formatPercentage(number) {
+	number = parseInt(number)
+	if (number <= 0) return '0%'
+	else if (number >= 100) return '100%'
+	else if (number < 10) return `0${number}%`
+	else return `${number}%`
+}
+
 window.onload = function () {
 	restoreOptions();
 
