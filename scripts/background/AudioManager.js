@@ -101,6 +101,8 @@ function AudioManager(addEventListener, isTownTune) {
 	}
 
 	function playKKSong() {
+		audio.onpause = null;
+
 		let version;
 		if (kkVersion == 'both') {
 			if (Math.floor(Math.random() * 2) == 0) version = 'live';
