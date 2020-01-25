@@ -8,6 +8,7 @@ function MediaSessionManager() {
 		'animal-crossing': 'Animal Crossing',
 		'wild-world': 'Animal Crossing: Wild World',
 		'new-leaf': 'Animal Crossing: New Leaf',
+		'new-horizons': 'Animal Crossing: New Horizons'
 	}
 
 	this.updateMetadata = async function (game, hour, weather) {
