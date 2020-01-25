@@ -156,7 +156,7 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.src = `https://ac.pikadude.me/static/kk/${version}/${randomSong}.ogg`;
 		audio.play();
 
-		let formattedTitle = `${randomSong.split(' - ')[1]} (${version.charAt(0).toUpperCase() + version.slice(1)} Version)`;
+		let formattedTitle = `${randomSong.split(' - ')[1]} (${capitalize(version)} Version)`;
 		window.notify("kkMusic", [formattedTitle]);
 
 		mediaSessionManager.updateMetadataKK(formattedTitle, randomSong);

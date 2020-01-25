@@ -14,7 +14,7 @@ function MediaSessionManager() {
 	this.updateMetadata = async function (game, hour, weather) {
 		let artwork = await toDataURL(game);
 		navigator.mediaSession.metadata = new MediaMetadata({
-			title: `${formatHour(hour)} (${weather.charAt(0).toUpperCase() + weather.slice(1)})`,
+			title: `${formatHour(hour)} (${capitalize(weather)})`,
 			artist: gameNames[game],
 			album: 'Animal Crossing Music',
 			artwork: [

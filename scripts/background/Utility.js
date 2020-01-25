@@ -24,3 +24,9 @@ function formatHour(time) {
 function printDebug(...args) {
 	if (DEBUG_FLAG) console.log(...args);
 }
+
+
+// Returns a copy of this string having its first letter uppercased
+function capitalize(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1)
+}
