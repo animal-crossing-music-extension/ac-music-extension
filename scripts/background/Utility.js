@@ -2,9 +2,9 @@
 
 'use strict';
 
-var DEBUG_FLAG = false;
+var DEBUG_FLAG = true;
 
-// format text for the badge and for the song URL
+// Returns a hour-formatted string of a time
 function formatHour(time) {
 	if (time == -1) {
 		return '';
