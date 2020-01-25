@@ -21,6 +21,6 @@ function formatHour(time) {
 	return (time - 12) + 'pm';
 }
 
-function printDebug(message) {
-	if (DEBUG_FLAG) console.log(message);
+function printDebug(...args) {
+	if (DEBUG_FLAG) console.log(...args);
 }
