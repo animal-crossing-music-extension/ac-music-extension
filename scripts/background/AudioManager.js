@@ -18,7 +18,9 @@ function AudioManager(addEventListener, isTownTune) {
 	let mediaSessionManager = new MediaSessionManager();
 	let kkVersion;
 	let hourlyChange = false;
-	let setVolume;
+
+	let setVolumeValue;
+	let reduceVolumeValue = 0;
 	let reducedVolume = false;
 	let tabAudioPaused = false;
 
@@ -159,6 +161,16 @@ function AudioManager(addEventListener, isTownTune) {
 		}
 	}
 
+	function setVolume() {
+		let newVolume = setVolumeValue;
+		if (reducedVolume) newVolume = newVolume * (1 - reduceVolumeValue / 100);
+
+		if (newVolume < 0) newVolume = 0;
+		if (newVolume > 1) newVolume = 1;
+
+		audio.volume = newVolume;
+	}
+
 	addEventListener("hourMusic", playHourlyMusic);
 
 	addEventListener("kkStart", playKKMusic);
@@ -173,13 +185,15 @@ function AudioManager(addEventListener, isTownTune) {
 	});
 
 	addEventListener("volume", newVol => {
-		audio.volume = newVol;
-		setVolume = newVol;
+		setVolumeValue = newVol;
+		setVolume();
 	});
 
 	// If a tab starts or stops playing audio
 	addEventListener("tabAudio", (audible, tabAudio, reduceValue) => {
 		if (audible != null) {
+			tabAudible = audible;
+
 			// Handles all cases except for an options switch.
 			if (tabAudio == 'pause') {
 				if (audible) {
@@ -199,13 +213,12 @@ function AudioManager(addEventListener, isTownTune) {
 
 			if (tabAudio == 'reduce') {
 				if (audible) {
-					let newVolume = setVolume * (1 - reduceValue / 100);
-					if (newVolume < 0) newVolume = 0;
-					audio.volume = newVolume;
+					reduceVolumeValue = reduceValue;
 					reducedVolume = true;
+					setVolume();
 				} else {
-					audio.volume = setVolume;
 					reducedVolume = false;
+					setVolume();
 				}
 			}
 		} else {
@@ -218,7 +231,7 @@ function AudioManager(addEventListener, isTownTune) {
 				window.notify("tabAudio", [true, tabAudio, reduceValue]);
 			} else if (reducedVolume && tabAudio != 'reduce') {
 				reducedVolume = false;
-				audio.volume = setVolume;
+				setVolume();
 				window.notify("tabAudio", [true, tabAudio, reduceValue]);
 			} else if (tabAudio == 'pause' && audio.pause && !tabAudioPaused) window.notify("tabAudio", [true, tabAudio, reduceValue]);
 			else if (!reducedVolume && tabAudio == 'reduce') window.notify("tabAudio", [true, tabAudio, reduceValue]);
