@@ -155,15 +155,19 @@ function StateManager() {
 		}
 	});
 
-	// Update our options object if stored options changes, and notify listeners
-	// of any pertinent changes.
+	// 'Updated options' listener callback
+	// Detects that the user has updated an option
+	// Updates the 'options' variable and notifies listeners of any pertinent changes
 	chrome.storage.onChanged.addListener(changes => {
+		printDebug('A data object has been updated: ', changes)
 		let wasKK = isKK();
 		let kkVersion = options.kkVersion;
 		let oldMusicAndWeather = getMusicAndWeather();
 		let oldTabAudio = this.getOption("tabAudio");
 		let oldTabAudioReduce = this.getOption("tabAudioReduceValue");
+		// Trigger 'options' variable update
 		getSyncedOptions(() => {
+			// Detect changes and notify corresponding listeners
 			if (typeof changes.zipCode !== 'undefined') weatherManager.setZip(options.zipCode);
 			if (typeof changes.countryCode !== 'undefined') weatherManager.setCountry(options.countryCode);
 			if (typeof changes.volume !== 'undefined') notifyListeners("volume", [options.volume]);
@@ -172,7 +176,6 @@ function StateManager() {
 				if (musicAndWeather.music != oldMusicAndWeather.music || musicAndWeather.weather != oldMusicAndWeather.weather)
 					notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
 			}
-
 			if ((isKK() && !wasKK) || (kkVersion != options.kkVersion && isKK())) notifyListeners("kkStart", [options.kkVersion]);
 			if (!isKK() && wasKK) {
 				let musicAndWeather = getMusicAndWeather();
