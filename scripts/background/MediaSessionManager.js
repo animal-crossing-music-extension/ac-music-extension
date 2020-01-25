@@ -53,8 +53,8 @@ function MediaSessionManager() {
 			xhr.open('GET', getLocalUrl(imagePath), true);
 			xhr.responseType = 'blob';
 			xhr.onload = function () {
-				if (this.status == 200) resolve(URL.createObjectURL(this.response));
-				else fallback();
+				printDebug('Successfully created blob url from local image')
+				resolve(URL.createObjectURL(this.response));
 			};
 			xhr.onerror = fallback;
 			xhr.send();
