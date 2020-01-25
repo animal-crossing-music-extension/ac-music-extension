@@ -152,11 +152,11 @@ function AudioManager(addEventListener, isTownTune) {
 	// If the music is paused via pressing the "close" button in the media session dialogue,
 	// then we gracefully handle it rather than going into an invalid state.
 	function onPause() {
-    if (hourlyChange) hourlyChange = false;
+		if (hourlyChange) hourlyChange = false;
 		else {
-		  window.notify("pause", [tabAudioPaused]);
-		  if (!tabAudioPaused) chrome.storage.sync.set({ paused: true });
-    }
+			window.notify("pause", [tabAudioPaused]);
+			if (!tabAudioPaused) chrome.storage.sync.set({ paused: true });
+		}
 	}
 
 	addEventListener("hourMusic", playHourlyMusic);
