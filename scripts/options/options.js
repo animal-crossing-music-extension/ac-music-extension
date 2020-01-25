@@ -44,10 +44,13 @@ function formatPercentage(number) {
 
 window.onload = function () {
 	restoreOptions();
-
 	document.getElementById('version-number').textContent = 'Version ' + chrome.runtime.getManifest().version;
-
 	document.getElementById('volume').onchange = saveOptions;
+	document.getElementById('volume').oninput = function() {
+		let volumeText = document.getElementById('volumeText');
+		volumeText.innerHTML = `${formatPercentage(this.value*100)}`;
+	};
+
 	onClickElements.forEach(el => {
 		document.getElementById(el).onclick = saveOptions;
 	});
@@ -176,6 +179,7 @@ function restoreOptions() {
 		tabAudioReduceValue: 80
 	}, items => {
 		document.getElementById('volume').value = items.volume;
+		document.getElementById('volumeText').innerHTML = `${formatPercentage(items.volume*100)}`;
 		document.getElementById(items.music).checked = true;
 		document.getElementById(items.weather).checked = true;
 		document.getElementById('enable-notifications').checked = items.enableNotifications;
