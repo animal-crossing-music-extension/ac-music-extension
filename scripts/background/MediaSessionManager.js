@@ -46,8 +46,11 @@ function MediaSessionManager() {
 	// Gets a blob URL from a local file.
 	function toDataURL(name, kk = false) {
 		return new Promise(resolve => {
+			let imagePath = `../img/cover/${kk ? 'kk/' : ''}${name}.png`
+			printDebug(`Trying to retrieve art from local storage: "${imagePath}"`)
+
 			let xhr = new XMLHttpRequest();
-			xhr.open('GET', chrome.extension.getURL(`../img/cover/${kk ? 'kk/' : ''}${name}.png`), true);
+			xhr.open('GET', getLocalUrl(imagePath), true);
 			xhr.responseType = 'blob';
 			xhr.onload = function () {
 				if (this.status == 200) resolve(URL.createObjectURL(this.response));

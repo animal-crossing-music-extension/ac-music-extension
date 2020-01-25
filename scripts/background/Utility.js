@@ -30,3 +30,7 @@ function printDebug(...args) {
 function capitalize(string) {
 	return string.charAt(0).toUpperCase() + string.slice(1)
 }
+
+function getLocalUrl(relativePath) {
+	return chrome.runtime.getURL(relativePath)
+}
