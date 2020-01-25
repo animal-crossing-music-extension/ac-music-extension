@@ -75,7 +75,8 @@ function StateManager() {
 		return options.weather == 'live';
 	}
 
-	// retrieve saved options
+	// Retrieves all synced options, which are then stored in the 'options' variable
+	// Default values to use if absent are specified
 	function getSyncedOptions(callback) {
 		chrome.storage.sync.get({
 			volume: 0.5,
