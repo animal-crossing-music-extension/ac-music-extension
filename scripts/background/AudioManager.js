@@ -10,6 +10,10 @@ function AudioManager(addEventListener, isTownTune) {
 	// Should also be used for disabling event music for those who have turned them off in the settings, then this  should be false.
 	let eventsEnabled = false;
 
+	// If enabled, after 3 seconds, the song will skim to three seconds before
+	// the end of the loop time, to easily and quickly test loops.
+	let debugLoopTimes = false;
+
 	let audio = document.createElement('audio');
 	let killLoopTimeout;
 	let killFadeInterval;
@@ -61,30 +65,67 @@ function AudioManager(addEventListener, isTownTune) {
 		// SETTING AUDIO SOURCE		
 		audio.src = `https://ac.pikadude.me/static/${game}/${weather}/${songName}.ogg`;
 
-		let loopTime = (loopTimes[game] || {})[hour];
-		// set up loop points if loopTime is set up for this
-		// game and hour
+		let loopTime = ((loopTimes[game] || {})[weather] || {})[hour];
+		let delayToLoop;
+		let started = false;
+
 		if (loopTime) {
-			let delayToLoop = loopTime.end;
+			delayToLoop = loopTime.end;
+
 			if (skipIntro) {
 				audio.currentTime = loopTime.start;
 				delayToLoop -= loopTime.start;
-			}
-			audio.onplay = function () {
-				let loopTimeout = setTimeout(() => {
-					printDebug("looping");
-					playHourSong(game, weather, hour, true);
-				}, delayToLoop * 1000);
-				killLoopTimeout = function () {
-					clearTimeout(loopTimeout);
-					loopTimeout = null;
-				};
 			}
 		}
 
 		audio.onpause = onPause;
 
-		audio.play();
+		audio.onplay = () => {
+			// If we resume mid-song, then we recalculate the delayToLoop
+			if (started && loopTime) {
+				delayToLoop = loopTime.end;
+				delayToLoop -= audio.currentTime;
+
+				setLoopTimes();
+			}
+		};
+
+		audio.play().then(setLoopTimes);
+
+		function setLoopTimes() {
+			// song has started
+			started = true;
+
+			// set up loop points if loopTime is set up for this
+			// game, hour and weather.
+			if (loopTime) {
+				printDebug("setting loop times");
+
+				if (debugLoopTimes) {
+					delayToLoop = 8;
+					setTimeout(() => {
+						printDebug("skimming");
+						audio.currentTime = loopTime.end - 5;
+					}, 3000);
+				}
+
+				printDebug("delayToLoop: " + delayToLoop);
+
+				let loopTimeout = setTimeout(() => {
+					printDebug("looping");
+					audio.currentTime = loopTime.start;
+
+					delayToLoop = loopTime.end - loopTime.start;
+					setLoopTimes();
+				}, delayToLoop * 1000);
+				killLoopTimeout = () => {
+					printDebug("killing loop timeout");
+					clearTimeout(loopTimeout);
+					loopTimeout = null;
+				};
+			} else printDebug("no loop times found. looping full song")
+		}
+
 		mediaSessionManager.updateMetadata(game, hour, weather);
 	}
 
@@ -160,6 +201,7 @@ function AudioManager(addEventListener, isTownTune) {
 		if (hourlyChange) hourlyChange = false;
 		else {
 			window.notify("pause", [tabAudioPaused]);
+			if (killLoopTimeout) killLoopTimeout();
 			if (!tabAudioPaused) chrome.storage.sync.set({ paused: true });
 		}
 	}
