@@ -75,7 +75,8 @@ function StateManager() {
 		return options.weather == 'live';
 	}
 
-	// retrieve saved options
+	// Retrieves all synced options, which are then stored in the 'options' variable
+	// Default values to use if absent are specified
 	function getSyncedOptions(callback) {
 		chrome.storage.sync.get({
 			volume: 0.5,
@@ -154,24 +155,25 @@ function StateManager() {
 		}
 	});
 
-	// Update our options object if stored options changes, and notify listeners
-	// of any pertinent changes.
+	// 'Updated options' listener callback
+	// Detects that the user has updated an option
+	// Updates the 'options' variable and notifies listeners of any pertinent changes
 	chrome.storage.onChanged.addListener(changes => {
+		printDebug('A data object has been updated: ', changes)
 		let wasKK = isKK();
 		let kkVersion = options.kkVersion;
-		let oldMusicAndWeather = getMusicAndWeather();
 		let oldTabAudio = this.getOption("tabAudio");
 		let oldTabAudioReduce = this.getOption("tabAudioReduceValue");
+		// Trigger 'options' variable update
 		getSyncedOptions(() => {
-			if (typeof changes.zipCode !== 'undefined') weatherManager.setZip(options.zipCode);
-			if (typeof changes.countryCode !== 'undefined') weatherManager.setCountry(options.countryCode);
-			if (typeof changes.volume !== 'undefined') notifyListeners("volume", [options.volume]);
-			if ((typeof changes.music !== 'undefined' || typeof changes.weather) && !isKK()) {
+			// Detect changes and notify corresponding listeners
+			if ('zipCode' in changes) weatherManager.setZip(changes.zipCode.newValue);
+			if ('countryCode' in changes) weatherManager.setCountry(changes.countryCode.newValue);
+			if ('volume' in changes) notifyListeners("volume", [changes.volume.newValue]);
+			if (('music' in changes || 'weather' in changes) && !isKK()) {
 				let musicAndWeather = getMusicAndWeather();
-				if (musicAndWeather.music != oldMusicAndWeather.music || musicAndWeather.weather != oldMusicAndWeather.weather)
-					notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
+				notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
 			}
-
 			if ((isKK() && !wasKK) || (kkVersion != options.kkVersion && isKK())) notifyListeners("kkStart", [options.kkVersion]);
 			if (!isKK() && wasKK) {
 				let musicAndWeather = getMusicAndWeather();
