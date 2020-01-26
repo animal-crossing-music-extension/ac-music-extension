@@ -150,9 +150,7 @@ function AudioManager(addEventListener, isTownTune) {
 			else version = 'aircheck';
 		} else version = kkVersion;
 
-		let randomSong;
-		if (version == 'live') randomSong = liveKKSongList[Math.floor(Math.random() * liveKKSongList.length)];
-		else if (version == 'aircheck') randomSong = aircheckKKSongList[Math.floor(Math.random() * aircheckKKSongList.length)];
+		let randomSong = KKSongList[Math.floor(Math.random() * KKSongList.length)];
 		audio.src = `https://ac.pikadude.me/static/kk/${version}/${randomSong}.ogg`;
 		audio.play();
 
