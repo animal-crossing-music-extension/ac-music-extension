@@ -9,9 +9,6 @@
 	var notificationManager = new NotificationManager(stateManager.registerCallback, function() {
 		return stateManager.getOption("enableNotifications");
 	});
-	var badgeManager = new BadgeManager(stateManager.registerCallback, function() {
-		return stateManager.getOption("enableBadgeText");
-	});
 	
 	stateManager.activate();
 	
