@@ -38,7 +38,7 @@ window.onload = function () {
 
 	document.getElementById('version-number').textContent = 'Version ' + chrome.runtime.getManifest().version;
 
-	document.getElementById('volume').oninput = saveOptions;
+	document.getElementById('volume').onchange = saveOptions;
 	onClickElements.forEach(el => {
 		document.getElementById(el).onclick = saveOptions;
 	});
