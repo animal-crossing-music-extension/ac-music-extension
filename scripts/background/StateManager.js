@@ -13,6 +13,7 @@ function StateManager() {
 	let timeKeeper = new TimeKeeper();
 	let tabAudio = new TabAudioHandler();
 	let townTuneManager = new TownTuneManager();
+	let badgeManager;
 	let weatherManager;
 	let isKKTime;
 	let startup = true;
@@ -29,6 +30,8 @@ function StateManager() {
 	this.activate = function () {
 		isKKTime = timeKeeper.getDay() == 6 && timeKeeper.getHour() >= 20;
 		getSyncedOptions(() => {
+			badgeManager = new BadgeManager(this.registerCallback, options.enableBadgeText);
+
 			if (!weatherManager) {
 				weatherManager = new WeatherManager(options.zipCode, options.countryCode);
 				weatherManager.registerChangeCallback(() => {
@@ -179,7 +182,8 @@ function StateManager() {
 				let musicAndWeather = getMusicAndWeather();
 				notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
 			}
-			if (oldTabAudio != options.tabAudio || oldTabAudioReduce != options.tabAudioReduceValue) notifyListeners("tabAudio", [null, options.tabAudio, options.tabAudioReduceValue])
+			if (oldTabAudio != options.tabAudio || oldTabAudioReduce != options.tabAudioReduceValue) notifyListeners("tabAudio", [null, options.tabAudio, options.tabAudioReduceValue]);
+			badgeManager.updateEnabled(options.enableBadgeText);
 		});
 	});
 

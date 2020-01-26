@@ -2,31 +2,45 @@
 
 'use strict';
 
-function BadgeManager(addEventListener, isEnabled) {
-	let pausedState = {};
+function BadgeManager(addEventListener, isEnabledStart) {
+	let isEnabled = isEnabledStart;
+	let isTabAudible = false;
+	let badgeText;
+	let badgeIcon;
+
+	this.updateEnabled = (enabled) => {
+		printDebug("BadgeText has been set to", enabled);
+
+		isEnabled = enabled;
+
+		if (enabled) updateBadgeText();
+		else updateBadgeText(true);
+	}
 
 	addEventListener("hourMusic", (hour, weather) => {
-		isEnabled() && chrome.browserAction.setBadgeText({ text: `${formatHour(hour)}` });
+		badgeText = `${formatHour(hour)}`;
+		if (isEnabled) updateBadgeText();
 		setIcon(weather);
 	});
 
 	addEventListener("kkStart", () => {
-		isEnabled() && chrome.browserAction.setBadgeText({ text: "KK" });
+		badgeText = "KK";
+		if (isEnabled) updateBadgeText();
 		setIcon('kk');
 	});
 
 	addEventListener("pause", tabPause => {
-		chrome.browserAction.getBadgeText({}, badgeText => {
-			pausedState.badge = badgeText;
-			if (tabPause) chrome.browserAction.setBadgeText({ text: "ll" });
-			else chrome.browserAction.setBadgeText({ text: "" });
-			setIcon('paused');
-		});
+		if (tabPause) {
+			isTabAudible = true;
+			chrome.browserAction.setBadgeText({ text: "ll" });
+		} else chrome.browserAction.setBadgeText({ text: "" });
+		setIcon('paused');
 	});
 
 	addEventListener("unpause", () => {
-		if (pausedState.badge) chrome.browserAction.setBadgeText({ text: pausedState.badge });
-		if (pausedState.icon) setIcon(pausedState.icon);
+		isTabAudible = false;
+		if (isEnabled) chrome.browserAction.setBadgeText({ text: badgeText });
+		if (badgeIcon) setIcon(badgeIcon);
 	});
 
 	addEventListener("gameChange", (hour, weather) => setIcon(weather));
@@ -35,8 +49,19 @@ function BadgeManager(addEventListener, isEnabled) {
 
 	chrome.browserAction.setBadgeBackgroundColor({ color: [57, 230, 0, 255] });
 
+	function updateBadgeText(reset = false) {
+		if (isTabAudible) return;
+
+		printDebug("Updating BadgeText to", badgeText);
+
+		let text = badgeText || "";
+		if (reset) text = "";
+
+		chrome.browserAction.setBadgeText({ text });
+	}
+
 	function setIcon(icon) {
-		if (icon != 'paused') pausedState.icon = icon;
+		if (icon != 'paused') badgeIcon = icon;
 
 		let path = {
 			128: `img/icons/status/${icon}/128.png`,
