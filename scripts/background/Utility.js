@@ -6,13 +6,13 @@ var DEBUG_FLAG = false;
 
 // format text for the badge and for the song URL
 function formatHour(time) {
-	if (time === -1) {
+	if (time == -1) {
 		return '';
 	}
-	if (time === 0) {
+	if (time == 0) {
 		return '12am';
 	}
-	if (time === 12) {
+	if (time == 12) {
 		return '12pm';
 	}
 	if (time < 13) {
