@@ -90,7 +90,7 @@ function AudioManager(addEventListener, isTownTune) {
 			}
 		};
 
-		audio.play().then(setLoopTimes);
+		if (!tabAudioPaused) audio.play().then(setLoopTimes);
 
 		function setLoopTimes() {
 			// song has started
