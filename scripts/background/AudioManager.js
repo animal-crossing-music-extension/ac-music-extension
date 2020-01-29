@@ -91,6 +91,7 @@ function AudioManager(addEventListener, isTownTune) {
 		};
 
 		if (!tabAudioPaused) audio.play().then(setLoopTimes);
+		else window.notify("pause", [tabAudioPaused]); // Set the badge icon back to the paused state
 
 		function setLoopTimes() {
 			// song has started
