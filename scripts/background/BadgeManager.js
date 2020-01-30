@@ -18,9 +18,11 @@ function BadgeManager(addEventListener, isEnabledStart) {
 	}
 
 	addEventListener("hourMusic", (hour, weather) => {
-		badgeText = `${formatHour(hour)}`;
-		if (isEnabled) updateBadgeText();
-		setIcon(weather);
+		if (!isTabAudible) {
+			badgeText = `${formatHour(hour)}`;
+			if (isEnabled) updateBadgeText();
+			setIcon(weather);
+		}
 	});
 
 	addEventListener("kkStart", () => {
