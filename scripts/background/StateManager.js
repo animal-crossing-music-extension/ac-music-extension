@@ -59,7 +59,7 @@ function StateManager() {
 	};
 
 	// Possible events include:
-	// volume, kkStart, hourMusic, gameChange, weatherChange, pause, tabAudio
+	// volume, kkStart, hourMusic, gameChange, weatherChange, pause, tabAudio, musicFailed
 	function notifyListeners(event, args) {
 		if (!options.paused || event === "pause") {
 			var callbackArr = callbacks[event] || [];
