@@ -128,6 +128,11 @@ h3, h4 {
     border: none;
 }
 
+.nav-buttons-2 {
+    max-width: 66%;
+    margin-top: -12px;
+}
+
 .nav-button {
     padding: 7px 0 35px 0;
 }
