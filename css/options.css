@@ -135,3 +135,15 @@ h3, h4 {
 .nav-button>img {
     width: 100%;
 }
+
+.changelog-list, .changelog-list>li {
+    list-style-type: circle !important;
+}
+
+.changelog-list>li {
+    padding: 4px 0;
+}
+
+.changelog-list {
+    padding: 0 40px !important;
+}
