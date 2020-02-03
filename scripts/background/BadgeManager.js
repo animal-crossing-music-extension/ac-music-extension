@@ -34,15 +34,19 @@ function BadgeManager(addEventListener, isEnabledStart) {
 	addEventListener("pause", tabPause => {
 		if (tabPause) {
 			isTabAudible = true;
-			chrome.browserAction.setBadgeText({ text: "ll" });
-		} else chrome.browserAction.setBadgeText({ text: "" });
+			setBadgeText("ll");
+		} else setBadgeText("");
 		setIcon('paused');
 	});
 
 	addEventListener("unpause", () => {
 		isTabAudible = false;
-		if (isEnabled) chrome.browserAction.setBadgeText({ text: badgeText });
+		if (isEnabled) setBadgeText(badgeText);
 		if (badgeIcon) setIcon(badgeIcon);
+	});
+
+	addEventListener("musicFailed", () => {
+		setBadgeText("x", [230, 0, 0, 255]);
 	});
 
 	addEventListener("gameChange", (hour, weather) => setIcon(weather));
@@ -59,7 +63,12 @@ function BadgeManager(addEventListener, isEnabledStart) {
 		let text = badgeText || "";
 		if (reset) text = "";
 
+		setBadgeText(text);
+	}
+
+	function setBadgeText(text, color = [57, 230, 0, 255]) {
 		chrome.browserAction.setBadgeText({ text });
+		chrome.browserAction.setBadgeBackgroundColor({ color });
 	}
 
 	function setIcon(icon) {

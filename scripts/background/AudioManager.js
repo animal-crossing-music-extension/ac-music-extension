@@ -90,7 +90,7 @@ function AudioManager(addEventListener, isTownTune) {
 			}
 		};
 
-		if (!tabAudioPaused) audio.play().then(setLoopTimes);
+		if (!tabAudioPaused) audio.play().then(setLoopTimes).catch(audioPlayError);
 		else window.notify("pause", [tabAudioPaused]); // Set the badge icon back to the paused state
 
 		function setLoopTimes() {
@@ -283,4 +283,9 @@ function AudioManager(addEventListener, isTownTune) {
 		}
 	});
 
+	audio.onerror = audioPlayError;
+
+	function audioPlayError() {
+		window.notify("musicFailed");
+	}
 }
