@@ -139,9 +139,17 @@ function saveOptions() {
 	document.getElementById('absolute-town-tune').disabled = !enableTownTune;
 
 	let enabledKKVersion = !(document.getElementById('always-kk').checked || document.getElementById('enable-kk').checked);
-	document.getElementById('kk-version-live').disabled = enabledKKVersion;
-	document.getElementById('kk-version-aircheck').disabled = enabledKKVersion;
-	document.getElementById('kk-version-both').disabled = enabledKKVersion;
+
+	document.getElementById('music-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, alwaysKK));
+
+	document.getElementById('weather-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, alwaysKK))
+
+	document.getElementById('kk-version-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, enabledKKVersion));
+
+
+	function updateChildrenState(disabled, childElement){		
+		childElement.disabled = disabled
+	}
 
 	chrome.storage.sync.set({
 		volume,
@@ -200,9 +208,10 @@ function restoreOptions() {
 		document.getElementById('absolute-town-tune').disabled = !items.enableTownTune;
 
 		let enabledKKVersion = !(document.getElementById('always-kk').checked || document.getElementById('enable-kk').checked);
-		document.getElementById('kk-version-live').disabled = enabledKKVersion;
-		document.getElementById('kk-version-aircheck').disabled = enabledKKVersion;
-		document.getElementById('kk-version-both').disabled = enabledKKVersion;
+
+		document.getElementById('music-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, alwaysKK));
+		document.getElementById('weather-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, alwaysKK));
+		document.getElementById('kk-version-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, enabledKKVersion));
 	});
 }
 
