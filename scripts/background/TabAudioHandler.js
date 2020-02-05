@@ -7,11 +7,16 @@ function TabAudioHandler() {
     let tabUpdatedHandler;
     let callback;
 
+    this.activated = false;
+
     this.registerCallback = function (cb) {
         callback = cb;
     }
 
     this.activate = async function () {
+        printDebug("Activating TabAudioHandler.");
+
+        this.activated = true;
         let perms = await checkPerms();
         printDebug(perms);
 

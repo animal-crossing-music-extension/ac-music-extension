@@ -8,13 +8,15 @@ function BadgeManager(addEventListener, isEnabledStart) {
 	let badgeText;
 	let badgeIcon;
 
-	this.updateEnabled = (enabled) => {
+	this.updateEnabled = (enabled, update) => {
 		printDebug("BadgeText has been set to", enabled);
 
 		isEnabled = enabled;
 
-		if (enabled) updateBadgeText();
-		else updateBadgeText(true);
+		if (update) {
+			if (enabled) updateBadgeText();
+			else updateBadgeText(true);
+		}
 	}
 
 	addEventListener("hourMusic", (hour, weather) => {
