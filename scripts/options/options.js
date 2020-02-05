@@ -146,11 +146,6 @@ function saveOptions() {
 
 	document.getElementById('kk-version-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, enabledKKVersion));
 
-
-	function updateChildrenState(disabled, childElement){		
-		childElement.disabled = disabled
-	}
-
 	chrome.storage.sync.set({
 		volume,
 		music,
@@ -207,10 +202,10 @@ function restoreOptions() {
 		document.getElementById('raining').disabled = items.music == 'animal-crossing';
 		document.getElementById('absolute-town-tune').disabled = !items.enableTownTune;
 
-		let enabledKKVersion = !(document.getElementById('always-kk').checked || document.getElementById('enable-kk').checked);
+		let enabledKKVersion = !(items.alwaysKK || items.enableKK);
 
-		document.getElementById('music-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, alwaysKK));
-		document.getElementById('weather-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, alwaysKK));
+		document.getElementById('music-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, items.alwaysKK));
+		document.getElementById('weather-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, items.alwaysKK));
 		document.getElementById('kk-version-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, enabledKKVersion));
 	});
 }
@@ -266,4 +261,8 @@ function validateWeather() {
 		updateLocationEl.textContent = "Update Location";
 		updateLocationEl.disabled = false;
 	}
+}
+
+function updateChildrenState(disabled, childElement){		
+	childElement.disabled = disabled
 }
