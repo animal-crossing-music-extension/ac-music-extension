@@ -139,9 +139,12 @@ function saveOptions() {
 	document.getElementById('absolute-town-tune').disabled = !enableTownTune;
 
 	let enabledKKVersion = !(document.getElementById('always-kk').checked || document.getElementById('enable-kk').checked);
-	document.getElementById('kk-version-live').disabled = enabledKKVersion;
-	document.getElementById('kk-version-aircheck').disabled = enabledKKVersion;
-	document.getElementById('kk-version-both').disabled = enabledKKVersion;
+
+	document.getElementById('music-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, alwaysKK));
+
+	document.getElementById('weather-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, alwaysKK))
+
+	document.getElementById('kk-version-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, enabledKKVersion));
 
 	chrome.storage.sync.set({
 		volume,
@@ -199,10 +202,11 @@ function restoreOptions() {
 		document.getElementById('raining').disabled = items.music == 'animal-crossing';
 		document.getElementById('absolute-town-tune').disabled = !items.enableTownTune;
 
-		let enabledKKVersion = !(document.getElementById('always-kk').checked || document.getElementById('enable-kk').checked);
-		document.getElementById('kk-version-live').disabled = enabledKKVersion;
-		document.getElementById('kk-version-aircheck').disabled = enabledKKVersion;
-		document.getElementById('kk-version-both').disabled = enabledKKVersion;
+		let enabledKKVersion = !(items.alwaysKK || items.enableKK);
+
+		document.getElementById('music-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, items.alwaysKK));
+		document.getElementById('weather-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, items.alwaysKK));
+		document.getElementById('kk-version-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, enabledKKVersion));
 	});
 }
 
@@ -257,4 +261,8 @@ function validateWeather() {
 		updateLocationEl.textContent = "Update Location";
 		updateLocationEl.disabled = false;
 	}
+}
+
+function updateChildrenState(disabled, childElement){		
+	childElement.disabled = disabled
 }
