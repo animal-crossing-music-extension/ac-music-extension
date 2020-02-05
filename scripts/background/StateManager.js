@@ -28,9 +28,11 @@ function StateManager() {
 	};
 
 	this.activate = function () {
+		printDebug("Activating StateManager");
+		
 		isKKTime = timeKeeper.getDay() == 6 && timeKeeper.getHour() >= 20;
 		getSyncedOptions(() => {
-			badgeManager = new BadgeManager(this.registerCallback, options.enableBadgeText);
+			if (!badgeManager) badgeManager = new BadgeManager(this.registerCallback, options.enableBadgeText);
 
 			if (!weatherManager) {
 				weatherManager = new WeatherManager(options.zipCode, options.countryCode);
@@ -54,7 +56,7 @@ function StateManager() {
 				if (musicAndWeather.weather) notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
 			}
 
-			tabAudio.activate();
+			if (!tabAudio.activated) tabAudio.activate();
 		});
 	};
 
@@ -167,6 +169,7 @@ function StateManager() {
 		let kkVersion = options.kkVersion;
 		let oldTabAudio = this.getOption("tabAudio");
 		let oldTabAudioReduce = this.getOption("tabAudioReduceValue");
+		let oldBadgeTextEnabled = this.getOption("enableBadgeText");
 		// Trigger 'options' variable update
 		getSyncedOptions(() => {
 			// Detect changes and notify corresponding listeners
@@ -183,7 +186,7 @@ function StateManager() {
 				notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
 			}
 			if (oldTabAudio != options.tabAudio || oldTabAudioReduce != options.tabAudioReduceValue) notifyListeners("tabAudio", [null, options.tabAudio, options.tabAudioReduceValue]);
-			badgeManager.updateEnabled(options.enableBadgeText);
+			if (oldBadgeTextEnabled != options.enableBadgeText) badgeManager.updateEnabled(options.enableBadgeText);
 		});
 	});
 
