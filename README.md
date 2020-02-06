@@ -2,13 +2,13 @@
 
 # Animal Crossing Music 🍀
  
-**Animal Crossing Music** is a a fun Chrome extension for playing Animal Crossing's
-music in the browser, while you work, play or browse the web! ✨
+**Animal Crossing Music** is a fun Chrome extension for playing Animal Crossing's music in the browser, while you work, play or browse the web! ✨
 
 The music updates in real-time on the hour, and informs you via an optional desktop notification and customizable town tune! 🌱
 
+
 ## Features
-### Hourly music 🕒
+### Hourly Music 🕒
 Listen to the corresponding hourly music from the main Animal Crossing titles:
   - Animal Crossing
   - Wild World / City Folk
@@ -17,24 +17,26 @@ Listen to the corresponding hourly music from the main Animal Crossing titles:
 'Raining' and 'snowing' variants are also included!
 
 ### Live Weather 🌧
-You can enable Weather Detection so weather variants of the hourly music can be automatically picked according to the weather in your location!
+You can enable the "Live Weather" function so weather variants of the hourly music can be automatically picked according to the weather in your specified location!
 
 ### K.K. Slider 🎙
 Listen to K.K. Slider's songs! The extension features both 'live' and 'aircheck' version of his tunes.
 
 You can choose whether to keep his appearances to the usual Saturday nights, or to play his songs 24/7.
 
-
 ### Town Tune 🎵
 The extension features an awesome Town Tune editor available within the browser.
 
-With it you can compone your custom Town Tune, which will be played every time an hour passes (just as in the game!)
+With it you can compose your custom Town Tune, which will be played every time an hour passes, just like the games!
+
 
 ## Installation
-Notice that this project remains unpublished right now. You'll soon be able to install it through the Chrome Web Store!
 
-### Source Code
-You can download the source code of the project and install the unpacked extension yourself. Just click on the `Clone or download` button at the top-right of the page and then on `Download Zip`.
+### Chrome Web Store (Stable Version)
+Simply head over to the [extension's page on the Chrome Web Store](https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop) to download the latest stable version of the extension.
+
+### Source Code (Development Version)
+You can download the source code of the project and install the unpacked extension yourself to access the latest, greatest and probably buggy unreleased features and updates. Just click on the `Clone or download` button at the top-right of the page and then on `Download Zip`.
 
 To install the downloaded project, do the following:
 1. Unzip the downloaded file
@@ -45,11 +47,11 @@ To install the downloaded project, do the following:
 6. Profit!
 
 ### Resources
-The upcoming `4.0` version of the extension introduces a long-needed change: music is now played remotely! 🎉
+The `4.0` version of the extension introduces a long-needed change: music is now played remotely! 🎉
 
 The extension no longer contains music files, and the source code does not depend on resources hosted elsewhere.
 
-Thanks to this change, the size of the extension has shrink from `436MB` to only `4,1MB`. That's a 99,99% decrease in size!
+Thanks to this change, the size of the extension has shrunk from `436MB` to less than `3MB`. That's over a 99% decrease in size!
 
 Downloading the music files and including them into the project directory **is no longer needed** in order to install/use the extension. 
 
@@ -60,11 +62,14 @@ You can still find the used music resources in the following link:
 - The `master` branch contains the latest published version of the extension. This is the stable branch.
 - The `develop` branch contains the latest fully-integrated features of the extension. This is where PRs should be merged into. 
 
-## Support
-If you have any questions or doubts, feel free to jump into the project's [discord channel](https://discordapp.com/invite/4FMrEF8).
+
+## Help & Support
+If you have any questions or doubts, feel free to jump into the project's [Discord Server](https://discord.gg/4FMrEF8).
+
 
 ## Contribute
 Contributions to the project are **greatly** appreciated! Here is how you can help to make this project even better:
+
 ### Issues
 If you want to report a bug, or have a feature request/proposal for improvement, feel free to open a public [issue](https://github.com/PikaDude/Animal-Crossing-Music-Extension/issues) on the project repository.
 
@@ -73,7 +78,11 @@ If you want to report a bug, or have a feature request/proposal for improvement,
 
 
 ## Credit
-Credit is due to all the [contributors](https://github.com/animal-crossing-music-extension/Animal-Crossing-Music-Extension/graphs/contributors) of the original project.
+All of the contributors for versions post-3.0 can be found [listed here](https://github.com/animal-crossing-music-extension/Animal-Crossing-Music-Extension/graphs/contributors).
+
+Credit is due to [Andrex](https://www.neogaf.com/members/andrex.20593/) and [blazescorch2](https://www.neogaf.com/members/blazescorch2.142800/) from NeoGAF for developing the original 1.0 and 2.0 versions of the extension.
+
+Original concept of the extension taken from [tane.us](http://tane.us/ac/)
 
 
 ## Licensing
