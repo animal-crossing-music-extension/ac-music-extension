@@ -1,5 +1,5 @@
 // Be sure to update this URL when the time comes.
-const projectURL = 'https://api.github.com/repos/PikaDude/ac-music-extension-revived/contributors';
+const projectURL = 'https://api.github.com/repos/animal-crossing-music-extension/ac-music-extension/contributors';
 const tableColCount = 6;
 
 function getContributors() {

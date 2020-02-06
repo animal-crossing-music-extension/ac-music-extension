@@ -71,10 +71,10 @@ If you have any questions or doubts, feel free to jump into the project's [Disco
 Contributions to the project are **greatly** appreciated! Here is how you can help to make this project even better:
 
 ### Issues
-If you want to report a bug, or have a feature request/proposal for improvement, feel free to open a public [issue](https://github.com/PikaDude/Animal-Crossing-Music-Extension/issues) on the project repository.
+If you want to report a bug, or have a feature request/proposal for improvement, feel free to open a public [issue](https://github.com/animal-crossing-music-extension/ac-music-extension/issues) on the project repository.
 
 ### PR Submission
-[Pull Requests](https://github.com/PikaDude/Animal-Crossing-Music-Extension/pulls) are equally welcomed. Just make sure to submit them to `develop` and give some love to the PR description!
+[Pull Requests](https://github.com/animal-crossing-music-extension/ac-music-extension/pulls) are equally welcomed. Just make sure to submit them to `develop` and give some love to the PR description!
 
 
 ## Credit
