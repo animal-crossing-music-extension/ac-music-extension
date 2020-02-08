@@ -1,26 +1,47 @@
 {
    "background": {
-      "scripts": [ "scripts/Utility.js", "scripts/tune_player.js", "scripts/TownTuneManager.js", "scripts/TimeKeeper.js", "scripts/LoopTimes.js", "scripts/WeatherManager.js", "scripts/AudioManager.js", "scripts/BadgeManager.js", "scripts/NotificationManager.js", "scripts/StateManager.js", "scripts/main.js" ]
+      "scripts": [
+         "scripts/background/Utility.js",
+         "scripts/global/tune_player.js",
+         "scripts/background/TownTuneManager.js",
+         "scripts/background/TimeKeeper.js",
+         "scripts/background/LoopTimes.js",
+         "scripts/background/WeatherManager.js",
+         "scripts/background/KKSongs.js",
+         "scripts/background/AudioManager.js",
+         "scripts/background/BadgeManager.js",
+         "scripts/background/NotificationManager.js",
+         "scripts/background/StateManager.js",
+         "scripts/background/MediaSessionManager.js",
+         "scripts/background/TabAudioHandler.js",
+         "scripts/background/main.js"
+      ]
    },
    "browser_action": {
       "default_icon": {
-		  "38": "img/icon_38_leaf_playing.png"
+         "128": "img/icons/status/paused/128.png",
+         "64": "img/icons/status/paused/64.png",
+         "32": "img/icons/status/paused/32.png"
       },
       "default_title": "Animal Crossing Music"
    },
    "description": "Play Animal Crossing's smooth background music in real-time throughout your day.",
    "icons": {
-      "128": "img/icon_128_kk.png",
-      "38": "img/icon_32_kk.png"
+      "128": "img/icons/icon/128.png",
+      "64": "img/icons/icon/64.png",
+      "32": "img/icons/icon/32.png"
    },
-   "manifest_version": 3,
+   "manifest_version": 2,
    "name": "Animal Crossing Music",
    "options_page": "options.html",
-   "permissions": [ 
-		"notifications", 
-		"storage", 
-		"http://api.openweathermap.org/" ],
+   "permissions": [
+      "notifications",
+      "storage",
+      "https://ac.pikadude.me/"
+   ],
+   "optional_permissions": [
+      "tabs"
+   ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "3.4",
-   "web_accessible_resources": [ "img/clock.png", "bells.ogg" ]
+   "version": "4.0.0"
 }
