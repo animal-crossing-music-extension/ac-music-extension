@@ -34,3 +34,11 @@ function capitalize(string) {
 function getLocalUrl(relativePath) {
 	return chrome.runtime.getURL(relativePath)
 }
+
+function hasMediaSessionSupport() {
+	return isChrome;
+}
+
+function checkMediaSessionSupport(lambda) {
+	if (hasMediaSessionSupport) lambda();
+}
