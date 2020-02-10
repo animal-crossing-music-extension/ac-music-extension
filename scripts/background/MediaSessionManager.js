@@ -13,7 +13,7 @@ function MediaSessionManager() {
 
 	// Updates the mediasession metadata (for hourly music)
 	this.updateMetadata = async function (game, hour, weather) {
-		if (!hasMediaSessionSupport) return 
+		if (!supportsMediaSession) return 
 
 		let artwork = await toDataURL(game);
 		navigator.mediaSession.metadata = new MediaMetadata({
@@ -29,7 +29,7 @@ function MediaSessionManager() {
 
 	// Updates the mediasession metadata (for kk)
 	this.updateMetadataKK = async function (title, fileName) {
-		if (!hasMediaSessionSupport) return 
+		if (!supportsMediaSession) return 
 
 		let metadata = new MediaMetadata({
 			title,

@@ -35,10 +35,8 @@ function getLocalUrl(relativePath) {
 	return chrome.runtime.getURL(relativePath)
 }
 
-function hasMediaSessionSupport() {
-	return navigator.mediasesion != null;
-}
+var supportsMediaSession = (typeof(navigator.mediasesion) !== "undefined");
 
 function checkMediaSessionSupport(lambda) {
-	if (hasMediaSessionSupport) lambda();
+	if (supportsMediaSession) lambda();
 }
