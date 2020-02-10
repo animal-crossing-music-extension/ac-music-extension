@@ -13,6 +13,8 @@ function MediaSessionManager() {
 
 	// Updates the mediasession metadata (for hourly music)
 	this.updateMetadata = async function (game, hour, weather) {
+		if (!hasMediaSessionSupport) return 
+
 		let artwork = await toDataURL(game);
 		navigator.mediaSession.metadata = new MediaMetadata({
 			title: `${formatHour(hour)} (${capitalize(weather)})`,
@@ -27,6 +29,8 @@ function MediaSessionManager() {
 
 	// Updates the mediasession metadata (for kk)
 	this.updateMetadataKK = async function (title, fileName) {
+		if (!hasMediaSessionSupport) return 
+
 		let metadata = new MediaMetadata({
 			title,
 			artist: 'K.K. Slider',
