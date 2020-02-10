@@ -36,7 +36,7 @@ function getLocalUrl(relativePath) {
 }
 
 function hasMediaSessionSupport() {
-	return isChrome;
+	return navigator.mediasesion != null;
 }
 
 function checkMediaSessionSupport(lambda) {
