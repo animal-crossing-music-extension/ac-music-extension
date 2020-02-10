@@ -44,7 +44,9 @@ function AudioManager(addEventListener, isTownTune) {
 			} else playHourSong(game, weather, hour, false);
 		});
 
-		navigator.mediaSession.setActionHandler('nexttrack', null);
+		checkMediaSessionSupport(() => {
+			navigator.mediaSession.setActionHandler('nexttrack', null);
+		});
 	}
 
 	// Plays a song for an hour, setting up loop times if
@@ -139,7 +141,9 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.addEventListener("ended", playKKSong);
 		fadeOutAudio(500, playKKSong);
 
-		navigator.mediaSession.setActionHandler('nexttrack', playKKSong);
+		checkMediaSessionSupport(() => {
+			navigator.mediaSession.setActionHandler('nexttrack', playKKSong);
+		});
 	}
 
 	function playKKSong() {
