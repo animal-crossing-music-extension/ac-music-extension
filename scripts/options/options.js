@@ -42,6 +42,11 @@ function formatPercentage(number) {
 	else return `${number}%`
 }
 
+function containsSpace(string) {
+	return (string.indexOf(' ') >= 0);
+}
+
+
 window.onload = function () {
 	restoreOptions();
 	document.getElementById('version-number').textContent = 'Version ' + chrome.runtime.getManifest().version;
