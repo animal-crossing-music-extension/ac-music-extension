@@ -215,8 +215,8 @@ function validateWeather() {
 	updateLocationEl.textContent = "Validating...";
 	updateLocationEl.disabled = true;
 
-	let zip = document.getElementById('zip-code').value;
-	let country = document.getElementById('country-code').value;
+	let zip = document.getElementById('zip-code').value.trim();
+	let country = document.getElementById('country-code').value.trim();
 	if (zip == '') {
 		responseMessage('You must specify a zip code.');
 		return;
