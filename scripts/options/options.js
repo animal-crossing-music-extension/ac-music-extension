@@ -246,7 +246,6 @@ function validateWeather() {
 		if (request.status == 200) responseMessage(`Success! The current weather status in ${response.city}, ${response.country} is "${response.weather}"`, true);
 		else {
 			if (response.error) {
-				let errorMessage = response.error;
 				if ((response.error === "City not found") && (containsSpace(zip))) {
 					response.error += " – Try with only the first part of the zip code."
 				}
