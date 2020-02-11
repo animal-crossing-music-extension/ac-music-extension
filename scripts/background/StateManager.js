@@ -202,8 +202,11 @@ function StateManager() {
 	});
 
 	// Handle the user interactions in the media session dialogue.
-	navigator.mediaSession.setActionHandler('play', toggleMusic);
-	navigator.mediaSession.setActionHandler('pause', toggleMusic);
+	checkMediaSessionSupport(() => {
+		navigator.mediaSession.setActionHandler('play', toggleMusic);
+		navigator.mediaSession.setActionHandler('pause', toggleMusic);
+		}
+	);
 
 	function toggleMusic() {
 		chrome.storage.sync.set({ paused: !options.paused }, function () {
