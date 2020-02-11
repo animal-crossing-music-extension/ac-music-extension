@@ -5,7 +5,9 @@
 function TabAudioHandler() {
 
     let tabUpdatedHandler;
+    let checkTabsInterval;
     let callback;
+    let audible = false;
 
     this.activated = false;
 
@@ -25,6 +27,7 @@ function TabAudioHandler() {
             tabUpdatedHandler = checkTabs;
             chrome.tabs.onUpdated.addListener(checkTabs);
             chrome.tabs.onRemoved.addListener(checkTabs); // A tab that is audible can be closed and will not trigger the updated event.
+            checkTabsInterval = setInterval(checkTabs, 100);
             checkTabs();
         } else if (tabUpdatedHandler) removeHandler();
     }
@@ -36,7 +39,8 @@ function TabAudioHandler() {
     }
 
     function removeHandler() {
-        chrome.tabs.onUpdated.removeListener(tabUpdatedHandler);
+        if (tabUpdatedHandler) chrome.tabs.onUpdated.removeListener(tabUpdatedHandler);
+        if (checkTabsInterval) clearInterval(checkTabsInterval);
         tabUpdatedHandler = null;
     }
 
@@ -46,7 +50,11 @@ function TabAudioHandler() {
             muted: false,
             audible: true
         }, tabs => {
-            callback(tabs.length > 0);
+            let nowAudible = tabs.length > 0;
+            if (nowAudible != audible) {
+                callback(tabs.length > 0);
+                audible = nowAudible;
+            }
         });
     }
 }
