@@ -2,7 +2,7 @@
 
 'use strict';
 
-var DEBUG_FLAG = false;
+var DEBUG_FLAG = true;
 
 // Returns a hour-formatted string of a time
 function formatHour(time) {
