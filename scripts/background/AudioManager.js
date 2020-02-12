@@ -22,6 +22,7 @@ function AudioManager(addEventListener, isTownTune) {
 	let mediaSessionManager = new MediaSessionManager();
 	let kkVersion;
 	let hourlyChange = false;
+	let townTunePlaying = false;
 
 	let setVolumeValue;
 	let tabAudible = false;
@@ -38,7 +39,9 @@ function AudioManager(addEventListener, isTownTune) {
 		let fadeOutLength = isHourChange ? 3000 : 500;
 		fadeOutAudio(fadeOutLength, () => {
 			if (isHourChange && isTownTune()) {
+				townTunePlaying = true;
 				townTuneManager.playTune(() => {
+					townTunePlaying = false;
 					playHourSong(game, weather, hour, false);
 				});
 			} else playHourSong(game, weather, hour, false);
@@ -102,7 +105,7 @@ function AudioManager(addEventListener, isTownTune) {
 			// set up loop points if loopTime is set up for this
 			// game, hour and weather.
 			if (loopTime) {
-				printDebug("setting loop times");
+				printDebug("setting loop times. start:", loopTime.start, "end:", loopTime.end);
 
 				if (debugLoopTimes) {
 					delayToLoop = 8;
@@ -114,8 +117,9 @@ function AudioManager(addEventListener, isTownTune) {
 
 				printDebug("delayToLoop: " + delayToLoop);
 
+				if (killLoopTimeout) killLoopTimeout();
 				let loopTimeout = setTimeout(() => {
-					printDebug("looping");
+					printDebug("looping from", audio.currentTime, "to", loopTime.start);
 					audio.currentTime = loopTime.start;
 
 					delayToLoop = loopTime.end - loopTime.start;
@@ -125,6 +129,7 @@ function AudioManager(addEventListener, isTownTune) {
 					printDebug("killing loop timeout");
 					clearTimeout(loopTimeout);
 					loopTimeout = null;
+					killLoopTimeout = null;
 				};
 			} else printDebug("no loop times found. looping full song")
 		}
@@ -245,13 +250,11 @@ function AudioManager(addEventListener, isTownTune) {
 			// Handles all cases except for an options switch.
 			if (tabAudio == 'pause') {
 				if (audible) {
-					if (!audio.paused) {
-						audio.pause();
-						tabAudioPaused = true;
-					}
+					audio.pause();
+					tabAudioPaused = true;
 				} else {
 					if (audio.paused && audio.readyState >= 3) {
-						audio.play();
+						if (!townTunePlaying) audio.play();
 						tabAudioPaused = false;
 						// Get the badge icon updated.
 						window.notify("unpause");
