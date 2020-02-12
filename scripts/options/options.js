@@ -223,11 +223,11 @@ function validateWeather() {
 	let zip = document.getElementById('zip-code').value.trim();
 	let country = document.getElementById('country-code').value.trim();
 	if (zip == '') {
-		responseMessage('You must specify a zip code.');
+		responseMessage('You must specify a zip/post code.');
 		return;
 	}
 	if (country == '') {
-		responseMessage('You must specify a country code.');
+		responseMessage('You must specify an ISO code.');
 		return;
 	}
 

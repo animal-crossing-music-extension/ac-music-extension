@@ -172,13 +172,10 @@
 
 					<section id="live-weather-location">
 						<h3>Live Weather Location</h3>
-						<p>Select the location to fetch the live weather information from. The live weather synchronizes with the extension's music</p>
-						<div class="text">
-							<input type="text" id="zip-code" aria-label="Zip Code" value="98052" placeholder="Zip Code">
-							<input type="text" id="country-code" aria-label="Country Code" value="US" placeholder="Country Code">
+						<p>Select the location to fetch the live weather information from. The live weather synchronizes with the extension's music.<br />The first box is your <a href="https://worldpostalcode.com/" target="_blank">zip/post code</a>, the second is your <a href="https://countrycode.org/" target="_blank">ISO code (the two letters)</a></p> <div class="text">
+							<input type="text" id="zip-code" aria-label="Zip/Post Code" value="98052" placeholder="Zip/Post Code">
+							<input type="text" id="country-code" aria-label="ISO Code" value="US" placeholder="ISO Code">
 							<button type="button" id="update-location">Update Location</button>
-							<label>(First box is <a href="https://worldpostalcode.com/" target="_blank">zip code</a>, second is <a href="https://countrycode.org/"
-									target="_blank">country code</a>)</label>
 							<p id="weather-response"></p>
 						</div>
 					</section>
