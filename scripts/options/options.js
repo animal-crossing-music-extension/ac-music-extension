@@ -42,6 +42,11 @@ function formatPercentage(number) {
 	else return `${number}%`
 }
 
+function containsSpace(string) {
+	return (string.indexOf(' ') >= 0);
+}
+
+
 window.onload = function () {
 	restoreOptions();
 	document.getElementById('version-number').textContent = 'Version ' + chrome.runtime.getManifest().version;
@@ -215,8 +220,8 @@ function validateWeather() {
 	updateLocationEl.textContent = "Validating...";
 	updateLocationEl.disabled = true;
 
-	let zip = document.getElementById('zip-code').value;
-	let country = document.getElementById('country-code').value;
+	let zip = document.getElementById('zip-code').value.trim();
+	let country = document.getElementById('country-code').value.trim();
 	if (zip == '') {
 		responseMessage('You must specify a zip code.');
 		return;
@@ -240,7 +245,12 @@ function validateWeather() {
 
 		if (request.status == 200) responseMessage(`Success! The current weather status in ${response.city}, ${response.country} is "${response.weather}"`, true);
 		else {
-			if (response.error) responseMessage(response.error);
+			if (response.error) {
+				if ((response.error === "City not found") && (containsSpace(zip))) {
+					response.error += " – Try with only the first part of the zip code."
+				}
+				responseMessage(response.error);
+			}
 			else responseMessage();
 		}
 	}
