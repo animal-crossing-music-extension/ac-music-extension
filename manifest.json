@@ -37,11 +37,11 @@
    "permissions": [
       "notifications",
       "storage",
-      "https://ac.pikadude.me/"
+      "https://acmusicext.com/"
    ],
    "optional_permissions": [
       "tabs"
    ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "4.0.1"
+   "version": "4.1.0"
 }
