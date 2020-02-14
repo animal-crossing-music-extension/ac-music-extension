@@ -17,6 +17,7 @@ const onClickElements = [
 	'absolute-town-tune',
 	'enable-notifications',
 	'enable-badge',
+	'enable-background',
 	'kk-version-live',
 	'kk-version-aircheck',
 	'kk-version-both',
@@ -106,6 +107,7 @@ function saveOptions() {
 	let zipCode = document.getElementById('zip-code').value;
 	let countryCode = document.getElementById('country-code').value;
 	let enableBadgeText = document.getElementById('enable-badge').checked;
+	let enableBackground = document.getElementById('enable-background').checked;
 	let tabAudioReduceValue = document.getElementById('tab-audio-reduce-value').value;
 
 	if (tabAudioReduceValue > 100) {
@@ -164,6 +166,7 @@ function saveOptions() {
 		zipCode,
 		countryCode,
 		enableBadgeText,
+		enableBackground,
 		tabAudio,
 		tabAudioReduceValue
 	});
@@ -183,6 +186,7 @@ function restoreOptions() {
 		zipCode: "98052",
 		countryCode: "us",
 		enableBadgeText: true,
+		enableBackground: false,
 		tabAudio: 'nothing',
 		tabAudioReduceValue: 80
 	}, items => {
@@ -200,6 +204,7 @@ function restoreOptions() {
 		document.getElementById('zip-code').value = items.zipCode;
 		document.getElementById('country-code').value = items.countryCode;
 		document.getElementById('enable-badge').checked = items.enableBadgeText;
+		document.getElementById('enable-background').checked = items.enableBackground;
 		document.getElementById('tab-audio-' + items.tabAudio).checked = true;
 		document.getElementById('tab-audio-reduce-value').value = items.tabAudioReduceValue;
 
