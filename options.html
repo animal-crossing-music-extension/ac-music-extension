@@ -302,14 +302,12 @@
 
 	<div id="tabAudioModal" class="modal">
 		<div class="modal-content">
-			<p class="modal-title">Note!</p>
-			<p>The "Tab Audio Behaviour" option requires additional permissions to function, specifically the "Tabs" permission. Due to a quirk in Chromium, this permission is defined
-				as "Read your browsing history". This permission does NOT give the extension permission to view your actual browsing history, but allows it to see what tabs you currently
-				have open, which we use ONLY to check to see if any tabs are playing audio. If you are okay with that, press "Allow" on the next dialogue.</p>
-			<a target="_blank" href="https://developer.chrome.com/extensions/permission_warnings#view_warnings">For more info, refer to the Chrome Developer Docs.</a>
+			<p id="modal-title"></p>
+			<p id="modal-text"></p>
+			<a id="modal-link" target="_blank"></a>
 			<br />
 			<br />
-			<button id="tabAudioModalDismiss">Understood!</button>
+			<button id="tabAudioModalDismiss"></button>
 		</div>
 	</div>
 </body>

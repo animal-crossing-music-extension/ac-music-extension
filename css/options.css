@@ -89,7 +89,7 @@ td {
     width: 50%;
 }
 
-.modal-title {
+#modal-title {
     font-weight: bold;
     font-size: 18px;
 }

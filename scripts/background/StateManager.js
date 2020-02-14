@@ -193,10 +193,6 @@ function StateManager() {
 	// play/pause when user clicks the extension icon
 	chrome.browserAction.onClicked.addListener(toggleMusic);
 
-	// update tab audio handler when the user changes the extension's permissions
-	chrome.permissions.onAdded.addListener(tabAudio.activate);
-	chrome.permissions.onRemoved.addListener(tabAudio.activate);
-
 	tabAudio.registerCallback(audible => {
 		notifyListeners("tabAudio", [audible, options.tabAudio, options.tabAudioReduceValue]);
 	});
