@@ -94,6 +94,7 @@ function StateManager() {
 			paused: false,
 			enableTownTune: true,
 			absoluteTownTune: false,
+			townTuneVolume: 0.75,
 			//enableAutoPause: false,
 			zipCode: "98052",
 			countryCode: "us",
