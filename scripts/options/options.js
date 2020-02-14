@@ -55,6 +55,11 @@ window.onload = function () {
 		let volumeText = document.getElementById('volumeText');
 		volumeText.innerHTML = `${formatPercentage(this.value*100)}`;
 	};
+	document.getElementById('townTuneVolume').onchange = saveOptions; // Maybe disable as to only save when clicking "save" button
+	document.getElementById('townTuneVolume').oninput = function() {
+		let ttVolumeText = document.getElementById('townTuneVolumeText');
+		ttVolumeText.innerHTML = `${formatPercentage(this.value*100)}`;
+	};
 
 	onClickElements.forEach(el => {
 		document.getElementById(el).onclick = saveOptions;
@@ -103,6 +108,7 @@ function saveOptions() {
 	let enableKK = alwaysKK || document.getElementById('enable-kk').checked;
 	let enableTownTune = document.getElementById('enable-town-tune').checked;
 	let absoluteTownTune = document.getElementById('absolute-town-tune').checked;
+	let townTuneVolume   = document.getElementById('townTuneVolume').value;
 	let zipCode = document.getElementById('zip-code').value;
 	let countryCode = document.getElementById('country-code').value;
 	let enableBadgeText = document.getElementById('enable-badge').checked;
@@ -161,6 +167,7 @@ function saveOptions() {
 		kkVersion,
 		enableTownTune,
 		absoluteTownTune,
+		townTuneVolume,
 		zipCode,
 		countryCode,
 		enableBadgeText,
@@ -180,6 +187,7 @@ function restoreOptions() {
 		kkVersion: 'live',
 		enableTownTune: true,
 		absoluteTownTune: false,
+		townTuneVolume: 0.75,
 		zipCode: "98052",
 		countryCode: "us",
 		enableBadgeText: true,
@@ -197,6 +205,8 @@ function restoreOptions() {
 		document.getElementById('kk-version-' + items.kkVersion).checked = true;
 		document.getElementById('enable-town-tune').checked = items.enableTownTune;
 		document.getElementById('absolute-town-tune').checked = items.absoluteTownTune;
+		document.getElementById('townTuneVolume').value = items.townTuneVolume;
+		document.getElementById('townTuneVolumeText').innerHTML = `${formatPercentage(items.townTuneVolume*100)}`;
 		document.getElementById('zip-code').value = items.zipCode;
 		document.getElementById('country-code').value = items.countryCode;
 		document.getElementById('enable-badge').checked = items.enableBadgeText;
@@ -213,6 +223,7 @@ function restoreOptions() {
 		document.getElementById('weather-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, items.alwaysKK));
 		document.getElementById('kk-version-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, enabledKKVersion));
 	});
+	
 }
 
 function validateWeather() {
