@@ -192,17 +192,24 @@
 					<section>
 						<p>Compose a tune to be played every hour on the hour</p>
 						<div class="pitch-template hidden">
-							<input class="pitch-name" type="text" maxlength="2" size="2">
-							<input class="pitch-slider" type="range" min="0" max="14" step="1" orient="vertical">
+							<input class="pitch-name"   type="text"  maxlength="2" size="2">
+							<input class="pitch-slider" type="range" min="0" max="16" step="1" orient="vertical">
 						</div>
 						<div class="staff staff1"></div>
 						<div class="staff staff2"></div>
+						<br>
+						<p>Town tune volume:</p>
+						<input id="townTuneVolume" type="range" min="0" max="1" step="0.01">
+						<span  id="townTuneVolumeText"></span> 
 					</section>
-
+					
 					<header>
 						<div style="padding: 0; margin: 0; height:18px;"></div>
 						<div class="controls">
 							<button class="play-tune">Play!</button>
+							<div class="spacer"></div>
+							<button class="reset-tune">Reset</button>
+							<button class="randomize-tune">Randomize</button>
 							<div class="spacer"></div>
 							<button class="save-tune">Save</button>
 						</div>
