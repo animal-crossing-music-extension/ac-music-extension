@@ -158,7 +158,7 @@ function restoreOptions() {
 		zipCode: "98052",
 		countryCode: "us",
 		enableBadgeText: true,
-		tabAudio: 'nothing',
+		tabAudio: 'pause',
 		tabAudioReduceValue: 80
 	}, items => {
 		document.getElementById('volume').value = items.volume;

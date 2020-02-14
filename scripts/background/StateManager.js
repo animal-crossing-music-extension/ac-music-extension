@@ -98,7 +98,7 @@ function StateManager() {
 			zipCode: "98052",
 			countryCode: "us",
 			enableBadgeText: true,
-			tabAudio: 'nothing',
+			tabAudio: 'pause',
 			tabAudioReduceValue: 80
 		}, items => {
 			options = items;
