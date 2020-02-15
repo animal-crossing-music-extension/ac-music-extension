@@ -266,6 +266,8 @@
 						<li>Changed zip/post code reference link</li>
 						<li>Added a note for users with a space in their post code</li>
 						<li>Fixed a bug causing songs to sometimes loop incorrectly</li>
+						<li>Removed the need for the tabs permission for the Tab Audio Behaviour/Handling function</li>
+						<li>Change default Tab Audio Behaviour to pause rather than nothing</li>
 						<li>Fixed a bug causing the music to not click over to the next hour and get stuck on a single hour</li>
 						<li>Overhauled about page</li>
 						<li>Changed API endpoints and domain</li>
@@ -310,14 +312,12 @@
 
 	<div id="tabAudioModal" class="modal">
 		<div class="modal-content">
-			<p class="modal-title">Note!</p>
-			<p>The "Tab Audio Behaviour" option requires additional permissions to function, specifically the "Tabs" permission. Due to a quirk in Chromium, this permission is defined
-				as "Read your browsing history". This permission does NOT give the extension permission to view your actual browsing history, but allows it to see what tabs you currently
-				have open, which we use ONLY to check to see if any tabs are playing audio. If you are okay with that, press "Allow" on the next dialogue.</p>
-			<a target="_blank" href="https://developer.chrome.com/extensions/permission_warnings#view_warnings">For more info, refer to the Chrome Developer Docs.</a>
+			<p id="modal-title"></p>
+			<p id="modal-text"></p>
+			<a id="modal-link" target="_blank"></a>
 			<br />
 			<br />
-			<button id="tabAudioModalDismiss">Understood!</button>
+			<button id="tabAudioModalDismiss"></button>
 		</div>
 	</div>
 </body>

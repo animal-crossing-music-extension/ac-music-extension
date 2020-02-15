@@ -99,8 +99,8 @@ function StateManager() {
 			zipCode: "98052",
 			countryCode: "us",
 			enableBadgeText: true,
+			tabAudio: 'pause',
 			enableBackground: false,
-			tabAudio: 'nothing',
 			tabAudioReduceValue: 80
 		}, items => {
 			options = items;
@@ -194,10 +194,6 @@ function StateManager() {
 
 	// play/pause when user clicks the extension icon
 	chrome.browserAction.onClicked.addListener(toggleMusic);
-
-	// update tab audio handler when the user changes the extension's permissions
-	chrome.permissions.onAdded.addListener(tabAudio.activate);
-	chrome.permissions.onRemoved.addListener(tabAudio.activate);
 
 	// play/pause when chrome closes and the option to play in background is disabled
 	chrome.tabs.onRemoved.addListener(checkTabs);

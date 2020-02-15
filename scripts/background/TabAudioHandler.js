@@ -19,23 +19,13 @@ function TabAudioHandler() {
         printDebug("Activating TabAudioHandler.");
 
         this.activated = true;
-        let perms = await checkPerms();
-        printDebug(perms);
 
-        if (perms) {
-            if (tabUpdatedHandler) removeHandler();
-            tabUpdatedHandler = checkTabs;
-            chrome.tabs.onUpdated.addListener(checkTabs);
-            chrome.tabs.onRemoved.addListener(checkTabs); // A tab that is audible can be closed and will not trigger the updated event.
-            checkTabsInterval = setInterval(checkTabs, 100);
-            checkTabs();
-        } else if (tabUpdatedHandler) removeHandler();
-    }
-
-    function checkPerms () {
-        return new Promise(resolve => {
-            chrome.permissions.contains({ permissions: ['tabs'] }, resolve);
-        });
+        if (tabUpdatedHandler) removeHandler();
+        tabUpdatedHandler = checkTabs;
+        chrome.tabs.onUpdated.addListener(checkTabs);
+        chrome.tabs.onRemoved.addListener(checkTabs); // A tab that is audible can be closed and will not trigger the updated event.
+        checkTabsInterval = setInterval(checkTabs, 100);
+        checkTabs();
     }
 
     function removeHandler() {

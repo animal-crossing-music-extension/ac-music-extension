@@ -21,13 +21,10 @@ const onClickElements = [
 	'kk-version-live',
 	'kk-version-aircheck',
 	'kk-version-both',
-	'tab-audio-nothing'
-];
-
-const tabAudioElements = [
+	'tab-audio-nothing',
 	'tab-audio-reduce',
 	'tab-audio-pause'
-]
+];
 
 const exclamationElements = [
 	'live-weather-location-link',
@@ -59,28 +56,6 @@ window.onload = function () {
 
 	onClickElements.forEach(el => {
 		document.getElementById(el).onclick = saveOptions;
-	});
-	tabAudioElements.forEach(el => {
-		document.getElementById(el).onclick = () => {
-			chrome.permissions.contains({ permissions: ['tabs'] }, hasTabs => {
-				if (hasTabs) saveOptions();
-				else {
-					let modal = document.getElementById('tabAudioModal');
-					modal.style.display = 'block';
-
-					document.getElementById('tabAudioModalDismiss').onclick = () => {
-						modal.style.display = "none";
-						chrome.permissions.request({ permissions: ['tabs'] }, hasTabs => {
-							if (hasTabs) saveOptions();
-							else {
-								tabAudioElements.forEach(el => document.getElementById(el).checked = false);
-								document.getElementById('tab-audio-nothing').checked = true;
-							}
-						});
-					};
-				}
-			});
-		}
 	});
 	document.getElementById('update-location').onclick = validateWeather;
 	document.getElementById('tab-audio-reduce-value').onchange = saveOptions;
@@ -186,8 +161,8 @@ function restoreOptions() {
 		zipCode: "98052",
 		countryCode: "us",
 		enableBadgeText: true,
-		enableBackground: false,
-		tabAudio: 'nothing',
+		tabAudio: 'pause',
+		enableBackground: false
 		tabAudioReduceValue: 80
 	}, items => {
 		document.getElementById('volume').value = items.volume;
