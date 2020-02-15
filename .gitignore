@@ -47,3 +47,5 @@ Animal-Crossing-Music-Extension.zip
 *.ai
 !sound/bells.ogg
 img/cover/kk
+node_modules/
+
