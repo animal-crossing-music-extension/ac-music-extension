@@ -1,0 +1,22 @@
+{
+  "name": "ac-music-extension",
+  "version": "1.1.0",
+  "description": "Browser extension that plays Animal Crossing music",
+  "main": "scripts/background/main.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JordiGarcL/ac-music-extension.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JordiGarcL/ac-music-extension/issues"
+  },
+  "homepage": "https://github.com/JordiGarcL/ac-music-extension#readme"
+}
