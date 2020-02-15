@@ -20,6 +20,7 @@ section {
   
   border-width: 3px !important;
   border-radius: 40px !important;
+  transition-duration: 0.1s;
 }
 
 .pitch-slider {
