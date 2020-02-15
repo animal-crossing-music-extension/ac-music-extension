@@ -68,7 +68,7 @@ function AudioManager(addEventListener, isTownTune) {
 		}*/
 
 		// SETTING AUDIO SOURCE		
-		audio.src = `https://ac.pikadude.me/static/${game}/${weather}/${songName}.ogg`;
+		audio.src = `https://acmusicext.com/static/${game}/${weather}/${songName}.ogg`;
 
 		let loopTime = ((loopTimes[game] || {})[weather] || {})[hour];
 		let delayToLoop;
@@ -161,7 +161,7 @@ function AudioManager(addEventListener, isTownTune) {
 		} else version = kkVersion;
 
 		let randomSong = KKSongList[Math.floor(Math.random() * KKSongList.length)];
-		audio.src = `https://ac.pikadude.me/static/kk/${version}/${randomSong}.ogg`;
+		audio.src = `https://acmusicext.com/static/kk/${version}/${randomSong}.ogg`;
 		audio.play();
 
 		let formattedTitle = `${randomSong.split(' - ')[1]} (${capitalize(version)} Version)`;

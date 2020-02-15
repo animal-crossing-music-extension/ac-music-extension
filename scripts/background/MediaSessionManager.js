@@ -74,7 +74,7 @@ function MediaSessionManager() {
 				if (name == 'kk') resolve('');
 
 				if (kk) {
-					let kkArtUrl = `https://ac.pikadude.me/static/kk/art/${name}.png`
+					let kkArtUrl = `https://acmusicext.com/static/kk/art/${name}.png`
 					printDebug(`Using fallback remote url: "${kkArtUrl}"`)
 					resolve(kkArtUrl);
 				}

@@ -36,7 +36,7 @@ function WeatherManager(zip, country) {
 
 	// Checks the weather every 10 minutes, calls callback if it's changed
 	let weatherCheckLoop = function () {
-		let url = `https://ac.pikadude.me/weather/${country}/${zip}`
+		let url = `https://acmusicext.com/api/weather-v1/${country}/${zip}`
 		let request = new XMLHttpRequest();
 
 		request.onload = function () {

@@ -1,6 +1,6 @@
 // Be sure to update this URL when the time comes.
-const projectURL = 'https://api.github.com/repos/animal-crossing-music-extension/ac-music-extension/contributors';
-const tableColCount = 6;
+const projectURL = 'https://acmusicext.com/api/contributors';
+const tableColCount = 5;
 
 function getContributors() {
     return new Promise(resolve => {
@@ -50,22 +50,63 @@ async function updateContributors() {
         for (let cI = rowI * tableColCount; cI < tableColCount + rowI * tableColCount; cI++) {
             let contributor = contributors[cI];
             let td = document.createElement('td');
+            td.className = 'contributor';
 
             if (contributor) {
-                let anchor = document.createElement('a');
-                anchor.target = "_blank";
-                anchor.href = contributor.html_url;
-                anchor.className = 'contributor';
-
                 let avatar = document.createElement('img');
                 avatar.src = contributor.avatar_url;
 
                 let name = document.createElement('p');
-                name.textContent = contributor.login;
+                name.textContent = contributor.name;
 
-                anchor.appendChild(avatar);
-                anchor.appendChild(name);
-                td.appendChild(anchor);
+                let contributions;
+                if (contributor.contributions > 0) {
+                    contributions = document.createElement('span');
+                    contributions.textContent = `${contributor.contributions} ${(contributor.contributions == 1) ? 'Contribution' : 'Contributions'}`;
+                }
+
+                let githubLink;
+                if (contributor.url) {
+                    githubLink = document.createElement('a');
+                    githubLink.target = "_blank";
+                    githubLink.href = contributor.url;
+                    githubLink.className = 'contributorLink';
+
+                    let icon = document.createElement('img');
+                    icon.src = 'img/social/github.png';
+                    icon.className = 'githubIcon';
+                    githubLink.appendChild(icon);
+
+                    githubLink.append(`@${contributor.login}`);
+                }
+
+                let discordName;
+                if (contributor.discord) {
+                    discordName = document.createElement('span');
+                    discordName.className = 'contributorLink';
+
+                    let icon = document.createElement('img');
+                    icon.src = 'img/social/discord.png';
+                    icon.className = 'discordIcon';
+                    discordName.appendChild(icon);
+
+                    discordName.append(`@${contributor.discord}`);
+                }
+
+                td.appendChild(avatar);
+                td.appendChild(name);
+                if (contributions) {
+                    td.appendChild(document.createElement('br'));
+                    td.appendChild(contributions);
+                }
+                if (githubLink) {
+                    td.appendChild(document.createElement('br'));
+                    td.appendChild(githubLink);
+                }
+                if (discordName) {
+                    td.appendChild(document.createElement('br'));
+                    td.appendChild(discordName);
+                }
             }
 
             row.appendChild(td);
