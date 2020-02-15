@@ -194,7 +194,7 @@ var updateColor = function(index, pitch){
 
 var updateTune = function(index, pitch) {
   tune[index] = pitch;
-  booper.playNote(pitch, undefined, undefined, townTuneVolume);
+  booper.playNote(pitch);
 };
 
 window.addEventListener('load', setup);
