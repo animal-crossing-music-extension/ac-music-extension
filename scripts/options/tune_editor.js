@@ -70,6 +70,7 @@ var initControls = function() {
   resetButton = document.querySelector('.reset-tune');
   randomizeButton = document.querySelector('.randomize-tune');
   saveButton = document.querySelector('.save-tune');
+  let volumeSlider = document.getElementById("townTuneVolume");
 
   for (index = 0; index < tuneLength; index++) {
     newPitchControl = createPitchControl(index);
@@ -89,6 +90,7 @@ var initControls = function() {
   editorControls.push(playButton);
   editorControls.push(resetButton);
   editorControls.push(randomizeButton);
+  editorControls.push(volumeSlider);
 };
 
 var disableEditor = function() {
