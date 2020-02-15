@@ -1,3 +1,10 @@
+# =========================
+# Operating System Files
+# =========================
+
+# Windows
+# =========================
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -17,13 +24,10 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# =========================
-# Operating System Files
-# =========================
-
 # OSX
 # =========================
 
+# OSX files
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -41,9 +45,18 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-Animal-Crossing-Music-Extension.zip
+
+# =========================
+# Extension especifc
+# =========================
+
+# NPM
+node_modules/
+
+# Ignored file extensions
 *.ogg
 *.mp3
 *.ai
+
+# Exclusions
 !sound/bells.ogg
-img/cover/kk
