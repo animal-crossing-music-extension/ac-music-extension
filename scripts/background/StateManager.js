@@ -17,6 +17,7 @@ function StateManager() {
 	let weatherManager;
 	let isKKTime;
 	let startup = true;
+	let browserClosed = false;
 
 	this.registerCallback = function (event, callback) {
 		callbacks[event] = callbacks[event] || [];
@@ -29,7 +30,7 @@ function StateManager() {
 
 	this.activate = function () {
 		printDebug("Activating StateManager");
-		
+
 		isKKTime = timeKeeper.getDay() == 6 && timeKeeper.getHour() >= 20;
 		getSyncedOptions(() => {
 			if (!badgeManager) badgeManager = new BadgeManager(this.registerCallback, options.enableBadgeText);
@@ -99,6 +100,7 @@ function StateManager() {
 			countryCode: "us",
 			enableBadgeText: true,
 			tabAudio: 'pause',
+			enableBackground: false,
 			tabAudioReduceValue: 80
 		}, items => {
 			options = items;
@@ -193,6 +195,11 @@ function StateManager() {
 	// play/pause when user clicks the extension icon
 	chrome.browserAction.onClicked.addListener(toggleMusic);
 
+	// play/pause when chrome closes and the option to play in background is disabled
+	chrome.tabs.onRemoved.addListener(checkTabs);
+	chrome.tabs.onCreated.addListener(checkTabs);
+	setInterval(checkTabs, 1000);
+
 	tabAudio.registerCallback(audible => {
 		notifyListeners("tabAudio", [audible, options.tabAudio, options.tabAudioReduceValue]);
 	});
@@ -201,8 +208,7 @@ function StateManager() {
 	checkMediaSessionSupport(() => {
 		navigator.mediaSession.setActionHandler('play', toggleMusic);
 		navigator.mediaSession.setActionHandler('pause', toggleMusic);
-		}
-	);
+	});
 
 	function toggleMusic() {
 		chrome.storage.sync.set({ paused: !options.paused }, function () {
@@ -211,6 +217,21 @@ function StateManager() {
 				else self.activate();
 			});
 		});
+	}
+
+	function checkTabs() {
+		if (!options.enableBackground) {
+			chrome.tabs.query({}, tabs => {
+				if (tabs.length == 0) {
+					if (browserClosed) return;
+					notifyListeners("pause");
+					browserClosed = true;
+				} else if (browserClosed) {
+					self.activate();
+					browserClosed = false;
+				}
+			});
+		}
 	}
 
 	// Make notifyListeners public to allow for easier notification sending.

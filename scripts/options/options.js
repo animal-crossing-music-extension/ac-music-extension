@@ -17,6 +17,7 @@ const onClickElements = [
 	'absolute-town-tune',
 	'enable-notifications',
 	'enable-badge',
+	'enable-background',
 	'kk-version-live',
 	'kk-version-aircheck',
 	'kk-version-both',
@@ -81,6 +82,7 @@ function saveOptions() {
 	let zipCode = document.getElementById('zip-code').value;
 	let countryCode = document.getElementById('country-code').value;
 	let enableBadgeText = document.getElementById('enable-badge').checked;
+	let enableBackground = document.getElementById('enable-background').checked;
 	let tabAudioReduceValue = document.getElementById('tab-audio-reduce-value').value;
 
 	if (tabAudioReduceValue > 100) {
@@ -139,6 +141,7 @@ function saveOptions() {
 		zipCode,
 		countryCode,
 		enableBadgeText,
+		enableBackground,
 		tabAudio,
 		tabAudioReduceValue
 	});
@@ -159,6 +162,7 @@ function restoreOptions() {
 		countryCode: "us",
 		enableBadgeText: true,
 		tabAudio: 'pause',
+		enableBackground: false
 		tabAudioReduceValue: 80
 	}, items => {
 		document.getElementById('volume').value = items.volume;
@@ -175,6 +179,7 @@ function restoreOptions() {
 		document.getElementById('zip-code').value = items.zipCode;
 		document.getElementById('country-code').value = items.countryCode;
 		document.getElementById('enable-badge').checked = items.enableBadgeText;
+		document.getElementById('enable-background').checked = items.enableBackground;
 		document.getElementById('tab-audio-' + items.tabAudio).checked = true;
 		document.getElementById('tab-audio-reduce-value').value = items.tabAudioReduceValue;
 
@@ -206,7 +211,7 @@ function validateWeather() {
 		return;
 	}
 
-	let url = `https://ac.pikadude.me/weather/${country}/${zip}`;
+	let url = `https://acmusicext.com/api/weather-v1/${country}/${zip}`;
 	let request = new XMLHttpRequest();
 
 	request.onload = function () {

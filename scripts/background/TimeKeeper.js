@@ -78,10 +78,8 @@ function TimeKeeper() {
 	
 	
 	
-	var timeCheckLoop = function() {
+	function timeCheck() {
 		var newDate = new Date();
-		var timeToNext = 3600000 - (newDate.getTime() % 3600000);
-		setTimeout(timeCheckLoop, timeToNext);
 		currDay = newDate.getDay();
 		// if we're in a new hour
 		if (newDate.getHours() != currHour) {
@@ -92,6 +90,5 @@ function TimeKeeper() {
 		}
 	}
 
-	timeCheckLoop();
-
+	setInterval(timeCheck, 1000);
 }
