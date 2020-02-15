@@ -162,7 +162,7 @@ function restoreOptions() {
 		countryCode: "us",
 		enableBadgeText: true,
 		tabAudio: 'pause',
-		enableBackground: false
+		enableBackground: false,
 		tabAudioReduceValue: 80
 	}, items => {
 		document.getElementById('volume').value = items.volume;
