@@ -143,18 +143,6 @@
 					</section>
 
 					<section>
-						<h3>Notifications</h3>
-						<p>Customize desktop notification behaviour</p>
-						<div class="checkbox">
-							<input id="enable-notifications" type="checkbox"><label for="enable-notifications"><span></span>Enable Chrome notifications on song change</label>
-						</div>
-
-						<div class="checkbox">
-							<input id="enable-badge" type="checkbox"><label for="enable-badge"><span></span>Display text on badge</label>
-						</div>
-					</section>
-
-					<section>
 						<h3>Tab Audio Behaviour</h3>
 						<p>Control what the extension does while a tab is playing audio</p>
 						<div class="radio" style="height: 21px">
@@ -167,6 +155,22 @@
 						</div>
 						<div class="radio">
 							<input id="tab-audio-nothing" name="tab-audio" type="radio"><label for="tab-audio-nothing"><span><span></span></span>Do nothing</label>
+						</div>
+					</section>
+
+					<section>
+						<h3>Other</h3>
+						<p>Other various options that don't fit in any other category</p>
+						<div class="checkbox">
+							<input id="enable-notifications" type="checkbox"><label for="enable-notifications"><span></span>Enable Chrome notifications on song change</label>
+						</div>
+
+						<div class="checkbox">
+							<input id="enable-badge" type="checkbox"><label for="enable-badge"><span></span>Display text on badge</label>
+						</div>
+
+						<div class="checkbox">
+							<input id="enable-background" type="checkbox"><label for="enable-background"><span></span>Allow for music to play when Chrome is closed. <a target="_blank" href="https://kb.nmsu.edu/73071">Background apps must also be enabled in Chrome's settings.</a></label>
 						</div>
 					</section>
 
@@ -264,6 +268,7 @@
 						<li>Fixed a bug causing songs to sometimes loop incorrectly</li>
 						<li>Overhauled about page</li>
 						<li>Changed API endpoints and domain</li>
+						<li>Added a built-in option to stop the extension from playing music when Chrome is closed</li>
 					</ul>
 					<h3>Version 4.0.0<span class="changelog-date"> - 8th of February 2020</span></h3>
 					<ul class="changelog-list">
