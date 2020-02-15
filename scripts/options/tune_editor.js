@@ -87,6 +87,8 @@ var initControls = function() {
   }
 
   editorControls.push(playButton);
+  editorControls.push(resetButton);
+  editorControls.push(randomizeButton);
 };
 
 var disableEditor = function() {
@@ -172,8 +174,11 @@ var saveTune = function() {
     saveButton.textContent = 'Saving...';
     saveButton.disabled = true;
     setTimeout(function() {
-      saveButton.textContent = 'Saved';
+      saveButton.textContent = 'Saved!';
       saveButton.disabled = false;
+      setTimeout(function() {
+        saveButton.textContent = 'Save';
+      }, 2000);
     }, 750);
   });
 };
