@@ -219,19 +219,22 @@ var createTunePlayer = function(audioContext, bpm) {
       // Look at createBooper.playNote() method for a way to implement sustain in createSampler.playNote().
     }
 
-    //jQuery stlye chain callbacks
-    callbacks = {
-      eachNote: function(callback) {
-        eachNote = callback;
-        return callbacks;
-      },
-      done: function(callback) {
-        //when the tune over
-        if (callback) setTimeout(callback, stepDuration * tune.length * 1000);
-        return callbacks;
-      }
-    };
-    return callbacks;
+    // Slight delay to fix jarring introduction to song after town tune has played
+    setTimeout(function(){
+      //jQuery stlye chain callbacks
+      callbacks = {
+        eachNote: function(callback) {
+          eachNote = callback;
+          return callbacks;
+        },
+        done: function(callback) {
+          //when the tune over
+          if (callback) setTimeout(callback, stepDuration * tune.length * 1000);
+          return callbacks;
+        }
+      };
+      return callbacks;
+    }, 500);
   };
 
   return tunePlayer = {
