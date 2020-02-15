@@ -236,7 +236,7 @@ function validateWeather() {
 		return;
 	}
 
-	let url = `https://ac.pikadude.me/weather/${country}/${zip}`;
+	let url = `https://acmusicext.com/api/weather-v1/${country}/${zip}`;
 	let request = new XMLHttpRequest();
 
 	request.onload = function () {
