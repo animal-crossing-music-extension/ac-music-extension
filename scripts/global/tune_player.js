@@ -4,7 +4,7 @@
   // ^ values in HZ
   
   var _defaultTownTuneVolume = 0.75;
-  
+  var timeBetweenTuneEndAndMusicBegin = 1; // Used at line 230
   
   /**
    * @function createBooper
@@ -219,22 +219,19 @@ var createTunePlayer = function(audioContext, bpm) {
       // Look at createBooper.playNote() method for a way to implement sustain in createSampler.playNote().
     }
 
-    // Slight delay to fix jarring introduction to song after town tune has played
-    setTimeout(function(){
-      //jQuery stlye chain callbacks
-      callbacks = {
-        eachNote: function(callback) {
-          eachNote = callback;
-          return callbacks;
-        },
-        done: function(callback) {
-          //when the tune over
-          if (callback) setTimeout(callback, stepDuration * tune.length * 1000);
-          return callbacks;
-        }
-      };
-      return callbacks;
-    }, 500);
+    //jQuery stlye chain callbacks
+    callbacks = {
+      eachNote: function(callback) {
+        eachNote = callback;
+        return callbacks;
+      },
+      done: function(callback) {
+        //when the tune over
+        if (callback) setTimeout(callback, stepDuration * tune.length * 1000 + timeBetweenTuneEndAndMusicBegin * 1000);
+        return callbacks;
+      }
+    };
+    return callbacks;
   };
 
   return tunePlayer = {
