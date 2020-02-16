@@ -10,18 +10,21 @@ section {
 .pitch {
   display: inline-block;
   width: 25px;
-  margin:5px;
+  margin: 6px;
 }
 
 .pitch-name {
   text-align: center;
-  width: 40px;
+  width: 35px;
+  height: 35px;
+  
+  border-width: 3px !important;
+  border-radius: 40px !important;
+  transition-duration: 0.1s;
 }
 
 .pitch-slider {
   -webkit-appearance: slider-vertical;
-  width: 25px;
-  height: 75px;
 }
 
 button, input[type='text']:not(.pitch-name) {
@@ -54,10 +57,18 @@ input[type="text"]#weather {
 }
 
 input[type="range"]#volume{
-    -webkit-appearance: none;
+  -webkit-appearance: none;
 	width: 129px;
 	height: 3px;
-    background-color: #e3ddd8; 
+  background-color: #e3ddd8; 
+}
+
+input[type="range"]#townTuneVolume{
+  -webkit-appearance: none;
+  width: 240px;
+  height: 3px;
+  background-color: #e3ddd8; 
+  
 }
 
 
