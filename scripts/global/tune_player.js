@@ -4,7 +4,7 @@
   // ^ values in HZ
   
   var _defaultTownTuneVolume = 0.75;
-  var timeBetweenTuneEndAndMusicBegin = 1; // Used at line 230
+  var timeBetweenTuneEndAndMusicBeginS = 2; // In Seconds. Delays createTunePlayer.playTune()'s callback.
   
   /**
    * @function createBooper
@@ -72,11 +72,11 @@
       chrome.storage.sync.get({townTuneVolume: _defaultTownTuneVolume}, function(items){
         let volume = items.townTuneVolume;
         
-        gain.gain.setValueAtTime         (0,                  time);
+        gain.gain.setValueAtTime         (0,                     time);
         gain.gain.linearRampToValueAtTime(gainLevel    * volume, time + attack);
         gain.gain.linearRampToValueAtTime(sustainLevel * volume, time + attack + decay);
         gain.gain.setValueAtTime         (sustainLevel * volume, time + attack + decay + sustainDuration);
-        gain.gain.linearRampToValueAtTime(0,                  time + attack + decay + sustainDuration + release);
+        gain.gain.linearRampToValueAtTime(0,                     time + attack + decay + sustainDuration + release);
         
       });
     };
@@ -227,7 +227,7 @@ var createTunePlayer = function(audioContext, bpm) {
       },
       done: function(callback) {
         //when the tune over
-        if (callback) setTimeout(callback, stepDuration * tune.length * 1000 + timeBetweenTuneEndAndMusicBegin * 1000);
+        if (callback) setTimeout(callback, stepDuration * tune.length * 1000 + timeBetweenTuneEndAndMusicBeginS * 1000);
         return callbacks;
       }
     };
