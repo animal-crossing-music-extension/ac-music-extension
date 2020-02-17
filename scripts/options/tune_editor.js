@@ -203,8 +203,10 @@ var updateColor = function(index, pitch){
 } 
 
 var updateTune = function(index, pitch) {
-  tune[index] = pitch;
-  booper.playNote(pitch);
+  chrome.storage.sync.get({townTuneVolume: defaultTownTuneVolume}, function(items){
+    tune[index] = pitch;
+    booper.playNote(pitch, undefined, undefined, items.townTuneVolume);
+  });
 };
 
 window.addEventListener('load', setup);
