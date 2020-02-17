@@ -61,8 +61,9 @@ function AudioManager(addEventListener, isTownTune) {
 		let songName = formatHour(hour);
 
 		// EVENT SONG NAME FORMATTING
-		// TODO: Re-enable events.
-		/*if(timeKeeper.getEvent() !== "none"){ //getEvent() returns eventname, or "none".
+		// TODO: Re-enable events after adding necessary files.
+		// TODO: Fetch eventsEnabled from user options instead of local boolean.
+		/*if(eventsEnabled && timeKeeper.getEvent() !== "none"){ //getEvent() returns eventname, or "none".
 			// Changing the song name to the name of the event, if an event is ongoing.
 			songName = timeKeeper.getEvent();
 		}*/
