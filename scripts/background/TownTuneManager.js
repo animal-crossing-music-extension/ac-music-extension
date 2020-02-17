@@ -14,7 +14,7 @@ function TownTuneManager() {
 	// Play tune and call doneCB after it's done
 	this.playTune = function(doneCB) {
 		chrome.storage.sync.get({ townTune: defaultTune }, function(items){
-			tunePlayer.playTune(items.townTune, sampler, 100).done(doneCB);
+			tunePlayer.playTune(items.townTune, sampler, 100, 2).done(doneCB);
 		});
 	}
 
