@@ -3,11 +3,10 @@
   var frequencies      = [null,  null, 350,  392,  440,  494,  523,  587,  659,  698,  784,  880,  988, 1046, 1174, 1318, "random"];
   // ^ values in HZ
   
-  var _defaultTownTuneVolume = 0.75; //Stored in a variable as it's used in multiple places. Change if default townTuneVolume is changed.
   
   /**
    * @function createBooper
-   * @desc  Creates & returns method responsible for playing town-tune notes in the town-tune editor
+   * @desc  Creates & returns instrument responsible for playing town-tune notes in the town-tune editor
    * @param {*} audioContext 
    * @returns {method} playNote
    */
@@ -38,7 +37,7 @@
       return freq;
     };
 
-    var playNote = function(pitch, time, sustainDuration) {
+    var playNote = function(pitch, time, sustainDuration, volume) {
       if (time === undefined) time = audioContext.currentTime;
       if (sustainDuration === undefined) sustainDuration = 0;
 
@@ -67,17 +66,11 @@
       oscillator.start(time);
       oscillator.stop(time + attack + decay + sustainDuration + release);
 
-      // Fetching stored or default town tune volume
-      chrome.storage.sync.get({townTuneVolume: _defaultTownTuneVolume}, function(items){
-        let volume = items.townTuneVolume;
-        
-        gain.gain.setValueAtTime         (0,                     time);
-        gain.gain.linearRampToValueAtTime(gainLevel    * volume, time + attack);
-        gain.gain.linearRampToValueAtTime(sustainLevel * volume, time + attack + decay);
-        gain.gain.setValueAtTime         (sustainLevel * volume, time + attack + decay + sustainDuration);
-        gain.gain.linearRampToValueAtTime(0,                     time + attack + decay + sustainDuration + release);
-        
-      });
+      gain.gain.setValueAtTime         (0,                     time);
+      gain.gain.linearRampToValueAtTime(gainLevel    * volume, time + attack);
+      gain.gain.linearRampToValueAtTime(sustainLevel * volume, time + attack + decay);
+      gain.gain.setValueAtTime         (sustainLevel * volume, time + attack + decay + sustainDuration);
+      gain.gain.linearRampToValueAtTime(0,                     time + attack + decay + sustainDuration + release);
     };
 
     return {
@@ -88,7 +81,7 @@
   
 /**
  * @function createSampler
- * @desc  Creates & (?) returns method responsible for playing notes used to play the town tune at the hour
+ * @desc  Creates & returns instrument responsible for playing notes used to play the town tune at the hour
  * @param {*} audioContext 
  * @returns {method} playNote
  */
@@ -127,7 +120,7 @@ var createSampler = function(audioContext) {
     }
   };
 
-  var playNote = function(pitch, time, sustain) {  //Sustain parameter isn't used here (unlike at createBooper.playNote)
+  var playNote = function(pitch, time, sustain, volume) {  //Sustain parameter isn't used here (unlike at createBooper.playNote)
     if (!bellBuffer) return;
     var source = audioContext.createBufferSource();
     source.buffer = bellBuffer;
@@ -135,20 +128,17 @@ var createSampler = function(audioContext) {
     // If pitch is '?', randomizing pitch
     if(pitch == '?') pitch = availablePitches[ 2 + Math.floor( Math.random() * (availablePitches.length - 3) ) ]
     
-    // Fetching volume
-    chrome.storage.sync.get({townTuneVolume: _defaultTownTuneVolume}, function(items){
-      let volume = items.townTuneVolume * 0.5;
-      // The notes sound broken & not accurate to the editor's volume when played at higher volumes, vol is therefore reduced with this multiplier.
+    volume *= 0.5;
+    // The notes sound broken & not accurate to the editor's volume when played at higher volumes, vol is therefore reduced with this multiplier.
       
-      // Configuring gain
-      gain = audioContext.createGain();
-      gain.gain.value = volume;
-      
-      // Playing audio
-      source.connect(gain);
-      gain.connect(audioContext.destination);
-      source.start(time, pitchToStartPoint(pitch), chimeLength); 
-    });
+    // Configuring gain
+    gain = audioContext.createGain();
+    gain.gain.value = volume;
+    
+    // Playing audio
+    source.connect(gain);
+    gain.connect(audioContext.destination);
+    source.start(time, pitchToStartPoint(pitch), chimeLength); 
   };
 
   initStartPoints();
@@ -191,31 +181,32 @@ var createTunePlayer = function(audioContext, bpm) {
     } while(current == sustain)
     return count;
   };
-
-  var playTune = function(tune, instrument, bpm, postTuneDelayS = 0) {
+  
+  var playTune = function(tune, instrument, bpm, volume) {
     var callbacks, i, pitch, time, sustainDuration;
     var stepDuration = getStepDuration(bpm);
     var eachNote = function(index, duration) {};
     if(!bpm) bpm = defaultBpm;
-
+    
     for (i = 0; i < tune.length; i++) {
       time = stepDuration * i;
-
+      
       //when a note is played
       (function(index) {
         setTimeout(function(){
           eachNote(index, stepDuration);
         }, time * 1000);
       })(i);
-
+      
       pitch = tune[i];
       if(pitch == rest || pitch == sustain) continue;
-
+      
       sustainDuration = getSustainMultiplier(i, tune) * stepDuration;
-      // Plays a note using createSampler.playNote() method
-      instrument.playNote(pitch, audioContext.currentTime + time, sustainDuration); 
-      // The sustainDuration parameter is however not used in createSampler.playNote().
-      // Look at createBooper.playNote() method for a way to implement sustain in createSampler.playNote().
+      
+      // Plays a note using:
+      //   At the hour:  createSampler.playNote() method 
+      //   In the editor: createBooper.playNote() method
+      instrument.playNote(pitch, audioContext.currentTime + time, sustainDuration, volume); 
     }
 
     //jQuery stlye chain callbacks
@@ -226,7 +217,7 @@ var createTunePlayer = function(audioContext, bpm) {
       },
       done: function(callback) {
         //when the tune over
-        if (callback) setTimeout(callback, stepDuration * tune.length * 1000 + postTuneDelayS * 1000);
+        if (callback) setTimeout(callback, stepDuration * tune.length * 1000);
         return callbacks;
       }
     };
