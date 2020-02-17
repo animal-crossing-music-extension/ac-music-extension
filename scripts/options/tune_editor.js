@@ -9,11 +9,13 @@ var pitchNames = [];
 var flashColor = '#FFFFFF';
 var audioContext = new AudioContext;
 
-var booper = createBooper(audioContext);
-var sampler = createSampler(audioContext);
-var tunePlayer = createTunePlayer(audioContext);
+var booper     = createBooper(audioContext);  // Instrument for the town tune editor
+var sampler    = createSampler(audioContext); // Instrument for the town tune playing at the hour
+var tunePlayer = createTunePlayer(audioContext); // Responsible for playing town tunes
 var availablePitches = tunePlayer.availablePitches;
 var rest = availablePitches[0];
+
+var defaultTownTuneVolume = 0.75; // Fallback town tune volume, change this if the default town tune volume is altered.
 
 $(".pitch-template > .pitch-slider")[0].max = availablePitches.length-1;
 
@@ -127,9 +129,15 @@ var flashName = function(index, duration) {
   }, duration * 1000);
 };
 
+/**
+ * @method playTune
+ * @desc   Plays the town tune using createBooper as an instrument, used only by the town tune editor
+ */
 var playTune = function() {
-  disableEditor();
-  tunePlayer.playTune(tune, booper, 240).eachNote(flashName).done(enableEditor);
+  chrome.storage.sync.get({townTuneVolume: defaultTownTuneVolume}, function(items){
+    disableEditor();
+    tunePlayer.playTune(tune, booper, 240, items.townTuneVolume).eachNote(flashName).done(enableEditor);
+  });
 };
 
 var resetTune = function() {
