@@ -3,8 +3,7 @@
   var frequencies      = [null,  null, 350,  392,  440,  494,  523,  587,  659,  698,  784,  880,  988, 1046, 1174, 1318, "random"];
   // ^ values in HZ
   
-  var _defaultTownTuneVolume = 0.75;
-  var timeBetweenTuneEndAndMusicBeginS = 2; // In Seconds. Delays createTunePlayer.playTune()'s callback.
+  var _defaultTownTuneVolume = 0.75; //Stored in a variable as it's used in multiple places. Change if default townTuneVolume is changed.
   
   /**
    * @function createBooper
@@ -164,7 +163,7 @@ var createSampler = function(audioContext) {
 
 /**
  * @function createTunePlayer
- * @desc  Creates & returns object responsible for handling the playing of town tunes at the hour.
+ * @desc  Creates & returns object responsible for handling the playing of entire town tunes at the hour and in the editor.
  * @param {*} audioContext 
  * @param {*} bpm 
  * @returns {object} tunePlayer 
@@ -193,7 +192,7 @@ var createTunePlayer = function(audioContext, bpm) {
     return count;
   };
 
-  var playTune = function(tune, instrument, bpm) {
+  var playTune = function(tune, instrument, bpm, postTuneDelayS = 0) {
     var callbacks, i, pitch, time, sustainDuration;
     var stepDuration = getStepDuration(bpm);
     var eachNote = function(index, duration) {};
@@ -215,7 +214,7 @@ var createTunePlayer = function(audioContext, bpm) {
       sustainDuration = getSustainMultiplier(i, tune) * stepDuration;
       // Plays a note using createSampler.playNote() method
       instrument.playNote(pitch, audioContext.currentTime + time, sustainDuration); 
-      // The sustain parameter is however, not used. 
+      // The sustainDuration parameter is however not used in createSampler.playNote().
       // Look at createBooper.playNote() method for a way to implement sustain in createSampler.playNote().
     }
 
@@ -227,7 +226,7 @@ var createTunePlayer = function(audioContext, bpm) {
       },
       done: function(callback) {
         //when the tune over
-        if (callback) setTimeout(callback, stepDuration * tune.length * 1000 + timeBetweenTuneEndAndMusicBeginS * 1000);
+        if (callback) setTimeout(callback, stepDuration * tune.length * 1000 + postTuneDelayS * 1000);
         return callbacks;
       }
     };
