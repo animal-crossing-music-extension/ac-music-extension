@@ -86,6 +86,8 @@ function AudioManager(addEventListener, isTownTune) {
 
 		audio.onpause = onPause;
 
+		setVolume();
+
 		audio.onplay = () => {
 			// If we resume mid-song, then we recalculate the delayToLoop
 			if (started && loopTime) {
@@ -223,6 +225,7 @@ function AudioManager(addEventListener, isTownTune) {
 		if (newVolume > 1) newVolume = 1;
 
 		audio.volume = newVolume;
+		console.log(audio.volume)
 	}
 
 	addEventListener("hourMusic", playHourlyMusic);

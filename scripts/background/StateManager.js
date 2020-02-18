@@ -64,7 +64,7 @@ function StateManager() {
 	// Possible events include:
 	// volume, kkStart, hourMusic, gameChange, weatherChange, pause, tabAudio, musicFailed
 	function notifyListeners(event, args) {
-		if (!options.paused || event === "pause") {
+		if (!options.paused || event === "pause" || event === "volume") {
 			var callbackArr = callbacks[event] || [];
 			for (var i = 0; i < callbackArr.length; i++) {
 				callbackArr[i].apply(window, args);
