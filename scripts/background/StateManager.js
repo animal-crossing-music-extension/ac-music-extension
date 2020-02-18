@@ -158,8 +158,7 @@ function StateManager() {
 		else if (!isKK()) {
 			let musicAndWeather = getMusicAndWeather();
 			notifyListeners("hourMusic", [hour, musicAndWeather.weather, musicAndWeather.music, true]);
-
-			if (options.paused && options.absoluteTownTune) townTuneManager.playTune();
+			if (options.paused && options.absoluteTownTune) townTuneManager.playTune(tabAudio.audible);
 		}
 	});
 
