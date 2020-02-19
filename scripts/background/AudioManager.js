@@ -38,9 +38,9 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.removeEventListener("ended", playKKSong);
 		let fadeOutLength = isHourChange ? 3000 : 500;
 		fadeOutAudio(fadeOutLength, () => {
-			if (isHourChange && isTownTune()) {
+			if (isHourChange && isTownTune() && !tabAudioPaused) {
 				townTunePlaying = true;
-				townTuneManager.playTune(() => {
+				townTuneManager.playTune(false, () => {
 					townTunePlaying = false;
 					playHourSong(game, weather, hour, false);
 				});

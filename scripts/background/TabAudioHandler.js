@@ -7,8 +7,8 @@ function TabAudioHandler() {
     let tabUpdatedHandler;
     let checkTabsInterval;
     let callback;
-    let audible = false;
-
+    
+    this.audible = false;
     this.activated = false;
 
     this.registerCallback = function (cb) {
@@ -34,16 +34,17 @@ function TabAudioHandler() {
         tabUpdatedHandler = null;
     }
 
-    function checkTabs() {
+    // Done this way so the correct "this" can still be accessed
+    var checkTabs = () => {
         // A tab can be muted and still be "audible"
         chrome.tabs.query({
             muted: false,
             audible: true
         }, tabs => {
             let nowAudible = tabs.length > 0;
-            if (nowAudible != audible) {
+            if (nowAudible != this.audible) {
                 callback(tabs.length > 0);
-                audible = nowAudible;
+                this.audible = nowAudible;
             }
         });
     }
