@@ -29,6 +29,7 @@ function AudioManager(addEventListener, isTownTune) {
 	let reduceVolumeValue = 0;
 	let reducedVolume = false;
 	let tabAudioPaused = false;
+	let pausedDuringTownTune = false;
 
 	// isHourChange is true if it's an actual hour change,
 	// false if we're activating music in the middle of an hour
@@ -42,7 +43,8 @@ function AudioManager(addEventListener, isTownTune) {
 				townTunePlaying = true;
 				townTuneManager.playTune(false, () => {
 					townTunePlaying = false;
-					playHourSong(game, weather, hour, false);
+					if (!pausedDuringTownTune) playHourSong(game, weather, hour, false);
+					else pausedDuringTownTune = false;
 				});
 			} else playHourSong(game, weather, hour, false);
 		});
@@ -238,6 +240,7 @@ function AudioManager(addEventListener, isTownTune) {
 	addEventListener("pause", () => {
 		clearLoop();
 		fadeOutAudio(300);
+		if (townTunePlaying) pausedDuringTownTune = true;
 	});
 
 	addEventListener("volume", newVol => {
