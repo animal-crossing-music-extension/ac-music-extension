@@ -82,13 +82,13 @@ function TimeKeeper() {
 		var newDate = new Date();
 		currDay = newDate.getDay();
 		// if we're in a new hour
-		if (newDate.getHours() != 1) {
-			currHour++;
+		if (newDate.getHours() != currHour) {
+			currHour = newDate.getHours();
 			if (hourlyCallback) {
 				hourlyCallback(currDay, currHour);
 			}
 		}
 	}
 
-	setInterval(timeCheck, 30000);
+	setInterval(timeCheck, 1000);
 }
