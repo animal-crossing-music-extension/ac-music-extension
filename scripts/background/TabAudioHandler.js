@@ -7,7 +7,7 @@ function TabAudioHandler() {
     let tabUpdatedHandler;
     let checkTabsInterval;
     let callback;
-    
+
     this.audible = false;
     this.activated = false;
 
@@ -21,28 +21,32 @@ function TabAudioHandler() {
         this.activated = true;
 
         if (tabUpdatedHandler) removeHandler();
-        tabUpdatedHandler = checkTabs;
-        chrome.tabs.onUpdated.addListener(checkTabs);
-        chrome.tabs.onRemoved.addListener(checkTabs); // A tab that is audible can be closed and will not trigger the updated event.
-        checkTabsInterval = setInterval(checkTabs, 100);
-        checkTabs();
+        tabUpdatedHandler = this.checkTabs;
+        chrome.tabs.onUpdated.addListener(tabUpdatedHandler);
+        chrome.tabs.onRemoved.addListener(tabUpdatedHandler); // A tab that is audible can be closed and will not trigger the updated event.
+        checkTabsInterval = setInterval(this.checkTabs, 100);
+        this.checkTabs();
     }
 
     function removeHandler() {
-        if (tabUpdatedHandler) chrome.tabs.onUpdated.removeListener(tabUpdatedHandler);
+        if (tabUpdatedHandler) {
+            chrome.tabs.onUpdated.removeListener(tabUpdatedHandler);
+            chrome.tabs.onRemoved.removeListener(tabUpdatedHandler);
+        }
         if (checkTabsInterval) clearInterval(checkTabsInterval);
         tabUpdatedHandler = null;
     }
 
     // Done this way so the correct "this" can still be accessed
-    var checkTabs = () => {
+    this.checkTabs = (force = false) => {
         // A tab can be muted and still be "audible"
         chrome.tabs.query({
             muted: false,
             audible: true
         }, tabs => {
             let nowAudible = tabs.length > 0;
-            if (nowAudible != this.audible) {
+            // If forced, then we send the callback regardless if there's been no change to catch up on any missed events.
+            if (nowAudible != this.audible || force) {
                 callback(tabs.length > 0);
                 this.audible = nowAudible;
             }

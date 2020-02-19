@@ -58,6 +58,7 @@ function StateManager() {
 			}
 
 			if (!tabAudio.activated) tabAudio.activate();
+			else tabAudio.checkTabs(true);
 		});
 	};
 

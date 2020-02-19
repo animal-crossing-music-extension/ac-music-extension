@@ -225,7 +225,6 @@ function AudioManager(addEventListener, isTownTune) {
 		if (newVolume > 1) newVolume = 1;
 
 		audio.volume = newVolume;
-		console.log(audio.volume)
 	}
 
 	addEventListener("hourMusic", playHourlyMusic);
@@ -257,7 +256,7 @@ function AudioManager(addEventListener, isTownTune) {
 					audio.pause();
 					tabAudioPaused = true;
 				} else {
-					if (audio.paused && audio.readyState >= 3) {
+					if (audio.paused && (audio.readyState >= 3 || audio.readyState == 0)) {
 						if (!townTunePlaying) audio.play();
 						tabAudioPaused = false;
 						// Get the badge icon updated.
