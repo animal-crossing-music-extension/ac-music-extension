@@ -5,8 +5,10 @@
 function TabAudioHandler() {
 
     let tabUpdatedHandler;
+    let checkTabsInterval;
     let callback;
 
+    this.audible = false;
     this.activated = false;
 
     this.registerCallback = function (cb) {
@@ -17,36 +19,37 @@ function TabAudioHandler() {
         printDebug("Activating TabAudioHandler.");
 
         this.activated = true;
-        let perms = await checkPerms();
-        printDebug(perms);
 
-        if (perms) {
-            if (tabUpdatedHandler) removeHandler();
-            tabUpdatedHandler = checkTabs;
-            chrome.tabs.onUpdated.addListener(checkTabs);
-            chrome.tabs.onRemoved.addListener(checkTabs); // A tab that is audible can be closed and will not trigger the updated event.
-            checkTabs();
-        } else if (tabUpdatedHandler) removeHandler();
-    }
-
-    function checkPerms () {
-        return new Promise(resolve => {
-            chrome.permissions.contains({ permissions: ['tabs'] }, resolve);
-        });
+        if (tabUpdatedHandler) removeHandler();
+        tabUpdatedHandler = this.checkTabs;
+        chrome.tabs.onUpdated.addListener(tabUpdatedHandler);
+        chrome.tabs.onRemoved.addListener(tabUpdatedHandler); // A tab that is audible can be closed and will not trigger the updated event.
+        checkTabsInterval = setInterval(this.checkTabs, 100);
+        this.checkTabs();
     }
 
     function removeHandler() {
-        chrome.tabs.onUpdated.removeListener(tabUpdatedHandler);
+        if (tabUpdatedHandler) {
+            chrome.tabs.onUpdated.removeListener(tabUpdatedHandler);
+            chrome.tabs.onRemoved.removeListener(tabUpdatedHandler);
+        }
+        if (checkTabsInterval) clearInterval(checkTabsInterval);
         tabUpdatedHandler = null;
     }
 
-    function checkTabs() {
+    // Done this way so the correct "this" can still be accessed
+    this.checkTabs = (force = false) => {
         // A tab can be muted and still be "audible"
         chrome.tabs.query({
             muted: false,
             audible: true
         }, tabs => {
-            callback(tabs.length > 0);
+            let nowAudible = tabs.length > 0;
+            // If forced, then we send the callback regardless if there's been no change to catch up on any missed events.
+            if (nowAudible != this.audible || force) {
+                callback(tabs.length > 0);
+                this.audible = nowAudible;
+            }
         });
     }
 }

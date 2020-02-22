@@ -33,9 +33,17 @@
     border-radius: 10px;
 }
 
+#about>header, .about-content {
+    min-width: 700px !important;
+}
+
 #contributors-failed {
     display: none;
     color: red;
+}
+
+#contributors-table {
+    vertical-align: top;
 }
 
 table {
@@ -50,7 +58,7 @@ td {
     padding: 8px;
 }
 
-.contributor {
+.contributorLink {
     text-decoration: none !important;
 }
 
@@ -59,8 +67,22 @@ td {
     margin: 6px 0 0 0;
 }
 
-.contributor>img {
+.contributor>img:first-child {
     width: 100%;
+}
+
+.contributorLink>img {
+    width: 12px;
+    vertical-align: middle;
+}
+
+.githubIcon {
+    padding-right: 3px;
+    margin-bottom: 2px;
+}
+
+.discordIcon {
+    padding-right: 2px;
 }
 
 #tab-audio-reduce-value {
@@ -89,7 +111,7 @@ td {
     width: 50%;
 }
 
-.modal-title {
+#modal-title {
     font-weight: bold;
     font-size: 18px;
 }

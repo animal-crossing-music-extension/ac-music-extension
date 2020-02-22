@@ -17,6 +17,7 @@ function StateManager() {
 	let weatherManager;
 	let isKKTime;
 	let startup = true;
+	let browserClosed = false;
 
 	this.registerCallback = function (event, callback) {
 		callbacks[event] = callbacks[event] || [];
@@ -29,7 +30,7 @@ function StateManager() {
 
 	this.activate = function () {
 		printDebug("Activating StateManager");
-		
+
 		isKKTime = timeKeeper.getDay() == 6 && timeKeeper.getHour() >= 20;
 		getSyncedOptions(() => {
 			if (!badgeManager) badgeManager = new BadgeManager(this.registerCallback, options.enableBadgeText);
@@ -57,13 +58,14 @@ function StateManager() {
 			}
 
 			if (!tabAudio.activated) tabAudio.activate();
+			else tabAudio.checkTabs(true);
 		});
 	};
 
 	// Possible events include:
 	// volume, kkStart, hourMusic, gameChange, weatherChange, pause, tabAudio, musicFailed
 	function notifyListeners(event, args) {
-		if (!options.paused || event === "pause") {
+		if (!options.paused || event === "pause" || event === "volume") {
 			var callbackArr = callbacks[event] || [];
 			for (var i = 0; i < callbackArr.length; i++) {
 				callbackArr[i].apply(window, args);
@@ -94,11 +96,13 @@ function StateManager() {
 			paused: false,
 			enableTownTune: true,
 			absoluteTownTune: false,
+			townTuneVolume: 0.75,
 			//enableAutoPause: false,
 			zipCode: "98052",
 			countryCode: "us",
 			enableBadgeText: true,
-			tabAudio: 'nothing',
+			tabAudio: 'pause',
+			enableBackground: false,
 			tabAudioReduceValue: 80
 		}, items => {
 			options = items;
@@ -155,8 +159,7 @@ function StateManager() {
 		else if (!isKK()) {
 			let musicAndWeather = getMusicAndWeather();
 			notifyListeners("hourMusic", [hour, musicAndWeather.weather, musicAndWeather.music, true]);
-
-			if (options.paused && options.absoluteTownTune) townTuneManager.playTune();
+			if (options.paused && options.absoluteTownTune) townTuneManager.playTune(tabAudio.audible);
 		}
 	});
 
@@ -193,17 +196,20 @@ function StateManager() {
 	// play/pause when user clicks the extension icon
 	chrome.browserAction.onClicked.addListener(toggleMusic);
 
-	// update tab audio handler when the user changes the extension's permissions
-	chrome.permissions.onAdded.addListener(tabAudio.activate);
-	chrome.permissions.onRemoved.addListener(tabAudio.activate);
+	// play/pause when chrome closes and the option to play in background is disabled
+	chrome.tabs.onRemoved.addListener(checkTabs);
+	chrome.tabs.onCreated.addListener(checkTabs);
+	setInterval(checkTabs, 1000);
 
 	tabAudio.registerCallback(audible => {
 		notifyListeners("tabAudio", [audible, options.tabAudio, options.tabAudioReduceValue]);
 	});
 
 	// Handle the user interactions in the media session dialogue.
-	navigator.mediaSession.setActionHandler('play', toggleMusic);
-	navigator.mediaSession.setActionHandler('pause', toggleMusic);
+	checkMediaSessionSupport(() => {
+		navigator.mediaSession.setActionHandler('play', toggleMusic);
+		navigator.mediaSession.setActionHandler('pause', toggleMusic);
+	});
 
 	function toggleMusic() {
 		chrome.storage.sync.set({ paused: !options.paused }, function () {
@@ -212,6 +218,21 @@ function StateManager() {
 				else self.activate();
 			});
 		});
+	}
+
+	function checkTabs() {
+		if (!options.enableBackground) {
+			chrome.tabs.query({}, tabs => {
+				if (tabs.length == 0) {
+					if (browserClosed) return;
+					notifyListeners("pause");
+					browserClosed = true;
+				} else if (browserClosed) {
+					self.activate();
+					browserClosed = false;
+				}
+			});
+		}
 	}
 
 	// Make notifyListeners public to allow for easier notification sending.

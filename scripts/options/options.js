@@ -17,16 +17,14 @@ const onClickElements = [
 	'absolute-town-tune',
 	'enable-notifications',
 	'enable-badge',
+	'enable-background',
 	'kk-version-live',
 	'kk-version-aircheck',
 	'kk-version-both',
-	'tab-audio-nothing'
-];
-
-const tabAudioElements = [
+	'tab-audio-nothing',
 	'tab-audio-reduce',
 	'tab-audio-pause'
-]
+];
 
 const exclamationElements = [
 	'live-weather-location-link',
@@ -42,6 +40,11 @@ function formatPercentage(number) {
 	else return `${number}%`
 }
 
+function containsSpace(string) {
+	return (string.indexOf(' ') >= 0);
+}
+
+
 window.onload = function () {
 	restoreOptions();
 	document.getElementById('version-number').textContent = 'Version ' + chrome.runtime.getManifest().version;
@@ -50,31 +53,14 @@ window.onload = function () {
 		let volumeText = document.getElementById('volumeText');
 		volumeText.innerHTML = `${formatPercentage(this.value*100)}`;
 	};
+	document.getElementById('townTuneVolume').onchange = saveOptions; // Maybe disable as to only save when clicking "save" button
+	document.getElementById('townTuneVolume').oninput = function() {
+		let ttVolumeText = document.getElementById('townTuneVolumeText');
+		ttVolumeText.innerHTML = `${formatPercentage(this.value*100)}`;
+	};
 
 	onClickElements.forEach(el => {
 		document.getElementById(el).onclick = saveOptions;
-	});
-	tabAudioElements.forEach(el => {
-		document.getElementById(el).onclick = () => {
-			chrome.permissions.contains({ permissions: ['tabs'] }, hasTabs => {
-				if (hasTabs) saveOptions();
-				else {
-					let modal = document.getElementById('tabAudioModal');
-					modal.style.display = 'block';
-
-					document.getElementById('tabAudioModalDismiss').onclick = () => {
-						modal.style.display = "none";
-						chrome.permissions.request({ permissions: ['tabs'] }, hasTabs => {
-							if (hasTabs) saveOptions();
-							else {
-								tabAudioElements.forEach(el => document.getElementById(el).checked = false);
-								document.getElementById('tab-audio-nothing').checked = true;
-							}
-						});
-					};
-				}
-			});
-		}
 	});
 	document.getElementById('update-location').onclick = validateWeather;
 	document.getElementById('tab-audio-reduce-value').onchange = saveOptions;
@@ -98,9 +84,11 @@ function saveOptions() {
 	let enableKK = alwaysKK || document.getElementById('enable-kk').checked;
 	let enableTownTune = document.getElementById('enable-town-tune').checked;
 	let absoluteTownTune = document.getElementById('absolute-town-tune').checked;
+	let townTuneVolume   = document.getElementById('townTuneVolume').value;
 	let zipCode = document.getElementById('zip-code').value;
 	let countryCode = document.getElementById('country-code').value;
 	let enableBadgeText = document.getElementById('enable-badge').checked;
+	let enableBackground = document.getElementById('enable-background').checked;
 	let tabAudioReduceValue = document.getElementById('tab-audio-reduce-value').value;
 
 	if (tabAudioReduceValue > 100) {
@@ -156,9 +144,11 @@ function saveOptions() {
 		kkVersion,
 		enableTownTune,
 		absoluteTownTune,
+		townTuneVolume,
 		zipCode,
 		countryCode,
 		enableBadgeText,
+		enableBackground,
 		tabAudio,
 		tabAudioReduceValue
 	});
@@ -175,10 +165,12 @@ function restoreOptions() {
 		kkVersion: 'live',
 		enableTownTune: true,
 		absoluteTownTune: false,
+		townTuneVolume: 0.75,
 		zipCode: "98052",
 		countryCode: "us",
 		enableBadgeText: true,
-		tabAudio: 'nothing',
+		tabAudio: 'pause',
+		enableBackground: false,
 		tabAudioReduceValue: 80
 	}, items => {
 		document.getElementById('volume').value = items.volume;
@@ -192,9 +184,12 @@ function restoreOptions() {
 		document.getElementById('kk-version-' + items.kkVersion).checked = true;
 		document.getElementById('enable-town-tune').checked = items.enableTownTune;
 		document.getElementById('absolute-town-tune').checked = items.absoluteTownTune;
+		document.getElementById('townTuneVolume').value = items.townTuneVolume;
+		document.getElementById('townTuneVolumeText').innerHTML = `${formatPercentage(items.townTuneVolume*100)}`;
 		document.getElementById('zip-code').value = items.zipCode;
 		document.getElementById('country-code').value = items.countryCode;
 		document.getElementById('enable-badge').checked = items.enableBadgeText;
+		document.getElementById('enable-background').checked = items.enableBackground;
 		document.getElementById('tab-audio-' + items.tabAudio).checked = true;
 		document.getElementById('tab-audio-reduce-value').value = items.tabAudioReduceValue;
 
@@ -208,6 +203,7 @@ function restoreOptions() {
 		document.getElementById('weather-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, items.alwaysKK));
 		document.getElementById('kk-version-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, enabledKKVersion));
 	});
+	
 }
 
 function validateWeather() {
@@ -215,18 +211,18 @@ function validateWeather() {
 	updateLocationEl.textContent = "Validating...";
 	updateLocationEl.disabled = true;
 
-	let zip = document.getElementById('zip-code').value;
-	let country = document.getElementById('country-code').value;
+	let zip = document.getElementById('zip-code').value.trim();
+	let country = document.getElementById('country-code').value.trim();
 	if (zip == '') {
-		responseMessage('You must specify a zip code.');
+		responseMessage('You must specify a zip/post code.');
 		return;
 	}
 	if (country == '') {
-		responseMessage('You must specify a country code.');
+		responseMessage('You must specify an ISO code.');
 		return;
 	}
 
-	let url = `https://ac.pikadude.me/weather/${country}/${zip}`;
+	let url = `https://acmusicext.com/api/weather-v1/${country}/${zip}`;
 	let request = new XMLHttpRequest();
 
 	request.onload = function () {
@@ -240,7 +236,12 @@ function validateWeather() {
 
 		if (request.status == 200) responseMessage(`Success! The current weather status in ${response.city}, ${response.country} is "${response.weather}"`, true);
 		else {
-			if (response.error) responseMessage(response.error);
+			if (response.error) {
+				if ((response.error === "City not found") && (containsSpace(zip))) {
+					response.error += " – Try with only the first part of the zip code."
+				}
+				responseMessage(response.error);
+			}
 			else responseMessage();
 		}
 	}

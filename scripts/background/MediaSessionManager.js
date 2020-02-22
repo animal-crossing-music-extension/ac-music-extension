@@ -13,6 +13,8 @@ function MediaSessionManager() {
 
 	// Updates the mediasession metadata (for hourly music)
 	this.updateMetadata = async function (game, hour, weather) {
+		if (!supportsMediaSession) return 
+
 		let artwork = await toDataURL(game);
 		navigator.mediaSession.metadata = new MediaMetadata({
 			title: `${formatHour(hour)} (${capitalize(weather)})`,
@@ -27,6 +29,8 @@ function MediaSessionManager() {
 
 	// Updates the mediasession metadata (for kk)
 	this.updateMetadataKK = async function (title, fileName) {
+		if (!supportsMediaSession) return 
+
 		let metadata = new MediaMetadata({
 			title,
 			artist: 'K.K. Slider',
@@ -70,7 +74,7 @@ function MediaSessionManager() {
 				if (name == 'kk') resolve('');
 
 				if (kk) {
-					let kkArtUrl = `https://ac.pikadude.me/static/kk/art/${name}.png`
+					let kkArtUrl = `https://acmusicext.com/static/kk/art/${name}.png`
 					printDebug(`Using fallback remote url: "${kkArtUrl}"`)
 					resolve(kkArtUrl);
 				}

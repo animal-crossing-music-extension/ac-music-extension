@@ -22,12 +22,14 @@ function AudioManager(addEventListener, isTownTune) {
 	let mediaSessionManager = new MediaSessionManager();
 	let kkVersion;
 	let hourlyChange = false;
+	let townTunePlaying = false;
 
 	let setVolumeValue;
 	let tabAudible = false;
 	let reduceVolumeValue = 0;
 	let reducedVolume = false;
 	let tabAudioPaused = false;
+	let pausedDuringTownTune = false;
 
 	// isHourChange is true if it's an actual hour change,
 	// false if we're activating music in the middle of an hour
@@ -37,14 +39,19 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.removeEventListener("ended", playKKSong);
 		let fadeOutLength = isHourChange ? 3000 : 500;
 		fadeOutAudio(fadeOutLength, () => {
-			if (isHourChange && isTownTune()) {
-				townTuneManager.playTune(() => {
-					playHourSong(game, weather, hour, false);
+			if (isHourChange && isTownTune() && !tabAudioPaused) {
+				townTunePlaying = true;
+				townTuneManager.playTune(false, () => {
+					townTunePlaying = false;
+					if (!pausedDuringTownTune) playHourSong(game, weather, hour, false);
+					else pausedDuringTownTune = false;
 				});
 			} else playHourSong(game, weather, hour, false);
 		});
 
-		navigator.mediaSession.setActionHandler('nexttrack', null);
+		checkMediaSessionSupport(() => {
+			navigator.mediaSession.setActionHandler('nexttrack', null);
+		});
 	}
 
 	// Plays a song for an hour, setting up loop times if
@@ -56,14 +63,15 @@ function AudioManager(addEventListener, isTownTune) {
 		let songName = formatHour(hour);
 
 		// EVENT SONG NAME FORMATTING
-		// TODO: Re-enable events.
-		/*if(timeKeeper.getEvent() !== "none"){ //getEvent() returns eventname, or "none".
+		// TODO: Re-enable events after adding necessary files.
+		// TODO: Fetch eventsEnabled from user options instead of local boolean.
+		/*if(eventsEnabled && timeKeeper.getEvent() !== "none"){ //getEvent() returns eventname, or "none".
 			// Changing the song name to the name of the event, if an event is ongoing.
 			songName = timeKeeper.getEvent();
 		}*/
 
 		// SETTING AUDIO SOURCE		
-		audio.src = `https://ac.pikadude.me/static/${game}/${weather}/${songName}.ogg`;
+		audio.src = `https://acmusicext.com/static/${game}/${weather}/${songName}.ogg`;
 
 		let loopTime = ((loopTimes[game] || {})[weather] || {})[hour];
 		let delayToLoop;
@@ -79,6 +87,8 @@ function AudioManager(addEventListener, isTownTune) {
 		}
 
 		audio.onpause = onPause;
+
+		setVolume();
 
 		audio.onplay = () => {
 			// If we resume mid-song, then we recalculate the delayToLoop
@@ -100,7 +110,7 @@ function AudioManager(addEventListener, isTownTune) {
 			// set up loop points if loopTime is set up for this
 			// game, hour and weather.
 			if (loopTime) {
-				printDebug("setting loop times");
+				printDebug("setting loop times. start:", loopTime.start, "end:", loopTime.end);
 
 				if (debugLoopTimes) {
 					delayToLoop = 8;
@@ -112,8 +122,9 @@ function AudioManager(addEventListener, isTownTune) {
 
 				printDebug("delayToLoop: " + delayToLoop);
 
+				if (killLoopTimeout) killLoopTimeout();
 				let loopTimeout = setTimeout(() => {
-					printDebug("looping");
+					printDebug("looping from", audio.currentTime, "to", loopTime.start);
 					audio.currentTime = loopTime.start;
 
 					delayToLoop = loopTime.end - loopTime.start;
@@ -123,6 +134,7 @@ function AudioManager(addEventListener, isTownTune) {
 					printDebug("killing loop timeout");
 					clearTimeout(loopTimeout);
 					loopTimeout = null;
+					killLoopTimeout = null;
 				};
 			} else printDebug("no loop times found. looping full song")
 		}
@@ -139,7 +151,9 @@ function AudioManager(addEventListener, isTownTune) {
 		audio.addEventListener("ended", playKKSong);
 		fadeOutAudio(500, playKKSong);
 
-		navigator.mediaSession.setActionHandler('nexttrack', playKKSong);
+		checkMediaSessionSupport(() => {
+			navigator.mediaSession.setActionHandler('nexttrack', playKKSong);
+		});
 	}
 
 	function playKKSong() {
@@ -152,7 +166,7 @@ function AudioManager(addEventListener, isTownTune) {
 		} else version = kkVersion;
 
 		let randomSong = KKSongList[Math.floor(Math.random() * KKSongList.length)];
-		audio.src = `https://ac.pikadude.me/static/kk/${version}/${randomSong}.ogg`;
+		audio.src = `https://acmusicext.com/static/kk/${version}/${randomSong}.ogg`;
 		audio.play();
 
 		let formattedTitle = `${randomSong.split(' - ')[1]} (${capitalize(version)} Version)`;
@@ -226,6 +240,7 @@ function AudioManager(addEventListener, isTownTune) {
 	addEventListener("pause", () => {
 		clearLoop();
 		fadeOutAudio(300);
+		if (townTunePlaying) pausedDuringTownTune = true;
 	});
 
 	addEventListener("volume", newVol => {
@@ -241,13 +256,11 @@ function AudioManager(addEventListener, isTownTune) {
 			// Handles all cases except for an options switch.
 			if (tabAudio == 'pause') {
 				if (audible) {
-					if (!audio.paused) {
-						audio.pause();
-						tabAudioPaused = true;
-					}
+					audio.pause();
+					tabAudioPaused = true;
 				} else {
-					if (audio.paused && audio.readyState >= 3) {
-						audio.play();
+					if (audio.paused && (audio.readyState >= 3 || audio.readyState == 0)) {
+						if (!townTunePlaying) audio.play();
 						tabAudioPaused = false;
 						// Get the badge icon updated.
 						window.notify("unpause");

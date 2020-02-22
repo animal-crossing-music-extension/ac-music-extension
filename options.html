@@ -143,18 +143,6 @@
 					</section>
 
 					<section>
-						<h3>Notifications</h3>
-						<p>Customize desktop notification behaviour</p>
-						<div class="checkbox">
-							<input id="enable-notifications" type="checkbox"><label for="enable-notifications"><span></span>Enable Chrome notifications on song change</label>
-						</div>
-
-						<div class="checkbox">
-							<input id="enable-badge" type="checkbox"><label for="enable-badge"><span></span>Display text on badge</label>
-						</div>
-					</section>
-
-					<section>
 						<h3>Tab Audio Behaviour</h3>
 						<p>Control what the extension does while a tab is playing audio</p>
 						<div class="radio" style="height: 21px">
@@ -170,15 +158,28 @@
 						</div>
 					</section>
 
+					<section>
+						<h3>Other</h3>
+						<p>Other various options that don't fit in any other category</p>
+						<div class="checkbox">
+							<input id="enable-notifications" type="checkbox"><label for="enable-notifications"><span></span>Enable Chrome notifications on song change</label>
+						</div>
+
+						<div class="checkbox">
+							<input id="enable-badge" type="checkbox"><label for="enable-badge"><span></span>Display text on badge</label>
+						</div>
+
+						<div class="checkbox">
+							<input id="enable-background" type="checkbox"><label for="enable-background"><span></span>Allow for music to play when Chrome is closed. <a target="_blank" href="https://kb.nmsu.edu/73071">Background apps must also be enabled in Chrome's settings.</a></label>
+						</div>
+					</section>
+
 					<section id="live-weather-location">
 						<h3>Live Weather Location</h3>
-						<p>Select the location to fetch the live weather information from. The live weather synchronizes with the extension's music</p>
-						<div class="text">
-							<input type="text" id="zip-code" aria-label="Zip Code" value="98052" placeholder="Zip Code">
-							<input type="text" id="country-code" aria-label="Country Code" value="US" placeholder="Country Code">
+						<p>Select the location to fetch the live weather information from. The live weather synchronizes with the extension's music.<br />The first box is your <a href="https://worldpostalcode.com/" target="_blank">zip/post code</a>, the second is your <a href="https://countrycode.org/" target="_blank">ISO code (the two letters)</a></p> <div class="text">
+							<input type="text" id="zip-code" aria-label="Zip/Post Code" value="98052" placeholder="Zip/Post Code">
+							<input type="text" id="country-code" aria-label="ISO Code" value="US" placeholder="ISO Code">
 							<button type="button" id="update-location">Update Location</button>
-							<label>(First box is <a href="http://www.geonames.org/postal-codes/" target="_blank">zip code</a>, second is <a href="https://countrycode.org/"
-									target="_blank">country code</a>)</label>
 							<p id="weather-response"></p>
 						</div>
 					</section>
@@ -195,17 +196,24 @@
 					<section>
 						<p>Compose a tune to be played every hour on the hour</p>
 						<div class="pitch-template hidden">
-							<input class="pitch-name" type="text" maxlength="2" size="2">
-							<input class="pitch-slider" type="range" min="0" max="14" step="1" orient="vertical">
+							<input class="pitch-name"   type="text"  maxlength="2" size="2">
+							<input class="pitch-slider" type="range" min="0" max="16" step="1" orient="vertical">
 						</div>
 						<div class="staff staff1"></div>
 						<div class="staff staff2"></div>
+						<br>
+						<p>Town tune volume:</p>
+						<input id="townTuneVolume" type="range" min="0" max="1" step="0.01">
+						<span  id="townTuneVolumeText"></span> 
 					</section>
-
+					
 					<header>
 						<div style="padding: 0; margin: 0; height:18px;"></div>
 						<div class="controls">
 							<button class="play-tune">Play!</button>
+							<div class="spacer"></div>
+							<button class="reset-tune">Reset to Default</button>
+							<button class="randomize-tune">Randomize</button>
 							<div class="spacer"></div>
 							<button class="save-tune">Save</button>
 						</div>
@@ -218,7 +226,7 @@
 					<h1>About</h1>
 				</header>
 
-				<div class="content">
+				<div class="content about-content">
 					<div class="image-container">
 						<img src="img/icons/icon/128.png" width="48" height="48">
 						<div class="image-container-text">
@@ -256,7 +264,31 @@
 				</header>
 
 				<div class="content">
-					<h3>Version 4.0.0<span class="changelog-date"> - ??th of February 2020</span></h3>
+					<h3>Version 4.1.0<span class="changelog-date"> - 23rd of February 2020</span></h3>
+					<ul class="changelog-list">
+						<li>Added checks for MediaSession API fixing the issue where music would not play in some browsers and older versions of Chrome</li>
+						<li>Fixed a bug causing the Tab Audio Handler to not work as intended on some browsers</li>
+						<li>Fixed a bug causing the Tab Audio Handler to get stuck in the wrong state if tabs stopped playing audio while the music was paused and vice-versa</li>
+						<li>Clarified what country code to use</li>
+						<li>Changed zip/post code reference link</li>
+						<li>Added a note for users with a space in their post code</li>
+						<li>Fixed a bug causing songs to sometimes loop incorrectly</li>
+						<li>Removed the need for the tabs permission for the Tab Audio Behaviour/Handling function</li>
+						<li>Change default Tab Audio Behaviour to pause rather than nothing</li>
+						<li>Fixed a bug causing the music to not click over to the next hour and get stuck on a single hour</li>
+						<li>Overhauled about page</li>
+						<li>Changed API endpoints and domain</li>
+						<li>Added a built-in option to stop the extension from playing music when Chrome is closed</li>
+						<li>Added an option to edit the town tune's volume</li>
+						<li>Updated the default town tune</li>
+						<li>Overhauled Town Tune Editor</li>
+						<li>Added ? notes support to Town Tune Editor</li>
+						<li>Added reset to default and randomize buttons to Town Tune Editor</li>
+						<li>Fixed a bug causing the town tune to play while Tab Audio Behaviour is set to paused and a tab is playing audio</li>
+						<li>Fixed a bug causing the volume to not update if the volume was changed while the extension was paused</li>
+						<li>Fixed a bug causing the badge text to become incorrect if the extension was paused when an hour ticked over</li>
+					</ul>
+					<h3>Version 4.0.0<span class="changelog-date"> - 8th of February 2020</span></h3>
 					<ul class="changelog-list">
 						<li>Added Wild World/City Folk/Let's Go to the City Snowing and Raining weather alternatives</li>
 						<li>Made time checker more accurate</li>
@@ -295,14 +327,12 @@
 
 	<div id="tabAudioModal" class="modal">
 		<div class="modal-content">
-			<p class="modal-title">Note!</p>
-			<p>The "Tab Audio Behaviour" option requires additional permissions to function, specifically the "Tabs" permission. Due to a quirk in Chromium, this permission is defined
-				as "Read your browsing history". This permission does NOT give the extension permission to view your actual browsing history, but allows it to see what tabs you currently
-				have open, which we use ONLY to check to see if any tabs are playing audio. If you are okay with that, press "Allow" on the next dialogue.</p>
-			<a target="_blank" href="https://developer.chrome.com/extensions/permission_warnings#view_warnings">For more info, refer to the Chrome Developer Docs.</a>
+			<p id="modal-title"></p>
+			<p id="modal-text"></p>
+			<a id="modal-link" target="_blank"></a>
 			<br />
 			<br />
-			<button id="tabAudioModalDismiss">Understood!</button>
+			<button id="tabAudioModalDismiss"></button>
 		</div>
 	</div>
 </body>
