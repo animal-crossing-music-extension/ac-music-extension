@@ -140,8 +140,8 @@ var createSampler = function(audioContext) {
     // Playing audio
     source.connect(gain);
     gain.connect(audioContext.destination);
-    console.log(time, pitchToStartPoint(pitch), chimeLength)
-    source.start(time, pitchToStartPoint(pitch), chimeLength); 
+    console.log(time, pitchToStartPoint(pitch), chimeLength, sustain)
+    source.start(time, pitchToStartPoint(pitch), chimeLength + sustain); 
 
     setTimeout(() => {
       let fadeInterval = setInterval(() => {
@@ -153,7 +153,7 @@ var createSampler = function(audioContext) {
           gain.gain.value = volume;
         }
       }, 100);
-    }, (time - chimeLength * chimeLength * chimeLength) * 1000);
+    }, (time - chimeLength * chimeLength * chimeLength + sustain) * 1000);
   };
 
   initStartPoints();
