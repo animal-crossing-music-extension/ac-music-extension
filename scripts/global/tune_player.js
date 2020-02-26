@@ -90,7 +90,7 @@
 var createSampler = function(audioContext) {
   var bellBuffer;
   var startPoints = [null, null];
-  var chimeLength = 3.8; 
+  var chimeLength = 1.5; 
 
   var pitchToStartPoint = function(pitch) {
     index = availablePitches.indexOf(pitch);
@@ -134,13 +134,26 @@ var createSampler = function(audioContext) {
     // The notes sound broken & not accurate to the editor's volume when played at higher volumes, vol is therefore reduced with this multiplier.
       
     // Configuring gain
-    gain = audioContext.createGain();
+    let gain = audioContext.createGain();
     gain.gain.value = volume;
     
     // Playing audio
     source.connect(gain);
     gain.connect(audioContext.destination);
+    console.log(time, pitchToStartPoint(pitch), chimeLength)
     source.start(time, pitchToStartPoint(pitch), chimeLength); 
+
+    setTimeout(() => {
+      let fadeInterval = setInterval(() => {
+        gain.gain.value -= 0.05;
+        console.log(gain.gain.value, time);
+        if (gain.gain.value <= 0) {
+          clearInterval(fadeInterval);
+          console.log("clearing")
+          gain.gain.value = volume;
+        }
+      }, 100);
+    }, (time - chimeLength * chimeLength * chimeLength) * 1000);
   };
 
   initStartPoints();
