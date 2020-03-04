@@ -6,7 +6,8 @@
 
 function TownTuneManager() {
 
-	var defaultTune = ["C2", "E2", "C2", "G1", "F1", "G1", "B1", "D2", "C2", "zZz", "G1", "zZz", "C2", "-", "-", "zZz"];
+	// var defaultTune = ["C2", "E2", "C2", "G1", "F1", "G1", "B1", "D2", "C2", "zZz", "G1", "zZz", "C2", "-", "-", "zZz"];
+	var defaultTune = ["C3", "E3", "C3", "G2", "F2", "G2", "B2", "D3", "C3", "zZz", "?", "zZz", "C3", "-", "-", "zZz"];
 	var defaultTownTuneVolume = 0.75;
 	var defaultTabAudio = 'pause';
 	var defaultTabAudioReduceVolume = 80;

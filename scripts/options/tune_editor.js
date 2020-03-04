@@ -1,9 +1,9 @@
 $(function(){
 var pitchTemplate, playButton, saveButton, tune;
-const defaultTune = ["C2", "E2", "C2", "G1", "F1", "G1", "B1", "D2", "C2", "zZz", "G1", "zZz", "C2", "-", "-", "zZz"]; // From AC : Wild World. Old default: ["G2", "E3", "-", "G2", "F2", "D3", "-", "B2", "C3", "zZz", "C2", "zZz", "C2", "-", "-", "zZz"];
+const defaultTune = ["C3", "E3", "C3", "G2", "F2", "G2", "B2", "D3", "C3", "zZz", "?", "zZz", "C3", "-", "-", "zZz"]; // From AC: Wild World
 var tuneLength = 16;
-var availableColors = ["#a4a2d0", "#e4b3d3", "#5eccf5", "#12fee0", "#53fd8a", "#79fc4e", "#a8fd35", "#d0fe47", "#e4fd39", 
-                       "#f9fe2e", "#fefa43", "#fef03f", "#fcd03a", "#fcb141", "#fe912e", "#FE672E", "#FA5C90", "#ba32a4"];
+var availableColors = ["#A4A4FF", "#FFB0FF", "#52D3FE", "#12FEE0", "#53FD8A", "#79FC4E", "#A8FD35", "#D0FE47",
+                       "#E4FD39", "#F9FE2E", "#FEFA43", "#FEF03F", "#FCD03A", "#FCB141", "#FE912E", "#FE7929"];
 var editorControls = [];
 var pitchNames = [];
 var flashColor = '#FFFFFF';
@@ -15,7 +15,7 @@ var tunePlayer = createTunePlayer(audioContext); // Responsible for playing town
 var availablePitches = tunePlayer.availablePitches;
 var rest = availablePitches[0];
 
-var defaultTownTuneVolume = 0.75; // Fallback town tune volume, change this if the default town tune volume is altered.
+var defaultTownTuneVolume = 0.75; // Default town tune volume, used as fallback when retreiving town tune volume from chrome storage. (Just here to make it easier to change)
 
 $(".pitch-template > .pitch-slider")[0].max = availablePitches.length-1;
 
