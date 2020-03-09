@@ -25,6 +25,7 @@ section {
 
 .pitch-slider {
   -webkit-appearance: slider-vertical;
+  -moz-appearance: slider-vertical;
 }
 
 button, input[type='text']:not(.pitch-name) {
@@ -58,6 +59,7 @@ input[type="text"]#weather {
 
 input[type="range"]#volume{
   -webkit-appearance: none;
+  -moz-appearance: none;
 	width: 129px;
 	height: 3px;
   background-color: #e3ddd8; 
@@ -65,6 +67,8 @@ input[type="range"]#volume{
 
 input[type="range"]#townTuneVolume{
   -webkit-appearance: none;
+  -moz-appearance: none;
+
   width: 240px;
   height: 3px;
   background-color: #e3ddd8; 
@@ -74,6 +78,8 @@ input[type="range"]#townTuneVolume{
 
 input[type="range"].pitch-slider{
     -webkit-appearance: none;
+    -moz-appearance: none;
+
     transform:rotate(-90deg);
 	margin: 40px -20px;
 	width: 75px;
@@ -81,8 +87,10 @@ input[type="range"].pitch-slider{
     background-color: #e3ddd8; 
 }
 
-input[type="range"]::-webkit-slider-thumb {
-	-webkit-appearance: none;
+input[type="range"]::-webkit-slider-thumb ::-moz-range-thumb{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
 	background-color: #f3f3f3;
 	border: 1px solid #BFBFBF;
 	width: 10px;
