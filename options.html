@@ -14,9 +14,19 @@
 	<script src="scripts/options/options.js"></script>
 	<script src="scripts/options/contributors.js"></script>
 	<style>
-		/* .chrome-bootstrap .frame .view {
-		margin-block-start: 180px;
-		} */
+
+		.icon-grid{
+			width:80%;
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0px, 60px));
+			margin: 20px 5px;
+			grid-gap: 5px;
+
+		}
+		.icon-grid div{
+			text-align: center;
+		}
+		
 	</style>
 </head>
 
@@ -39,15 +49,26 @@
 				</li>
 			</ul>
 
-			<table class="nav-buttons">
-				<td><a target="_blank" href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop"><button type="button" class="nav-button" title="Chrome Webstore"><img src="img/social/webstore.png" /></button></a></td>
-				<td><a target="_blank" href="https://discord.gg/4FMrEF8"><button type="button" class="nav-button" title="Discord Server"><img src="img/social/discord.png" /></button></a></td>
-				<td><a target="_blank" href="https://github.com/animal-crossing-music-extension/ac-music-extension"><button type="button" class="nav-button" title="GitHub"><img src="img/social/github.png" /></button></a></td>
-			</table>
-			<table class="nav-buttons nav-buttons-2">
-				<td><a target="_blank" href="https://twitter.com/ac_music_ext"><button type="button" class="nav-button" title="Twitter"><img src="img/social/twitter.png" /></button></a></td>
-				<td><a target="_blank" href="https://acmusicext.com"><button type="button" class="nav-button" title="Website"><img src="img/social/website.png" /></button></a></td>
-			</table>
+		<div class="icon-grid">
+
+
+				<div>
+					<a target="_blank"
+						href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop"><button
+							type="button" class="nav-button" title="Chrome Webstore"><img src="img/social/webstore.png" /></button></a>
+				</div>
+				<div><a target="_blank" href="https://discord.gg/4FMrEF8"><button type="button" class="nav-button"
+							title="Discord Server"><img src="img/social/discord.png" /></button></a></div>
+				<div><a target="_blank" href="https://github.com/animal-crossing-music-extension/ac-music-extension"><button
+							type="button" class="nav-button" title="GitHub"><img src="img/social/github.png" /></button></a></div>
+				<div><a target="_blank" href="https://twitter.com/ac_music_ext"><button type="button" class="nav-button"
+							title="Twitter"><img src="img/social/twitter.png" /></button></a></div>
+				<div><a target="_blank" href="https://acmusicext.com"><button type="button" class="nav-button" title="Website"><img
+								src="img/social/website.png" /></button></a></div>
+
+		</div>
+
+			
 		</div>
 
 		<div class="mainview view">
@@ -57,8 +78,9 @@
 				</header>
 
 				<div class="content">
+					<h3>Volume</h3>
+
 					<section>
-						<h3>Volume</h3>
 						<p>Adjust the volume that the extension's music plays at</p>
 						<span class="checkbox">
 							<label>
@@ -68,7 +90,9 @@
 						<span id="volumeText"></span>
 					</section>
 
-					<section id="music-selection">						<h3>Music</h3>
+					<h3>Music</h3>
+
+					<section id="music-selection">						
 						<p>Select which game's music you wish to listen to</p>
 						<div class="radio">
 							<input id="animal-crossing" name="music-choice" type="radio"><label for="animal-crossing"><span><span></span></span>Animal Forest/Animal Crossing</label>
@@ -83,8 +107,9 @@
 							<input id="game-random" name="music-choice" type="radio"><label for="game-random"><span><span></span></span>Random!</label>
 						</div>
 					</section>
+					<h3>Weather</h3>
 
-					<section id="weather-selection">						<h3>Weather</h3>
+					<section id="weather-selection">						
 						<p>Select the weather variation you wish to listen to</p>
 						<div class="radio">
 							<input id="sunny" name="weather-choice" type="radio"><label for="sunny"><span><span></span></span>Sunny/Normal</label>
@@ -102,9 +127,9 @@
 							<input id="weather-random" name="weather-choice" type="radio"><label for="weather-random"><span><span></span></span>Random!</label>
 						</div>
 					</section>
+					<h3>K.K. Slider</h3>
 
 					<section>
-						<h3>K.K. Slider</h3>
 						<p>Customize K.K. Slider's behaviour</p>
 						<h4>Play Times</h4>
 						<div class="radio">
@@ -118,8 +143,9 @@
 							<input id="always-kk" name="enable-kk" type="radio"><label for="always-kk"><span><span></span></span>Play K.K. Slider songs at all times</label>
 						</div>
 					</section>
+					<h4>Version Choice</h4>
+
 					<section id="kk-version-selection">
-						<h4>Version Choice</h4>
 						<div class="radio">
 							<input id="kk-version-live" name="kk-version" type="radio"><label for="kk-version-live"><span><span></span></span>Live</label>
 						</div>
@@ -131,8 +157,9 @@
 						</div>
 					</section>
 
+					<h3>Town Tune <a id="town-tune-button-link" class="exclamation">!</a></h3>
+
 					<section>
-						<h3>Town Tune <a id="town-tune-button-link" class="exclamation">!</a></h3>
 						<p>Customize your custom town tune's behaviour</p>
 						<div class="checkbox">
 							<input id="enable-town-tune" type="checkbox"><label for="enable-town-tune"><span></span>Play your custom town tune on the hour</label>
@@ -142,8 +169,9 @@
 						</div>
 					</section>
 
+					<h3>Tab Audio Behaviour</h3>
+
 					<section>
-						<h3>Tab Audio Behaviour</h3>
 						<p>Control what the extension does while a tab is playing audio</p>
 						<div class="radio" style="height: 21px">
 							<input id="tab-audio-reduce" name="tab-audio" type="radio"><label for="tab-audio-reduce" style="line-height: unset"><span
@@ -157,9 +185,9 @@
 							<input id="tab-audio-nothing" name="tab-audio" type="radio"><label for="tab-audio-nothing"><span><span></span></span>Do nothing</label>
 						</div>
 					</section>
+					<h3>Other</h3>
 
 					<section>
-						<h3>Other</h3>
 						<p>Other various options that don't fit in any other category</p>
 						<div class="checkbox">
 							<input id="enable-notifications" type="checkbox"><label for="enable-notifications"><span></span>Enable Chrome notifications on song change</label>
@@ -170,12 +198,15 @@
 						</div>
 
 						<div class="checkbox">
-							<input id="enable-background" type="checkbox"><label for="enable-background"><span></span>Allow for music to play when Chrome is closed. <a target="_blank" href="https://kb.nmsu.edu/73071">Background apps must also be enabled in Chrome's settings.</a></label>
+							<input id="enable-background" type="checkbox"><label for="enable-background"><span></span>
+
+							Allow for music to play when Chrome is closed.</label> <a target="_blank" href="https://kb.nmsu.edu/73071">Background apps must also be enabled in Chrome's settings.</a>
 						</div>
 					</section>
 
+					<h3>Live Weather Location</h3>
+
 					<section id="live-weather-location">
-						<h3>Live Weather Location</h3>
 						<p>Select the location to fetch the live weather information from. The live weather synchronizes with the extension's music.<br />The first box is your <a href="https://worldpostalcode.com/" target="_blank">zip/post code</a>, the second is your <a href="https://countrycode.org/" target="_blank">ISO code (the two letters)</a></p> <div class="text">
 							<input type="text" id="zip-code" aria-label="Zip/Post Code" value="98052" placeholder="Zip/Post Code">
 							<input type="text" id="country-code" aria-label="ISO Code" value="US" placeholder="ISO Code">
@@ -226,7 +257,7 @@
 					<h1>About</h1>
 				</header>
 
-				<div class="content about-content">
+				<div class="content">
 					<div class="image-container">
 						<img src="img/icons/icon/128.png" width="48" height="48">
 						<div class="image-container-text">
