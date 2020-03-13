@@ -1,12 +1,14 @@
 (function() {
-  var availablePitches = ['zZz', '-', 'F1', 'G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3', '?'];
-  var frequencies      = [null,  null, 350,  392,  440,  494,  523,  587,  659,  698,  784,  880,  988, 1046, 1174, 1318, "random"];
+     var availablePitches = ['zZz', '-', 'G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3', '?'];
+  // var availablePitches = ['zZz', '-', 'F1', 'G1', 'A1', 'B1', 'C2', 'D2', 'E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3', '?'];
+  // var frequencies      = [null,  null, 350,  392,  440,  494,  523,  587,  659,  698,  784,  880,  988, 1046, 1174, 1318, "random"];
+     var frequencies      = [null,  null, 392,  440,  494,  523,  587,  659,  698,  784,  880,  988, 1046, 1174, 1318, "random"];
   // ^ values in HZ
   
   
   /**
    * @function createBooper
-   * @desc  Creates & returns instrument responsible for playing town-tune notes in the town-tune editor
+   * @desc  Creates & returns instrument (playNote method) used to play each note in the town tune, when it's played or updated in the town-tune editor
    * @param {*} audioContext 
    * @returns {method} playNote
    */
@@ -81,14 +83,14 @@
   
 /**
  * @function createSampler
- * @desc  Creates & returns instrument responsible for playing notes used to play the town tune at the hour
+ * @desc  Creates & returns instrument (playNote method) used to play each note in the town tune, when it's played at the hour
  * @param {*} audioContext 
  * @returns {method} playNote
  */
 var createSampler = function(audioContext) {
   var bellBuffer;
   var startPoints = [null, null];
-  var chimeLength = 3.8;
+  var chimeLength = 3.8; 
 
   var pitchToStartPoint = function(pitch) {
     index = availablePitches.indexOf(pitch);
