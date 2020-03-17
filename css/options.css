@@ -160,3 +160,18 @@ h3, h4 {
     color: gray;
     font-weight: normal;
 }
+
+#contributors-container{
+    width: 60vw;
+    display: grid;
+    grid-template-columns: repeat(4, 20vmin);
+    margin: 20px 5px;
+    grid-gap: 0px;
+    align-items: stretch;
+}
+
+.contributor {
+    text-align: center;
+    border: 1px solid #dddddd;
+    padding: 8px;
+}
