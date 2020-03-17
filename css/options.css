@@ -175,3 +175,16 @@ h3, h4 {
     border: 1px solid #dddddd;
     padding: 8px;
 }
+
+.icon-grid{
+    width:80%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0px, 60px));
+    margin: 20px 5px;
+    grid-gap: 5px;
+
+}
+
+.icon-grid div{
+    text-align: center;
+}
