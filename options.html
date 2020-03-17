@@ -13,17 +13,18 @@
 	<script src="scripts/options/tune_editor.js"></script>
 	<script src="scripts/options/options.js"></script>
 	<script src="scripts/options/contributors.js"></script>
+
 </head>
 
 <body class="chrome-bootstrap">
 	<div class="frame">
 		<div class="navigation">
-			<h1 style="color: #5C6166;">Animal Crossing Music</h1>
-			<ul class="menu" style="margin-top: 4em;">
+			<h1>Animal Crossing Music</h1>
+			<ul class="menu">
 				<li class="selected">
 					<a href="#options">Options</a>
 				</li>
-				<li class="town-tune-link" id ="town-tune-button">
+				<li class="town-tune-link" id="town-tune-button">
 					<a href="#town-tune">Town Tune Editor</a>
 				</li>
 				<li class="help-link">
@@ -34,26 +35,27 @@
 				</li>
 			</ul>
 
-		<div class="icon-grid">
-
-
+			<div class="icon-grid">
 				<div>
 					<a target="_blank"
 						href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop"><button
-							type="button" class="nav-button" title="Chrome Webstore"><img src="img/social/webstore.png" /></button></a>
+							type="button" class="nav-button" title="Chrome Webstore"><img
+								src="img/social/webstore.png" /></button></a>
 				</div>
 				<div><a target="_blank" href="https://discord.gg/4FMrEF8"><button type="button" class="nav-button"
 							title="Discord Server"><img src="img/social/discord.png" /></button></a></div>
-				<div><a target="_blank" href="https://github.com/animal-crossing-music-extension/ac-music-extension"><button
-							type="button" class="nav-button" title="GitHub"><img src="img/social/github.png" /></button></a></div>
+				<div><a target="_blank"
+						href="https://github.com/animal-crossing-music-extension/ac-music-extension"><button
+							type="button" class="nav-button" title="GitHub"><img
+								src="img/social/github.png" /></button></a></div>
 				<div><a target="_blank" href="https://twitter.com/ac_music_ext"><button type="button" class="nav-button"
 							title="Twitter"><img src="img/social/twitter.png" /></button></a></div>
-				<div><a target="_blank" href="https://acmusicext.com"><button type="button" class="nav-button" title="Website"><img
-								src="img/social/website.png" /></button></a></div>
+				<div><a target="_blank" href="https://acmusicext.com"><button type="button" class="nav-button"
+							title="Website"><img src="img/social/website.png" /></button></a></div>
 
-		</div>
+			</div>
 
-			
+
 		</div>
 
 		<div class="mainview view">
@@ -77,39 +79,50 @@
 
 					<h3>Music</h3>
 
-					<section id="music-selection">						
+					<section id="music-selection">
 						<p>Select which game's music you wish to listen to</p>
 						<div class="radio">
-							<input id="animal-crossing" name="music-choice" type="radio"><label for="animal-crossing"><span><span></span></span>Animal Forest/Animal Crossing</label>
+							<input id="animal-crossing" name="music-choice" type="radio"><label
+								for="animal-crossing"><span><span></span></span>Animal Forest/Animal Crossing</label>
 						</div>
 						<div class="radio">
-							<input id="wild-world" name="music-choice" type="radio"><label for="wild-world"><span><span></span></span>Wild World/City Folk/Let's Go to the City</label>
+							<input id="wild-world" name="music-choice" type="radio"><label
+								for="wild-world"><span><span></span></span>Wild World/City Folk/Let's Go to the
+								City</label>
 						</div>
 						<div class="radio">
-							<input id="new-leaf" name="music-choice" type="radio"><label for="new-leaf"><span><span></span></span>New Leaf</label>
+							<input id="new-leaf" name="music-choice" type="radio"><label
+								for="new-leaf"><span><span></span></span>New Leaf</label>
 						</div>
 						<div class="radio">
-							<input id="game-random" name="music-choice" type="radio"><label for="game-random"><span><span></span></span>Random!</label>
+							<input id="game-random" name="music-choice" type="radio"><label
+								for="game-random"><span><span></span></span>Random!</label>
 						</div>
 					</section>
 					<h3>Weather</h3>
 
-					<section id="weather-selection">						
+					<section id="weather-selection">
 						<p>Select the weather variation you wish to listen to</p>
 						<div class="radio">
-							<input id="sunny" name="weather-choice" type="radio"><label for="sunny"><span><span></span></span>Sunny/Normal</label>
+							<input id="sunny" name="weather-choice" type="radio"><label
+								for="sunny"><span><span></span></span>Sunny/Normal</label>
 						</div>
 						<div class="radio">
-							<input id="snowing" name="weather-choice" type="radio"><label for="snowing"><span><span></span></span>Snowing</label>
+							<input id="snowing" name="weather-choice" type="radio"><label
+								for="snowing"><span><span></span></span>Snowing</label>
 						</div>
 						<div class="radio">
-							<input id="raining" name="weather-choice" type="radio"><label for="raining"><span><span></span></span>Raining</label>
+							<input id="raining" name="weather-choice" type="radio"><label
+								for="raining"><span><span></span></span>Raining</label>
 						</div>
 						<div class="radio">
-							<input id="live" name="weather-choice" type="radio"><label for="live"><span><span></span></span>Live Weather <a href="#live-weather-location" id="live-weather-location-link" class="exclamation">!</a></label>
+							<input id="live" name="weather-choice" type="radio"><label
+								for="live"><span><span></span></span>Live Weather <a href="#live-weather-location"
+									id="live-weather-location-link" class="exclamation">!</a></label>
 						</div>
 						<div class="radio">
-							<input id="weather-random" name="weather-choice" type="radio"><label for="weather-random"><span><span></span></span>Random!</label>
+							<input id="weather-random" name="weather-choice" type="radio"><label
+								for="weather-random"><span><span></span></span>Random!</label>
 						</div>
 					</section>
 					<h3>K.K. Slider</h3>
@@ -118,27 +131,33 @@
 						<p>Customize K.K. Slider's behaviour</p>
 						<h4>Play Times</h4>
 						<div class="radio">
-							<input id="no-kk" name="enable-kk" type="radio"><label for="no-kk"><span><span></span></span>Do not play K.K. Slider songs</label>
+							<input id="no-kk" name="enable-kk" type="radio"><label
+								for="no-kk"><span><span></span></span>Do not play K.K. Slider songs</label>
 						</div>
 						<div class="radio">
-							<input id="enable-kk" name="enable-kk" type="radio"><label for="enable-kk"><span><span></span></span>Play K.K. Slider songs on Saturdays from
+							<input id="enable-kk" name="enable-kk" type="radio"><label
+								for="enable-kk"><span><span></span></span>Play K.K. Slider songs on Saturdays from
 								8pm&ndash;12am</label>
 						</div>
 						<div class="radio">
-							<input id="always-kk" name="enable-kk" type="radio"><label for="always-kk"><span><span></span></span>Play K.K. Slider songs at all times</label>
+							<input id="always-kk" name="enable-kk" type="radio"><label
+								for="always-kk"><span><span></span></span>Play K.K. Slider songs at all times</label>
 						</div>
 					</section>
 					<h4>Version Choice</h4>
 
 					<section id="kk-version-selection">
 						<div class="radio">
-							<input id="kk-version-live" name="kk-version" type="radio"><label for="kk-version-live"><span><span></span></span>Live</label>
+							<input id="kk-version-live" name="kk-version" type="radio"><label
+								for="kk-version-live"><span><span></span></span>Live</label>
 						</div>
 						<div class="radio">
-							<input id="kk-version-aircheck" name="kk-version" type="radio"><label for="kk-version-aircheck"><span><span></span></span>Aircheck</label>
+							<input id="kk-version-aircheck" name="kk-version" type="radio"><label
+								for="kk-version-aircheck"><span><span></span></span>Aircheck</label>
 						</div>
 						<div class="radio">
-							<input id="kk-version-both" name="kk-version" type="radio"><label for="kk-version-both"><span><span></span></span>Both</label>
+							<input id="kk-version-both" name="kk-version" type="radio"><label
+								for="kk-version-both"><span><span></span></span>Both</label>
 						</div>
 					</section>
 
@@ -147,10 +166,13 @@
 					<section>
 						<p>Customize your custom town tune's behaviour</p>
 						<div class="checkbox">
-							<input id="enable-town-tune" type="checkbox"><label for="enable-town-tune"><span></span>Play your custom town tune on the hour</label>
+							<input id="enable-town-tune" type="checkbox"><label for="enable-town-tune"><span></span>Play
+								your custom town tune on the hour</label>
 						</div>
 						<div class="checkbox">
-							<input id="absolute-town-tune" type="checkbox"><label for="absolute-town-tune"><span></span>Play your custom town tune regardless if the music is paused</label>
+							<input id="absolute-town-tune" type="checkbox"><label
+								for="absolute-town-tune"><span></span>Play your custom town tune regardless if the music
+								is paused</label>
 						</div>
 					</section>
 
@@ -158,16 +180,18 @@
 
 					<section>
 						<p>Control what the extension does while a tab is playing audio</p>
-						<div class="radio" style="height: 21px">
-							<input id="tab-audio-reduce" name="tab-audio" type="radio"><label for="tab-audio-reduce" style="line-height: unset"><span
-									style="vertical-align: middle;"><span></span></span>Reduce the extension's music by <input id="tab-audio-reduce-value" name="tab-audio" type="number"
-									max="100" min="0">%</label>
+						<div class="radio">
+							<input id="tab-audio-reduce" name="tab-audio" type="radio"><label for="tab-audio-reduce"><span><span></span></span>Reduce the extension's music by</label>
+								<input id="tab-audio-reduce-value" name="tab-audio" type="number" max="100"
+									min="0">%</label>
 						</div>
 						<div class="radio">
-							<input id="tab-audio-pause" name="tab-audio" type="radio"><label for="tab-audio-pause"><span><span></span></span>Pause the extension's music</label>
+							<input id="tab-audio-pause" name="tab-audio" type="radio"><label
+								for="tab-audio-pause"><span><span></span></span>Pause the extension's music</label>
 						</div>
 						<div class="radio">
-							<input id="tab-audio-nothing" name="tab-audio" type="radio"><label for="tab-audio-nothing"><span><span></span></span>Do nothing</label>
+							<input id="tab-audio-nothing" name="tab-audio" type="radio"><label
+								for="tab-audio-nothing"><span><span></span></span>Do nothing</label>
 						</div>
 					</section>
 					<h3>Other</h3>
@@ -175,26 +199,37 @@
 					<section>
 						<p>Other various options that don't fit in any other category</p>
 						<div class="checkbox">
-							<input id="enable-notifications" type="checkbox"><label for="enable-notifications"><span></span>Enable Chrome notifications on song change</label>
+							<input id="enable-notifications" type="checkbox"><label
+								for="enable-notifications"><span></span>Enable Chrome notifications on song
+								change</label>
 						</div>
 
 						<div class="checkbox">
-							<input id="enable-badge" type="checkbox"><label for="enable-badge"><span></span>Display text on badge</label>
+							<input id="enable-badge" type="checkbox"><label for="enable-badge"><span></span>Display text
+								on badge</label>
 						</div>
 
 						<div class="checkbox">
 							<input id="enable-background" type="checkbox"><label for="enable-background"><span></span>
 
-							Allow for music to play when Chrome is closed.</label> <a target="_blank" href="https://kb.nmsu.edu/73071">Background apps must also be enabled in Chrome's settings.</a>
+								Allow for music to play when Chrome is closed.</label> <a target="_blank"
+								href="https://kb.nmsu.edu/73071">Background apps must also be enabled in Chrome's
+								settings.</a>
 						</div>
 					</section>
 
 					<h3>Live Weather Location</h3>
 
 					<section id="live-weather-location">
-						<p>Select the location to fetch the live weather information from. The live weather synchronizes with the extension's music.<br />The first box is your <a href="https://worldpostalcode.com/" target="_blank">zip/post code</a>, the second is your <a href="https://countrycode.org/" target="_blank">ISO code (the two letters)</a></p> <div class="text">
-							<input type="text" id="zip-code" aria-label="Zip/Post Code" value="98052" placeholder="Zip/Post Code">
-							<input type="text" id="country-code" aria-label="ISO Code" value="US" placeholder="ISO Code">
+						<p>Select the location to fetch the live weather information from. The live weather synchronizes
+							with the extension's music.<br />The first box is your <a
+								href="https://worldpostalcode.com/" target="_blank">zip/post code</a>, the second is
+							your <a href="https://countrycode.org/" target="_blank">ISO code (the two letters)</a></p>
+						<div class="text">
+							<input type="text" id="zip-code" aria-label="Zip/Post Code" value="98052"
+								placeholder="Zip/Post Code">
+							<input type="text" id="country-code" aria-label="ISO Code" value="US"
+								placeholder="ISO Code">
 							<button type="button" id="update-location">Update Location</button>
 							<p id="weather-response"></p>
 						</div>
@@ -212,7 +247,7 @@
 					<section>
 						<p>Compose a tune to be played every hour on the hour</p>
 						<div class="pitch-template hidden">
-							<input class="pitch-name"   type="text"  maxlength="2" size="2">
+							<input class="pitch-name" type="text" maxlength="2" size="2">
 							<input class="pitch-slider" type="range" min="0" max="16" step="1" orient="vertical">
 						</div>
 						<div class="staff staff1"></div>
@@ -220,17 +255,14 @@
 						<br>
 						<p>Town tune volume:</p>
 						<input id="townTuneVolume" type="range" min="0" max="1" step="0.01">
-						<span  id="townTuneVolumeText"></span> 
+						<span id="townTuneVolumeText"></span>
 					</section>
-					
+
 					<header>
-						<div style="padding: 0; margin: 0; height:18px;"></div>
 						<div class="controls">
 							<button class="play-tune">Play!</button>
-							<div class="spacer"></div>
 							<button class="reset-tune">Reset to Default</button>
 							<button class="randomize-tune">Randomize</button>
-							<div class="spacer"></div>
 							<button class="save-tune">Save</button>
 						</div>
 					</header>
@@ -247,16 +279,22 @@
 						<img src="img/icons/icon/128.png" width="48" height="48">
 						<div class="image-container-text">
 							<h2>Animal Crossing Music</h2>
-							<span>Play Animal Crossing's smooth background music in real-time throughout your day.</span>
+							<span>Play Animal Crossing's smooth background music in real-time throughout your
+								day.</span>
 							<br />
 							<span id="version-number"></span>
 						</div>
 					</div>
 
 					<div>
-						<a target="_blank" href="https://discord.gg/4FMrEF8"><button role="link">Join our Discord Server to get help using this extension</button></a>
-						<a target="_blank" href="https://github.com/animal-crossing-music-extension/ac-music-extension/issues"><button role="link">Report an issue</button></a>
-						<a target="_blank" href="https://github.com/animal-crossing-music-extension/ac-music-extension"><button role="link">GitHub Repository</button></a>
+						<a target="_blank" href="https://discord.gg/4FMrEF8"><button role="link">Join our Discord Server
+								to get help using this extension</button></a>
+						<a target="_blank"
+							href="https://github.com/animal-crossing-music-extension/ac-music-extension/issues"><button
+								role="link">Report an issue</button></a>
+						<a target="_blank"
+							href="https://github.com/animal-crossing-music-extension/ac-music-extension"><button
+								role="link">GitHub Repository</button></a>
 					</div>
 
 					<br />
@@ -266,10 +304,15 @@
 					<div id="contributors-container">
 					</div>
 					<br />
-					<p>Extension originally created by <a href="https://www.neogaf.com/members/andrex.20593/">Andrex</a> from <a href="https://www.neogaf.com/threads/real-time-animal-crossing-music.473164/post-37661922">NeoGAF</a>.</p>
-					<p>Extension improved by <a href="https://www.neogaf.com/members/blazescorch2.142800/">blazescorch2</a>.</p>
+					<p>Extension originally created by <a href="https://www.neogaf.com/members/andrex.20593/">Andrex</a>
+						from <a
+							href="https://www.neogaf.com/threads/real-time-animal-crossing-music.473164/post-37661922">NeoGAF</a>.
+					</p>
+					<p>Extension improved by <a
+							href="https://www.neogaf.com/members/blazescorch2.142800/">blazescorch2</a>.</p>
 					<p>Idea for extension taken from <a href="http://tane.us/ac/">tane.us</a>.</p>
-					<p>This options page uses <a href="https://github.com/roykolak/chrome-bootstrap">Chrome Bootstrap</a> by Roy Kolak under the MIT License.</p>
+					<p>This options page uses <a href="https://github.com/roykolak/chrome-bootstrap">Chrome
+							Bootstrap</a> by Roy Kolak under the MIT License.</p>
 				</div>
 			</div>
 
@@ -281,16 +324,19 @@
 				<div class="content">
 					<h3>Version 4.1.0<span class="changelog-date"> - 23rd of February 2020</span></h3>
 					<ul class="changelog-list">
-						<li>Added checks for MediaSession API fixing the issue where music would not play in some browsers and older versions of Chrome</li>
+						<li>Added checks for MediaSession API fixing the issue where music would not play in some
+							browsers and older versions of Chrome</li>
 						<li>Fixed a bug causing the Tab Audio Handler to not work as intended on some browsers</li>
-						<li>Fixed a bug causing the Tab Audio Handler to get stuck in the wrong state if tabs stopped playing audio while the music was paused and vice-versa</li>
+						<li>Fixed a bug causing the Tab Audio Handler to get stuck in the wrong state if tabs stopped
+							playing audio while the music was paused and vice-versa</li>
 						<li>Clarified what country code to use</li>
 						<li>Changed zip/post code reference link</li>
 						<li>Added a note for users with a space in their post code</li>
 						<li>Fixed a bug causing songs to sometimes loop incorrectly</li>
 						<li>Removed the need for the tabs permission for the Tab Audio Behaviour/Handling function</li>
 						<li>Change default Tab Audio Behaviour to pause rather than nothing</li>
-						<li>Fixed a bug causing the music to not click over to the next hour and get stuck on a single hour</li>
+						<li>Fixed a bug causing the music to not click over to the next hour and get stuck on a single
+							hour</li>
 						<li>Overhauled about page</li>
 						<li>Changed API endpoints and domain</li>
 						<li>Added a built-in option to stop the extension from playing music when Chrome is closed</li>
@@ -299,13 +345,17 @@
 						<li>Overhauled Town Tune Editor</li>
 						<li>Added ? notes support to Town Tune Editor</li>
 						<li>Added reset to default and randomize buttons to Town Tune Editor</li>
-						<li>Fixed a bug causing the town tune to play while Tab Audio Behaviour is set to paused and a tab is playing audio</li>
-						<li>Fixed a bug causing the volume to not update if the volume was changed while the extension was paused</li>
-						<li>Fixed a bug causing the badge text to become incorrect if the extension was paused when an hour ticked over</li>
+						<li>Fixed a bug causing the town tune to play while Tab Audio Behaviour is set to paused and a
+							tab is playing audio</li>
+						<li>Fixed a bug causing the volume to not update if the volume was changed while the extension
+							was paused</li>
+						<li>Fixed a bug causing the badge text to become incorrect if the extension was paused when an
+							hour ticked over</li>
 					</ul>
 					<h3>Version 4.0.0<span class="changelog-date"> - 8th of February 2020</span></h3>
 					<ul class="changelog-list">
-						<li>Added Wild World/City Folk/Let's Go to the City Snowing and Raining weather alternatives</li>
+						<li>Added Wild World/City Folk/Let's Go to the City Snowing and Raining weather alternatives
+						</li>
 						<li>Made time checker more accurate</li>
 						<li>Made Town Tune Editor look nicer</li>
 						<li>Added Live Weather option</li>
@@ -321,8 +371,10 @@
 						<li>Added K.K. Slider Aircheck and Live version choices</li>
 						<li>Updated badge text to show full hour (E.g. 8pm rather than 8p)</li>
 						<li>Added support for Chrome's Media Session service</li>
-						<li>Added support for remote streaming for music rather than bundling music with the extension</li>
-						<li>Updated every song to be of the highest possible quality, removing any static where possible, bad loops and lowering any excessively high bitrates</li>
+						<li>Added support for remote streaming for music rather than bundling music with the extension
+						</li>
+						<li>Updated every song to be of the highest possible quality, removing any static where
+							possible, bad loops and lowering any excessively high bitrates</li>
 						<li>Added every single K.K. Slider song (all 91 songs)</li>
 						<li>Reorganised extension's file structure</li>
 						<li>Added dynamic Contributors/Credits list</li>
@@ -333,7 +385,8 @@
 						<li>Added an option to play the town tune regardless if the extension's music is paused</li>
 						<li>Added better error handling</li>
 						<li>Polished options page</li>
-						<li>Many other various additions, bug fixes, code refactors and changes to make Animal Crossing Music Extension the BEST Animal Crossing extension ever!</li>
+						<li>Many other various additions, bug fixes, code refactors and changes to make Animal Crossing
+							Music Extension the BEST Animal Crossing extension ever!</li>
 					</ul>
 				</div>
 			</div>

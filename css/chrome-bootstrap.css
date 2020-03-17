@@ -173,21 +173,40 @@ section {
   padding-inline-start: 4px;
   transition: padding 100ms, height 100ms, opacity 100ms;
   border-bottom: 1px solid #EEE;
-  display: display-box;
+  display: grid;
   overflow: hidden;
   padding: 13px 0;
-  position: relative;
-  
-  margin-bottom: 25px;
+  grid-gap: 30px;
+  margin: 25px 25px;
   padding-top: 7px;
+  grid-template-columns: repeat(6, auto);
 }
 .chrome-bootstrap .controls .text {
   display: inline-block;
   margin-top: 4px;
 }
-.chrome-bootstrap .controls .spacer {
-  flex-grow: 1;
-}
+
+  .play-tune {
+    grid-row: 1;
+  }
+
+  
+  .reset-tune {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  
+  .randomize-tune {
+    grid-column: 4;
+    grid-row: 1;
+  }
+  
+  .save-tune {
+    grid-column: 6 / 6;
+    grid-row: 1;
+  }
+
 .chrome-bootstrap ol.pagination li {
   margin: 0 2px;
   display: inline-block;
