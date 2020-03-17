@@ -41,8 +41,8 @@ async function updateContributors() {
 
 
     contributors.forEach((contributor) => {
-        let td = document.createElement('div');
-        td.className = 'contributor';
+        let div = document.createElement('div');
+        div.className = 'contributor';
 
         if (contributor) {
             let avatar = document.createElement('img');
@@ -85,24 +85,21 @@ async function updateContributors() {
                 discordName.append(`@${contributor.discord}`);
             }
 
-            td.appendChild(avatar);
-            td.appendChild(name);
+            div.appendChild(avatar);
+            div.appendChild(name);
             if (contributions) {
-                td.appendChild(document.createElement('br'));
-                td.appendChild(contributions);
+                div.appendChild(document.createElement('br'));
+                div.appendChild(contributions);
             }
             if (githubLink) {
-                td.appendChild(document.createElement('br'));
-                td.appendChild(githubLink);
+                div.appendChild(document.createElement('br'));
+                div.appendChild(githubLink);
             }
             if (discordName) {
-                td.appendChild(document.createElement('br'));
-                td.appendChild(discordName);
+                div.appendChild(document.createElement('br'));
+                div.appendChild(discordName);
             }
         }
-
-        contributorsContainer.appendChild(td);
-
-
+        contributorsContainer.appendChild(div);
     });
 }
