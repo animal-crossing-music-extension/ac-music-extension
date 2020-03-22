@@ -122,7 +122,8 @@ function StateManager() {
 			let games = [
 				'animal-crossing',
 				'wild-world',
-				'new-leaf'
+				'new-leaf',
+				'new-horizons'
 			];
 
 			data.music = games[Math.floor(Math.random() * games.length)];
