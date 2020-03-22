@@ -4,6 +4,7 @@ const onClickElements = [
 	'animal-crossing',
 	'wild-world',
 	'new-leaf',
+	'new-horizons',
 	'game-random',
 	'sunny',
 	'snowing',
@@ -105,6 +106,7 @@ function saveOptions() {
 	if (document.getElementById('animal-crossing').checked) music = 'animal-crossing';
 	else if (document.getElementById('wild-world').checked) music = 'wild-world';
 	else if (document.getElementById('new-leaf').checked) music = 'new-leaf';
+	else if (document.getElementById('new-horizons').checked) music = 'new-horizons';
 	else if (document.getElementById('game-random').checked) music = 'game-random';
 
 	if (document.getElementById('sunny').checked) weather = 'sunny';
