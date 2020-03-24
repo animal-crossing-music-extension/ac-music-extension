@@ -87,7 +87,7 @@ function StateManager() {
 	function getSyncedOptions(callback) {
 		chrome.storage.sync.get({
 			volume: 0.5,
-			music: 'new-leaf',
+			music: 'new-horizons',
 			weather: 'sunny',
 			enableNotifications: true,
 			enableKK: true,
@@ -122,7 +122,8 @@ function StateManager() {
 			let games = [
 				'animal-crossing',
 				'wild-world',
-				'new-leaf'
+				'new-leaf',
+				'new-horizons'
 			];
 
 			data.music = games[Math.floor(Math.random() * games.length)];
