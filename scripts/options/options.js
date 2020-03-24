@@ -18,7 +18,6 @@ const onClickElements = [
 	'absolute-town-tune',
 	'enable-notifications',
 	'enable-badge',
-	'enable-background',
 	'kk-version-live',
 	'kk-version-aircheck',
 	'kk-version-both',
@@ -73,6 +72,23 @@ window.onload = function () {
 			element.onanimationend = () => element.style.animation = null;
 		}
 	});
+
+	let enableBackgroundEl = document.getElementById('enable-background');
+	enableBackgroundEl.onclick = () => {
+		chrome.permissions.contains({ permissions: ['background'] }, hasPerms => {
+			if (enableBackgroundEl.checked) {
+				chrome.permissions.contains({ permissions: ['background'] }, hasPerms => {
+					if (hasPerms) saveOptions();
+					else {
+						chrome.permissions.request({ permissions: ['background'] }, hasPerms => {
+							if (hasPerms) saveOptions();
+							else enableBackgroundEl.checked = false;
+						});
+					}
+				});
+			} else if (hasPerms) chrome.permissions.remove({ permissions: ['background'] });
+		});
+	}
 
 	updateContributors();
 }
