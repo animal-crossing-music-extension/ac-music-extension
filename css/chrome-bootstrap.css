@@ -431,9 +431,7 @@ section {
   height: 100%;
   width: 100%;
 }
-.chrome-bootstrap html[dir='rtl'] input[type='checkbox']:checked::before {
-  /* -webkit-transform: scaleX(-1); */
-}
+
 .chrome-bootstrap input[type='radio']:checked::before {
   background-color: #666;
   border-radius: 100%;
@@ -441,20 +439,15 @@ section {
   content: '';
   display: block;
   left: 3px;
-  position: absolute;
   right: 3px;
   top: 3px;
 }
 .chrome-bootstrap select {
-  /* -webkit-appearance: none;
-  -webkit-padding-end: 20px;
-  -webkit-padding-start: 6px; */
-  /* OVERRIDE */
-
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAICAYAAAAbQcSUAAAAWklEQVQokWNgoAOIAuI0PDiKaJMSgYCZmfkbkPkfHYPEQfJEG/b//3+FBQsWLGRjY/uJbBCIDxIHyRNtGDYDyTYI3UA+Pr4vFBmEbODbt2+bKDYIyUBWYtQBAIRzRP/XKJ//AAAAAElFTkSuQmCC), -webkit-linear-gradient(#ededed, #ededed 38%, #dedede);
   background-position: right center;
   background-repeat: no-repeat;
 }
+
 .chrome-bootstrap select {
   min-height: 2em;
   min-width: 4em;
@@ -465,7 +458,6 @@ section {
 .chrome-bootstrap input[type='checkbox'] {
   bottom: 2px;
   height: 13px;
-  position: relative;
   vertical-align: middle;
   width: 13px;
 }
@@ -475,16 +467,10 @@ section {
   border-radius: 100%;
   bottom: 3px;
   height: 15px;
-  /* position: relative; */
   vertical-align: middle;
   width: 15px;
 }
-.chrome-bootstrap button {
-  /* -webkit-padding-end: 10px;
-  -webkit-padding-start: 10px; */
-  /* min-height: 2em;
-  min-width: 4em; */
-}
+
 .chrome-bootstrap input[type='text'],
 .chrome-bootstrap input[type='number'],
 .chrome-bootstrap input[type='search'] {
