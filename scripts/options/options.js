@@ -4,6 +4,7 @@ const onClickElements = [
 	'animal-crossing',
 	'wild-world',
 	'new-leaf',
+	'new-horizons',
 	'game-random',
 	'sunny',
 	'snowing',
@@ -17,7 +18,6 @@ const onClickElements = [
 	'absolute-town-tune',
 	'enable-notifications',
 	'enable-badge',
-	'enable-background',
 	'kk-version-live',
 	'kk-version-aircheck',
 	'kk-version-both',
@@ -73,6 +73,23 @@ window.onload = function () {
 		}
 	});
 
+	let enableBackgroundEl = document.getElementById('enable-background');
+	enableBackgroundEl.onclick = () => {
+		chrome.permissions.contains({ permissions: ['background'] }, hasPerms => {
+			if (enableBackgroundEl.checked) {
+				chrome.permissions.contains({ permissions: ['background'] }, hasPerms => {
+					if (hasPerms) saveOptions();
+					else {
+						chrome.permissions.request({ permissions: ['background'] }, hasPerms => {
+							if (hasPerms) saveOptions();
+							else enableBackgroundEl.checked = false;
+						});
+					}
+				});
+			} else if (hasPerms) chrome.permissions.remove({ permissions: ['background'] });
+		});
+	}
+
 	updateContributors();
 }
 
@@ -105,6 +122,7 @@ function saveOptions() {
 	if (document.getElementById('animal-crossing').checked) music = 'animal-crossing';
 	else if (document.getElementById('wild-world').checked) music = 'wild-world';
 	else if (document.getElementById('new-leaf').checked) music = 'new-leaf';
+	else if (document.getElementById('new-horizons').checked) music = 'new-horizons';
 	else if (document.getElementById('game-random').checked) music = 'game-random';
 
 	if (document.getElementById('sunny').checked) weather = 'sunny';
@@ -157,7 +175,7 @@ function saveOptions() {
 function restoreOptions() {
 	chrome.storage.sync.get({
 		volume: 0.5,
-		music: 'new-leaf',
+		music: 'new-horizons',
 		weather: 'sunny',
 		enableNotifications: true,
 		enableKK: true,

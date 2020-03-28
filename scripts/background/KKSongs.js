@@ -95,5 +95,9 @@ const KKSongList = [
     'NL - K.K. Oasis',
     'NL - K.K. Stroll',
     'NL - K.K. Synth',
-    'NL - Space K.K.'
+    'NL - Space K.K.',
+    'NH - Animal City',
+    'NH - Drivin\'',
+    'NH - Farewell',
+    'NH - Welcome Horizons'
 ];
