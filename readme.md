@@ -13,6 +13,7 @@ Listen to the corresponding hourly music from the main Animal Crossing titles:
   - Animal Crossing
   - Wild World / City Folk
   - New Leaf
+  - New Horizons
 
 'Raining' and 'snowing' variants are also included!
 
