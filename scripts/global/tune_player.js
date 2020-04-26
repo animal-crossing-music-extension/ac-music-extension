@@ -169,7 +169,7 @@ var createTunePlayer = function(audioContext, bpm) {
 
   var getStepDuration = function(bpm) {
     if(stepDuration) return stepDuration;
-    stepDuration = 1 / (bpm / 60);
+    stepDuration = 1 / (bpm / 90);
     return stepDuration;
   };
 
