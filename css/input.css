@@ -3,7 +3,10 @@
 }
 
 .pitch {
-  display: inline-block;
+  display: inline-grid;
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
+  justify-items: center;
   width: 25px;
   margin: 6px;
 }
@@ -12,16 +15,19 @@
   text-align: center;
   width: 35px;
   height: 35px;
-  
   border-width: 3px !important;
   border-radius: 40px !important;
-  transition-duration: 0.1s;
+  transition-duration: 0.1s
 }
 
-.pitch-slider {
+.staff{
+  margin: 10px 10px;
+}
+
+/* .pitch-slider {
   -webkit-appearance: slider-vertical;
   -moz-appearance: slider-vertical;
-}
+} */
 
 button, input[type='text']:not(.pitch-name) {
 	background: #f9f9f8 !important; 
@@ -29,6 +35,7 @@ button, input[type='text']:not(.pitch-name) {
 	padding: 10px auto !important; 
 	height: 25px; 
 }
+
 button:hover {
 	background: #e3ddd8 !important;
 	border: 1px solid #BFBFBF !important; 
@@ -69,24 +76,25 @@ input[type="range"]#townTuneVolume{
 
 
 input[type="range"].pitch-slider{
+
   -webkit-appearance: none;
-  transform:rotate(-90deg);
-	margin: 40px -20px;
-	width: 75px;
-	height: 3px;
+  border-radius: 5px;
+  background: #ccc;
+  outline: none;
+  writing-mode: bt-lr; /* IE */
+  -webkit-appearance: slider-vertical; /* WebKit */
   background-color: #e3ddd8; 
 }
 
 input[type="range"]::-webkit-slider-thumb ::-moz-range-thumb{
   -webkit-appearance: none;
   -moz-appearance: none;
-
 	background-color: #f3f3f3;
 	border: 1px solid #BFBFBF;
 	width: 10px;
 	height: 20px;
 	border-radius: 3px;
-	cursor: pointer;
+  cursor: pointer;
 }
 
 input[type=checkbox]:not(old),
@@ -148,4 +156,14 @@ input[type=radio]:not(old):checked +  label > span > span{
   border           : 1px solid #BFBFBF;
   border-radius    : 5px;
   background       : #595959;
+}
+
+// Firefox Overrides
+::-moz-range-track {
+    background: #ccc;
+    border: 0;
+}
+
+input::-moz-focus-inner { 
+  border: 0; 
 }
