@@ -24,11 +24,6 @@
   margin: 10px 10px;
 }
 
-/* .pitch-slider {
-  -webkit-appearance: slider-vertical;
-  -moz-appearance: slider-vertical;
-} */
-
 button, input[type='text']:not(.pitch-name) {
 	background: #f9f9f8 !important; 
 	border: 1px solid #BFBFBF !important; 
@@ -158,7 +153,6 @@ input[type=radio]:not(old):checked +  label > span > span{
   background       : #595959;
 }
 
-// Firefox Overrides
 ::-moz-range-track {
     background: #ccc;
     border: 0;

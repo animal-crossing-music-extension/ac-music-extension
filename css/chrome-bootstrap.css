@@ -139,10 +139,12 @@
   font: inherit;
 }
 .chrome-bootstrap .frame .mainview > * {
+  margin-inline-start: -20px;
+  opacity: 0;
   transition: margin 100ms, opacity 100ms;
 }
 .chrome-bootstrap .frame .mainview > .selected {
-  margin-block-start: 0;
+  margin-inline-start: 0px;
   transition: margin 200ms, opacity 200ms;
   transition-delay: 100ms;
   z-index: 1;
@@ -564,7 +566,7 @@ section {
 }
 .chrome-bootstrap .overlay .page {
   border-radius: 3px;
- flex-direction: column;
+  flex-direction: column;
   transition: 200ms transform;
   background: white;
   box-shadow: 0 4px 23px 5px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.15);
