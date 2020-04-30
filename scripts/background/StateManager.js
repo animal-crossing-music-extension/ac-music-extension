@@ -93,7 +93,6 @@ function StateManager() {
 			enableKK: true,
 			alwaysKK: false,
 			kkVersion: 'live',
-			paused: false,
 			enableTownTune: true,
 			absoluteTownTune: false,
 			townTuneVolume: 0.75,
@@ -105,6 +104,7 @@ function StateManager() {
 			enableBackground: false,
 			tabAudioReduceValue: 80
 		}, items => {
+			items.paused = window.localStorage.getItem("paused") == "true";
 			options = items;
 			if (typeof callback === 'function') callback();
 		});
@@ -213,11 +213,10 @@ function StateManager() {
 	});
 
 	function toggleMusic() {
-		chrome.storage.sync.set({ paused: !options.paused }, function () {
-			getSyncedOptions(() => {
-				if (options.paused) notifyListeners("pause");
-				else self.activate();
-			});
+		window.localStorage.setItem('paused', !options.paused);
+		getSyncedOptions(() => {
+			if (options.paused) notifyListeners("pause");
+			else self.activate();
 		});
 	}
 
