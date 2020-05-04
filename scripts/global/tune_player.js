@@ -14,6 +14,7 @@
    */
   var createBooper = function(audioContext) { 
     
+	var instrumentName = "booper";
     var attack = 0.05;  //in seconds
     var decay = 0.1;    //in seconds
     var release = 0.15; //in seconds
@@ -88,6 +89,7 @@
  * @returns {method} playNote
  */
 var createSampler = function(audioContext) {
+  var instrumentName = "sampler";
   var bellBuffer;
   var startPoints = [null, null];
   var chimeLength = 3.8; 
@@ -169,9 +171,7 @@ var createTunePlayer = function(audioContext, bpm) {
 
   var getStepDuration = function(instrument, bpm) {
     if(stepDuration) return stepDuration;
-	stepDuration = (instrument == 'sampler') ? 1 / (bpm / 90) : 1 / (bpm / 60);
-	//alert(instrument.toString());
-    //stepDuration = 1 / (bpm / 90);	//This affects the tune's speed in both the editor and hourly chime. Find a better way to slow down the bells.
+	stepDuration = (instrument.instrumentName == 'sampler') ? 1 / (bpm / 90) : 1 / (bpm / 60);
     return stepDuration;
   };
 
