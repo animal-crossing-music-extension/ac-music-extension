@@ -13,8 +13,7 @@
    * @returns {method} playNote
    */
   var createBooper = function(audioContext) { 
-    
-	var instrumentName = "booper";
+	var instrumentName = 'booper';
     var attack = 0.05;  //in seconds
     var decay = 0.1;    //in seconds
     var release = 0.15; //in seconds
@@ -89,10 +88,10 @@
  * @returns {method} playNote
  */
 var createSampler = function(audioContext) {
-  var instrumentName = "sampler";
+  var instrumentName = 'sampler';
   var bellBuffer;
   var startPoints = [null, null];
-  var chimeLength = 3.8; 
+  var chimeLength = 3.8;
 
   var pitchToStartPoint = function(pitch) {
     index = availablePitches.indexOf(pitch);
@@ -171,8 +170,9 @@ var createTunePlayer = function(audioContext, bpm) {
 
   var getStepDuration = function(instrument, bpm) {
     if(stepDuration) return stepDuration;
-	stepDuration = (instrument.instrumentName == 'sampler') ? 1 / (bpm / 90) : 1 / (bpm / 60);
-    return stepDuration;
+	stepDuration = 1 / (bpm / 60);
+	alert("It is about to play! Prepare OBS! Current timing: BPM 70");
+	return stepDuration;
   };
 
   var getSustainMultiplier = function(index, tune) {
