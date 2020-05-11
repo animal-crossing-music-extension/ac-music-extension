@@ -171,7 +171,6 @@ var createTunePlayer = function(audioContext, bpm) {
   var getStepDuration = function(instrument, bpm) {
     if(stepDuration) return stepDuration;
 	stepDuration = 1 / (bpm / 60);
-	alert("It is about to play! Prepare OBS! Current timing: BPM 70");
 	return stepDuration;
   };
 
