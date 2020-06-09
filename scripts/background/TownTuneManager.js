@@ -24,7 +24,7 @@ function TownTuneManager() {
 			if (volume < 0) volume = 0;
 			if (volume > 1) volume = 1;
 
-			tunePlayer.playTune(items.townTune, sampler, 100, volume).done(doneCB);
+			tunePlayer.playTune(items.townTune, sampler, 66, volume).done(doneCB);	//Original "BPM" was 100.
 		});
 	}
 

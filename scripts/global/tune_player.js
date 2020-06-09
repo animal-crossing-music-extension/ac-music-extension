@@ -13,7 +13,7 @@
    * @returns {method} playNote
    */
   var createBooper = function(audioContext) { 
-    
+	var instrumentName = 'booper';
     var attack = 0.05;  //in seconds
     var decay = 0.1;    //in seconds
     var release = 0.15; //in seconds
@@ -88,9 +88,10 @@
  * @returns {method} playNote
  */
 var createSampler = function(audioContext) {
+  var instrumentName = 'sampler';
   var bellBuffer;
   var startPoints = [null, null];
-  var chimeLength = 3.8; 
+  var chimeLength = 3.8;
 
   var pitchToStartPoint = function(pitch) {
     index = availablePitches.indexOf(pitch);
@@ -167,10 +168,10 @@ var createTunePlayer = function(audioContext, bpm) {
   var rest = availablePitches[0];
   var sustain = availablePitches[1];
 
-  var getStepDuration = function(bpm) {
+  var getStepDuration = function(instrument, bpm) {
     if(stepDuration) return stepDuration;
-    stepDuration = 1 / (bpm / 60);
-    return stepDuration;
+	stepDuration = 1 / (bpm / 60);
+	return stepDuration;
   };
 
   var getSustainMultiplier = function(index, tune) {
@@ -186,7 +187,7 @@ var createTunePlayer = function(audioContext, bpm) {
   
   var playTune = function(tune, instrument, bpm, volume) {
     var callbacks, i, pitch, time, sustainDuration;
-    var stepDuration = getStepDuration(bpm);
+    var stepDuration = getStepDuration(instrument, bpm);
     var eachNote = function(index, duration) {};
     if(!bpm) bpm = defaultBpm;
     
@@ -219,7 +220,7 @@ var createTunePlayer = function(audioContext, bpm) {
       },
       done: function(callback) {
         //when the tune over
-        if (callback) setTimeout(callback, stepDuration * tune.length * 1000);
+        if (callback) setTimeout(callback, (stepDuration * tune.length * 1000) + (stepDuration * 2));
         return callbacks;
       }
     };
