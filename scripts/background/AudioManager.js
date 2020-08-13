@@ -1,4 +1,8 @@
 // Handles playing hourly music, KK, and the town tune.
+/* exported AudioManager */
+/* global TownTuneManager, MediaSessionManager, TimeKeeper */
+/* global chrome, printDebug, checkMediaSessionSupport, KKSongList, capitalize, loopTimes, formatHour */
+
 
 'use strict';
 
