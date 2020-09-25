@@ -103,7 +103,9 @@ function StateManager() {
 			enableBadgeText: true,
 			tabAudio: 'pause',
 			enableBackground: false,
-			tabAudioReduceValue: 80
+			tabAudioReduceValue: 80,
+			kkSelectedSongsEnable: false,
+			kkSelectedSongs: []
 		}, items => {
 			options = items;
 			if (typeof callback === 'function') callback();
@@ -184,7 +186,7 @@ function StateManager() {
 				let musicAndWeather = getMusicAndWeather();
 				notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
 			}
-			if ((isKK() && !wasKK) || (kkVersion != options.kkVersion && isKK())) notifyListeners("kkStart", [options.kkVersion]);
+			if ((isKK() && !wasKK) || (kkVersion != options.kkVersion && isKK()) || ('kkSelectedSongsEnable' in changes || 'kkSelectedSongs' in changes)) notifyListeners("kkStart", [options.kkVersion]);
 			if (!isKK() && wasKK) {
 				let musicAndWeather = getMusicAndWeather();
 				notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);

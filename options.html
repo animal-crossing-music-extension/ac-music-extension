@@ -11,6 +11,7 @@
 	<script src="scripts/options/navigation.js"></script>
 	<script src="scripts/global/tune_player.js"></script>
 	<script src="scripts/options/tune_editor.js"></script>
+	<script src="scripts/background/KKSongs.js"></script>
 	<script src="scripts/options/options.js"></script>
 	<script src="scripts/options/contributors.js"></script>
 	<style>
@@ -133,6 +134,13 @@
 							<input id="kk-version-both" name="kk-version" type="radio"><label for="kk-version-both"><span><span></span></span>Both</label>
 						</div>
 					</section>
+					<section>
+						<h4>Select songs</h4>
+						<div class="checkbox">
+							<input id="kk-songs-selection-enable" type="checkbox"><label for="kk-songs-selection-enable"><span></span>Only play the selected K.K. songs</label>
+						</div>
+						<select id="kk-songs-selection" style="height: 25vh" multiple></select>
+					</section>
 
 					<section>
 						<h3>Town Tune <a id="town-tune-button-link" class="exclamation">!</a></h3>
@@ -207,9 +215,9 @@
 						<br>
 						<p>Town tune volume:</p>
 						<input id="townTuneVolume" type="range" min="0" max="1" step="0.01">
-						<span  id="townTuneVolumeText"></span> 
+						<span  id="townTuneVolumeText"></span>
 					</section>
-					
+
 					<header>
 						<div style="padding: 0; margin: 0; height:18px;"></div>
 						<div class="controls">
