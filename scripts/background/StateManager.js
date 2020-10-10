@@ -103,7 +103,8 @@ function StateManager() {
 			enableBadgeText: true,
 			tabAudio: 'pause',
 			enableBackground: false,
-			tabAudioReduceValue: 80
+			tabAudioReduceValue: 80,
+			specificGames: []
 		}, items => {
 			options = items;
 			if (typeof callback === 'function') callback();
@@ -119,12 +120,18 @@ function StateManager() {
 		};
 
 		if (options.music === "game-random") {
-			let games = [
-				'animal-crossing',
-				'wild-world',
-				'new-leaf',
-				'new-horizons'
-			];
+			let games = [];
+
+			if (options.specificGames.length > 0) {
+				games = options.specificGames;
+			} else {
+				games = [
+					'animal-crossing',
+					'wild-world',
+					'new-leaf',
+					'new-horizons'
+				];
+			}
 
 			data.music = games[Math.floor(Math.random() * games.length)];
 		}
@@ -180,7 +187,7 @@ function StateManager() {
 			if ('zipCode' in changes) weatherManager.setZip(changes.zipCode.newValue);
 			if ('countryCode' in changes) weatherManager.setCountry(changes.countryCode.newValue);
 			if ('volume' in changes) notifyListeners("volume", [changes.volume.newValue]);
-			if (('music' in changes || 'weather' in changes) && !isKK()) {
+			if (('music' in changes || 'weather' in changes || 'specificGames' in changes) && !isKK()) {
 				let musicAndWeather = getMusicAndWeather();
 				notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
 			}

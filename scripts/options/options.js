@@ -90,6 +90,8 @@ window.onload = function () {
 		});
 	}
 
+	document.getElementById('specific-music-selection').onchange = saveOptions;
+
 	updateContributors();
 }
 
@@ -152,6 +154,9 @@ function saveOptions() {
 
 	document.getElementById('kk-version-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, enabledKKVersion));
 
+	let specificGames = Array.from(document.getElementById('specific-music-selection').selectedOptions).map(option => option.value);
+	document.getElementById('specific-music-selection').disabled = !(music === 'game-random');
+
 	chrome.storage.sync.set({
 		volume,
 		music,
@@ -168,7 +173,8 @@ function saveOptions() {
 		enableBadgeText,
 		enableBackground,
 		tabAudio,
-		tabAudioReduceValue
+		tabAudioReduceValue,
+		specificGames
 	});
 }
 
@@ -189,8 +195,10 @@ function restoreOptions() {
 		enableBadgeText: true,
 		tabAudio: 'pause',
 		enableBackground: false,
-		tabAudioReduceValue: 80
+		tabAudioReduceValue: 80,
+		specificGames: []
 	}, items => {
+		console.log(items.specificGames);
 		document.getElementById('volume').value = items.volume;
 		document.getElementById('volumeText').innerHTML = `${formatPercentage(items.volume*100)}`;
 		document.getElementById(items.music).checked = true;
@@ -220,8 +228,18 @@ function restoreOptions() {
 		document.getElementById('music-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, items.alwaysKK));
 		document.getElementById('weather-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, items.alwaysKK));
 		document.getElementById('kk-version-selection').querySelectorAll('input').forEach(updateChildrenState.bind(null, enabledKKVersion));
+
+		const specificMusicSelection = document.getElementById('specific-music-selection') ;
+		const specificMusicOptions = document.querySelectorAll('#specific-music-selection > option');
+		specificMusicSelection.disabled = !(items.music === 'game-random');
+
+		specificMusicOptions.forEach((gameOption) => {
+			if (items.specificGames.includes(gameOption.value)) {
+				gameOption.selected = 'selected';
+			}
+		});
 	});
-	
+
 }
 
 function validateWeather() {
@@ -282,6 +300,6 @@ function validateWeather() {
 	}
 }
 
-function updateChildrenState(disabled, childElement){		
+function updateChildrenState(disabled, childElement){
 	childElement.disabled = disabled
 }
