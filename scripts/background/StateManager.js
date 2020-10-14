@@ -160,7 +160,8 @@ function StateManager() {
 		else if (!isKK()) {
 			let musicAndWeather = getMusicAndWeather();
 			notifyListeners("hourMusic", [hour, musicAndWeather.weather, musicAndWeather.music, true]);
-			if (options.paused && options.absoluteTownTune) townTuneManager.playTune(tabAudio.audible);
+			// Play hourly tune when paused, but only if town tune is enabled
+			if (options.paused && (options.absoluteTownTune && options.enableTownTune)) townTuneManager.playTune(tabAudio.audible);
 		}
 	});
 
