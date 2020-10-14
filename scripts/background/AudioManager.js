@@ -4,9 +4,9 @@
 
 function AudioManager(addEventListener, isTownTune) {
 
-	// if eventsEnabled is true, plays event music when appliccable. 
-	// Only enable after all game's music-folders contain one .ogg sound file for each event 
-	// (i.e. "halloween.ogg" in newLeaf, AC,) 
+	// if eventsEnabled is true, plays event music when appliccable.
+	// Only enable after all game's music-folders contain one .ogg sound file for each event
+	// (i.e. "halloween.ogg" in newLeaf, AC,)
 	// Should also be used for disabling event music for those who have turned them off in the settings, then this  should be false.
 	let eventsEnabled = false;
 
@@ -70,7 +70,7 @@ function AudioManager(addEventListener, isTownTune) {
 			songName = timeKeeper.getEvent();
 		}*/
 
-		// SETTING AUDIO SOURCE		
+		// SETTING AUDIO SOURCE
 		audio.src = `https://acmusicext.com/static/${game}/${weather}/${songName}.ogg`;
 
 		let loopTime = ((loopTimes[game] || {})[weather] || {})[hour];
@@ -159,20 +159,33 @@ function AudioManager(addEventListener, isTownTune) {
 	function playKKSong() {
 		audio.onpause = null;
 
-		let version;
-		if (kkVersion == 'both') {
-			if (Math.floor(Math.random() * 2) == 0) version = 'live';
-			else version = 'aircheck';
-		} else version = kkVersion;
+		chrome.storage.sync.get({
+			kkSelectedSongsEnable: false, kkSelectedSongs: []
+		}, (items) => {
+			const kkSelectedSongsEnable = items.kkSelectedSongsEnable;
+			const kkSelectedSongs = items.kkSelectedSongs;
 
-		let randomSong = KKSongList[Math.floor(Math.random() * KKSongList.length)];
-		audio.src = `https://acmusicext.com/static/kk/${version}/${randomSong}.ogg`;
-		audio.play();
+			let version;
+			if (kkVersion == 'both') {
+				if (Math.floor(Math.random() * 2) == 0) version = 'live';
+				else version = 'aircheck';
+			} else version = kkVersion;
 
-		let formattedTitle = `${randomSong.split(' - ')[1]} (${capitalize(version)} Version)`;
-		window.notify("kkMusic", [formattedTitle]);
+			let song;
+			if (kkSelectedSongsEnable && kkSelectedSongs.length > 0) {
+				song = kkSelectedSongs[Math.floor(Math.random() * kkSelectedSongs.length)];
+			} else {
+				song = KKSongList[Math.floor(Math.random() * KKSongList.length)];
+			}
 
-		mediaSessionManager.updateMetadataKK(formattedTitle, randomSong);
+			audio.src = `https://acmusicext.com/static/kk/${version}/${song}.ogg`;
+			audio.play();
+
+			let formattedTitle = `${song.split(' - ')[1]} (${capitalize(version)} Version)`;
+			window.notify("kkMusic", [formattedTitle]);
+
+			mediaSessionManager.updateMetadataKK(formattedTitle, song);
+		});
 	}
 
 	// clears the loop point timeout and the fadeout
