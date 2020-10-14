@@ -1,6 +1,12 @@
 $(function(){
-var pitchTemplate, playButton, saveButton, tune;
+var pitchTemplate, playButton, saveButton, tune, activeTownTuneSaveState, townTuneSaveStates;
 const defaultTune = ["C3", "E3", "C3", "G2", "F2", "G2", "B2", "D3", "C3", "zZz", "?", "zZz", "C3", "-", "-", "zZz"]; // From AC: Wild World
+const defaultTownTuneSaveStates = [
+  {
+    "name": "TownTune #1",
+    "tune": defaultTune
+  }
+];
 var tuneLength = 16;
 var availableColors = ["#A4A4FF", "#FFB0FF", "#52D3FE", "#12FEE0", "#53FD8A", "#79FC4E", "#A8FD35", "#D0FE47",
                        "#E4FD39", "#F9FE2E", "#FEFA43", "#FEF03F", "#FCD03A", "#FCB141", "#FE912E", "#FE7929"];
@@ -19,6 +25,15 @@ var defaultTownTuneVolume = 0.75; // Default town tune volume, used as fallback 
 
 $(".pitch-template > .pitch-slider")[0].max = availablePitches.length-1;
 
+const townTuneSaveSlotsSelect = document.querySelector('#town-tune-save-slots');
+const townTuneRenameSaveSlotBtn = document.querySelector('#town-town-rename-save-slot')
+const townTuneNewSaveSlotBtn = document.querySelector('#town-tune-new-save-slot');
+const townTuneDeleteSaveSlotBtn = document.querySelector('#town-tune-delete-save-slot');
+
+const getCurrentSaveSlotOption = () => {
+  return townTuneSaveSlotsSelect.options[townTuneSaveSlotsSelect.options.selectedIndex];
+}
+
 var createPitchControl = function(index) {
   var pitch = pitchTemplate.cloneNode(true);
   var name = pitch.querySelector('.pitch-name');
@@ -29,14 +44,13 @@ var createPitchControl = function(index) {
 
   name.value = tune[index];
   name.style.borderColor = "transparent";
-  
-  
+
   name.onchange = function() {
     var val = name.value.toUpperCase();
     var pitchIndex = availablePitches.indexOf(val);
     if (pitchIndex != -1) {
       slider.value = pitchIndex;
-      name.value = val; 
+      name.value = val;
     } else {
       slider.value = 0;
       name.value = rest;
@@ -93,6 +107,64 @@ var initControls = function() {
   editorControls.push(resetButton);
   editorControls.push(randomizeButton);
   editorControls.push(volumeSlider);
+
+  // select town tune save slot
+  townTuneSaveSlotsSelect.addEventListener('change', () => {
+    activeTownTuneSaveState = townTuneSaveSlotsSelect.options.selectedIndex;
+    tune = townTuneSaveStates[activeTownTuneSaveState].tune;
+    setTuneSliders();
+  });
+
+  // rename town tune save slot
+  townTuneRenameSaveSlotBtn.addEventListener('click', () => {
+    const saveSlot = getCurrentSaveSlotOption();
+    const name = window.prompt('Rename save slot:', saveSlot.text).trim();
+    if (!name)
+      return window.alert('Name cannot be empty!');
+    saveSlot.text = name;
+
+    townTuneSaveStates[activeTownTuneSaveState].name = name;
+  });
+
+  // new town tune save slot
+  townTuneNewSaveSlotBtn.addEventListener('click', () => {
+    const saveSlot = document.createElement('option');
+    const index = townTuneSaveSlotsSelect.options.length - 1;
+    const name = 'TownTune #' + (townTuneSaveSlotsSelect.options.length + 1);
+    const tune = defaultTune;
+
+    saveSlot.text = name;
+    townTuneSaveSlotsSelect.appendChild(saveSlot);
+    townTuneSaveSlotsSelect.options.selectedIndex = index;
+    townTuneSaveSlotsSelect.dispatchEvent(new Event('change'));
+
+    townTuneSaveStates[index] = {
+      name: name,
+      tune: tune
+    };
+  });
+
+  // delete town tune save slot
+  townTuneDeleteSaveSlotBtn.addEventListener('click', () => {
+    const saveSlot = getCurrentSaveSlotOption();
+
+    if (townTuneSaveStates.length === 1)
+      return window.alert('You must have at lease 1 save slot!');
+
+    if (window.confirm(`Delete save slot "${saveSlot.text}"?`)) {
+      townTuneSaveStates.splice(townTuneSaveSlotsSelect.options.selectedIndex, 1);
+      townTuneSaveSlotsSelect.removeChild(saveSlot);
+    }
+  });
+
+  // init town tune selector
+  townTuneSaveStates.forEach((saveState) => {
+    const saveSlot = document.createElement('option');
+    saveSlot.text = saveState.name;
+    townTuneSaveSlotsSelect.appendChild(saveSlot);
+  });
+  townTuneSaveSlotsSelect.options.selectedIndex = activeTownTuneSaveState;
+  townTuneSaveSlotsSelect.dispatchEvent(new Event('change'));
 };
 
 var disableEditor = function() {
@@ -114,14 +186,14 @@ var flashName = function(index, duration) {
   pitchName.style.background = flashColor;
   pitchName.style.borderColor = availableColors[availablePitches.indexOf(tune[index])];
   let pitch = pitchName.value;
-  
+
   if (pitch == '-'){
     pitchName.style.transform = "scale(1.1) translate(-3px, 0) rotate(-15deg)";
-  } else 
+  } else
   if(pitch != "zZz") {
     pitchName.style.transform = "scale(1.25) rotate(10deg)";
   }
-  
+
   setTimeout(function() {
     updateColor(index, tune[index]);
     pitchName.style.borderColor = "transparent";
@@ -142,45 +214,49 @@ var playTune = function() {
 
 var resetTune = function() {
   tune = Array.from(defaultTune);
+  setTuneSliders();
+}
+
+const setTuneSliders = () => {
   let tuneSliders = document.getElementsByClassName("pitch");
-  
-  // Setting sliders
   for (let i = 0; i < tuneLength; i++) {
-    let range = tuneSliders[i].getElementsByClassName("pitch-slider")[0]; 
+    let range = tuneSliders[i].getElementsByClassName("pitch-slider")[0];
     let label = tuneSliders[i].getElementsByClassName("pitch-name")[0];
-    label.value = tune[i];  
-    range.value = availablePitches.indexOf(tune[i]); 
-	  updateColor(i,tune[i]);
+    label.value = tune[i];
+    range.value = availablePitches.indexOf(tune[i]);
+    updateColor(i,tune[i]);
   }
 }
 
 var randomizeTune = function(){
   let tuneSliders = document.getElementsByClassName("pitch");
-  
+
   // Randomizing sliders
   for (let i = 0; i < tuneLength; i++) {
     // Selecting a random pitch
     let pitch =  availablePitches[ 2 + Math.floor( Math.random() * availablePitches.length-2 ) ];
     tune[i] = pitch;
-    
+
     // Setting values
-    let range = tuneSliders[i].getElementsByClassName("pitch-slider")[0]; 
+    let range = tuneSliders[i].getElementsByClassName("pitch-slider")[0];
     let label = tuneSliders[i].getElementsByClassName("pitch-name")[0];
-    label.value = tune[i];  
-    range.value = availablePitches.indexOf(tune[i]); 
+    label.value = tune[i];
+    range.value = availablePitches.indexOf(tune[i]);
 	  updateColor(i,tune[i]);
   }
 }
 
 var retrieveTune = function(done) {
-  chrome.storage.sync.get({ townTune: defaultTune }, function(items){
-    tune = items.townTune;
+  chrome.storage.sync.get({ activeTownTuneSaveState: 0, townTuneSaveStates: defaultTownTuneSaveStates }, function(items){
+    activeTownTuneSaveState = items.activeTownTuneSaveState;
+    townTuneSaveStates = items.townTuneSaveStates;
+    tune = items.townTuneSaveStates[items.activeTownTuneSaveState].tune;
     if (typeof done == 'function') done();
   });
 };
 
 var saveTune = function() {
-  chrome.storage.sync.set({ townTune: tune }, function(){
+  chrome.storage.sync.set({ activeTownTuneSaveState: activeTownTuneSaveState, townTuneSaveStates: townTuneSaveStates }, function() {
     saveButton.textContent = 'Saving...';
     saveButton.disabled = true;
     setTimeout(function() {
@@ -200,7 +276,7 @@ var setup = function() {
 var updateColor = function(index, pitch){
   var pitchName = pitchNames[index];
   pitchName.style.background = availableColors[availablePitches.indexOf(pitch)];
-} 
+}
 
 var updateTune = function(index, pitch) {
   chrome.storage.sync.get({townTuneVolume: defaultTownTuneVolume}, function(items){
