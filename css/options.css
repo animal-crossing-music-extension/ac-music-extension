@@ -190,7 +190,7 @@ h3, h4 {
         color: white;
     }
 
-    h3, h4 {
+    .chrome-bootstrap h3 {
         color: white;
     }
 
@@ -202,6 +202,9 @@ h3, h4 {
         color: white;
     }
 
+    .chrome-bootstrap header {
+        background-image: -webkit-linear-gradient(#2c2c2c, #2c2c2c 40%, rgba(44, 44, 44, 0.92));
+    }
     
 }
 
