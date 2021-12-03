@@ -45,6 +45,8 @@ To install the downloaded project, do the following:
 5. Choose the unzipped project directory
 6. Profit!
 
+If you're having issues making the extension work with Opera GX or another Chromium-based browser, Sleepy-Vagabond's solution might help: https://github.com/animal-crossing-music-extension/ac-music-extension/issues/153
+
 ### Branch conventions
 - The `master` branch contains the latest published version of the extension. This is the stable branch.
 - The `develop` branch contains the latest fully-integrated features of the extension. This is where PRs should be merged into.
