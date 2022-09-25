@@ -168,6 +168,11 @@ function saveOptions() {
 
 	document.getElementById('kk-songs-selection').disabled = !kkSelectedSongsEnable;
 
+	// fixes so that if the weather selected was live and the music is random, it will preserve the live setting
+	if (music === "game-random" && weather === 'live'){
+		weather = 'live'
+	}
+
 	chrome.storage.sync.set({
 		volume,
 		music,
@@ -233,7 +238,7 @@ function restoreOptions() {
 		document.getElementById('kk-songs-selection-enable').checked = items.kkSelectedSongsEnable;
 
 		// Disable raining if the game is animal crossing, since there is no raining music for animal crossing.
-		document.getElementById('raining').disabled = items.music == 'animal-crossing';
+		document.getElementById('raining').disabled = items.music === 'animal-crossing';
 		document.getElementById('absolute-town-tune').disabled = !items.enableTownTune;
 
 		let enabledKKVersion = !(items.alwaysKK || items.enableKK);
@@ -256,6 +261,7 @@ function restoreOptions() {
 }
 
 function validateWeather() {
+	let weather;
 	let updateLocationEl = document.getElementById('update-location');
 	updateLocationEl.textContent = "Validating...";
 	updateLocationEl.disabled = true;
@@ -283,7 +289,17 @@ function validateWeather() {
 			return;
 		}
 
-		if (request.status == 200) responseMessage(`Success! The current weather status in ${response.city}, ${response.country} is "${response.weather}"`, true);
+		if (request.status === 200) {
+			responseMessage(`Success! The current weather status in ${response.city}, ${response.country} is "${response.weather}"`, true);
+			if(document.getElementById('live').checked){
+				if(response.weather === "Rain") weather = "raining"
+				else if(response.weather === "Clear") weather = 'sunny'
+				else if(response.weather === "Snow") weather = 'snowing'
+				chrome.storage.sync.set({
+					weather
+				})
+			}
+		}
 		else {
 			if (response.error) {
 				if ((response.error === "City not found") && (containsSpace(zip))) {

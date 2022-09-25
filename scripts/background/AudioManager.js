@@ -248,7 +248,10 @@ function AudioManager(addEventListener, isTownTune) {
 
 	addEventListener("gameChange", playHourlyMusic);
 
-	addEventListener("weatherChange", playHourlyMusic);
+	addEventListener("weatherChange", () => {
+	        fadeOutAudio(300);
+	        setTimeout(playHourlyMusic, 300);
+	});
 
 	addEventListener("pause", () => {
 		clearLoop();
