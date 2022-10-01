@@ -1,0 +1,22 @@
+name: Publish Extension
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to publish, e.g v6.0.5"
+        required: true
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Github Release Assets
+        uses: PlasmoHQ/download-release-asset@v1
+        with:
+          tag: ${{ github.event.inputs.tag }}
+      - name: Browser Platform Publisher
+        uses: PlasmoHQ/bpp@v2
+        with:
+          keys: ${{ secrets.SUBMIT_KEYS }}
+          artifact: ${{ github.event.inputs.tag }}.zip
