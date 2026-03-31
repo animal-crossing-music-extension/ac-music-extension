@@ -23,7 +23,7 @@
          "64": "img/icons/status/paused/64.png",
          "32": "img/icons/status/paused/32.png"
       },
-      "default_title": "Animal Crossing Music"
+      "default_title": "Animal Crossing Music (J variant)"
    },
    "description": "Play Animal Crossing's smooth background music in real-time throughout your day.",
    "icons": {
@@ -32,16 +32,24 @@
       "32": "img/icons/icon/32.png"
    },
    "manifest_version": 2,
-   "name": "Animal Crossing Music",
-   "options_page": "options.html",
+   "name": "Animal Crossing Music (J variant)",
+   "options_ui": {
+      "page": "options.html",
+      "open_in_tab": true
+   },
+   "browser_specific_settings": {
+      "gecko": {
+        "id": "{2fff585f-d956-4ea6-ba18-6fc7177f55a7}"
+      }
+   },
    "permissions": [
       "notifications",
       "storage",
       "https://acmusicext.com/"
    ],
    "optional_permissions": [
-      "background"
-   ],
-   "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "4.2.0"
+      "background",
+      "<all_urls>"
+   ], 
+   "version": "1.1.0"
 }

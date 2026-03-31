@@ -17,9 +17,9 @@ function TownTuneManager() {
 	
 	// Play tune and call doneCB after it's done
 	this.playTune = function(tabAudioPlaying = false, doneCB) {
-		chrome.storage.sync.get({ townTune: defaultTune, townTuneVolume: defaultTownTuneVolume, tabAudio: defaultTabAudio, tabAudioReduceValue: defaultTabAudioReduceVolume }, function(items){
+		chrome.storage.sync.get({ townTune: defaultTune, tabAudio: defaultTabAudio, tabAudioReduceValue: defaultTabAudioReduceVolume }, function(items){
 			// Reduce the volume when necessary
-			var volume = items.townTuneVolume;
+			var volume = (window.localStorage.getItem("townTuneVolume") >= 0 && window.localStorage.getItem("townTuneVolume") !== null) ? window.localStorage.getItem("townTuneVolume") : defaultTownTuneVolume;
 			if (items.tabAudio == 'reduce' && tabAudioPlaying) volume = volume * (1 - items.tabAudioReduceValue / 100);
 			if (volume < 0) volume = 0;
 			if (volume > 1) volume = 1;

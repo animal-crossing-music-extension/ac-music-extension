@@ -1,16 +1,20 @@
-// Handles Chrome notifications
+// Handles notifications
 
 'use strict';
 
 function NotificationManager(addEventListener, isEnabled) {
 	function doNotification(message, icon = 'clock') {
-		chrome.notifications.create('animal-crossing-music', {
-			type: 'basic',
-			title: 'Animal Crossing Music',
-			iconUrl: `../img/${icon}.png`,
-			silent: true,
-			message
-		});
+		const notificationOptions = {
+				type: 'basic',
+				title: 'Animal Crossing Music',
+				iconUrl: `../img/${icon}.png`,
+				message
+		};
+		
+		// Silent notifications are not supported on Firefox or Safari
+		if (navigator.userAgentData) notificationOptions.silent = true;
+		
+		chrome.notifications.create('animal-crossing-music', notificationOptions);
 	}
 
 	addEventListener("weatherChange", (hour, weather) => {

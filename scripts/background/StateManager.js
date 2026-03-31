@@ -4,11 +4,14 @@
 'use strict';
 
 function StateManager() {
+	let self;
+	self = this;
 
-	let self = this;
+	let options;
+	options = {};
 
-	let options = {};
-	let callbacks = {};
+	let callbacks;
+	callbacks = {};
 
 	let timeKeeper = new TimeKeeper();
 	let tabAudio = new TabAudioHandler();
@@ -107,6 +110,18 @@ function StateManager() {
 			kkSelectedSongsEnable: false,
 			kkSelectedSongs: []
 		}, items => {
+			if (window.localStorage.getItem('paused') == null) {
+				window.localStorage.setItem('paused', `${items.paused}`);
+			}
+			if (window.localStorage.getItem('volume') == null) {
+				window.localStorage.setItem('volume', `${items.volume}`);
+			}
+			if (window.localStorage.getItem('townTuneVolume') == null) {
+				window.localStorage.setItem('townTuneVolume', `${items.townTuneVolume}`);
+			}	
+			items.paused = window.localStorage.getItem("paused") == "true";
+			items.volume = (window.localStorage.getItem("volume") >= 0 && window.localStorage.getItem("volume") !== null) ? window.localStorage.getItem("volume") : 0.5;
+			items.townTuneVolume = (window.localStorage.getItem("townTuneVolume") >= 0 && window.localStorage.getItem("townTuneVolume") !== null) ? window.localStorage.getItem("townTuneVolume") : 0.75;
 			options = items;
 			if (typeof callback === 'function') callback();
 		});
@@ -170,13 +185,27 @@ function StateManager() {
 	// 'Updated options' listener callback
 	// Detects that the user has updated an option
 	// Updates the 'options' variable and notifies listeners of any pertinent changes
-	chrome.storage.onChanged.addListener(changes => {
+	let storageListener = (changes) => {
+		// Firefox handles onChanged weirdly and provides *everything*, regardless
+		// of whether or not it changed. To make it be handled more like Chromium-based
+		// browsers, and make the rest of this code more readable, this goes through 
+		// everything in the "changes" object and deletes items in it if both values 
+		// are the same.
+		Object.keys(changes).forEach((change) => { 
+			if (changes[change].oldValue == changes[change].newValue) delete changes[change];
+			else {
+				if (Array.isArray(changes[change].oldValue) && Array.isArray(changes[change].newValue)) {
+					if (changes[change].oldValue.every(item => changes[change].newValue.includes(item)) && changes[change].newValue.every(item => changes[change].oldValue.includes(item))) delete changes[change];
+				}
+			}
+		})
+		
 		printDebug('A data object has been updated: ', changes)
 		let wasKK = isKK();
 		let kkVersion = options.kkVersion;
-		let oldTabAudio = this.getOption("tabAudio");
-		let oldTabAudioReduce = this.getOption("tabAudioReduceValue");
-		let oldBadgeTextEnabled = this.getOption("enableBadgeText");
+		let oldTabAudio = self.getOption("tabAudio");
+		let oldTabAudioReduce = self.getOption("tabAudioReduceValue");
+		let oldBadgeTextEnabled = self.getOption("enableBadgeText");
 		// Trigger 'options' variable update
 		getSyncedOptions(() => {
 			// Detect changes and notify corresponding listeners
@@ -187,7 +216,7 @@ function StateManager() {
 				let musicAndWeather = getMusicAndWeather();
 				notifyListeners("gameChange", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music]);
 			}
-			if ((isKK() && !wasKK) || (kkVersion != options.kkVersion && isKK()) || ('kkSelectedSongsEnable' in changes || 'kkSelectedSongs' in changes)) notifyListeners("kkStart", [options.kkVersion]);
+			if ((isKK() && !wasKK) || (kkVersion != options.kkVersion && isKK()) || (('kkSelectedSongsEnable' in changes || 'kkSelectedSongs' in changes) && isKK())) notifyListeners("kkStart", [options.kkVersion]);
 			if (!isKK() && wasKK) {
 				let musicAndWeather = getMusicAndWeather();
 				notifyListeners("hourMusic", [timeKeeper.getHour(), musicAndWeather.weather, musicAndWeather.music, false]);
@@ -195,12 +224,20 @@ function StateManager() {
 			if (oldTabAudio != options.tabAudio || oldTabAudioReduce != options.tabAudioReduceValue) notifyListeners("tabAudio", [null, options.tabAudio, options.tabAudioReduceValue]);
 			if (oldBadgeTextEnabled != options.enableBadgeText) badgeManager.updateEnabled(options.enableBadgeText);
 		});
-	});
+	};
+	chrome.storage.onChanged.addListener(storageListener)
+	addEventListener("storage", changes => {
+		var changesObj = {}
+		changesObj[changes['key']] = {}
+		changesObj[changes['key']]['newValue'] = changes['newValue']
+		changesObj[changes['key']]['oldValue'] = changes['oldValue']
+		storageListener(changesObj)
+	})
 
 	// play/pause when user clicks the extension icon
 	chrome.browserAction.onClicked.addListener(toggleMusic);
 
-	// play/pause when chrome closes and the option to play in background is disabled
+	// play/pause when the browser closes and the option to play in background is disabled
 	chrome.tabs.onRemoved.addListener(checkTabs);
 	chrome.tabs.onCreated.addListener(checkTabs);
 	setInterval(checkTabs, 1000);
@@ -216,11 +253,10 @@ function StateManager() {
 	});
 
 	function toggleMusic() {
-		chrome.storage.sync.set({ paused: !options.paused }, function () {
-			getSyncedOptions(() => {
-				if (options.paused) notifyListeners("pause");
-				else self.activate();
-			});
+		window.localStorage.setItem('paused', !options.paused);
+		getSyncedOptions(() => {
+ 			if (options.paused) notifyListeners("pause");
+ 			else self.activate();
 		});
 	}
 

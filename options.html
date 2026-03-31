@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Animal Crossing Music - Options</title>
+	<title>Animal Crossing Music (J variant) - Options</title>
 	<link rel="stylesheet" href="css/chrome-bootstrap.css">
 	<link rel="stylesheet" href="css/input.css">
 	<link rel="stylesheet" href="css/options.css">
@@ -13,23 +13,18 @@
 	<script src="scripts/options/tune_editor.js"></script>
 	<script src="scripts/background/KKSongs.js"></script>
 	<script src="scripts/options/options.js"></script>
-	<script src="scripts/options/contributors.js"></script>
-	<style>
-		.chrome-bootstrap .frame .view {
-			-webkit-margin-start: 180px;
-		}
-	</style>
+
 </head>
 
 <body class="chrome-bootstrap">
 	<div class="frame">
 		<div class="navigation">
-			<h1 style="color: #5C6166;">Animal Crossing Music</h1>
-			<ul class="menu" style="margin-top: 4em;">
+			<h1>AC Music (J variant)</h1>
+			<ul class="menu">
 				<li class="selected">
 					<a href="#options">Options</a>
 				</li>
-				<li class="town-tune-link" id ="town-tune-button">
+				<li class="town-tune-link" id="town-tune-button">
 					<a href="#town-tune">Town Tune Editor</a>
 				</li>
 				<li class="help-link">
@@ -39,16 +34,6 @@
 					<a href="#changelog">Changelog</a>
 				</li>
 			</ul>
-
-			<table class="nav-buttons">
-				<td><a target="_blank" href="https://chrome.google.com/webstore/detail/animal-crossing-music/fcedlaimpcfgpnfdgjbmmfibkklpioop"><button type="button" class="nav-button" title="Chrome Webstore"><img src="img/social/webstore.png" /></button></a></td>
-				<td><a target="_blank" href="https://discord.gg/4FMrEF8"><button type="button" class="nav-button" title="Discord Server"><img src="img/social/discord.png" /></button></a></td>
-				<td><a target="_blank" href="https://github.com/animal-crossing-music-extension/ac-music-extension"><button type="button" class="nav-button" title="GitHub"><img src="img/social/github.png" /></button></a></td>
-			</table>
-			<table class="nav-buttons nav-buttons-2">
-				<td><a target="_blank" href="https://twitter.com/ac_music_ext"><button type="button" class="nav-button" title="Twitter"><img src="img/social/twitter.png" /></button></a></td>
-				<td><a target="_blank" href="https://acmusicext.com"><button type="button" class="nav-button" title="Website"><img src="img/social/website.png" /></button></a></td>
-			</table>
 		</div>
 
 		<div class="mainview view">
@@ -58,8 +43,9 @@
 				</header>
 
 				<div class="content">
+					<h3>Volume</h3>
+
 					<section>
-						<h3>Volume</h3>
 						<p>Adjust the volume that the extension's music plays at</p>
 						<span class="checkbox">
 							<label>
@@ -69,16 +55,22 @@
 						<span id="volumeText"></span>
 					</section>
 
-					<section id="music-selection">						<h3>Music</h3>
+					<h3>Music</h3>
+
+					<section id="music-selection">
 						<p>Select which game's music you wish to listen to</p>
 						<div class="radio">
-							<input id="animal-crossing" name="music-choice" type="radio"><label for="animal-crossing"><span><span></span></span>Animal Forest/Animal Crossing</label>
+							<input id="animal-crossing" name="music-choice" type="radio"><label
+								for="animal-crossing"><span><span></span></span>Animal Forest/Animal Crossing</label>
 						</div>
 						<div class="radio">
-							<input id="wild-world" name="music-choice" type="radio"><label for="wild-world"><span><span></span></span>Wild World/City Folk/Let's Go to the City</label>
+							<input id="wild-world" name="music-choice" type="radio"><label
+								for="wild-world"><span><span></span></span>Wild World/City Folk/Let's Go to the
+								City</label>
 						</div>
 						<div class="radio">
-							<input id="new-leaf" name="music-choice" type="radio"><label for="new-leaf"><span><span></span></span>New Leaf</label>
+							<input id="new-leaf" name="music-choice" type="radio"><label
+								for="new-leaf"><span><span></span></span>New Leaf</label>
 						</div>
 						<div class="radio">
 							<input id="new-horizons" name="music-choice" type="radio"><label for="new-horizons"><span><span></span></span>New Horizons</label>
@@ -87,51 +79,65 @@
 							<input id="game-random" name="music-choice" type="radio"><label for="game-random"><span><span></span></span>Random!</label>
 						</div>
 					</section>
+					<h3>Weather</h3>
 
-					<section id="weather-selection">						<h3>Weather</h3>
+					<section id="weather-selection">
 						<p>Select the weather variation you wish to listen to</p>
 						<div class="radio">
-							<input id="sunny" name="weather-choice" type="radio"><label for="sunny"><span><span></span></span>Sunny/Normal</label>
+							<input id="sunny" name="weather-choice" type="radio"><label
+								for="sunny"><span><span></span></span>Sunny/Normal</label>
 						</div>
 						<div class="radio">
-							<input id="snowing" name="weather-choice" type="radio"><label for="snowing"><span><span></span></span>Snowing</label>
+							<input id="snowing" name="weather-choice" type="radio"><label
+								for="snowing"><span><span></span></span>Snowing</label>
 						</div>
 						<div class="radio">
-							<input id="raining" name="weather-choice" type="radio"><label for="raining"><span><span></span></span>Raining</label>
+							<input id="raining" name="weather-choice" type="radio"><label
+								for="raining"><span><span></span></span>Raining</label>
 						</div>
 						<div class="radio">
-							<input id="live" name="weather-choice" type="radio"><label for="live"><span><span></span></span>Live Weather <a href="#live-weather-location" id="live-weather-location-link" class="exclamation">!</a></label>
+							<input id="live" name="weather-choice" type="radio"><label
+								for="live"><span><span></span></span>Live Weather <a href="#live-weather-location"
+									id="live-weather-location-link" class="exclamation">!</a></label>
 						</div>
 						<div class="radio">
-							<input id="weather-random" name="weather-choice" type="radio"><label for="weather-random"><span><span></span></span>Random!</label>
+							<input id="weather-random" name="weather-choice" type="radio"><label
+								for="weather-random"><span><span></span></span>Random!</label>
 						</div>
 					</section>
+					<h3>K.K. Slider</h3>
 
 					<section>
-						<h3>K.K. Slider</h3>
 						<p>Customize K.K. Slider's behaviour</p>
 						<h4>Play Times</h4>
 						<div class="radio">
-							<input id="no-kk" name="enable-kk" type="radio"><label for="no-kk"><span><span></span></span>Do not play K.K. Slider songs</label>
+							<input id="no-kk" name="enable-kk" type="radio"><label
+								for="no-kk"><span><span></span></span>Do not play K.K. Slider songs</label>
 						</div>
 						<div class="radio">
-							<input id="enable-kk" name="enable-kk" type="radio"><label for="enable-kk"><span><span></span></span>Play K.K. Slider songs on Saturdays from
+							<input id="enable-kk" name="enable-kk" type="radio"><label
+								for="enable-kk"><span><span></span></span>Play K.K. Slider songs on Saturdays from
 								8pm&ndash;12am</label>
 						</div>
 						<div class="radio">
-							<input id="always-kk" name="enable-kk" type="radio"><label for="always-kk"><span><span></span></span>Play K.K. Slider songs at all times</label>
+							<input id="always-kk" name="enable-kk" type="radio"><label
+								for="always-kk"><span><span></span></span>Play K.K. Slider songs at all times</label>
 						</div>
 					</section>
+					<h4>Version Choice</h4>
+
 					<section id="kk-version-selection">
-						<h4>Version Choice</h4>
 						<div class="radio">
-							<input id="kk-version-live" name="kk-version" type="radio"><label for="kk-version-live"><span><span></span></span>Live</label>
+							<input id="kk-version-live" name="kk-version" type="radio"><label
+								for="kk-version-live"><span><span></span></span>Live</label>
 						</div>
 						<div class="radio">
-							<input id="kk-version-aircheck" name="kk-version" type="radio"><label for="kk-version-aircheck"><span><span></span></span>Aircheck</label>
+							<input id="kk-version-aircheck" name="kk-version" type="radio"><label
+								for="kk-version-aircheck"><span><span></span></span>Aircheck</label>
 						</div>
 						<div class="radio">
-							<input id="kk-version-both" name="kk-version" type="radio"><label for="kk-version-both"><span><span></span></span>Both</label>
+							<input id="kk-version-both" name="kk-version" type="radio"><label
+								for="kk-version-both"><span><span></span></span>Both</label>
 						</div>
 					</section>
 					<section>
@@ -140,57 +146,348 @@
 							<input id="kk-songs-selection-enable" type="checkbox"><label for="kk-songs-selection-enable"><span></span>Only play the selected K.K. songs</label>
 						</div>
 						<select id="kk-songs-selection" style="height: 25vh" multiple></select>
-						<label for="kk-songs-selection" style="display: block"><b>Strg/Cmd + Click</b> for mutliple selection</label>
+						<label for="kk-songs-selection" style="display: block">Use <b><span id="ctrl-cmd">Control/Ctrl/Steuerung/Strg (or Command/Cmd on macOS)</span> + Left Click</b> to select multiple songs</label>
 					</section>
 
+					<h3>Town Tune <a id="town-tune-button-link" class="exclamation">!</a></h3>
+
 					<section>
-						<h3>Town Tune <a id="town-tune-button-link" class="exclamation">!</a></h3>
 						<p>Customize your custom town tune's behaviour</p>
 						<div class="checkbox">
-							<input id="enable-town-tune" type="checkbox"><label for="enable-town-tune"><span></span>Play your custom town tune on the hour</label>
+							<input id="enable-town-tune" type="checkbox"><label for="enable-town-tune"><span></span>Play
+								your custom town tune on the hour</label>
 						</div>
 						<div class="checkbox">
-							<input id="absolute-town-tune" type="checkbox"><label for="absolute-town-tune"><span></span>Play your custom town tune regardless if the music is paused</label>
+							<input id="absolute-town-tune" type="checkbox"><label
+								for="absolute-town-tune"><span></span>Play your custom town tune regardless if the music
+								is paused</label>
 						</div>
 					</section>
 
+					<h3>Tab Audio Behaviour</h3>
+
 					<section>
-						<h3>Tab Audio Behaviour</h3>
 						<p>Control what the extension does while a tab is playing audio</p>
-						<div class="radio" style="height: 21px">
-							<input id="tab-audio-reduce" name="tab-audio" type="radio"><label for="tab-audio-reduce" style="line-height: unset"><span
-									style="vertical-align: middle;"><span></span></span>Reduce the extension's music by <input id="tab-audio-reduce-value" name="tab-audio" type="number"
-									max="100" min="0">%</label>
+						<div class="radio">
+							<input id="tab-audio-reduce" name="tab-audio" type="radio"><label for="tab-audio-reduce"><span><span></span></span>Reduce the extension's music by</label>
+								<input id="tab-audio-reduce-value" name="tab-audio" type="number" max="100"
+									min="0">%</label>
 						</div>
 						<div class="radio">
-							<input id="tab-audio-pause" name="tab-audio" type="radio"><label for="tab-audio-pause"><span><span></span></span>Pause the extension's music</label>
+							<input id="tab-audio-pause" name="tab-audio" type="radio"><label
+								for="tab-audio-pause"><span><span></span></span>Pause the extension's music</label>
 						</div>
 						<div class="radio">
-							<input id="tab-audio-nothing" name="tab-audio" type="radio"><label for="tab-audio-nothing"><span><span></span></span>Do nothing</label>
+							<input id="tab-audio-nothing" name="tab-audio" type="radio"><label
+								for="tab-audio-nothing"><span><span></span></span>Do nothing</label>
 						</div>
 					</section>
+					<h3>Other</h3>
 
 					<section>
-						<h3>Other</h3>
 						<p>Other various options that don't fit in any other category</p>
 						<div class="checkbox">
-							<input id="enable-notifications" type="checkbox"><label for="enable-notifications"><span></span>Enable Chrome notifications on song change</label>
+							<input id="enable-notifications" type="checkbox"><label
+								for="enable-notifications"><span></span>Enable notifications on song
+								change</label>
 						</div>
 
 						<div class="checkbox">
-							<input id="enable-badge" type="checkbox"><label for="enable-badge"><span></span>Display text on badge</label>
+							<input id="enable-badge" type="checkbox"><label for="enable-badge"><span></span>Display text
+								on badge</label>
 						</div>
 
 						<div class="checkbox">
-							<input id="enable-background" type="checkbox"><label for="enable-background"><span></span>Allow for music to play when Chrome is closed. <a target="_blank" href="https://kb.nmsu.edu/73071">Background apps must also be enabled in Chrome's settings.</a></label>
+							<input id="enable-background" type="checkbox"><label for="enable-background"><span></span>
+								Allow for music to play when the browser is closed.</label> 
+								<i>Background apps must also be enabled in your browser settings.</i>
 						</div>
 					</section>
 
+					<h3>Live Weather Location</h3>
+
 					<section id="live-weather-location">
-						<h3>Live Weather Location</h3>
-						<p>Select the location to fetch the live weather information from. The live weather synchronizes with the extension's music.<br />The first box is your <a href="https://worldpostalcode.com/" target="_blank">zip/post code</a>, the second is your <a href="https://countrycode.org/" target="_blank">ISO code (the two letters)</a></p> <div class="text">
-							<input type="text" id="zip-code" aria-label="Zip/Post Code" value="98052" placeholder="Zip/Post Code">
-							<input type="text" id="country-code" aria-label="ISO Code" value="US" placeholder="ISO Code">
+						<p>Select the location to fetch the live weather information from. The live weather synchronizes
+							with the extension's music.<br /></p>
+						<div class="text">
+							<label for="weather-provider">Weather provider:</label>
+							<select id="weather-provider" aria-label="Weather provider">
+								<option selected value="owm-proxy">OpenWeatherMap (AC Music weather proxy)</option>
+								<option value="owm">OpenWeatherMap (provide your own API key)</option>
+								<option value="foreca">Foreca US (provide your own API key)</option>
+								<option value="foreca-eu">Foreca EU (provide your own API key)</option>
+								<option value="other">Other (AC Music J variant server)</option>
+							</select>
+							<br />
+
+							<label for="api-key" class="api-key" style="display:none;">API key:</label>
+							<input style="display:none;" type="text" class="api-key" id="api-key" aria-label="API key" value="" placeholder="API key">
+							<br style="display:none;" class="api-key" />
+
+							<label for="provider-url" class="provider-url" style="display:none;">Provider URL:</label>
+							<input style="display:none;" type="text" class="provider-url" id="provider-url" aria-label="Provider URL" value="https://acmusicext.com/api/weather-v1" placeholder="Provider URL">
+							<br style="display:none;" class="provider-url" />
+
+							<label for="zip-code">ZIP code / postal code (<a href="https://worldpostalcode.com/" target="_blank">find yours</a>):</label>
+							<input type="text" id="zip-code" aria-label="ZIP code / postal code" value="98052" placeholder="ZIP code / postal code">
+							<br />
+							<label for="country-code">Country:</label>
+							<select id="country-code" aria-label="Country">
+								<option value="AF">Afghanistan</option>
+								<option value="AX">Aland Islands</option>
+								<option value="AL">Albania</option>
+								<option value="DZ">Algeria</option>
+								<option value="AS">American Samoa</option>
+								<option value="AD">Andorra</option>
+								<option value="AO">Angola</option>
+								<option value="AI">Anguilla</option>
+								<option value="AQ">Antarctica</option>
+								<option value="AG">Antigua and Barbuda</option>
+								<option value="AR">Argentina</option>
+								<option value="AM">Armenia</option>
+								<option value="AW">Aruba</option>
+								<option value="AU">Australia</option>
+									<option value="AT">Austria</option>
+									<option value="AZ">Azerbaijan</option>
+									<option value="BS">Bahamas</option>
+									<option value="BH">Bahrain</option>
+									<option value="BD">Bangladesh</option>
+									<option value="BB">Barbados</option>
+									<option value="BY">Belarus</option>
+									<option value="BE">Belgium</option>
+									<option value="BZ">Belize</option>
+									<option value="BJ">Benin</option>
+									<option value="BM">Bermuda</option>
+									<option value="BT">Bhutan</option>
+									<option value="BO">Bolivia</option>
+									<option value="BQ">Bonaire, Sint Eustatius and Saba</option>
+									<option value="BA">Bosnia and Herzegovina</option>
+									<option value="BW">Botswana</option>
+									<option value="BV">Bouvet Island</option>
+									<option value="BR">Brazil</option>
+									<option value="IO">British Indian Ocean Territory</option>
+									<option value="BN">Brunei Darussalam</option>
+									<option value="BG">Bulgaria</option>
+									<option value="BF">Burkina Faso</option>
+									<option value="BI">Burundi</option>
+									<option value="KH">Cambodia</option>
+									<option value="CM">Cameroon</option>
+									<option value="CA">Canada</option>
+									<option value="CV">Cape Verde</option>
+									<option value="KY">Cayman Islands</option>
+									<option value="CF">Central African Republic</option>
+									<option value="TD">Chad</option>
+									<option value="CL">Chile</option>
+									<option value="CN">China</option>
+									<option value="CX">Christmas Island</option>
+									<option value="CC">Cocos (Keeling) Islands</option>
+									<option value="CO">Colombia</option>
+									<option value="KM">Comoros</option>
+									<option value="CG">Congo</option>
+									<option value="CD">Congo, Democratic Republic of the Congo</option>
+									<option value="CK">Cook Islands</option>
+									<option value="CR">Costa Rica</option>
+									<option value="CI">Cote D'Ivoire</option>
+									<option value="HR">Croatia</option>
+									<option value="CU">Cuba</option>
+									<option value="CW">Curacao</option>
+									<option value="CY">Cyprus</option>
+									<option value="CZ">Czech Republic</option>
+									<option value="DK">Denmark</option>
+									<option value="DJ">Djibouti</option>
+									<option value="DM">Dominica</option>
+									<option value="DO">Dominican Republic</option>
+									<option value="EC">Ecuador</option>
+									<option value="EG">Egypt</option>
+									<option value="SV">El Salvador</option>
+									<option value="GQ">Equatorial Guinea</option>
+									<option value="ER">Eritrea</option>
+									<option value="EE">Estonia</option>
+									<option value="ET">Ethiopia</option>
+									<option value="FK">Falkland Islands (Malvinas)</option>
+									<option value="FO">Faroe Islands</option>
+									<option value="FJ">Fiji</option>
+									<option value="FI">Finland</option>
+									<option value="FR">France</option>
+									<option value="GF">French Guiana</option>
+									<option value="PF">French Polynesia</option>
+									<option value="TF">French Southern Territories</option>
+									<option value="GA">Gabon</option>
+									<option value="GM">Gambia</option>
+									<option value="GE">Georgia</option>
+									<option value="DE">Germany</option>
+									<option value="GH">Ghana</option>
+									<option value="GI">Gibraltar</option>
+									<option value="GR">Greece</option>
+									<option value="GL">Greenland</option>
+									<option value="GD">Grenada</option>
+									<option value="GP">Guadeloupe</option>
+									<option value="GU">Guam</option>
+									<option value="GT">Guatemala</option>
+									<option value="GG">Guernsey</option>
+									<option value="GN">Guinea</option>
+									<option value="GW">Guinea-Bissau</option>
+									<option value="GY">Guyana</option>
+									<option value="HT">Haiti</option>
+									<option value="HM">Heard Island and Mcdonald Islands</option>
+									<option value="VA">Holy See (Vatican City State)</option>
+									<option value="HN">Honduras</option>
+									<option value="HK">Hong Kong</option>
+									<option value="HU">Hungary</option>
+									<option value="IS">Iceland</option>
+									<option value="IN">India</option>
+									<option value="ID">Indonesia</option>
+									<option value="IR">Iran, Islamic Republic of</option>
+									<option value="IQ">Iraq</option>
+									<option value="IE">Ireland</option>
+									<option value="IM">Isle of Man</option>
+									<option value="IL">Israel</option>
+									<option value="IT">Italy</option>
+									<option value="JM">Jamaica</option>
+									<option value="JP">Japan</option>
+									<option value="JE">Jersey</option>
+									<option value="JO">Jordan</option>
+									<option value="KZ">Kazakhstan</option>
+									<option value="KE">Kenya</option>
+									<option value="KI">Kiribati</option>
+									<option value="KP">Korea, Democratic People's Republic of</option>
+									<option value="KR">Korea, Republic of</option>
+									<option value="XK">Kosovo</option>
+									<option value="KW">Kuwait</option>
+									<option value="KG">Kyrgyzstan</option>
+									<option value="LA">Lao People's Democratic Republic</option>
+									<option value="LV">Latvia</option>
+									<option value="LB">Lebanon</option>
+									<option value="LS">Lesotho</option>
+									<option value="LR">Liberia</option>
+									<option value="LY">Libyan Arab Jamahiriya</option>
+									<option value="LI">Liechtenstein</option>
+									<option value="LT">Lithuania</option>
+									<option value="LU">Luxembourg</option>
+									<option value="MO">Macao</option>
+									<option value="MK">Macedonia, the Former Yugoslav Republic of</option>
+									<option value="MG">Madagascar</option>
+									<option value="MW">Malawi</option>
+									<option value="MY">Malaysia</option>
+									<option value="MV">Maldives</option>
+									<option value="ML">Mali</option>
+									<option value="MT">Malta</option>
+									<option value="MH">Marshall Islands</option>
+									<option value="MQ">Martinique</option>
+									<option value="MR">Mauritania</option>
+									<option value="MU">Mauritius</option>
+									<option value="YT">Mayotte</option>
+									<option value="MX">Mexico</option>
+									<option value="FM">Micronesia, Federated States of</option>
+									<option value="MD">Moldova, Republic of</option>
+									<option value="MC">Monaco</option>
+									<option value="MN">Mongolia</option>
+									<option value="ME">Montenegro</option>
+									<option value="MS">Montserrat</option>
+									<option value="MA">Morocco</option>
+									<option value="MZ">Mozambique</option>
+									<option value="MM">Myanmar</option>
+									<option value="NA">Namibia</option>
+									<option value="NR">Nauru</option>
+									<option value="NP">Nepal</option>
+									<option value="NL">Netherlands</option>
+									<option value="AN">Netherlands Antilles</option>
+									<option value="NC">New Caledonia</option>
+									<option value="NZ">New Zealand</option>
+									<option value="NI">Nicaragua</option>
+									<option value="NE">Niger</option>
+									<option value="NG">Nigeria</option>
+									<option value="NU">Niue</option>
+									<option value="NF">Norfolk Island</option>
+									<option value="MP">Northern Mariana Islands</option>
+									<option value="NO">Norway</option>
+									<option value="OM">Oman</option>
+									<option value="PK">Pakistan</option>
+									<option value="PW">Palau</option>
+									<option value="PS">Palestinian Territory, Occupied</option>
+									<option value="PA">Panama</option>
+									<option value="PG">Papua New Guinea</option>
+									<option value="PY">Paraguay</option>
+									<option value="PE">Peru</option>
+									<option value="PH">Philippines</option>
+									<option value="PN">Pitcairn</option>
+									<option value="PL">Poland</option>
+									<option value="PT">Portugal</option>
+									<option value="PR">Puerto Rico</option>
+									<option value="QA">Qatar</option>
+									<option value="RE">Reunion</option>
+									<option value="RO">Romania</option>
+									<option value="RU">Russian Federation</option>
+									<option value="RW">Rwanda</option>
+									<option value="BL">Saint Barthelemy</option>
+									<option value="SH">Saint Helena</option>
+									<option value="KN">Saint Kitts and Nevis</option>
+									<option value="LC">Saint Lucia</option>
+									<option value="MF">Saint Martin</option>
+									<option value="PM">Saint Pierre and Miquelon</option>
+									<option value="VC">Saint Vincent and the Grenadines</option>
+									<option value="WS">Samoa</option>
+									<option value="SM">San Marino</option>
+									<option value="ST">Sao Tome and Principe</option>
+									<option value="SA">Saudi Arabia</option>
+									<option value="SN">Senegal</option>
+									<option value="RS">Serbia</option>
+									<option value="CS">Serbia and Montenegro</option>
+									<option value="SC">Seychelles</option>
+									<option value="SL">Sierra Leone</option>
+									<option value="SG">Singapore</option>
+									<option value="SX">Sint Maarten</option>
+									<option value="SK">Slovakia</option>
+									<option value="SI">Slovenia</option>
+									<option value="SB">Solomon Islands</option>
+									<option value="SO">Somalia</option>
+									<option value="ZA">South Africa</option>
+									<option value="GS">South Georgia and the South Sandwich Islands</option>
+									<option value="SS">South Sudan</option>
+									<option value="ES">Spain</option>
+									<option value="LK">Sri Lanka</option>
+									<option value="SD">Sudan</option>
+									<option value="SR">Suriname</option>
+									<option value="SJ">Svalbard and Jan Mayen</option>
+									<option value="SZ">Swaziland</option>
+									<option value="SE">Sweden</option>
+									<option value="CH">Switzerland</option>
+									<option value="SY">Syrian Arab Republic</option>
+									<option value="TW">Taiwan, Province of China</option>
+									<option value="TJ">Tajikistan</option>
+									<option value="TZ">Tanzania, United Republic of</option>
+									<option value="TH">Thailand</option>
+									<option value="TL">Timor-Leste</option>
+									<option value="TG">Togo</option>
+									<option value="TK">Tokelau</option>
+									<option value="TO">Tonga</option>
+									<option value="TT">Trinidad and Tobago</option>
+									<option value="TN">Tunisia</option>
+									<option value="TR">Turkey</option>
+									<option value="TM">Turkmenistan</option>
+									<option value="TC">Turks and Caicos Islands</option>
+									<option value="TV">Tuvalu</option>
+									<option value="UG">Uganda</option>
+									<option value="UA">Ukraine</option>
+									<option value="AE">United Arab Emirates</option>
+									<option value="GB">United Kingdom</option>
+									<option selected value="US">United States</option>
+									<option value="UM">United States Minor Outlying Islands</option>
+									<option value="UY">Uruguay</option>
+									<option value="UZ">Uzbekistan</option>
+									<option value="VU">Vanuatu</option>
+									<option value="VE">Venezuela</option>
+									<option value="VN">Viet Nam</option>
+									<option value="VG">Virgin Islands, British</option>
+									<option value="VI">Virgin Islands, U.s.</option>
+									<option value="WF">Wallis and Futuna</option>
+									<option value="EH">Western Sahara</option>
+									<option value="YE">Yemen</option>
+									<option value="ZM">Zambia</option>
+									<option value="ZW">Zimbabwe</option>
+								</select>		
+								<br />
+								<br />						
 							<button type="button" id="update-location">Update Location</button>
 							<p id="weather-response"></p>
 						</div>
@@ -208,7 +505,7 @@
 					<section>
 						<p>Compose a tune to be played every hour on the hour</p>
 						<div class="pitch-template hidden">
-							<input class="pitch-name"   type="text"  maxlength="2" size="2">
+							<input class="pitch-name" type="text" maxlength="2" size="2">
 							<input class="pitch-slider" type="range" min="0" max="16" step="1" orient="vertical">
 						</div>
 						<div class="staff staff1"></div>
@@ -216,17 +513,14 @@
 						<br>
 						<p>Town tune volume:</p>
 						<input id="townTuneVolume" type="range" min="0" max="1" step="0.01">
-						<span  id="townTuneVolumeText"></span>
+						<span id="townTuneVolumeText"></span>
 					</section>
 
 					<header>
-						<div style="padding: 0; margin: 0; height:18px;"></div>
 						<div class="controls">
 							<button class="play-tune">Play!</button>
-							<div class="spacer"></div>
 							<button class="reset-tune">Reset to Default</button>
 							<button class="randomize-tune">Randomize</button>
-							<div class="spacer"></div>
 							<button class="save-tune">Save</button>
 						</div>
 					</header>
@@ -238,34 +532,34 @@
 					<h1>About</h1>
 				</header>
 
-				<div class="content about-content">
+				<div class="content">
 					<div class="image-container">
 						<img src="img/icons/icon/128.png" width="48" height="48">
 						<div class="image-container-text">
-							<h2>Animal Crossing Music</h2>
-							<span>Play Animal Crossing's smooth background music in real-time throughout your day.</span>
+							<h2>Animal Crossing Music (J variant)</h2>
+							<span>Play Animal Crossing's smooth background music in real-time throughout your
+								day.</span>
 							<br />
 							<span id="version-number"></span>
 						</div>
 					</div>
 
 					<div>
-						<a target="_blank" href="https://discord.gg/4FMrEF8"><button role="link">Join our Discord Server to get help using this extension</button></a>
-						<a target="_blank" href="https://github.com/animal-crossing-music-extension/ac-music-extension/issues"><button role="link">Report an issue</button></a>
-						<a target="_blank" href="https://github.com/animal-crossing-music-extension/ac-music-extension"><button role="link">GitHub Repository</button></a>
+						<a target="_blank" href="https://discord.gg/4FMrEF8"><button 
+							role="link">Join the regular extension's official Discord server</button></a>
+						<a target="_blank"
+							href="https://github.com/ac-music-extension-j/ac-music-extension-j/issues"><button
+								role="link">Report an issue with the J variant</button></a>
+						<a target="_blank"
+							href="https://github.com/ac-music-extension-j/ac-music-extension-j"><button
+								role="link">GitHub repository</button></a>
 					</div>
 
 					<br />
 					<h3>Contributors</h3>
-					<p>These people have helped make the extension possible!</p>
-					<p id="contributors-failed">Failed to load contributors :(</p>
-					<table>
-						<tbody id="contributors-table"></tbody>
-					</table>
-					<br />
-					<p>Extension originally created by <a href="https://www.neogaf.com/members/andrex.20593/">Andrex</a> from <a href="https://www.neogaf.com/threads/real-time-animal-crossing-music.473164/post-37661922">NeoGAF</a>.</p>
-					<p>Extension improved by <a href="https://www.neogaf.com/members/blazescorch2.142800/">blazescorch2</a>.</p>
-					<p>Idea for extension taken from <a href="http://tane.us/ac/">tane.us</a>.</p>
+					<p>The J variant was made by <a href="https://jbmagination.com">JBMagination</a> (and <a href="https://github.com/jbmagination/ac-music-extension-j/graphs/contributors">these other lovelies</a>) after over 3 years of no upstream maintenance, and a strong love for Animal Crossing. <b>It is not associated with upstream in any way.</b></p>
+					<p>Extension originally created by <a href="https://www.neogaf.com/members/andrex.20593/">Andrex</a> (1.0), <a href="https://www.neogaf.com/members/blazescorch2.142800/">blazescorch2</a> (2.0), and <a href="https://pikadude.me">PikaDude</a> (alongside <a href="https://github.com/animal-crossing-music-extension/ac-music-extension/graphs/contributors">many others</a>) (3.0 and 4.0). <i>Check out their successor to this extension, <a href="https://acmusic.app/">AC Music App</a>!</i></p>
+					<p>Idea for extension taken from <a href="https://b-lee.net/">Brian Lee</a>'s <a href="https://tane.us/ac/">Animal Crossing music website</a>.</p>
 					<p>This options page uses <a href="https://github.com/roykolak/chrome-bootstrap">Chrome Bootstrap</a> by Roy Kolak under the MIT License.</p>
 				</div>
 			</div>
@@ -276,10 +570,31 @@
 				</header>
 
 				<div class="content">
+					<h3>JVersion 1.1.0<span class="changelog-date"> - ???</span></h3>
+					<ul class="changelog-list">
+						<li>Added experimental support for alternative weather providers</li>
+						<li>Moved pausing/playing and volume changes to local storage, so they no longer sync across 
+							computers</li>
+						<li>Changed how percentages 01%-09% were formatted - they now display as 1%-9%</li>
+						<li>Shortened sidebar title in options menu from "Animal Crossing Music (J variant)" to "AC 
+							Music (J variant)" to fix overlap with tabs</li>
+						<li>Minor CSS changes</li>
+					</ul>
+					<h3>JVersion 1.0.0<span class="changelog-date"> - 23rd of April 2023</span></h3>
+					<ul class="changelog-list">
+						<li>Added Firefox support</li>
+						<li>Merged other experimental branches that never made it to the upstream development branch</li>
+						<li>Using live weather will no longer cause a song restart if the current weather's song is 
+							already playing</li>
+						<li>Using the "Random" option for what game you want to hear will no longer cause a song restart 
+							if the chosen game is already playing</li>
+						<li>Revised options menu</li>
+					</ul>
 					<h3>Version 4.2.0<span class="changelog-date"> - 28th of March 2020</span></h3>
 					<ul class="changelog-list">
-						<li>Added support for New Horizons.</li>
-						<li>Fixed a bug causing the extension to sometimes not run in the background when the feature was enabled.</li>
+						<li>Added support for New Horizons</li>
+						<li>Fixed a bug causing the extension to sometimes not run in the background when the feature 
+							was enabled</li>
 					</ul>
 					<h3>Version 4.1.1<span class="changelog-date"> - 14th of March 2020</span></h3>
 					<ul class="changelog-list">
@@ -289,16 +604,19 @@
 					</ul>
 					<h3>Version 4.1.0<span class="changelog-date"> - 23rd of February 2020</span></h3>
 					<ul class="changelog-list">
-						<li>Added checks for MediaSession API fixing the issue where music would not play in some browsers and older versions of Chrome</li>
+						<li>Added checks for MediaSession API fixing the issue where music would not play in some
+							browsers and older versions of Chrome</li>
 						<li>Fixed a bug causing the Tab Audio Handler to not work as intended on some browsers</li>
-						<li>Fixed a bug causing the Tab Audio Handler to get stuck in the wrong state if tabs stopped playing audio while the music was paused and vice-versa</li>
+						<li>Fixed a bug causing the Tab Audio Handler to get stuck in the wrong state if tabs stopped
+							playing audio while the music was paused and vice-versa</li>
 						<li>Clarified what country code to use</li>
 						<li>Changed zip/post code reference link</li>
 						<li>Added a note for users with a space in their post code</li>
 						<li>Fixed a bug causing songs to sometimes loop incorrectly</li>
 						<li>Removed the need for the tabs permission for the Tab Audio Behaviour/Handling function</li>
 						<li>Change default Tab Audio Behaviour to pause rather than nothing</li>
-						<li>Fixed a bug causing the music to not click over to the next hour and get stuck on a single hour</li>
+						<li>Fixed a bug causing the music to not click over to the next hour and get stuck on a single
+							hour</li>
 						<li>Overhauled about page</li>
 						<li>Changed API endpoints and domain</li>
 						<li>Added a built-in option to stop the extension from playing music when Chrome is closed</li>
@@ -307,13 +625,17 @@
 						<li>Overhauled Town Tune Editor</li>
 						<li>Added ? notes support to Town Tune Editor</li>
 						<li>Added reset to default and randomize buttons to Town Tune Editor</li>
-						<li>Fixed a bug causing the town tune to play while Tab Audio Behaviour is set to paused and a tab is playing audio</li>
-						<li>Fixed a bug causing the volume to not update if the volume was changed while the extension was paused</li>
-						<li>Fixed a bug causing the badge text to become incorrect if the extension was paused when an hour ticked over</li>
+						<li>Fixed a bug causing the town tune to play while Tab Audio Behaviour is set to paused and a
+							tab is playing audio</li>
+						<li>Fixed a bug causing the volume to not update if the volume was changed while the extension
+							was paused</li>
+						<li>Fixed a bug causing the badge text to become incorrect if the extension was paused when an
+							hour ticked over</li>
 					</ul>
 					<h3>Version 4.0.0<span class="changelog-date"> - 8th of February 2020</span></h3>
 					<ul class="changelog-list">
-						<li>Added Wild World/City Folk/Let's Go to the City Snowing and Raining weather alternatives</li>
+						<li>Added Wild World/City Folk/Let's Go to the City Snowing and Raining weather alternatives
+						</li>
 						<li>Made time checker more accurate</li>
 						<li>Made Town Tune Editor look nicer</li>
 						<li>Added Live Weather option</li>
@@ -329,8 +651,10 @@
 						<li>Added K.K. Slider Aircheck and Live version choices</li>
 						<li>Updated badge text to show full hour (E.g. 8pm rather than 8p)</li>
 						<li>Added support for Chrome's Media Session service</li>
-						<li>Added support for remote streaming for music rather than bundling music with the extension</li>
-						<li>Updated every song to be of the highest possible quality, removing any static where possible, bad loops and lowering any excessively high bitrates</li>
+						<li>Added support for remote streaming for music rather than bundling music with the extension
+						</li>
+						<li>Updated every song to be of the highest possible quality, removing any static where
+							possible, bad loops and lowering any excessively high bitrates</li>
 						<li>Added every single K.K. Slider song (all 91 songs)</li>
 						<li>Reorganised extension's file structure</li>
 						<li>Added dynamic Contributors/Credits list</li>
@@ -341,7 +665,8 @@
 						<li>Added an option to play the town tune regardless if the extension's music is paused</li>
 						<li>Added better error handling</li>
 						<li>Polished options page</li>
-						<li>Many other various additions, bug fixes, code refactors and changes to make Animal Crossing Music Extension the BEST Animal Crossing extension ever!</li>
+						<li>Many other various additions, bug fixes, code refactors and changes to make Animal Crossing
+							Music Extension the BEST Animal Crossing extension ever!</li>
 					</ul>
 				</div>
 			</div>

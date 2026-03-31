@@ -134,10 +134,9 @@ var flashName = function(index, duration) {
  * @desc   Plays the town tune using createBooper as an instrument, used only by the town tune editor
  */
 var playTune = function() {
-  chrome.storage.sync.get({townTuneVolume: defaultTownTuneVolume}, function(items){
-    disableEditor();
-    tunePlayer.playTune(tune, booper, 240, items.townTuneVolume).eachNote(flashName).done(enableEditor);
-  });
+  var townTuneVolume = (window.localStorage.getItem("townTuneVolume") >= 0 && window.localStorage.getItem("townTuneVolume") == null) ? window.localStorage.getItem("townTuneVolume") : defaultTownTuneVolume
+  disableEditor();
+  tunePlayer.playTune(tune, booper, 240, townTuneVolume).eachNote(flashName).done(enableEditor);
 };
 
 var resetTune = function() {
@@ -203,10 +202,9 @@ var updateColor = function(index, pitch){
 } 
 
 var updateTune = function(index, pitch) {
-  chrome.storage.sync.get({townTuneVolume: defaultTownTuneVolume}, function(items){
-    tune[index] = pitch;
-    booper.playNote(pitch, undefined, undefined, items.townTuneVolume);
-  });
+  var townTuneVolume = (window.localStorage.getItem("townTuneVolume") >= 0 && window.localStorage.getItem("townTuneVolume") !== null) ? window.localStorage.getItem("townTuneVolume") : defaultTownTuneVolume;
+  tune[index] = pitch;
+  booper.playNote(pitch, undefined, undefined, townTuneVolume);
 };
 
 window.addEventListener('load', setup);

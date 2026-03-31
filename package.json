@@ -1,0 +1,8 @@
+{
+  "name": "ac-music-extension-j",
+  "version": "1.1.0",
+  "description": "A browser extension that plays hourly Animal Crossing music and more while browsing!",
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}
